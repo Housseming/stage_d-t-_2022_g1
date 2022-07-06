@@ -1,9 +1,3 @@
-
-import React from 'react';
-
-import {VscAccount} from "react-icons/vsc";
-
-
 import React from "react";
 import { VscAccount } from "react-icons/vsc";
 import axios from "axios";
@@ -17,22 +11,10 @@ export class Login extends React.Component {
       username: "",
       password: "",
     };
-
-
-    render(){
-        return (
-          <div className="base-container">
-            <div className="header">Connexion</div>
-            <div className="content">
-              <VscAccount className="image"></VscAccount>
-            </div>
-            <div className="form">
-
     this.changeName = this.changeName.bind(this);
     this.changePassword = this.changePassword.bind(this);
     this.Send = this.Send.bind(this);
   }
-
 
   async Send() {
     try {

@@ -2,10 +2,6 @@ import React from "react";
 
 import {VscAccount} from "react-icons/vsc";
 
-
-
-
-import { VscAccount, VscTypeHierarchySub } from "react-icons/vsc";
 import axios from "axios";
 const url = "http://localhost:5000/register";
 
