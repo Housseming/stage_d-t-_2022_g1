@@ -1,8 +1,14 @@
+
+
+
 //Custom Fonts
 @import url("https://fonts.googleapis.com/css?family=Open+Sans&display=swap");
 body {
     //pour la rendre responsive
+
     background-image: url("./law\ 2.jpg");
+    background-image: url("./court-hammer-and-books-judgment-and-law-concept.jpg");
+
     background-repeat: no-repeat;
     background-position: center center;
     background-attachment: fixed;
@@ -66,6 +72,9 @@ body {
         align-items: center;
         background-color: #fff;
         box-shadow: 0px 0px 12px 2px rgba(15, 15, 15, 0.2);
+
+        border:4px solid black;
+
         border-radius: 4px;
         position: relative;
         z-index: 99;
@@ -73,6 +82,9 @@ body {
         height: 100%;
         z-index: 99;
         padding: 17px 10px;
+
+        margin-top: 5em;
+
         //transition: transform 200ms ease-in-out;
     }
     .right-side {
@@ -80,7 +92,11 @@ body {
         flex-direction: column;
         justify-content: center;
         height: 90%;
+
         background-color: #8F6D3D;
+
+        background-color:#201F24;
+
         width: 100%;
         position: absolute;
         right: -34%;
@@ -89,6 +105,9 @@ body {
         transition: all 400ms ease-in-out;
         cursor: pointer;
         box-shadow: 0px 0px 12px 2px rgba(15, 15, 15, 0.281);
+
+
+        margin-top: 5em;
         &.right {
             right: -40%;
             align-items: flex-end;
@@ -118,15 +137,29 @@ body {
     font-size: 21px;
     padding: 5px 20px;
     border: 0;
+
     background-color: #3498db;
     color: #fff;
+
+    background-color: #201F24;
+    color: rgb(255, 255, 255);
+
     border-radius: 3px;
     transition: all 250ms ease-in-out;
     cursor: pointer;
     &:hover {
+
         background-color: #2386c8;
+
+        background-color:#201F24;
+
     }
     &:focus {
         outline: none;
     }
+
 }
+
+}
+
+
