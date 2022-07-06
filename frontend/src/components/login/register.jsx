@@ -1,5 +1,5 @@
 import React from "react";
-
+import {VscAccount} from "react-icons/vsc";
 export class Register extends React.Component {
   constructor(props) {
     super(props);
@@ -10,7 +10,8 @@ export class Register extends React.Component {
       <div className="base-container">
         <div className="header">Enregistrez-vous</div>
         <div className="content">
-          <div className="image"></div>
+
+          <VscAccount className="image"></VscAccount>
         </div>
         <div className="form">
           <div className="form-group">
