@@ -6,6 +6,7 @@ import Parametreglobale from "./components/dashboard/Parametreglobale.jsx"
 import PrimeHuissier from "./components/dashboard/primehuissier.jsx";
 import { Sharedlayout } from "./components/dashboard/sharedLayout.jsx";
 import { AccountBox, RegisterBox } from "./components/accountBox/index.jsx";
+
 import Gestionclient from "./components/dashboard/Gestionclient.jsx";
 
 import Honoraireenextra from "./components/dashboard/honoraireenextra.jsx";
@@ -15,6 +16,8 @@ import Transport from "./components/dashboard/transport.jsx";
 import Recettedufinance from "./components/dashboard/recettedufinance.jsx";
 import Emplacementdossier from "./components/dashboard/emplacementdossier.jsx";
 
+
+import {Collabo} from "./components/dashboard/collaborateurs/collabo"
 function App() {
   return (
     <BrowserRouter>
@@ -32,6 +35,7 @@ function App() {
         <Route path='recettedufinance' element={<Recettedufinance />} />
         <Route path='emplacementdossier' element={<Emplacementdossier/>} />
         <Route path='gestionclient' element={<Gestionclient/>} />
+            <Route path="collab" element={<Collabo></Collabo>}></Route>
           </Route>
       </Routes>
     </BrowserRouter>

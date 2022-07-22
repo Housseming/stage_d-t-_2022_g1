@@ -15,6 +15,11 @@ const app = express();
 app.use(bodyParser.json());
 const cors = require("cors");
 const pool = require("./db");
+const loginroute = require("./routes/RouteLogin");
+const registerroute = require("./routes/RouteRegister");
+const collabroute = require("./routes/RouteCollab");
+const homeroute = require("./routes/RouteHome");
+const tribunaleroute = require("./routes/tribunale");
 //middleware
 app.use(cors());
 app.use(express.json());
@@ -30,7 +35,11 @@ app.use(root7);//emplacementdossier
 app.use(root10);//gestionclient
 
 
-
+app.use(loginroute);
+app.use(registerroute);
+app.use(collabroute);
+app.use(homeroute);
+app.use(tribunaleroute);
 app.listen(5000, () => {
-    console.log("running server on 5000");
+  console.log("running server on 5000");
 });
