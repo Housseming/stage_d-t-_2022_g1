@@ -1,4 +1,4 @@
-/*const Client = require("pg").Client;
+const Client = require("pg").Client;
 
 const client = new Client({
     user: "postgres",
@@ -13,4 +13,4 @@ client.connect(function(err) {
     console.log("Connected!");
 });
 
-module.exports = client;*/
+module.exports = client;

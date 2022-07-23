@@ -1,5 +1,5 @@
 //file hedha lel connexion avec data base
-const Pool = require("pg").Pool;
+/*const Pool = require("pg").Pool;
 
 const pool = new Pool({
     user: "postgres",
@@ -13,4 +13,4 @@ pool.connect(function(err) {
     console.log("Connected!");
 });
 
-module.exports = pool;
+module.exports = pool;*/
