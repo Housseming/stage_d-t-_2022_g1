@@ -1,12 +1,15 @@
 const express = require("express");
 const route = express.Router();
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const client = require("../basededonnee");
 const bodyParser = require("body-parser");
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
 //bch nasnaa token
 
 const { validateToken } = require("../middlewares/AuthMiddleWare");
+var keyaccesstoken = process.env.ACCESS_TOKEN_SECRET;
+var keyrefreshtoken = process.env.REFRESH_TOKEN_SECRET;
 route.post("/login", (req, res) => {
     const { username, password } = req.body;
     client.query(
@@ -24,9 +27,11 @@ route.post("/login", (req, res) => {
                     if (match) {
                         console.log("matching");
 
-                        const accessToken = jwt.sign({ username: result.rows[0].username, id: result.rows[0].id },
-                            "secretkeyaccesstoken", { expiresIn: "10h" }
-                        ); //payload heya data nheb ena nkhazenha eli heya parametre lowel mtaa el sign
+            const accessToken = jwt.sign(
+            { username: result.rows[0].username, id: result.rows[0].id /*,iss:esm el site(createur de jeton) ou bien t7otha issuer fel options*/},
+              keyaccesstoken,
+              { expiresIn: "1h" },
+            ); //payload heya data nheb ena nkhazenha eli heya parametre lowel mtaa el sign
 
                         res.json(accessToken);
                     } else {

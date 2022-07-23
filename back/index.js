@@ -12,10 +12,17 @@ const root9 = require("./routes/utilisateur")
 const root10 = require("./routes/b_Gestion")
 const express = require("express");
 const app = express();
-app.use(bodyParser.json());
 const cors = require("cors");
 const pool = require("./db");
+const loginroute = require("./routes/RouteLogin");
+const registerroute = require("./routes/RouteRegister");
+const collabroute = require("./routes/RouteCollab");
+const homeroute = require("./routes/RouteHome");
+const tribunaleroute = require("./routes/tribunale");
+require('dotenv').config();
+const PORT = process.env.PORT || 5000
 //middleware
+app.use(bodyParser.json());
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -32,6 +39,12 @@ app.use(root10); //gestionclient
 
 
 
-app.listen(5000, () => {
-    console.log("running server on 5000");
+app.use(loginroute);
+app.use(registerroute);
+app.use(collabroute);
+app.use(homeroute);
+app.use(tribunaleroute);
+
+app.listen(PORT, () => {
+  console.log("running server on 5000");
 });

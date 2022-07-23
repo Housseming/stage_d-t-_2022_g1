@@ -6,9 +6,9 @@ import Parametreglobale from "./components/dashboard/Parametreglobale"
 import PrimeHuissier from "./components/dashboard/primehuissier.jsx";
 import { Sharedlayout } from "./components/dashboard/sharedLayout.jsx";
 import { AccountBox, RegisterBox } from "./components/accountBox/index.jsx";
-
+import { ToastContainer } from "react-toastify";
 import Gestionclient from "./components/dashboard/Gestionclient.jsx";
-
+import "react-toastify/dist/ReactToastify.css";
 import Honoraireenextra from "./components/dashboard/honoraireenextra.jsx";
 import Timbre from "./components/dashboard/timbre.jsx";
 import Photocopie from "./components/dashboard/photocopie.jsx";
@@ -17,6 +17,7 @@ import Recettedufinance from "./components/dashboard/recettedufinance.jsx";
 import Emplacementdossier from "./components/dashboard/emplacementdossier.jsx";
 import Utilisateur from "./components/dashboard/utilisateur";
 
+import Tribin_Admin from "./components/dashboard/tribinaux_administrations/tribin_admin";
 
 import {Collabo} from "./components/dashboard/collaborateurs/collabo"
 function App() {
@@ -35,9 +36,15 @@ function App() {
           <Route path="transport" element={<Transport />} />
           <Route path="recettedufinance" element={<Recettedufinance />} />
           <Route path="emplacementdossier" element={<Emplacementdossier />} />
+          <Route path="gestionclient" element={<Gestionclient />} />
           <Route path="collab" element={<Collabo></Collabo>}></Route>
+          <Route
+            path="/tribinaux_administrations"
+            element={<Tribin_Admin></Tribin_Admin>}
+          ></Route>
         </Route>
       </Routes>
+      <ToastContainer position="top-center"></ToastContainer>
     </BrowserRouter>
   );
                   }

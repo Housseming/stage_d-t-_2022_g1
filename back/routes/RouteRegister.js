@@ -1,7 +1,7 @@
 const express = require("express");
 const route = express.Router();
 const client = require("../basededonnee");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const saltRounds = 10;
 const bodyParser = require("body-parser");
 route.post("/register", (req, res) => {
