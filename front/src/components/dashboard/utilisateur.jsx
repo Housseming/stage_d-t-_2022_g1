@@ -6,27 +6,26 @@ import "antd/dist/antd.min.css";
 import {AiFillEdit} from "react-icons/ai";
 import {MdDeleteForever} from "react-icons/md";
 import {toast} from "react-toastify";
-import {Link} from "react-router-dom";
-const PrimeHuissier = () => {
+import { Link } from "react-router-dom";
+const Utilisateur = () => {
   //declaration necessaires
   const [liste, setListe] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
-  const [edditingprime, setEdditingprime] = useState(null);
+  const [edditingutilisateur, setEdditingutilisateur] = useState( {
+    login: "",
+    mdp: "",
+    domaine:"",
+  });
   const [isAdd, setIsAdd] = useState(false);
-  const [addingprime, setAddingprime] = useState({
-    libelle: "",
-    montant: "",
-    dessociable: "",
-    impot: "",
-    mensuel: "",
+  const [addingutilisateur, setAddingutilisateur] = useState({
+    login: "",
+    mdp: "",
+    domaine: "",
   });
   const column = [
-    {key: "1", title: "ID", dataIndex: "id"},
-    {key: "2", title: "libelle", dataIndex: "libelle"},
-    {key: "3", title: "montant", dataIndex: "montant"},
-    {key: "4", title: "dessociable", dataIndex: "dessociable"},
-    {key: "5", title: "impot", dataIndex: "impot"},
-    {key: "6", title: "mensuel", dataIndex: "mensuel"},
+    {key: "1", title: "login", dataIndex: "login"},
+    {key: "2", title: "mdp", dataIndex: "mdp"},
+    {key: "3", title: "domaine", dataIndex: "domaine"},
     {
       key: "16",
       title: "Actions",
@@ -37,18 +36,20 @@ const PrimeHuissier = () => {
               <AiFillEdit
                 className="edit"
                 onClick={() => {
-                  editprime(record);
+                  editutilisateur(record);
                 }}></AiFillEdit>
-              <p>modifier</p>
+
+              <p>modifier </p>
             </div>
             <div className="divdelete">
               <MdDeleteForever
                 className="delete"
                 onClick={() => {
-                  deleteprime(record);
+                  deleteutilisateur(record);
                 }}></MdDeleteForever>
-
-              <p>supprimer</p>
+              <pre>
+                <p> supprimer</p>
+              </pre>
             </div>
           </div>
         );
@@ -56,64 +57,64 @@ const PrimeHuissier = () => {
     },
   ];
 
-  //select primehuissier
-  const getprimerequest = async () => {
+  //select utilisateur
+  const getutilisateurrequest = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/primehuissier");
+      const response = await axios.get("http://localhost:5000/utilisateur");
       setListe(response.data);
     } catch (error) {
       console.log(error.message);
     }
   };
   useEffect(() => {
-    getprimerequest();
+    getutilisateurrequest();
   });
   console.log(liste);
 
-  //supprimer primehuissier
-  const deleteprime = (record) => {
+  //suprimer utilisateur
+  const deleteutilisateur = (record) => {
     Modal.confirm({
-      title: "Vous etes sur de supprimer ce primehuissier?",
+      title: "Vous etes sur de supprimer cet utilisateur ?",
       okText: "oui",
       okType: "danger",
       cancelText: "annuler",
       onOk: () => {
-        const newListe = liste.filter((prime) => prime.id !== record.id);
+        const newListe = liste.filter((utilisateur) => utilisateur.login !== record.login);
         setListe(newListe);
-        deleteprimerequest(record.id);
-        toast.success("primehuissier supprimée avec succés");
+        deleteutilisateurrequest(record.login);
+        toast.success("utilisateur supprimé avec succès");
       },
     });
   };
-  const deleteprimerequest = async (id) => {
+  const deleteutilisateurrequest = async (login) => {
     try {
       const deleted = await axios.post(
-        "http://localhost:5000/primehuissiereff",
+        "http://localhost:5000/utilisateureff",
         {
-          id: id,
+          login: login,
         }
       );
-      console.log("prime supprimé");
+      console.log("utlisateur supprimé");
     } catch (error) {
       console.log(error);
     }
   };
 
-  //modifier un primehuissier
-  const editprime = (record) => {
+  //modifier un utilisateur
+  const editutilisateur = (record) => {
     setIsEdit(true);
-    setEdditingprime({...record}); //copie mel record
+    setEdditingutilisateur({...record}); //copie mel record
   };
   const resetEditing = () => {
     setIsEdit(false);
-    setEdditingprime(null);
+    setEdditingutilisateur(null);
   };
-  //ajouter primehuissier
-  const addprime = async () => {
+  //ajouter utilisateur
+  const addutilisateur = async () => {
     try {
       const resp = await axios.post(
-        "http://localhost:5000/primehuissieradd",
-        addingprime
+        "http://localhost:5000/utilisateuradd",
+        addingutilisateur
       );
       console.log(resp.data);
     } catch (error) {
@@ -123,79 +124,81 @@ const PrimeHuissier = () => {
   return (
     <div className="App">
       <header className="App-header">
+        <h1>Liste Des Utilisateurs</h1>
         <button
           className="btnadd"
           onClick={() => {
             setIsAdd(true);
           }}>
-          Ajouter Primehuissier
+          Ajouter Utilisateur
         </button>
         <div className="tab">
           <Table
             columns={column}
             dataSource={liste}
-            size="medium"
+            size="small"
             bordered={true}></Table>
         </div>
 
         <Modal
-          title="modifier primehuissier"
+          title="modifier utilisateur"
           visible={isEdit}
           okText="Enregistrer"
           cancelText="Annuler"
           onCancel={() => {
             setIsEdit(false);
           }}
-          onOk={() => {
+          onOk={async () => {
             setIsEdit(false);
-            const newListe = liste.map((prime) => {
-              if (prime.id == edditingprime.id) {
-                return edditingprime;
+            const newListe = liste.map( ( utilisateur ) => {
+              if ( utilisateur.login === edditingutilisateur.login ) {
+                return edditingutilisateur;
               } else {
-                return prime;
+                return utilisateur;
               }
-            });
+            } );
+              try {
+                const addutilisateur = await axios.post(
+                  "http://localhost:5000/utilisateur/update",
+                  edditingutilisateur
+                );
+              } catch (error) {
+                console.log("error");
+              }
             setListe(newListe);
             resetEditing();
-            toast.success("primehuissier modifié avec succés");
+            toast.success("utilisateur modifié avec succès");
           }}>
           <Input
-            placeholder="Tapez le libelle"
-            value={edditingprime?.libelle}
+            placeholder="Tapez le Nom d'utilisateur"
+            value={edditingutilisateur?.login}
             onChange={(e) => {
-              setEdditingprime({
-                ...edditingprime,
-                libelle: e.target.value,
+              setEdditingutilisateur({
+                ...edditingutilisateur,
+                login: e.target.value,
               });
             }}></Input>
-          {/*edditingprime? s'il n'est pas null*/}
           <Input
-            placeholder="Tapez le Montant"
-            value={edditingprime?.montant}
+            placeholder="Tapez le Mot de passe de l'utilisateur ajouté"
+            value={edditingutilisateur?.mdp}
             onChange={(e) => {
-              setEdditingprime({...edditingprime, montant: e.target.value});
+              setEdditingutilisateur({
+                ...edditingutilisateur,
+                mdp: e.target.value,
+              });
             }}></Input>
           <Input
-            placeholder="Confirmez le dessociable ?"
-            value={edditingprime?.dessociable}
+            placeholder="tapez le domaine d'utilisation"
+            value={edditingutilisateur?.domaine}
             onChange={(e) => {
-              setEdditingprime({...edditingprime, dessociable: e.target.value});
-            }}></Input>
-          <Input
-            placeholder="Confimez l'impot ?"
-            value={edditingprime?.impot}
-            onChange={(e) => {
-              setEdditingprime({...edditingprime, impot: e.target.value});
-            }}></Input>
-          <Input
-            placeholder="Confirmez le Mensuel"
-            value={edditingprime?.mensuel}
-            onChange={(e) => {
-              setEdditingprime({...edditingprime, mensuel: e.target.value});
+              setEdditingutilisateur({
+                ...edditingutilisateur,
+                domaine: e.target.value,
+              });
             }}></Input>
         </Modal>
         <Modal
-          title="ajouter primehuissier"
+          title="ajouter utilisateur"
           visible={isAdd}
           okText="Enregistrer"
           cancelText="Annuler"
@@ -203,53 +206,35 @@ const PrimeHuissier = () => {
             setIsAdd(false);
           }}
           onOk={() => {
-            addprime();
+            addutilisateur();
             setIsAdd(false);
-            toast.success("Primehuissier ajoutée avec succès");
+            toast.success("utilisateur ajoutée avec succès");
           }}>
           <Input
-            placeholder="tapez le libéllé"
-            value={addingprime.libelle}
+            placeholder="tapez le nom d'utilisateur"
+            value={addingutilisateur.login}
             onChange={(e) => {
-              setAddingprime({
-                ...addingprime,
-                libelle: e.target.value,
+              setAddingutilisateur({
+                ...addingutilisateur,
+                login: e.target.value,
               });
             }}></Input>
           <Input
-            placeholder="Tapez le Montant"
-            value={addingprime.montant}
+            placeholder="Tapez le Mot de passe"
+            value={addingutilisateur.mdp}
             onChange={(e) => {
-              setAddingprime({
-                ...addingprime,
-                montant: e.target.value,
+              setAddingutilisateur({
+                ...addingutilisateur,
+                mdp: e.target.value,
               });
             }}></Input>
           <Input
-            placeholder="Confirmez le dessociable ?"
-            value={addingprime.dessociable}
+            placeholder="Tapez le domaine d'utilisation de l'utilisateur "
+            value={addingutilisateur.domaine}
             onChange={(e) => {
-              setAddingprime({
-                ...addingprime,
-                dessociable: e.target.value,
-              });
-            }}></Input>
-          <Input
-            placeholder="Confimez l'impot ?"
-            value={addingprime.impot}
-            onChange={(e) => {
-              setAddingprime({
-                ...addingprime,
-                impot: e.target.value,
-              });
-            }}></Input>
-          <Input
-            placeholder="Confirmez le Mensuel"
-            value={addingprime.mensuel}
-            onChange={(e) => {
-              setAddingprime({
-                ...addingprime,
-                mensuel: e.target.value,
+              setAddingutilisateur({
+                ...addingutilisateur,
+                domaine: e.target.value,
               });
             }}></Input>
         </Modal>
@@ -258,4 +243,4 @@ const PrimeHuissier = () => {
   );
 };
 
-export default PrimeHuissier;
+export default Utilisateur;

@@ -7,61 +7,60 @@ const pool = require("../db");
 //middleware
 
 //routes//
-//create prime
+//create utilisateur
 //req heya requete client res heya res li bch ymchi lclient
 //async taati wa9t lel data bch tekhdem les fctions teeha
 root9.post("/utilisateuradd", async(req, res) => {
     try {
-        const { libelle, montant, dessociable, impot, mensuel } = req.body;
-        const newprimes = await pool.query(
-            "INSERT INTO primehuissier (libelle, montant, dessociable, impot, mensuel) VALUES($1,$2,$3,$4,$5)", [libelle, montant, dessociable, impot, mensuel]
+        const { login, mdp, domaine } = req.body;
+        const newutilisateurs = await pool.query(
+            "INSERT INTO utilisateur (login,mdp,domaine) VALUES($1,$2,$3)", [login, mdp, domaine]
             //res.json("succes"),
         );
-        res.json(newprimes.rows[0]);
+        res.json(newutilisateurs.rows[0]);
     } catch (err) {
         console.error(err.message);
     }
 });
-//get all primes
+//get all utilisateurs
 root9.get("/utilisateur", async(req, res) => {
     try {
-        const allprimes = await pool.query("SELECT * FROM primehuissier");
-        res.json(allprimes.rows);
+        const allutilisateurs = await pool.query("SELECT * FROM utilisateur");
+        res.json(allutilisateurs.rows);
     } catch (err) {
         console.error(err.message);
     }
 });
-//get a prime
+//get  utilisateur
 root9.get("/utilisateur/:id", async(req, res) => {
     try {
-        const { id } = req.params;
-        const prime = await pool.query("SELECT * FROM primehuissier WHERE id=$1", [
-            id,
+        const { login } = req.params;
+        const utilisateur = await pool.query("SELECT * FROM utilisateur WHERE login=$1", [
+            login
         ]);
-        res.json(prime.rows[0]);
+        res.json(utilisateur.rows[0]);
     } catch (err) {
         console.error(err.message);
     }
 });
-//update a prime
-root9.put("/utilisateur/update", async(req, res) => {
+//update a utilisateur
+root9.post("/utilisateur/update", async(req, res) => {
     try {
-        const { id } = req.body;
-        const { libelle, montant, dessociable, impot, mensuel } = req.body;
-        const updatePrime = await pool.query(
-            "UPDATE primehuissier SET libelle=$1,montant=$2,dessociable=$3,impot=$4,mensuel=$5 WHERE id=$6", [libelle, montant, dessociable, impot, mensuel, id]
+        const { login, mdp, domaine } = req.body;
+        const updateutilisateur = await pool.query(
+            "UPDATE utilisateur SET mdp=$2,domaine=$3 WHERE login=$1", [login, mdp, domaine]
         );
-        res.json("prime updated");
+        res.json("utilisateur updated");
     } catch (err) {
         console.error(err.message);
     }
 });
-//delete a prime
-root8.post("/utilisateureff", async(req, res) => {
+//delete a utilisateur
+root9.post("/utilisateureff", async(req, res) => {
     try {
-        const { id } = req.body;
-        const deletePrime = await pool.query(
-            "DELETE FROM primehuissier WHERE id=$1", [id]
+        const { login } = req.body;
+        const deleteutilisateur = await pool.query(
+            "DELETE FROM utilisateur WHERE login=$1", [login]
         );
         res.json("deleted");
     } catch (err) {

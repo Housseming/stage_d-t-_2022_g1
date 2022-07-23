@@ -16,86 +16,68 @@ import { ChevronDownIcon } from '@heroicons/react/solid';
 
 const solutions = [
   {
-    name: "Paramètre globale",
-    description:
-      "Get a better understanding of where your traffic is coming from.",
-    href: "#Parametreglobal",
+    name: 'Paramètre globale',
+    description: 'Get a better understanding of where your traffic is coming from.',
+    href: '#Parametreglobal',
     icon: ChartBarIcon,
   },
   {
-    name: "honoraire en extra",
-    description: "Speak directly to your customers in a more meaningful way.",
-    href: "#",
+    name: 'honoraire en extra',
+    description: 'Speak directly to your customers in a more meaningful way.',
+    href: '#',
     icon: CursorClickIcon,
   },
+  { name: 'Debours', description: "Your customers' data will be safe and secure.", href: '#', icon: ShieldCheckIcon },
   {
-    name: "Debours",
-    description: "Your customers' data will be safe and secure.",
-    href: "#",
-    icon: ShieldCheckIcon,
-  },
-  {
-    name: "Emplacement dossier",
+    name: 'Emplacement dossier',
     description: "Connect with third-party tools that you're already using.",
-    href: "#",
+    href: '#',
     icon: ViewGridIcon,
   },
   {
-    name: "Emplacement dossier",
-    description: "Connect with third-party tools that you're already using.",
-    href: "#",
-    icon: ViewGridIcon,
-  },
-  {
-    name: "collaborateurs",
-    description:
-      "Liste des collaborateurs",
-    href: "/collab",
+    name: 'Tribunaux et Administrations',
+    description: 'Build strategic funnels that will drive your customers to convert',
+    href: '#',
     icon: RefreshIcon,
   },
   {
-    name: "Type dossier",
-    description:
-      "Get detailed reports that will help you make more informed decisions ",
-    href: "#",
+    name: 'Type dossier',
+    description: 'Get detailed reports that will help you make more informed decisions ',
+    href: '#',
     icon: DocumentReportIcon,
   },
   {
     name: "Utilisateur",
     description:
       "Get detailed reports that will help you make more informed decisions ",
-    href: "#",
+    href: "/utilisateur",
     icon: DocumentReportIcon,
   },
   {
-    name: "Huissier",
-    description:
-      "Get detailed reports that will help you make more informed decisions ",
-    href: "primehuissier",
+    name: 'Huissier',
+    description: 'Get detailed reports that will help you make more informed decisions ',
+    href: 'primehuissier',
     icon: DocumentReportIcon,
   },
   {
-    name: "primeorateur",
-    description:
-      "Get detailed reports that will help you make more informed decisions ",
-    href: "#",
+    name: 'primeorateur',
+    description: 'Get detailed reports that will help you make more informed decisions ',
+    href: '#',
     icon: DocumentReportIcon,
   },
   {
-    name: "Greffier",
-    description:
-      "Get detailed reports that will help you make more informed decisions ",
-    href: "#",
+    name: 'Greffier',
+    description: 'Get detailed reports that will help you make more informed decisions ',
+    href: '#',
     icon: DocumentReportIcon,
   },
   {
-    name: "Prime Greffier",
-    description:
-      "Get detailed reports that will help you make more informed decisions ",
-    href: "#",
+    name: 'Prime Greffier',
+    description: 'Get detailed reports that will help you make more informed decisions ',
+    href: '#',
     icon: DocumentReportIcon,
   },
-];
+]
 const resources = [
   {
     name: 'Help Center',

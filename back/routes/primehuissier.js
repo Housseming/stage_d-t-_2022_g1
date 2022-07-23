@@ -44,7 +44,7 @@ root8.get("/primehuissier/:id", async(req, res) => {
     }
 });
 //update a prime
-root8.put("/primehuissier/update", async(req, res) => {
+root8.post("/primehuissier/update", async(req, res) => {
     try {
         const { id } = req.body;
         const { libelle, montant, dessociable, impot, mensuel } = req.body;

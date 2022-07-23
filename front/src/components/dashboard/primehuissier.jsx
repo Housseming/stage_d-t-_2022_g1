@@ -141,7 +141,7 @@ const PrimeHuissier = () => {
           onCancel={() => {
             setIsEdit(false);
           }}
-          onOk={() => {
+          onOk={async () => {
             setIsEdit(false);
             const newListe = liste.map((prime) => {
               if (prime.id == edditingprime.id) {
@@ -149,10 +149,18 @@ const PrimeHuissier = () => {
               } else {
                 return prime;
               }
-            });
+            } );
+              try {
+                const addprime = await axios.post(
+                  "http://localhost:5000/primehuissier/update",
+                  edditingprime
+                );
+              } catch (error) {
+                console.log("error");
+              }
             setListe(newListe);
             resetEditing();
-            toast.success("primehuissier modifié avec succés");
+            toast.success("primehuissier modifié avec succès");
           }}>
           <Input
             placeholder="Tapez le libelle"
