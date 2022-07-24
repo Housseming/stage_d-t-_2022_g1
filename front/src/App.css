@@ -140,3 +140,7 @@
     background-color: #ffffffb7;
     color: #6646e5;
 }
+.situation{ 
+display:flex;
+flex-direction: column;
+}

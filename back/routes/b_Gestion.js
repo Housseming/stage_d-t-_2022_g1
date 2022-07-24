@@ -8,11 +8,11 @@ const pool = require("../db")
 // pour l'ajout
 root10.post("/gestionclient", async (req, res) => {
     try {
-        const { id,id_francais,montant } = req.body;
+        const { id,raison,matricule,ville,rue,num,code_postale,activité, situation_fiscale,categorie ,fax,email } = req.body;
        
 
-        const newTodo2 = await pool.query(" INSERT INTO public.gestionclient (id, id_francais,montant) VALUES ($1, $2,$3) ON CONFLICT (id) DO UPDATE SET id_francais =$2, montant=$3 ",
-            [ id,id_francais,montant ]);
+        const newTodo2 = await pool.query("INSERT INTO public.gestionclient (id,raison,matricule,ville,rue,num,code_postale,activité,situation_fiscale,categorie,fax,email) VALUES ($1, $2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)  ",//nahit on conflict khater ken yajouti meme id maykblsh haka wala haka
+            [id,raison,matricule,ville,rue,num,code_postale,activité, situation_fiscale ,categorie,fax,email]);
         res.json(newTodo2);
         
 
@@ -24,11 +24,10 @@ root10.post("/gestionclient", async (req, res) => {
 //pour la modification 
 root10.post("/gestionclient/modif", async (req, res) => {
     try {
-        const { id,montant } = req.body;
-       
-
-        const newTodo2 = await pool.query("UPDATE gestionclient SET montant=$2 WHERE id=$1  ",
-            [id,montant]);
+        const { id, raison,matricule,ville,rue,num,code_postale,activité,situation_fiscale,categorie,fax,email } = req.body;
+    
+        const newTodo2 = await pool.query("UPDATE gestionclient SET raison=$2,matricule=$3,ville=$4,rue=$5,num=$6,code_postale=$7,activité=$8,situation_fiscale=$9,categorie=$10,fax=$11,email=$12   WHERE id=$1  ",
+            [id,raison,matricule,ville,rue,num,code_postale,activité,situation_fiscale,categorie,fax,email]);
         res.json(newTodo2);
         
 
@@ -55,7 +54,7 @@ root10.get("/gestionclient", async (req, res) => {
        const newTodo1 = await pool.query(" DELETE FROM public.gestionclient WHERE id=$1",
             [id]);
         res.json(newTodo1);
-        res.json("honoraire was deleted");
+        res.json("CLIENt was deleted");
         
 
     }

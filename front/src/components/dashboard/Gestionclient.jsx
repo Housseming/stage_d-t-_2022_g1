@@ -1,6 +1,8 @@
-/* This example requires Tailwind CSS v2.0+ */
+/* This example requires Tailwind CSS v2.0+ */  
 //il vaut mieux l'id a ne pas toucher
 //aleh nafs l'id felexemple // je vais supposer que chaqun a son propre id 
+//difference entre addresse désigné et addresse //lien entre catgorie et la liste ajouter
+//collaborateur et code client??? // j'aui ajouté le fax et l'email malgre j'ai pas vu dans le tableau
 import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
@@ -17,7 +19,7 @@ const  Gestionclient = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [edditingGestionclient, setEdditingGestionclient] = useState(null);
   const [addingGestionclient, setAddingGestionclient] = useState({
-  id:"",raison:"",matricule:"",ville:"",rue:"",num:"",code_postale:"",activité:"",situation_fiscale:""
+  id:"",raison:"",matricule:"",ville:"",rue:"",num:"",code_postale:"",activité:"",situation_fiscale:"",categorie:"",fax:"",email:""
   
   
   });
@@ -31,8 +33,11 @@ const  Gestionclient = () => {
   { key: "7", title: "code_postale", dataIndex: "code_postale" },
   { key: "8", title: "activité", dataIndex: "activité" },
   { key: "9", title: "situation_fiscale", dataIndex: "situation_fiscale" },
+  { key: "10", title: "categorie", dataIndex: "categorie" },
+  { key: "11", title: "fax", dataIndex: "fax" },
+  { key: "12", title: "email", dataIndex: "email" },
   {
-  key: "10",
+  key: "13",
   title: "Actions",
   render: (record) => {
     return (
@@ -116,10 +121,16 @@ const deleteGestionclientrequest = async (id) => {
     setEdditingGestionclient(null);
   };
   //lien aveclback pour la modif
-  const editGestionclientrequest = async (id,raison,matricule,ville,rue,num,code_postale,activité,situation_fiscale) => {
+  const editGestionclientrequest = async (id,raison,matricule,ville,rue,num,code_postale,activité,situation_fiscale,categorie,fax,email) => {
     try {
       const modified = await axios.post("http://localhost:5000/gestionclient/modif", {
-        id:id,raison:raison,matricule:matricule,ville:ville,rue:rue,num:num,code_postale:code_postale,activité:activité,situation_fiscale:situation_fiscale
+        id:id,
+        raison:raison,
+        matricule:matricule,ville:ville,rue:rue,
+        num:num,code_postale:code_postale,activité:activité,
+        situation_fiscale:situation_fiscale,categorie:categorie,
+        fax:fax,
+        email:email
       });
       console.log("emplacement_dossier_modifié");
     } catch (error) {
@@ -185,7 +196,10 @@ const deleteGestionclientrequest = async (id) => {
         edditingGestionclient.num,
         edditingGestionclient.code_postale,
         edditingGestionclient.activité,
-        edditingGestionclient.situation_fiscale
+        edditingGestionclient.situation_fiscale,
+        edditingGestionclient.categorie,
+        edditingGestionclient.fax,
+        edditingGestionclient.email
         )// a ne pas toucher l'id
     resetEditing();
     toast.success("Gestionclient modifié avec succée");
@@ -221,6 +235,17 @@ const deleteGestionclientrequest = async (id) => {
       setEdditingGestionclient({
         ...edditingGestionclient,
         matricule: e.target.value,
+      });
+    }}
+  >
+ </Input>
+ <Input
+    placeholder=""
+    value={edditingGestionclient?.ville}
+    onChange={(e) => {
+      setEdditingGestionclient({
+        ...edditingGestionclient,
+        ville: e.target.value,
       });
     }}
   >
@@ -270,23 +295,82 @@ const deleteGestionclientrequest = async (id) => {
   >
  </Input>
 
- <Input
-    placeholder=""
+ <input
+    type="radio" name='a'
     value={edditingGestionclient?.situation_fiscale}
     onChange={(e) => {
       setEdditingGestionclient({
         ...edditingGestionclient,
-        situation_fiscale: e.target.value,
+        situation_fiscale: 'non Assujetti',
+      });
+    }}
+  >
+ </input>
+ <label>Non Assujetti          </label>
+ <input
+    type="radio" name='a'
+    value={edditingGestionclient?.situation_fiscale}
+    onChange={(e) => {
+      setEdditingGestionclient({
+        ...edditingGestionclient,
+        situation_fiscale: 'Assujetti',
+      });
+    }}
+  >
+ </input>
+ <label>Assujetti      </label>
+ <input
+    type="radio" name='a'
+    value={edditingGestionclient?.situation_fiscale}
+    onChange={(e) => {
+      setEdditingGestionclient({
+        ...edditingGestionclient,
+        situation_fiscale:'exonoré',
+      });
+    }}
+  >
+ </input>
+ <label>exonoré</label>
+ <Input
+    placeholder="categorie"
+    value={edditingGestionclient?.categorie}
+    onChange={(e) => {
+      setEdditingGestionclient({
+        ...edditingGestionclient,
+        categorie: e.target.value,
+      });
+    }}
+  >
+ </Input> 
+ <Input
+    placeholder="fax"
+    value={edditingGestionclient?.fax}
+    onChange={(e) => {
+      setEdditingGestionclient({
+        ...edditingGestionclient,
+        fax: e.target.value,
       });
     }}
   >
  </Input>
+ <Input
+    placeholder=""
+    value={edditingGestionclient?.email}
+    onChange={(e) => {
+      setEdditingGestionclient({
+        ...edditingGestionclient,
+        email: e.target.value,
+      });
+    }}
+  >
+ </Input>
+
  
-  
+ </Modal>
 
 
   {/*AJOUT*/}
-  </Modal>
+
   <Modal
           title="ajouter "
           visible={isAdd}
@@ -298,9 +382,9 @@ const deleteGestionclientrequest = async (id) => {
           onOk={() => {
             addGestionclient();
             setIsAdd(false);
-            toast.success("Emplacement_dossier_ajouté avec succès");
+            toast.success("client_ajouté avec succès");
           }}
-        >  id:"",raison:"",matricule:"",ville:"",rue:"",num:"",code_postale:"",activité:"",situation_fiscale:""
+        >  
           <Input
             placeholder="id"
             value={addingGestionclient.id}
@@ -372,23 +456,86 @@ const deleteGestionclientrequest = async (id) => {
             }}
           ></Input>
             <Input
-            placeholder="acy"
-            value={addingGestionclient.raison}
+            placeholder="activité"
+            value={addingGestionclient.activité}
             onChange={(e) => {
               setAddingGestionclient({
                 ...addingGestionclient,
-                raison: e.target.value,
+                activité: e.target.value,
+              });
+            }}
+          ></Input>
+          <div ClassName='situation'>
+           <p>Situation_fiscale</p>
+              <input type="radio" name='a'
+            placeholder="situation_fiscale"
+            value={addingGestionclient.situation_fiscale}
+            onChange={(e) => {
+              setAddingGestionclient({
+                ...addingGestionclient,
+                situation_fiscale: 'Non Assujetti',
+              });
+            }}
+          ></input> 
+          <label>Non Assujetti</label>
+          <input type="radio" name='a'
+            placeholder="situation_fiscale"
+            value={addingGestionclient.situation_fiscale}
+            onChange={(e) => {
+              setAddingGestionclient({
+                ...addingGestionclient,
+                situation_fiscale: 'Asujetti',
+              });
+            }}
+          ></input> 
+          <label>Asujetti</label>
+          <input type="radio" name='a'
+            placeholder="situation_fiscale"
+            value={addingGestionclient.situation_fiscale}
+            onChange={(e) => {
+              setAddingGestionclient({
+                ...addingGestionclient,
+                situation_fiscale: 'Exonoré',
+              });
+            }}
+          ></input> 
+          <label>Exonoré</label>
+          </div>
+              <Input
+            placeholder="categorie"
+            value={addingGestionclient.categorie}
+            onChange={(e) => {
+              setAddingGestionclient({
+                ...addingGestionclient,
+                categorie: e.target.value,
+              });
+            }}
+          ></Input>
+            <Input
+            placeholder="fax"
+            value={addingGestionclient.fax}
+            onChange={(e) => {
+              setAddingGestionclient({
+                ...addingGestionclient,
+                fax: e.target.value,
+              });
+            }}
+          ></Input>
+            <Input
+            placeholder="email"
+            value={addingGestionclient.email}
+            onChange={(e) => {
+              setAddingGestionclient({
+                ...addingGestionclient,
+                email: e.target.value,
               });
             }}
           ></Input>
           
           
+        
           
           
-          
-          
-          
-      
           </Modal>
 
   </header>

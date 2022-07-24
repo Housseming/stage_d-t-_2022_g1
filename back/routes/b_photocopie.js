@@ -12,7 +12,7 @@ root4.post("/photocopie/modif", async (req, res) => {
         const { prixphotocopie } = req.body;
        
 
-        const newTodo2 = await pool.query("UPDATE photocopie SET prixphotocopie =$1",
+        const newTodo2 = await pool.query("UPDATE photocopie SET prixphotocopie=$1",
             [ prixphotocopie ]);
         res.json(newTodo2);
         
