@@ -14,17 +14,29 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const pool = require("./db");
+const path = require("path");
+const PORT = process.env.PORT || 5000;
 const loginroute = require("./routes/RouteLogin");
 const registerroute = require("./routes/RouteRegister");
 const collabroute = require("./routes/RouteCollab");
 const homeroute = require("./routes/RouteHome");
 const tribunaleroute = require("./routes/tribunale");
-require('dotenv').config();
-const PORT = process.env.PORT || 5000
+//require('dotenv').config();
+//process.env.PORT 
+
+
 //middleware
 app.use(bodyParser.json());
 app.use(cors());
 app.use(express.json());
+app.use(express.static(path.join(__dirname, "front")));
+if (process.env.NODE_ENV === "production") {
+    //server static content
+    app.use(express.static(path.join(__dirname, "front/build")));
+}
+console.log(__dirname);
+console.log(path.join(__dirname, "front/src"));
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(root1); //parametreglobale
 app.use(root2); //honoraireenextra
@@ -46,5 +58,5 @@ app.use(homeroute);
 app.use(tribunaleroute);
 
 app.listen(PORT, () => {
-  console.log("running server on 5000");
+    console.log(`running server on ${PORT}`);
 });

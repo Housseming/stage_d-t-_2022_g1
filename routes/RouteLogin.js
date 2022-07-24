@@ -16,7 +16,7 @@ route.post("/login", (req, res) => {
         "SELECT * FROM clienttable WHERE username=$1", [username],
         (err, result) => {
             if (err) {
-                throw err;
+                throw (err);
             }
             if (result.rows.length > 0) {
                 console.log(result.rows[0]);
@@ -27,11 +27,12 @@ route.post("/login", (req, res) => {
                     if (match) {
                         console.log("matching");
 
-            const accessToken = jwt.sign(
-            { username: result.rows[0].username, id: result.rows[0].id /*,iss:esm el site(createur de jeton) ou bien t7otha issuer fel options*/},
-              keyaccesstoken,
-              { expiresIn: "1h" },
-            ); //payload heya data nheb ena nkhazenha eli heya parametre lowel mtaa el sign
+                        const accessToken = jwt.sign({
+                                username: result.rows[0].username,
+                                id: result.rows[0].id //,iss:esm el site(createur de jeton) ou bien t7otha issuer fel options
+                            },
+                            keyaccesstoken, { expiresIn: "1h" },
+                        ); //payload heya data nheb ena nkhazenha eli heya parametre lowel mtaa el sign
 
                         res.json(accessToken);
                     } else {

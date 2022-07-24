@@ -23,7 +23,7 @@ route.post("/register", (req, res) => {
                         "INSERT INTO clienttable (username,password,email) VALUES($1,$2,$3)", [username, hash, email],
                         (err, result) => {
                             if (err) {
-                                throw err;
+                                throw (err);
                             } else {
                                 res.json("SUCCESS"); //renvoi sucess au client
                             }
