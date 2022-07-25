@@ -1,7 +1,7 @@
 const express = require("express");
 const route = express.Router();
 const bcrypt = require("bcryptjs");
-const client = require("../basededonnee");
+const client = require("../db");
 const bodyParser = require("body-parser");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();

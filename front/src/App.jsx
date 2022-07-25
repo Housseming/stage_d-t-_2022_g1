@@ -16,8 +16,7 @@ import Transport from "./components/dashboard/transport.jsx";
 import Recettedufinance from "./components/dashboard/recettedufinance.jsx";
 import Emplacementdossier from "./components/dashboard/emplacementdossier.jsx";
 import Utilisateur from "./components/dashboard/utilisateur";
-
-import Tribin_Admin from "./components/dashboard/tribinaux_administrations/tribin_admin";
+import Tribunale from "./components/dashboard/tribinaux_administrations/tribunale";
 
 import {Collabo} from "./components/dashboard/collaborateurs/collabo"
 function App() {
@@ -38,10 +37,12 @@ function App() {
           <Route path="emplacementdossier" element={<Emplacementdossier />} />
           <Route path="gestionclient" element={<Gestionclient />} />
           <Route path="collab" element={<Collabo></Collabo>}></Route>
-          <Route
-            path="/tribinaux_administrations"
-            element={<Tribin_Admin></Tribin_Admin>}
-          ></Route>
+          <Route path="Tribunale" element={<Tribunale/>} />
+
+          {/*<Route
+            path="/tribunale"
+            element={<Tribunale/>}
+  ></Route>*/}
         </Route>
       </Routes>
       <ToastContainer position="top-center"></ToastContainer>

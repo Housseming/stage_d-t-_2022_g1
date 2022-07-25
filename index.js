@@ -29,13 +29,14 @@ const tribunaleroute = require("./routes/tribunale");
 app.use(bodyParser.json());
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "front")));
+//app.use(express.static(path.join(__dirname, "front")));
+app.use(express.static("front/public"))
 if (process.env.NODE_ENV === "production") {
     //server static content
-    app.use(express.static(path.join(__dirname, "front/build")));
+    app.use(express.static(path.join(__dirname, "front/public")));
 }
 console.log(__dirname);
-console.log(path.join(__dirname, "front/src"));
+console.log(path.join(__dirname, "front/public"));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(root1); //parametreglobale
