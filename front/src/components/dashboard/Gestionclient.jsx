@@ -11,6 +11,7 @@ import "antd/dist/antd.min.css";
 import { AiFillEdit } from "react-icons/ai";
 import { MdDeleteForever } from "react-icons/md";
 import { toast } from "react-toastify";
+import {SearchOutlined} from '@ant-design/icons'
 
 
 
@@ -25,8 +26,59 @@ const  Gestionclient = () => {
   });
   
   const columns= [{ key: "1", title: "id", dataIndex: "id" },
-  { key:"2" , title:"raison", dataIndex:"raison"},
-  { key: "3", title: "matricule", dataIndex: "matricule" },
+  { key:"2" , title:"raison", dataIndex:"raison",filterDropdown:({  
+    setSelectedKeys,
+    selectedKeys,
+    clearFilters,
+    confirm}) =>
+   {return ( 
+    <React.Fragment>
+   <Input 
+    autoFocus
+    placeholder="type text"
+    value={selectedKeys[0]}
+   onChange={(e)=>{setSelectedKeys(e.target.value ? [e.target.value] :[] )
+    confirm({closeDropdown:false});
+  }}
+   onPressEnter={() => { confirm();}}
+   onBlur={()=>{confirm();}}>
+
+   </Input> 
+   <Button onClick={()=>{confirm();}} type='primary'> Search </Button>
+   <Button onClick={() => {clearFilters()}} type="danger">Reset </Button>
+   </React.Fragment>
+   );},
+filterIcon:() =>{return <SearchOutlined/>},
+onFilter: (value,record) => {
+  return record.raison.toLowerCase().includes(value.toLowerCase())
+}
+
+},
+  { key: "3", title: "matricule", dataIndex: "matricule",filterDropdown:({ 
+     setSelectedKeys,
+    selectedKeys,
+    confirm,
+     clearFilters,
+  }) =>
+   {return ( 
+    <React.Fragment>
+   <Input 
+    autoFocus
+    placeholder="type text"
+   value={selectedKeys[0]}
+   onChange={(e)=>{setSelectedKeys(e.target.value ? [e.target.value] :[] )}}
+   onPressEnter={() => { confirm();}}
+   onBlur={()=>{confirm();}}>
+
+   </Input> 
+   <Button onClick={()=>{confirm();}} type='primary'> Search </Button>
+   <Button onClick={() => {clearFilters()}} type="danger">Reset </Button>
+   
+   </React.Fragment>
+   );},
+filterIcon:() =>{return <SearchOutlined/>},
+onFilter: (value,record) => {
+  return record.matricule.toLowerCase().includes(value.toLowerCase())} },
   { key: "4", title: "ville", dataIndex: "ville" },
   { key: "5", title: "rue", dataIndex: "rue" },
   { key: "6", title: "num", dataIndex: "num" },

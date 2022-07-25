@@ -18,7 +18,7 @@ const  Timbre = () => {
   const [addingTimbre, setAddingTimbre] = useState({
     libelle: "",
     
-    montant: "",
+    montant: 0,
   
   });
   
@@ -111,8 +111,8 @@ const deleteTimbrerequest = async (libelle) => {
   //lien aveclback pour la modif
   const editTimbrerequest = async (libelle,montant) => {
     try {
-      const modified = await axios.post("http://localhost:5000/timbre/modif1", {
-        libelle:libelle,montant:montant
+      const modified = await axios.post("http://localhost:5000/timbre/modif", {
+        libelle:libelle ,montant:montant
       });
       console.log("Timbre modifié");
     } catch (error) {
@@ -137,9 +137,9 @@ const deleteTimbrerequest = async (libelle) => {
   return (
     <div className="App">
       <header className="App-header">
-        <button className="btnadd"  onClick={() => {
+        <Button className="btnadd"  onClick={() => {
             setIsAdd(true);
-          } }> Ajouter</button>
+          } }> Ajouter</Button>
         <div classname="tab">
         <Table  
            columns={columns}
@@ -188,10 +188,7 @@ const deleteTimbrerequest = async (libelle) => {
   <Input placeholder='Montant'
     value={edditingTimbre?.montant}
     onChange={(e) => {
-      setEdditingTimbre({
-         ...edditingTimbre, 
-        montant: e.target.value,
-       });
+      setEdditingTimbre({ ...edditingTimbre, montant: e.target.value });
     }}
   ></Input>
   
