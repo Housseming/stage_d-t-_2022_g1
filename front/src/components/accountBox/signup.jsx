@@ -18,6 +18,7 @@ export function Signup(props) {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   let validate = true;
+
   const Send = async () => {
     if (!email || !password || !username) {
       toast.error(" il faut remplir tous les champs!");
@@ -80,6 +81,7 @@ export function Signup(props) {
           value={username}
           onChange={(e) => {
             setUsername(e.target.value);
+            console.log(username)
           }}
         />
         <Marginer direction="vertical" margin={20} />
@@ -87,11 +89,12 @@ export function Signup(props) {
           <strong>E-mail</strong>
         </label>
         <Input
-          type="e-mail"
+          type="email"
           placeholder="E-mail"
           value={email}
           onChange={(e) => {
             setEmail(e.target.value);
+            console.log(email);
           }}
         />
         <Marginer direction="vertical" margin={10} />
@@ -102,7 +105,8 @@ export function Signup(props) {
           type="password"
           placeholder="Mot de Passe"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) => {setPassword(e.target.value)
+          console.log(password)}}
         />
         {/*<Marginer direction="vertical" margin={10} />
         <label>
@@ -113,7 +117,7 @@ export function Signup(props) {
       <Marginer direction="vertical" margin="5em" />
       <SubmitButton
         type="button"
-        onclick={() => {
+        onClick={() => {
           Send();
         }}
       >
