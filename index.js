@@ -32,13 +32,13 @@ app.use(cors());
 app.use(express.json());
 //app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 //app.use(express.static(path.join(__dirname, "front")));
-app.use(express.static("front/public"));
+app.use(express.static("front"));
 if (process.env.NODE_ENV === "production") {
     //server static content
-    app.use(express.static(path.join(__dirname, "front/public")));
+    app.use(express.static(path.join(__dirname, "front")));
 }
 console.log(__dirname);
-console.log(path.join(__dirname, "front/public"));
+console.log(path.join(__dirname, "front"));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(root1); //parametreglobale
