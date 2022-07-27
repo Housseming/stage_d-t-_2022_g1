@@ -29,7 +29,7 @@ root6.get("/recettedufinance", async (req, res) => {
         
        
 
-        const newTodo = await pool.query(" SELECT * FROM recettedufinance")
+        const newTodo = await pool.query(" SELECT * FROM recettedufinance ORDER by id asc")
         res.json(newTodo.rows);
         
 

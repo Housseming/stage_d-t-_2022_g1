@@ -34,7 +34,7 @@ root1.get("/parametreglobale", async (req, res) => {
         
        
 
-        const newTodo = await pool.query(" SELECT * FROM parametreglobale")
+        const newTodo = await pool.query("SELECT * FROM parametreglobale")
         res.json(newTodo.rows);
         
 

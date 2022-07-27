@@ -39,7 +39,7 @@ root10.post("/gestionclient/modif", async (req, res) => {
 //selection 
 root10.get("/gestionclient", async (req, res) => {
     try {
-        const newTodo = await pool.query(" SELECT * FROM gestionclient")
+        const newTodo = await pool.query(" SELECT * FROM gestionclient ORDER by id asc")
         res.json(newTodo.rows);
         
 

@@ -18,20 +18,21 @@ const solutions = [
   {
     name: 'Paramètre globale',
     description: 'Get a better understanding of where your traffic is coming from.',
-    href: '#Parametreglobal',
+    href: 'Parametreglobale',
     icon: ChartBarIcon,
+    
   },
   {
     name: 'honoraire en extra',
     description: 'Speak directly to your customers in a more meaningful way.',
-    href: '#',
+    href: 'honoraireenextra',
     icon: CursorClickIcon,
   },
   { name: 'Debours', description: "Your customers' data will be safe and secure.", href: '#', icon: ShieldCheckIcon },
   {
     name: 'Emplacement dossier',
     description: "Connect with third-party tools that you're already using.",
-    href: '#',
+    href: 'emplacementdossier',
     icon: ViewGridIcon,
   },
   {
@@ -141,7 +142,7 @@ export default function Example() {
                     leave="transition ease-in duration-150"
                     leaveFrom="opacity-100 translate-y-0"
                     leaveTo="opacity-0 translate-y-1"
-                  >
+                   >
                     <Popover.Panel className="absolute z-10 -ml-4 mt-3 transform w-screen max-w-md lg:max-w-3xl">
                       <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
                         <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8 lg:grid-cols-2">
@@ -150,12 +151,13 @@ export default function Example() {
                               key={item.name}
                               href={item.href}
                               className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50"
-                            >
+                             
+                             >
                               <div className="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-indigo-500 text-white sm:h-12 sm:w-12">
                                 <item.icon className="h-6 w-6" aria-hidden="true" />
                               </div>
                               <div className="ml-4">
-                                <p className="text-base font-medium text-gray-900">{item.name}</p>
+                                <p className="text-base font-medium text-gray-900">{item.name}</p> 
                                 <p className="mt-1 text-sm text-gray-500">{item.description}</p>
                               </div>
                             </a>

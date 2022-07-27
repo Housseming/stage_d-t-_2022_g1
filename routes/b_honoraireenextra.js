@@ -11,7 +11,7 @@ root2.post("/honoraireenextra", async (req, res) => {
         const { libelle,libelle_francais,montant } = req.body;
        
 
-        const newTodo2 = await pool.query(" INSERT INTO public.honoraireenextra (libelle, libelle_francais,montant) VALUES ($1, $2,$3) ON CONFLICT (libelle) DO UPDATE SET libelle_francais =$2, montant=$3 ",
+        const newTodo2 = await pool.query("INSERT INTO public.honoraireenextra (libelle, libelle_francais,montant) VALUES ($1, $2,$3) ON CONFLICT (libelle) DO UPDATE SET libelle_francais =$2, montant=$3 ",
             [ libelle,libelle_francais,montant ]);
         res.json(newTodo2);
         

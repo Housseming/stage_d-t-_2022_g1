@@ -1,5 +1,6 @@
 /* This example requires Tailwind CSS v2.0+ */
 //il vaut mieux l'id a ne pas toucher
+// houwa fama par defaut mahomsh mnadhmin besh nemshy nhawel nadhmhom f data base
 import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
@@ -17,13 +18,15 @@ const  Emplacementdossier = () => {
   const [edditingEmplacementdossier, setEdditingEmplacementdossier] = useState(null);
   const [addingEmplacementdossier, setAddingEmplacementdossier] = useState({
    id:"", libelle: "",
-  
-  
   });
   
   const columns= [{ key: "1", title: "libelle", dataIndex: "libelle" },
   
-  { key:"2" , title:"id", dataIndex:"id"},
+  { key:"2" , title:"id",
+   dataIndex:"id",
+  //sorter:(record1,record2)=> 
+  //{ return record1.id<record2.id}
+},
  {
   key: "3",
   title: "Actions",
@@ -148,6 +151,7 @@ const deleteEmplacementdossierrequest = async (id) => {
             dataSource={liste}
             style={{ with:15 }}
             bordered={true}
+            pagination={false}
             /> 
           </div>
   {/*MODIFICATION*/}

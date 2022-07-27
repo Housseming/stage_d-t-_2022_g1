@@ -45,7 +45,7 @@ root7.get("/emplacementdossier", async (req, res) => {
         
        
 
-        const newTodo = await pool.query(" SELECT * FROM emplacementdossier")
+        const newTodo = await pool.query(" SELECT * FROM emplacementdossier ORDER by id asc")
         res.json(newTodo.rows);
         
 
