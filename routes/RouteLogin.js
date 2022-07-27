@@ -1,4 +1,4 @@
-const express = require("express");
+/*const express = require("express");
 const route = express.Router();
 const bcrypt = require("bcryptjs");
 const client = require("../basededonnee");
@@ -34,7 +34,7 @@ route.post("/login", (req, res) => {
               {
                 username: result.rows[0].username,
                 id: result.rows[0]
-                  .id /*,iss:esm el site(createur de jeton) ou bien t7otha issuer fel options*/,
+                  .id /*,iss:esm el site(createur de jeton) ou bien t7otha issuer fel options,
               },
               keyaccesstoken,
               { expiresIn: "1h" }
@@ -69,4 +69,4 @@ route.post("/", (req, res) => {
   });
 });
 
-module.exports = route;
+module.exports = route;*/

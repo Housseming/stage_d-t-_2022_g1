@@ -60,7 +60,7 @@ const  Parametreglobale = () => {
  //select Parametre
   const getParametrerequest = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/Parametreglobale");
+      const response = await axios.get("/Parametreglobale");
       setListe(response.data);// aleh liste dhaherli khtr tji liste [{:}]
     } catch (error) { 
       console.log( error.message );
@@ -88,7 +88,7 @@ const  Parametreglobale = () => {
 };
 const deleteParametrerequest = async (timbrefiscale) => {
   try {
-    const deleted = await axios.post("http://localhost:5000/Parametreenextra/delete", {
+    const deleted = await axios.post("/Parametreenextra/delete", {
       timbrefiscale:timbrefiscale ,
     });
     console.log("Parametre supprimé");
@@ -111,7 +111,7 @@ const deleteParametrerequest = async (timbrefiscale) => {
   //lien aveclback pour la modif
   const editParametrerequest = async (timbrefiscale,tauxtva) => {
     try {
-      const modified = await axios.post("http://localhost:5000/Parametreglobale/modif", {
+      const modified = await axios.post("/Parametreglobale/modif", {
         timbrefiscale:timbrefiscale ,tauxtva:tauxtva
       });
       console.log("Parametre modifié");
@@ -125,7 +125,7 @@ const deleteParametrerequest = async (timbrefiscale) => {
    const addParametre = async () => {
     try {
       const resp = await axios.post(
-        "http://localhost:5000/Parametreglobale",
+        "/Parametreglobale",
         addingParametre
       );
       console.log(resp.data);

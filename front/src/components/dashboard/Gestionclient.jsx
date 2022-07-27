@@ -66,7 +66,7 @@ const  Gestionclient = () => {
  //select Gestionclient
   const getGestionclientrequest = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/gestionclient");
+      const response = await axios.get("/gestionclient");
       setListe(response.data);// aleh liste dhaherli khtr tji liste [{:}]
     } catch (error) { 
       console.log( error.message );
@@ -94,7 +94,7 @@ const  Gestionclient = () => {
 };
 const deleteGestionclientrequest = async (id) => {
   try {
-    const deleted = await axios.post("http://localhost:5000/gestionclient/delete", {
+    const deleted = await axios.post("/gestionclient/delete", {
       id:id ,
     });
     console.log("Emplacement_dossier supprimé");
@@ -118,7 +118,7 @@ const deleteGestionclientrequest = async (id) => {
   //lien aveclback pour la modif
   const editGestionclientrequest = async (id,raison,matricule,ville,rue,num,code_postale,activité,situation_fiscale) => {
     try {
-      const modified = await axios.post("http://localhost:5000/gestionclient/modif", {
+      const modified = await axios.post("/gestionclient/modif", {
         id:id,raison:raison,matricule:matricule,ville:ville,rue:rue,num:num,code_postale:code_postale,activité:activité,situation_fiscale:situation_fiscale
       });
       console.log("emplacement_dossier_modifié");
@@ -133,7 +133,7 @@ const deleteGestionclientrequest = async (id) => {
    const addGestionclient = async () => {
     try {
       const resp = await axios.post(
-        "http://localhost:5000/gestionclient",
+        "/gestionclient",
         addingGestionclient
       );
       console.log(resp.data);

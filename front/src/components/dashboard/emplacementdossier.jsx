@@ -59,7 +59,7 @@ const  Emplacementdossier = () => {
  //select Emplacementdossier
   const getEmplacementdossierrequest = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/emplacementdossier");
+      const response = await axios.get("/emplacementdossier");
       setListe(response.data);// aleh liste dhaherli khtr tji liste [{:}]
     } catch (error) { 
       console.log( error.message );
@@ -87,7 +87,7 @@ const  Emplacementdossier = () => {
 };
 const deleteEmplacementdossierrequest = async (id) => {
   try {
-    const deleted = await axios.post("http://localhost:5000/emplacementdossier/delete", {
+    const deleted = await axios.post("/emplacementdossier/delete", {
       id:id ,
     });
     console.log("Emplacement_dossier supprimé");
@@ -111,7 +111,7 @@ const deleteEmplacementdossierrequest = async (id) => {
   //lien aveclback pour la modif
   const editEmplacementdossierrequest = async (id,libelle) => {
     try {
-      const modified = await axios.post("http://localhost:5000/emplacementdossier/modif", {
+      const modified = await axios.post("/emplacementdossier/modif", {
        id:id, libelle:libelle  
       });
       console.log("emplacement_dossier_modifié",id,libelle);
@@ -126,7 +126,7 @@ const deleteEmplacementdossierrequest = async (id) => {
    const addEmplacementdossier = async () => {
     try {
       const resp = await axios.post(
-        "http://localhost:5000/emplacementdossier",
+        "/emplacementdossier",
         addingEmplacementdossier
       );
       console.log(resp.data);

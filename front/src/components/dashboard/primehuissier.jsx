@@ -60,7 +60,7 @@ const PrimeHuissier = () => {
   //select primehuissier
   const getprimerequest = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/primehuissier");
+      const response = await axios.get("/primehuissier");
       setListe(response.data);
     } catch (error) {
       console.log(error.message);
@@ -89,7 +89,7 @@ const PrimeHuissier = () => {
   const deleteprimerequest = async (id) => {
     try {
       const deleted = await axios.post(
-        "http://localhost:5000/primehuissiereff",
+        "/primehuissiereff",
         {
           id: id,
         }
@@ -113,7 +113,7 @@ const PrimeHuissier = () => {
   const addprime = async () => {
     try {
       const resp = await axios.post(
-        "http://localhost:5000/primehuissieradd",
+        "/primehuissieradd",
         addingprime
       );
       console.log(resp.data);
@@ -152,7 +152,7 @@ const PrimeHuissier = () => {
             } );
               try {
                 const addprime = await axios.post(
-                  "http://localhost:5000/primehuissier/update",
+                  "/primehuissier/update",
                   edditingprime
                 );
               } catch (error) {

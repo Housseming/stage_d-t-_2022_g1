@@ -66,7 +66,7 @@ const Tableau = () => {
   //select servicehuissier
   const getservicerequest = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/service");
+      const response = await axios.get("/service");
       setListe(response.data);
     } catch (error) {
       console.log(error.message);
@@ -95,7 +95,7 @@ const Tableau = () => {
   const deleteservicerequest = async (id) => {
     try {
       const deleted = await axios.post(
-        "http://localhost:5000/serviceeff",
+        "/serviceeff",
         {
           id: id,
         }
@@ -119,7 +119,7 @@ const Tableau = () => {
   const addservice = async () => {
     try {
       const resp = await axios.post(
-        "http://localhost:5000/serviceadd",
+        "/serviceadd",
         addingservice
       );
       console.log(resp.data);
@@ -164,7 +164,7 @@ const Tableau = () => {
             });
             try {
               const addservice = await axios.post(
-                "http://localhost:5000/service/update",
+                "/service/update",
                 edditingservice
               );
             } catch (error) {

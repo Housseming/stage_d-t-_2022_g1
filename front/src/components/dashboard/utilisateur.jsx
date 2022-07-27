@@ -60,7 +60,7 @@ const Utilisateur = () => {
   //select utilisateur
   const getutilisateurrequest = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/utilisateur");
+      const response = await axios.get("/utilisateur");
       setListe(response.data);
     } catch (error) {
       console.log(error.message);
@@ -89,7 +89,7 @@ const Utilisateur = () => {
   const deleteutilisateurrequest = async (login) => {
     try {
       const deleted = await axios.post(
-        "http://localhost:5000/utilisateureff",
+        "/utilisateureff",
         {
           login: login,
         }
@@ -113,7 +113,7 @@ const Utilisateur = () => {
   const addutilisateur = async () => {
     try {
       const resp = await axios.post(
-        "http://localhost:5000/utilisateuradd",
+        "/utilisateuradd",
         addingutilisateur
       );
       console.log(resp.data);
@@ -159,7 +159,7 @@ const Utilisateur = () => {
             } );
               try {
                 const addutilisateur = await axios.post(
-                  "http://localhost:5000/utilisateur/update",
+                  "/utilisateur/update",
                   edditingutilisateur
                 );
               } catch (error) {

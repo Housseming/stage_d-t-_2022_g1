@@ -160,7 +160,7 @@ export const Collabo = () => {
   //select collaborateur
   const getCollabrequest = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/collab", {headers: {
+      const response = await axios.get("/collab", {headers: {
          accessToken: sessionStorage.getItem("accessToken"),
        }},
       );
@@ -200,7 +200,7 @@ export const Collabo = () => {
   const deleteCollabrequest = async (id) => {
     try {
       const deleted = await axios.post(
-        "http://localhost:5000/delete",
+        "/delete",
         {
           id: id,
         },
@@ -237,7 +237,7 @@ export const Collabo = () => {
   const addCollab = async () => {
     try {
       const resp = await axios.post(
-        "http://localhost:5000/collab",
+        "/collab",
         addingCollab,
         {
           headers: {
@@ -315,7 +315,7 @@ export const Collabo = () => {
             });
             try {
               const resp = await axios.post(
-                "http://localhost:5000/modif",
+                "/modif",
                 edditingCollab,
                 {
                   headers: {

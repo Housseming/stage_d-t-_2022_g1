@@ -49,7 +49,7 @@ export function Signup(props) {
     }
     if (validate == true) {
       try {
-        const resp = await axios.post("http://localhost:5000/register", {
+        const resp = await axios.post("/register", {
           username: username,
           password: password,
           email: email,

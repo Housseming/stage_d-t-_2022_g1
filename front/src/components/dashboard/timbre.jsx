@@ -60,7 +60,7 @@ const  Timbre = () => {
  //select Timbre
   const getTimbrerequest = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/timbre");
+      const response = await axios.get("/timbre");
       setListe(response.data);// aleh liste dhaherli khtr tji liste [{:}]
     } catch (error) {
       console.log(error.message);
@@ -88,7 +88,7 @@ const  Timbre = () => {
 };
 const deleteTimbrerequest = async (libelle) => {
   try {
-    const deleted = await axios.post("http://localhost:5000/timbre/delete", {
+    const deleted = await axios.post("/timbre/delete", {
       libelle:libelle ,
     });
     console.log("Timbre supprimé");
@@ -111,7 +111,7 @@ const deleteTimbrerequest = async (libelle) => {
   //lien aveclback pour la modif
   const editTimbrerequest = async (libelle,montant) => {
     try {
-      const modified = await axios.post("http://localhost:5000/timbre/modif", {
+      const modified = await axios.post("/timbre/modif", {
         libelle:libelle ,montant:montant
       });
       console.log("Timbre modifié");
@@ -126,7 +126,7 @@ const deleteTimbrerequest = async (libelle) => {
    const addTimbre = async () => {
     try {
       const resp = await axios.post(
-        "http://localhost:5000/timbre",
+        "/timbre",
         addingTimbre
       );
       console.log(resp.data);

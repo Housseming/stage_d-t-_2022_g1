@@ -1,4 +1,4 @@
-const express = require("express");
+/*const express = require("express");
 const route = express.Router();
 const client = require("../basededonnee");
 const bcrypt = require("bcryptjs");
@@ -40,4 +40,4 @@ route.post("/register", (req, res) => {
   );
 });
 
-module.exports = route;
+module.exports = route;*/

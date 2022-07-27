@@ -22,7 +22,7 @@ const collabroute = require("./routes/RouteCollab");
 const homeroute = require("./routes/RouteHome");
 const tribunaleroute = require("./routes/tribunale");
 const cookie = require("cookie-parser");
-//require('dotenv').config();
+require('dotenv').config();
 //process.env.PORT
 
 app.use(cookie());
@@ -30,12 +30,12 @@ app.use(cookie());
 app.use(bodyParser.json());
 app.use(cors());
 app.use(express.json());
-app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
+//app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 //app.use(express.static(path.join(__dirname, "front")));
 app.use(express.static("front/public"));
 if (process.env.NODE_ENV === "production") {
-  //server static content
-  app.use(express.static(path.join(__dirname, "front/public")));
+    //server static content
+    app.use(express.static(path.join(__dirname, "front/public")));
 }
 console.log(__dirname);
 console.log(path.join(__dirname, "front/public"));
@@ -52,12 +52,15 @@ app.use(root8); //primehuissier
 app.use(root9); //utilisateur
 app.use(root10); //gestionclient
 
-app.use(loginroute);
-app.use(registerroute);
-app.use(collabroute);
+//app.use(loginroute);
+//app.use(registerroute);
+//app.use(collabroute);
 app.use(homeroute);
-app.use(tribunaleroute);
+//app.use(tribunaleroute);
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "front/public/index.html"));
+});
 
 app.listen(PORT, () => {
-  console.log(`running server on ${PORT}`);
+    console.log(`running server on ${PORT}`);
 });

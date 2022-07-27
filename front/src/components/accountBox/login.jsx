@@ -22,7 +22,8 @@ export function Login( props ) {
    let navigate = useNavigate();
    const Send = async () => {
      try {
-       const resp = await axios.post("http://localhost:5000/login", {
+       //proxy
+       const resp = await axios.post("/login", {
          username: username,
 
          password: password,
