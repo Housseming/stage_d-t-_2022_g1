@@ -22,13 +22,13 @@ const collabroute = require("./routes/RouteCollab");
 const homeroute = require("./routes/RouteHome");
 const tribunaleroute = require("./routes/tribunale");
 const cookie = require("cookie-parser");
-require('dotenv').config();
-//process.env.PORT
+const verifyroute = require("./routes/verifytokenroute")
+const user = require("./routes/user")
+require("dotenv").config();
 
 app.use(cookie());
 //middleware
 app.use(bodyParser.json());
-app.use(cors());
 app.use(express.json());
 //app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 //app.use(express.static(path.join(__dirname, "front")));
@@ -51,16 +51,13 @@ app.use(root7); //emplacementdossier
 app.use(root8); //primehuissier
 app.use(root9); //utilisateur
 app.use(root10); //gestionclient
-
-//app.use(loginroute);
-//app.use(registerroute);
-//app.use(collabroute);
+app.use(verifyroute);
+app.use(loginroute);
+app.use(registerroute);
+app.use(collabroute);
 app.use(homeroute);
-//app.use(tribunaleroute);
-app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "front/public/index.html"));
-});
-
+app.use(user);
+app.use(tribunaleroute);
 app.listen(PORT, () => {
     console.log(`running server on ${PORT}`);
 });

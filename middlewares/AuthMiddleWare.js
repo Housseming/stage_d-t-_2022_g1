@@ -2,11 +2,13 @@ const jwt = require("jsonwebtoken");
 const { reset } = require("nodemon");
 const cookie = require("cookie-parser");
 require("dotenv").config();
+const client = require("../basededonnee");
+const { query } = require("express");
 var keyaccesstoken = process.env.ACCESS_TOKEN_SECRET;
 //bch naadiw el token mel front a travers el header mais fama des methodes okhrin
+
+//validateToken
 const validateToken = (req, res, next) => {
-  //const headers = req.headers[`authorization`]; //key
-  //const accessToken = headers.split(" ")[1];
   const cookies = req.headers.cookie;
   const accessToken = cookies.split("=")[1]; //traja3 el token
   console.log(cookies);
@@ -24,6 +26,8 @@ const validateToken = (req, res, next) => {
     }
   }
 };
+
+//refreshToken
 const refreshToken = (req, res, next) => {
   const cookies = req.headers.cookie;
   const prevToken = cookies.split("=")[1];
@@ -35,10 +39,43 @@ const refreshToken = (req, res, next) => {
       console.log(err);
       return res.status(403).json({ message: "authentification failed" });
     } else {
+      console.log("refresh user");
+      console.log(user);
       res.clearCookie(`${user.username}`);
       req.cookies[`${user.username}`] = "";
-      const token = jwt.sign({});
+      const token = jwt.sign(
+        {
+          username: user.username,
+          id: user.id,
+          /*,iss:esm el site(createur de jeton) ou bien t7otha issuer fel options*/
+        },
+        keyaccesstoken,
+        { expiresIn: "30s" }
+      );
+      res.cookie(String(user.username), token, {
+        path: "/",
+        expires: new Date(Date.now() + 1000 * 30),
+        httpOnly: true,
+        sameSite: "lax",
+      });
+      req.username = user.username;
+      next();
     }
   });
 };
-module.exports = { validateToken };
+//getUser
+const getUser = async (req, res, next) => {
+  const userId = req.id;
+  let user;
+  try {
+    user = await client.query("SELECT * FROM clienttable WHERE id=$1",[id])
+  } catch (err) {
+    return new Error(err);
+  }
+  if (!user) {
+    return res.status(404).json({ messsage: "User Not FOund" });
+  }
+  return res.status(200).json({ user });
+};
+
+module.exports = { validateToken, refreshToken , getUser };
