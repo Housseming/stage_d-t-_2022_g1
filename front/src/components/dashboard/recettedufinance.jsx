@@ -61,7 +61,7 @@ const  Recettedufinance = () => {
  //select Recettedufinance
   const getRecettedufinancerequest = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/recettedufinance");
+      const response = await axios.get("/recettedufinance");
       setListe(response.data);// aleh liste dhaherli khtr tji liste [{:}]
     } catch (error) { 
       console.log( error.message );
@@ -89,7 +89,7 @@ const  Recettedufinance = () => {
 };
 const deleteRecettedufinancerequest = async (id) => {
   try {
-    const deleted = await axios.post("http://localhost:5000/recettedufinance/delete", {
+    const deleted = await axios.post("/recettedufinance/delete", {
      id:id ,
     });
     console.log("Recettedufinance supprimé");
@@ -111,7 +111,7 @@ const deleteRecettedufinancerequest = async (id) => {
   //lien aveclback pour la modif
   const editRecettedufinancerequest = async (id,libelle,montant) => {
     try {
-      const modified = await axios.post("http://localhost:5000/recettedufinance/modif", {
+      const modified = await axios.post("/recettedufinance/modif", {
         id:id,libelle:libelle ,montant:montant
       });
       console.log("Recettedufinance modifié",libelle);
@@ -125,7 +125,7 @@ const deleteRecettedufinancerequest = async (id) => {
    const addRecettedufinance = async () => {
     try {
       const resp = await axios.post(
-        "http://localhost:5000/recettedufinance",
+        "/recettedufinance",
         addingRecettedufinance
       );
       console.log(resp.data);

@@ -97,6 +97,8 @@
 
 .ant-table {
     overflow-x: auto !important;
+    width: 1500px;
+    height: 1500px;
 }
 
 @media only screen and (max-width: 800px) {
@@ -140,7 +142,8 @@
     background-color: #ffffffb7;
     color: #6646e5;
 }
-.situation{ 
-display:flex;
-flex-direction: column;
+
+.TabPane {
+    width: 500px;
+    height: 500px;
 }

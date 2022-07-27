@@ -48,9 +48,10 @@ const solutions = [
     icon: DocumentReportIcon,
   },
   {
-    name: 'Utilisateur',
-    description: 'Get detailed reports that will help you make more informed decisions ',
-    href: '#',
+    name: "Utilisateur",
+    description:
+      "Get detailed reports that will help you make more informed decisions ",
+    href: "/utilisateur",
     icon: DocumentReportIcon,
   },
   {

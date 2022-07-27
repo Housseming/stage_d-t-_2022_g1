@@ -1,4 +1,6 @@
 # dependencies
 /node_modules
-db.js
+
 package.json
+basededonnee.js
+.env

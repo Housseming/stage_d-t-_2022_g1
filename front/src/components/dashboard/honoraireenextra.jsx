@@ -59,7 +59,7 @@ const  Honoraireenextra = () => {
  //select Honoraire
   const getHonorairerequest = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/honoraireenextra");
+      const response = await axios.get("/honoraireenextra");
       setListe(response.data);// aleh liste dhaherli khtr tji liste [{:}]
     } catch (error) {
       console.log(error.message);
@@ -87,7 +87,7 @@ const  Honoraireenextra = () => {
 };
 const deleteHonorairerequest = async (libelle) => {
   try {
-    const deleted = await axios.post("http://localhost:5000/honoraireenextra/delete", {
+    const deleted = await axios.post("/honoraireenextra/delete", {
       libelle:libelle ,
     });
     console.log("Honoraire supprimé");
@@ -111,7 +111,7 @@ const deleteHonorairerequest = async (libelle) => {
   //lien aveclback pour la modif
   const editHonorairerequest = async (libelle,montant) => {
     try {
-      const modified = await axios.post("http://localhost:5000/honoraireenextra/modif", {
+      const modified = await axios.post("/honoraireenextra/modif", {
         libelle:libelle ,montant:montant
       });
       console.log("Honoraire modifié");
@@ -125,7 +125,7 @@ const deleteHonorairerequest = async (libelle) => {
    const addHonoraire = async () => {
     try {
       const resp = await axios.post(
-        "http://localhost:5000/honoraireenextra",
+        "/honoraireenextra",
         addingHonoraire
       );
       console.log(resp.data);

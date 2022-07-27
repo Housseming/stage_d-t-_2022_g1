@@ -57,7 +57,7 @@ const  Transport  = () => {
  //select Transport
   const getTransportrequest = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/transport");
+      const response = await axios.get("/transport");
       setListe(response.data);// aleh liste dhaherli khtr tji liste [{:}]
     } catch (error) { 
       console.log( error.message );
@@ -83,7 +83,7 @@ const  Transport  = () => {
   //lien aveclback pour la modif
   const editTransportrequest = async ( montanttransportparjours) => {
     try {
-      const modified = await axios.post("http://localhost:5000/transport/modif", {
+      const modified = await axios.post("/transport/modif", {
          montanttransportparjours: montanttransportparjours 
       });
       console.log(" modifié");

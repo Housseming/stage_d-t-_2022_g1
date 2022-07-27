@@ -6,69 +6,62 @@ const root7 = express.Router();
 
 const cors = require("cors");
 const pool = require("../db")
-//ajout
+    //ajout
 
-root7.post("/emplacementdossier", async (req, res) => {
+root7.post("/emplacementdossier", async(req, res) => {
     try {
-        const { id,libelle } = req.body;
-       
+        const { id, libelle } = req.body;
 
-        const newTodo2 = await pool.query(" INSERT INTO public.emplacementdossier (id,libelle) VALUES ($1,$2) ",
-            [ id,libelle ]);
+
+        const newTodo2 = await pool.query(" INSERT INTO public.emplacementdossier (id,libelle) VALUES ($1,$2) ", [id, libelle]);
         res.json(newTodo2);
-        
 
-    }
-    catch (err) {
+
+    } catch (err) {
         console.error(err.message);
     }
 });
 //modif 
-root7.post("/emplacementdossier/modif", async (req, res) => {
+root7.post("/emplacementdossier/modif", async(req, res) => {
     try {
         const { id, libelle } = req.body;
-       
 
-        const newTodo2 = await pool.query("UPDATE emplacementdossier SET libelle=$2 WHERE id=$1",
-            [id, libelle ]);
+
+        const newTodo2 = await pool.query("UPDATE emplacementdossier SET libelle=$2 WHERE id=$1", [id, libelle]);
         res.json(newTodo2);
-        
 
-    }
-    catch (err) {
+
+    } catch (err) {
         console.error(err.message);
     }
 });
 //select
-root7.get("/emplacementdossier", async (req, res) => {
+root7.get("/emplacementdossier", async(req, res) => {
     try {
-        
-       
+
+
 
         const newTodo = await pool.query(" SELECT * FROM emplacementdossier ORDER by id asc")
         res.json(newTodo.rows);
-        
 
-    }
-    catch (err) {
+
+    } catch (err) {
         console.error(err.message);
     }
 });
- // pour la suppression
- root7.post("/emplacementdossier/delete", async (req, res) => {
+// pour la suppression
+root7.post("/emplacementdossier/delete", async(req, res) => {
     try {
         const { id } = req.body;
-       const newTodo1 = await pool.query(" DELETE FROM public.emplacementdossier WHERE id=$1",
-            [id]);
+        const newTodo1 = await pool.query(" DELETE FROM public.emplacementdossier WHERE id=$1", [id]);
         res.json(newTodo1);
         res.json("emplacement was deleted");
-        
 
-    }
-    catch (err) {
+
+    } catch (err) {
         console.error(err.message);
     }
 });
 
 
-module.exports=root7;
+module.exports = root7;

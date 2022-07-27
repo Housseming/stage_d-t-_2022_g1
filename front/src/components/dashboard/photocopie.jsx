@@ -59,7 +59,7 @@ const  Parametreenextra = () => {
  //select Parametre
   const getParametrerequest = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/photocopie");
+      const response = await axios.get("/photocopie");
       setListe(response.data);// aleh liste dhaherli khtr tji liste [{:}]
     } catch (error) { 
       console.log( error.message );
@@ -85,7 +85,7 @@ const  Parametreenextra = () => {
   //lien aveclback pour la modif
   const editParametrerequest = async (prixphotocopie) => {
     try {
-      const modified = await axios.post("http://localhost:5000/photocopie/modif", {
+      const modified = await axios.post("/photocopie/modif", {
         prixphotocopie:prixphotocopie ,
       });
       console.log("photocopie modifié");
