@@ -9,37 +9,33 @@ import { AiFillEdit } from "react-icons/ai";
 import { MdDeleteForever } from "react-icons/md";
 import { toast } from "react-toastify";
 
-
-
-const  Parametreenextra = () => {
-  const [liste, setListe] = useState([]);
+const Parametreenextra = () => {
+  const [listeservice, setlisteservice] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
   const [edditingParametre, setEdditingParametre] = useState(null);
   const [addingParametre, setAddingParametre] = useState({
     prixphotocopie: 0,
-  
-  
   });
-  
-  const columns= [{ key: "1", title: "prixphotocopie", dataIndex: "prixphotocopie" },
-  
 
- {
-  key: "2",
-  title: "Actions",
-  render: (record) => {
-    return (
-      <div className="addicons">
-        <div className="divedit">
-          <AiFillEdit
-            className="edit"
-            onClick={() => {
-              editParametre(record);
-            }}
-          ></AiFillEdit>
-          <p>modifier</p>
-        </div>
-      {/* <div className="divdelete">
+  const columns = [
+    { key: "1", title: "prixphotocopie", dataIndex: "prixphotocopie" },
+
+    {
+      key: "2",
+      title: "Actions",
+      render: (record) => {
+        return (
+          <div className="addicons">
+            <div className="divedit">
+              <AiFillEdit
+                className="edit"
+                onClick={() => {
+                  editParametre(record);
+                }}
+              ></AiFillEdit>
+              <p>modifier</p>
+            </div>
+            {/* <div className="divdelete">
           <MdDeleteForever
             className="delete"
             onClick={() => {
@@ -49,35 +45,32 @@ const  Parametreenextra = () => {
 
           <p>supprimer</p>
           </div>*/}
-      </div>
-    ); 
-  },
- },
- ];
+          </div>
+        );
+      },
+    },
+  ];
 
-
- //select Parametre
+  //select Parametre
   const getParametrerequest = async () => {
     try {
       const response = await axios.get("/photocopie");
-      setListe(response.data);// aleh liste dhaherli khtr tji liste [{:}]
-    } catch (error) { 
-      console.log( error.message );
+      setlisteservice(response.data); // aleh listeservice dhaherli khtr tji listeservice [{:}]
+    } catch (error) {
+      console.log(error.message);
     }
   };
   useEffect(() => {
     getParametrerequest();
   }, []);
-  console.log(liste);
-
-
+  console.log(listeservice);
 
   ////////////
   //modifier une Parametre
- const editParametre = (record) => {
-  setIsEdit(true);
-  setEdditingParametre({ ...record }); //copie mel record
- };
+  const editParametre = (record) => {
+    setIsEdit(true);
+    setEdditingParametre({ ...record }); //copie mel record
+  };
   const resetEditing = () => {
     setIsEdit(false);
     setEdditingParametre(null);
@@ -86,17 +79,16 @@ const  Parametreenextra = () => {
   const editParametrerequest = async (prixphotocopie) => {
     try {
       const modified = await axios.post("/photocopie/modif", {
-        prixphotocopie:prixphotocopie ,
+        prixphotocopie: prixphotocopie,
       });
       console.log("photocopie modifié");
     } catch (error) {
       console.log(error);
     }
-   };///////////////////// Ajout
-   //lien aveclback pour l'ajout
-   const [isAdd, setIsAdd] = useState(false);
-   
-   
+  }; ///////////////////// Ajout
+  //lien aveclback pour l'ajout
+  const [isAdd, setIsAdd] = useState(false);
+
   return (
     <div className="App">
       <header className="App-header">
@@ -104,61 +96,54 @@ const  Parametreenextra = () => {
             setIsAdd(true);
           } }> Ajouter</Button>*/}
         <div classname="tab">
-        <Table  
-           columns={columns}
-            dataSource={liste}
+          <Table
+            columns={columns}
+            dataSource={listeservice}
             style={{ with: 15 }}
             bordered={true}
-            /> 
-          </div>
-  {/*MODIFICATION*/}
-  <Modal
-  title="modifier prixphotocpie"
-  visible={isEdit}
-  okText="Enregistrer"
-  cancelText="Annuler"
-  onCancel={() => {
-    setIsEdit(false);
-  }}
-  onOk={() => {
-    setIsEdit(false);
-    const newListe = liste.map((Parametre) => {
-      if (Parametre.prixphotocopie === edditingParametre.prixphotocopie) {
-        return edditingParametre;
-      } else {
-        return Parametre;
-      }
-    });
-    setListe(newListe);
-    editParametrerequest(edditingParametre.prixphotocopie)
-    resetEditing();
-    toast.success("Parametre modifie avec succée");
-  }}
- >
-  <Input
-    placeholder="prix_photocopie"
-    value={edditingParametre?.prixphotocopie}
-    onChange={(e) => {
-      setEdditingParametre({
-        ...edditingParametre,
-        prixphotocopie: e.target.value,
-      });
-    }}
-  >
+          />
+        </div>
+        {/*MODIFICATION*/}
+        <Modal
+          title="modifier prixphotocpie"
+          visible={isEdit}
+          okText="Enregistrer"
+          cancelText="Annuler"
+          onCancel={() => {
+            setIsEdit(false);
+          }}
+          onOk={() => {
+            setIsEdit(false);
+            const newlisteservice = listeservice.map((Parametre) => {
+              if (
+                Parametre.prixphotocopie === edditingParametre.prixphotocopie
+              ) {
+                return edditingParametre;
+              } else {
+                return Parametre;
+              }
+            });
+            setlisteservice(newlisteservice);
+            editParametrerequest(edditingParametre.prixphotocopie);
+            resetEditing();
+            toast.success("Parametre modifie avec succée");
+          }}
+        >
+          <Input
+            placeholder="prix_photocopie"
+            value={edditingParametre?.prixphotocopie}
+            onChange={(e) => {
+              setEdditingParametre({
+                ...edditingParametre,
+                prixphotocopie: e.target.value,
+              });
+            }}
+          ></Input>
 
-  </Input>
-
- 
-  
-
-
-  {/*AJOUT*/}
-  </Modal>
-
-
-  </header>
-
-  </div>
-  ) 
-  };
-  export default Parametreenextra;
+          {/*AJOUT*/}
+        </Modal>
+      </header>
+    </div>
+  );
+};
+export default Parametreenextra;

@@ -56,6 +56,15 @@ route.get("/tribunale", (req, res) => {
 });
 
 //services
+route.get("/service", (req, res) => {
+  client.query("SELECT * FROM servicetable", (error, result) => {
+    if (error) {
+      console.log(error);
+    } else {
+      res.json(result.rows);
+    }
+  });
+});
 route.post("/serviceadd", (req, res) => {
     const { nom, tribunale_id } = req.body;
     client.query(

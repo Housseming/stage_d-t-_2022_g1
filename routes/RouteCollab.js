@@ -1,6 +1,6 @@
 const express = require("express");
 const route = express.Router();
-const client = require("../db");
+const client = require("../basededonnee");
 const bodyParser = require("body-parser");
 const { validateToken } = require("../middlewares/AuthMiddleWare");
 const { refreshToken } = require("../middlewares/AuthMiddleWare");
