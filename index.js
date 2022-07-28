@@ -31,7 +31,7 @@ app.use(cookie());
 //middleware
 app.use(bodyParser.json());
 app.use(express.json());
-//app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
+app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 //app.use(express.static(path.join(__dirname, "front")));
 app.use(express.static("front"));
 if (process.env.NODE_ENV === "production") {
