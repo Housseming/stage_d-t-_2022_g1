@@ -8,6 +8,7 @@ import {MdDeleteForever} from "react-icons/md";
 import {toast} from "react-toastify";
 
 const Tableau = () => {
+
   const [liste, setListe] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
   const [edditingservice, setEdditingservice] = useState(null);
@@ -68,6 +69,8 @@ const Tableau = () => {
     try {
       const response = await axios.get("/service");
       setListe(response.data);
+      
+      
     } catch (error) {
       console.log(error.message);
     }

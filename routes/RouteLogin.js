@@ -1,4 +1,4 @@
-/*const express = require("express");
+const express = require("express");
 const route = express.Router();
 const bcrypt = require("bcryptjs");
 const client = require("../basededonnee");
@@ -13,31 +13,30 @@ route.use(cookie());
 var keyaccesstoken = process.env.ACCESS_TOKEN_SECRET;
 var keyrefreshtoken = process.env.REFRESH_TOKEN_SECRET;
 route.post("/login", (req, res) => {
-  const { username, password } = req.body;
-  client.query(
-    "SELECT * FROM clienttable WHERE username=$1",
-    [username],
-    (err, result) => {
-      if (err) {
-        throw err;
-      }
-      if (result.rows.length > 0) {
-        console.log(result.rows[0]);
+            const { username, password } = req.body;
+            client.query(
+                    "SELECT * FROM clienttable WHERE username=$1", [username],
+                    (err, result) => {
+                        if (err) {
+                            throw err;
+                        }
+                        if (result.rows.length > 0) {
+                            console.log(result.rows[0]);
 
-        bcrypt.compare(password, result.rows[0].password, (error, match) => {
-          console.log(match);
+                            bcrypt.compare(password, result.rows[0].password, (error, match) => {
+                                        console.log(match);
 
-          if (match) {
-            console.log("matching");
+                                        if (match) {
+                                            console.log("matching");
 
-            const accessToken = jwt.sign(
-              {
-                username: result.rows[0].username,
-                id: result.rows[0]
-                  .id /*,iss:esm el site(createur de jeton) ou bien t7otha issuer fel options,
+                                            const accessToken = jwt.sign({
+                                                        username: result.rows[0].username,
+                                                        id: result.rows[0]
+                                                            .id
+                                                            /*,iss:esm el site(createur de jeton) ou bien t7otha issuer fel options,
               },
               keyaccesstoken,
-              { expiresIn: "1h" }
+              { expiresIn: "30s" }
             );
             //payload heya data nheb ena nkhazenha eli heya parametre lowel mtaa el sign
 
@@ -69,4 +68,4 @@ route.post("/", (req, res) => {
   });
 });
 
-module.exports = route;*/
+module.exports = route;

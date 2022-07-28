@@ -17,8 +17,9 @@ import Recettedufinance from "./components/dashboard/recettedufinance.jsx";
 import Emplacementdossier from "./components/dashboard/emplacementdossier.jsx";
 import Utilisateur from "./components/dashboard/utilisateur";
 import Tribunale from "./components/dashboard/tribinaux_administrations/tribunale";
-
-import {Collabo} from "./components/dashboard/collaborateurs/collabo"
+import Welcome from "./components/welcome/welcome";
+import RechercheDossier from "./components/dashboard/recherchedossier";
+import {Collabo} from "./components/dashboard/collaborateurs/collabo";
 function App() {
   return (
     <BrowserRouter>
@@ -37,7 +38,9 @@ function App() {
           <Route path="emplacementdossier" element={<Emplacementdossier />} />
           <Route path="gestionclient" element={<Gestionclient />} />
           <Route path="collab" element={<Collabo></Collabo>}></Route>
-          <Route path="Tribunale" element={<Tribunale/>} />
+          <Route path="Tribunale" element={<Tribunale />} />
+          <Route path="welcome" element={<Welcome></Welcome>}></Route>
+          <Route path="recherchedossier" element={<RechercheDossier/>}></Route>
 
           {/*<Route
             path="/tribunale"
