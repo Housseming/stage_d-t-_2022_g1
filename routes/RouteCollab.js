@@ -62,7 +62,7 @@ route.post("/delete", (req, res) => {
     );
 });
 
-route.post("/modif", validateToken, (req, res) => {
+route.post("/modif", (req, res) => {
     const {
         id,
         username,
@@ -108,7 +108,7 @@ route.post("/modif", validateToken, (req, res) => {
     );
 });
 
-route.get("/collab", validateToken, (req, res) => {
+route.get("/collab", (req, res) => {
     client.query("SELECT * FROM collaboratortable", (error, result) => {
         if (error) {
             console.log(error);

@@ -22,15 +22,19 @@ const registerroute = require("./routes/RouteRegister");
 const collabroute = require("./routes/RouteCollab");
 const homeroute = require("./routes/RouteHome");
 const tribunaleroute = require("./routes/tribunale");
-const cookie = require("cookie-parser");
+const cookie = require("cookie-parser"); <<
+<< << < HEAD
 //const verifyroute = require("./routes/verifytokenroute")
+    ===
+    === =
+    const verifyroute = require("./routes/verifytokenroute") >>>
+        >>> > stage - dev
 const user = require("./routes/user")
 require("dotenv").config();
 
 app.use(cookie());
 //middleware
 app.use(bodyParser.json());
-app.use(cors());
 app.use(express.json());
 //app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 //app.use(express.static(path.join(__dirname, "front")));
@@ -59,11 +63,8 @@ app.use(loginroute);
 app.use(registerroute);
 app.use(collabroute);
 app.use(homeroute);
-//app.use(tribunaleroute);
-app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "front/public/index.html"));
-});
-
+app.use(user);
+app.use(tribunaleroute);
 app.listen(PORT, () => {
     console.log(`running server on ${PORT}`);
 });

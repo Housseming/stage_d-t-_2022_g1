@@ -10,12 +10,25 @@ import { Link } from "react-router-dom";
 import { FcAcceptDatabase } from "react-icons/fc";
 import styled from "styled-components";
 import { MdPersonSearch } from "react-icons/md";
+
+axios.defaults.withCredentials = true;
+
 export const Collabo = () => {
   //declaration necessaires
+  /*const refreshToken = async () => {
+    try {
+      const res = await axios.get("http://localhost:5000/refresh", {
+        withCredentials: true,
+      });
+      console.log(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };*/
   const [liste, setListe] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
-  const [page,setPage]=useState(1);
-  const [pageSize,setPageSize]=useState(6);
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(6);
   const [edditingCollab, setEdditingCollab] = useState({
     username: "",
     cin: "",
@@ -160,27 +173,24 @@ export const Collabo = () => {
   //select collaborateur
   const getCollabrequest = async () => {
     try {
-      const response = await axios.get("/collab", {headers: {
-         accessToken: sessionStorage.getItem("accessToken"),
-       }},
-      );
-   
-      if(response.data.error){
-        console.log("non connecté")
-      }
-      else{
-        console.log(response)
-        setListe(response.data);}
+      const response = await axios.get("http://localhost:5000/collab", {
+        withCredentials: true,
+      });
 
-      
+      if (response.data.error) {
+        console.log("non connecté");
+      } else {
+        console.log(response);
+        setListe(response.data);
+      }
     } catch (error) {
       console.log(error.message);
     }
   };
+
   useEffect(() => {
     getCollabrequest();
-  });
-  console.log(liste);
+  }, [liste]);
 
   //supprimer collaborateur
   const deleteCollab = (record) => {
@@ -193,28 +203,18 @@ export const Collabo = () => {
         const newListe = liste.filter((collab) => collab.id !== record.id);
         setListe(newListe);
         deleteCollabrequest(record.id);
-        
       },
     });
   };
   const deleteCollabrequest = async (id) => {
     try {
-      const deleted = await axios.post(
-        "/delete",
-        {
-          id: id,
-        },
-        {
-          headers: {
-            accessToken: sessionStorage.getItem("accessToken"),
-          },
-        }
-      );
-     
+      const deleted = await axios.post("http://localhost:5000/delete", {
+        id: id,
+      });
+
       if (deleted.data.error) {
         toast.error(deleted.data.error);
-      }
-      else{
+      } else {
         console.log("collaborateur supprimé");
         toast.success("collaborateur supprime avec succee");
       }
@@ -237,22 +237,14 @@ export const Collabo = () => {
   const addCollab = async () => {
     try {
       const resp = await axios.post(
-        "/collab",
-        addingCollab,
-        {
-          headers: {
-            accessToken: sessionStorage.getItem("accessToken"),
-          },
-        }
+        "http://localhost:5000/collab",
+        addingCollab
       );
-      if(resp.data.error){
+      if (resp.data.error) {
         toast.error(resp.data.error);
+      } else {
+        console.log(resp.data);
       }
-      else{
-          console.log(resp.data);
-        
-      }
-    
     } catch (error) {
       console.log(error);
     }
@@ -276,21 +268,18 @@ export const Collabo = () => {
           dataSource={liste}
           //scroll={{ x:10}}
           pagination={{
-            current:page,
-            pageSize:pageSize,
-            onChange:(page,pageSize)=>{
-
+            current: page,
+            pageSize: pageSize,
+            onChange: (page, pageSize) => {
               setPage(page);
-              setPageSize(pageSize)
-            }
-
+              setPageSize(pageSize);
+            },
           }}
           size="middle"
           bordered={true}
           style={{ display: "flex", flex: 1 }}
-          scroll={{x:"max-content"}}
+          scroll={{ x: "max-content" }}
         ></Table>
-        
 
         <Modal
           title="modifier collaborateur"
@@ -315,13 +304,8 @@ export const Collabo = () => {
             });
             try {
               const resp = await axios.post(
-                "/modif",
-                edditingCollab,
-                {
-                  headers: {
-                    accessToken: sessionStorage.getItem("accessToken"),
-                  },
-                }
+                "http://localhost:5000/modif",
+                edditingCollab
               );
             } catch (error) {
               console.log(error);
@@ -595,5 +579,3 @@ export const Collabo = () => {
     </div>
   );
 };
-
-

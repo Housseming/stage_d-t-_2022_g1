@@ -1,5 +1,4 @@
-
-import React, {useContext,useState} from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -11,35 +10,31 @@ import {
   MutedLink,
   SubmitButton,
 } from "./common";
-import {Marginer} from "../marginer/marginfile";import { AccountBox } from ".";
+import { Marginer } from "../marginer/marginfile";
+import { AccountBox } from ".";
 import { AccountContext } from "./accountContext";
-;
+export function Login(props) {
+  const { Switchtosignup } = useContext(AccountContext);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  let navigate = useNavigate();
+  const Send = async () => {
+    try {
+      const resp = await axios.post("http://localhost:5000/login", {
+        username: username,
 
-export function Login( props ) {
-    const { Switchtosignup } = useContext( AccountContext );
-   const [username, setUsername] = useState("");
-   const [password, setPassword] = useState("");
-   let navigate = useNavigate();
-   const Send = async () => {
-     try {
-       //proxy
-       const resp = await axios.post("/login", {
-         username: username,
-
-         password: password,
-       });
-       if (resp.data.error) {
-         toast.error(resp.data.error);
-       } //khater ki naamlou login saye maach ykoun mawjoud asslan el response.data.error
-       else {
-         sessionStorage.setItem("accessToken", resp.data); //cle valeur
-         navigate("/");
-       }
-     } catch (error) {
-       console.log(error);
-     }
-   };
-   
+        password: password,
+      });
+      if (resp.data.error) {
+        toast.error(resp.data.error);
+      } //khater ki naamlou login saye maach ykoun mawjoud asslan el response.data.error
+      else {
+        navigate("/");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <BoxContainer>
