@@ -10,6 +10,7 @@ const root7 = require("./routes/b_emplacementdossier");
 const root8 = require("./routes/primehuissier");
 const root9 = require("./routes/utilisateur");
 const root10 = require("./routes/b_Gestion");
+const root11 = require("./routes/recherchedossier");
 const express = require("express");
 const app = express();
 const cors = require("cors");
@@ -22,8 +23,9 @@ const collabroute = require("./routes/RouteCollab");
 const homeroute = require("./routes/RouteHome");
 const tribunaleroute = require("./routes/tribunale");
 const cookie = require("cookie-parser");
-require('dotenv').config();
-//process.env.PORT
+//const verifyroute = require("./routes/verifytokenroute")
+const user = require("./routes/user")
+require("dotenv").config();
 
 app.use(cookie());
 //middleware
@@ -51,10 +53,11 @@ app.use(root7); //emplacementdossier
 app.use(root8); //primehuissier
 app.use(root9); //utilisateur
 app.use(root10); //gestionclient
-
-//app.use(loginroute);
-//app.use(registerroute);
-//app.use(collabroute);
+app.use(root11); //recherchedossier
+app.use(verifyroute);
+app.use(loginroute);
+app.use(registerroute);
+app.use(collabroute);
 app.use(homeroute);
 //app.use(tribunaleroute);
 app.get("*", (req, res) => {

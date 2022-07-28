@@ -1,4 +1,4 @@
-/*const express = require("express");
+const express = require("express");
 const route = express.Router();
 const client = require("../db");
 const bodyParser = require("body-parser");
@@ -55,4 +55,4 @@ route.get("/liste_tribunaux", (req, res) => {
     });
 });
 
-module.exports = route;*/
+module.exports = route;

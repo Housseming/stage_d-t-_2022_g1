@@ -3,7 +3,8 @@ const route = express.Router();
 const client = require("../db");
 const bodyParser = require("body-parser");
 const { validateToken } = require("../middlewares/AuthMiddleWare");
-route.post("/collab", validateToken, (req, res) => {
+const { refreshToken } = require("../middlewares/AuthMiddleWare");
+route.post("/collab", (req, res) => {
     const {
         username,
         cin,
@@ -47,7 +48,7 @@ route.post("/collab", validateToken, (req, res) => {
     );
 });
 
-route.post("/delete", validateToken, (req, res) => {
+route.post("/delete", (req, res) => {
     const { id } = req.body;
     client.query(
         "DELETE FROM collaboratortable WHERE id=$1", [id],
