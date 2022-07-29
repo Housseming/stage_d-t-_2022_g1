@@ -1,4 +1,4 @@
-import { Radio, Space, Tabs, Modal } from "antd";
+import { Radio, Space, Tabs, Modal, Table, Input } from "antd";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Tableau from "./service";
@@ -9,11 +9,10 @@ import { toast } from "react-toastify";
 const { TabPane } = Tabs;
 const Tribunale = () => {
   const [listeTrib, setListeTrib] = useState([]);
-  const [listeService, setListeService] = useState([]);
   //select tribunale
   const gettribunalerequest = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/tribunale");
+      const response = await axios.get("/tribunale");
       console.log(response.data);
 
       setListeTrib(response.data);
@@ -21,14 +20,11 @@ const Tribunale = () => {
       console.log(error.message);
     }
   };
-  useEffect(() => {
-    gettribunalerequest();
-  });
-  console.log(listeTrib);
-  const [liste, setListe] = useState([]);
-  const [isEdit, setIsEdit] = useState(false);
+
+  const [listeservice, setListeservice] = useState([]);
+  const [isEditservice, setIsEditservice] = useState(false);
   const [edditingservice, setEdditingservice] = useState(null);
-  const [isAdd, setIsAdd] = useState(false);
+  const [isAddservice, setIsAddservice] = useState(false);
   const [addingservice, setAddingservice] = useState({
     nom: "",
     lundi: "",
@@ -81,21 +77,22 @@ const Tribunale = () => {
       },
     },
   ];
+  gettribunalerequest();
 
-  //select servicehuissier
+  //select service
   const getservicerequest = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/service");
-      setListe(response.data);
-     
+      const response = await axios.get("/service");
+      setListeservice(response.data);
     } catch (error) {
       console.log(error.message);
     }
   };
   useEffect(() => {
+    gettribunalerequest();
     getservicerequest();
   });
-  console.log(liste);
+  console.log(listeservice);
 
   //supprimer service
   const deleteservice = (record) => {
@@ -105,8 +102,10 @@ const Tribunale = () => {
       okType: "danger",
       cancelText: "annuler",
       onOk: () => {
-        const newListe = liste.filter((service) => service.id !== record.id);
-        setListe(newListe);
+        const newListe = listeservice.filter(
+          (service) => service.id !== record.id
+        );
+        setListeservice(newListe);
         deleteservicerequest(record.id);
         toast.success("service supprimé avec succès");
       },
@@ -114,7 +113,7 @@ const Tribunale = () => {
   };
   const deleteservicerequest = async (id) => {
     try {
-      const deleted = await axios.post("http://localhost:5000/serviceeff", {
+      const deleted = await axios.post("/serviceeff", {
         id: id,
       });
       console.log("service supprimé");
@@ -125,20 +124,17 @@ const Tribunale = () => {
 
   //modifier un service
   const editservice = (record) => {
-    setIsEdit(true);
+    setIsEditservice(true);
     setEdditingservice({ ...record }); //copie mel record
   };
   const resetEditing = () => {
-    setIsEdit(false);
+    setIsEditservice(false);
     setEdditingservice(null);
   };
   //ajouter servicehuissier
   const addservice = async () => {
     try {
-      const resp = await axios.post(
-        "http://localhost:5000/serviceadd",
-        addingservice
-      );
+      const resp = await axios.post("/serviceadd", addingservice);
       console.log(resp.data);
     } catch (error) {
       console.log(error);
@@ -169,7 +165,180 @@ const Tribunale = () => {
       <Tabs tabPosition={tabPosition}>
         {listeTrib.map((trib) => {
           const { id, lieu } = trib;
-          return <TabPane tab={trib.lieu} key={trib.id}></TabPane>;
+          const newListeService = listeservice.filter(
+            (service) => service.id_tribunale !== trib.id
+          );
+          return (
+            <TabPane tab={trib.lieu} key={trib.id}>
+              <div className="App">
+                <header className="App-header">
+                  <button
+                    className="btnadd"
+                    onClick={() => {
+                      setIsAddservice(true);
+                    }}
+                  >
+                    Ajouter un service
+                  </button>
+                  <div className="tab">
+                    <Table
+                      columns={column}
+                      dataSource={newListeService}
+                      size="medium"
+                      bordered={true}
+                    ></Table>
+                  </div>
+
+                  <Modal
+                    title="modifier service"
+                    visible={isEditservice}
+                    okText="Enregistrer"
+                    cancelText="Annuler"
+                    onCancel={() => {
+                      setIsEditservice(false);
+                    }}
+                    onOk={async () => {
+                      setIsEditservice(false);
+                      const newListe = listeservice.map((service) => {
+                        if (service.id == edditingservice.id) {
+                          return edditingservice;
+                        } else {
+                          return service;
+                        }
+                      });
+                      try {
+                        const addservice = await axios.post(
+                          "/service/update",
+                          edditingservice
+                        );
+                      } catch (error) {
+                        console.log("error");
+                      }
+                      setListeservice(newListe);
+                      resetEditing();
+                      toast.success("service modifié avec succès");
+                    }}
+                  >
+                    <Input
+                      placeholder="Tapez le nom"
+                      value={edditingservice?.nom}
+                      onChange={(e) => {
+                        setEdditingservice({
+                          ...edditingservice,
+                          nom: e.target.value,
+                        });
+                      }}
+                    ></Input>
+                    <Input
+                      placeholder="Tapez le lundi"
+                      value={edditingservice?.lundi}
+                      onChange={(e) => {
+                        setEdditingservice({
+                          ...edditingservice,
+                          lundi: e.target.value,
+                        });
+                      }}
+                    ></Input>
+                    <Input
+                      placeholder="Confirmez le mardi ?"
+                      value={edditingservice?.mardi}
+                      onChange={(e) => {
+                        setEdditingservice({
+                          ...edditingservice,
+                          mardi: e.target.value,
+                        });
+                      }}
+                    ></Input>
+                    <Input
+                      placeholder="Confimez l'mercredi ?"
+                      value={edditingservice?.mercredi}
+                      onChange={(e) => {
+                        setEdditingservice({
+                          ...edditingservice,
+                          mercredi: e.target.value,
+                        });
+                      }}
+                    ></Input>
+                    <Input
+                      placeholder="Confirmez le jeudi"
+                      value={edditingservice?.jeudi}
+                      onChange={(e) => {
+                        setEdditingservice({
+                          ...edditingservice,
+                          jeudi: e.target.value,
+                        });
+                      }}
+                    ></Input>
+                  </Modal>
+                  <Modal
+                    title="ajouter un service"
+                    visible={isAddservice}
+                    okText="Enregistrer"
+                    cancelText="Annuler"
+                    onCancel={() => {
+                      setIsAddservice(false);
+                    }}
+                    onOk={() => {
+                      addservice();
+                      setIsAddservice(false);
+                      toast.success("service ajouté avec succès");
+                    }}
+                  >
+                    <Input
+                      placeholder="tapez le nom du service"
+                      value={addingservice.nom}
+                      onChange={(e) => {
+                        setAddingservice({
+                          ...addingservice,
+                          nom: e.target.value,
+                        });
+                      }}
+                    ></Input>
+                    <Input
+                      placeholder="Tapez le lundi"
+                      value={addingservice.lundi}
+                      onChange={(e) => {
+                        setAddingservice({
+                          ...addingservice,
+                          lundi: e.target.value,
+                        });
+                      }}
+                    ></Input>
+                    <Input
+                      placeholder="Confirmez le mardi ?"
+                      value={addingservice.mardi}
+                      onChange={(e) => {
+                        setAddingservice({
+                          ...addingservice,
+                          mardi: e.target.value,
+                        });
+                      }}
+                    ></Input>
+                    <Input
+                      placeholder="Confirmez l'mercredi ?"
+                      value={addingservice.mercredi}
+                      onChange={(e) => {
+                        setAddingservice({
+                          ...addingservice,
+                          mercredi: e.target.value,
+                        });
+                      }}
+                    ></Input>
+                    <Input
+                      placeholder="Confirmez le jeudi"
+                      value={addingservice.jeudi}
+                      onChange={(e) => {
+                        setAddingservice({
+                          ...addingservice,
+                          jeudi: e.target.value,
+                        });
+                      }}
+                    ></Input>
+                  </Modal>
+                </header>
+              </div>
+            </TabPane>
+          );
         })}
       </Tabs>
     </>

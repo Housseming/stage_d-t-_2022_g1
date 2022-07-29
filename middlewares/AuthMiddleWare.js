@@ -46,8 +46,7 @@ const refreshToken = (req, res, next) => {
       const token = jwt.sign(
         {
           username: user.username,
-          id: user.id,
-          /*,iss:esm el site(createur de jeton) ou bien t7otha issuer fel options*/
+          id: user.id
         },
         keyaccesstoken,
         { expiresIn: "30s" }

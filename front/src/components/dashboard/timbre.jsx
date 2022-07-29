@@ -9,59 +9,56 @@ import { AiFillEdit } from "react-icons/ai";
 import { MdDeleteForever } from "react-icons/md";
 import { toast } from "react-toastify";
 
-
-
-const  Timbre = () => {
-  const [liste, setListe] = useState([]);
+const Timbre = () => {
+  const [listeservice, setlisteservice] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
   const [edditingTimbre, setEdditingTimbre] = useState(null);
   const [addingTimbre, setAddingTimbre] = useState({
     libelle: "",
-    
+
     montant: 0,
-  
   });
-  
-  const columns= [{ key: "1", title: "libelle", dataIndex: "libelle" },
- 
-  { key: "2", title: "montant", dataIndex: "montant" },
- {
-  key: "3",
-  title: "Actions",
-  render: (record) => {
-    return (
-      <div className="addicons">
-        <div className="divedit">
-          <AiFillEdit
-            className="edit"
-            onClick={() => {
-              editTimbre(record);
-            }}
-          ></AiFillEdit>
-          <p>modifier</p>
-        </div>
-        <div className="divdelete">
-          <MdDeleteForever
-            className="delete"
-            onClick={() => {
-              deleteTimbre(record);
-            }}
-          ></MdDeleteForever>
 
-          <p>supprimer</p>
-        </div>
-      </div>
-    ); 
-  },
- },
- ];
+  const columns = [
+    { key: "1", title: "libelle", dataIndex: "libelle" },
 
+    { key: "2", title: "montant", dataIndex: "montant" },
+    {
+      key: "3",
+      title: "Actions",
+      render: (record) => {
+        return (
+          <div className="addicons">
+            <div className="divedit">
+              <AiFillEdit
+                className="edit"
+                onClick={() => {
+                  editTimbre(record);
+                }}
+              ></AiFillEdit>
+              <p>modifier</p>
+            </div>
+            <div className="divdelete">
+              <MdDeleteForever
+                className="delete"
+                onClick={() => {
+                  deleteTimbre(record);
+                }}
+              ></MdDeleteForever>
 
- //select Timbre
+              <p>supprimer</p>
+            </div>
+          </div>
+        );
+      },
+    },
+  ];
+
+  //select Timbre
   const getTimbrerequest = async () => {
     try {
       const response = await axios.get("/timbre");
-      setListe(response.data);// aleh liste dhaherli khtr tji liste [{:}]
+      setlisteservice(response.data); // aleh listeservice dhaherli khtr tji listeservice [{:}]
     } catch (error) {
       console.log(error.message);
     }
@@ -69,66 +66,65 @@ const  Timbre = () => {
   useEffect(() => {
     getTimbrerequest();
   }, []);
-  console.log(liste);
+  console.log(listeservice);
 
- //supprimer une Timbre
- const deleteTimbre = (record) => {
-  Modal.confirm({
-    title: "Vous etes sur de supprimer l'Timbre?",
-    okText: "oui",
-    okType: "danger",
-    cancelText: "annuler",
-    onOk: () => {
-      const newListe = liste.filter((Timbre) => Timbre.libelle !== record.libelle);
-      setListe(newListe);
-      deleteTimbrerequest(record.libelle);
-      toast.success("Timbre supprimé avec succès");
-    },
-  });
-};
-const deleteTimbrerequest = async (libelle) => {
-  try {
-    const deleted = await axios.post("/timbre/delete", {
-      libelle:libelle ,
+  //supprimer une Timbre
+  const deleteTimbre = (record) => {
+    Modal.confirm({
+      title: "Vous etes sur de supprimer l'Timbre?",
+      okText: "oui",
+      okType: "danger",
+      cancelText: "annuler",
+      onOk: () => {
+        const newlisteservice = listeservice.filter(
+          (Timbre) => Timbre.libelle !== record.libelle
+        );
+        setlisteservice(newlisteservice);
+        deleteTimbrerequest(record.libelle);
+        toast.success("Timbre supprimé avec succès");
+      },
     });
-    console.log("Timbre supprimé");
-  } catch (error) {
-    console.log(error);
-  }
- };
-
+  };
+  const deleteTimbrerequest = async (libelle) => {
+    try {
+      const deleted = await axios.post("/timbre/delete", {
+        libelle: libelle,
+      });
+      console.log("Timbre supprimé");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   ////////////
   //modifier une Timbre
- const editTimbre = (record) => {
-  setIsEdit(true);
-  setEdditingTimbre({ ...record }); //copie mel record
- };
+  const editTimbre = (record) => {
+    setIsEdit(true);
+    setEdditingTimbre({ ...record }); //copie mel record
+  };
   const resetEditing = () => {
     setIsEdit(false);
     setEdditingTimbre(null);
   };
   //lien aveclback pour la modif
-  const editTimbrerequest = async (libelle,montant) => {
+  const editTimbrerequest = async (libelle, montant) => {
     try {
       const modified = await axios.post("/timbre/modif", {
-        libelle:libelle ,montant:montant
+        libelle: libelle,
+        montant: montant,
       });
       console.log("Timbre modifié");
     } catch (error) {
       console.log(error);
     }
-   };
-   ///////////////////// Ajout
-   //lien aveclback pour l'ajout
-   const [isAdd, setIsAdd] = useState(false);
-   
-   const addTimbre = async () => {
+  };
+  ///////////////////// Ajout
+  //lien aveclback pour l'ajout
+  const [isAdd, setIsAdd] = useState(false);
+
+  const addTimbre = async () => {
     try {
-      const resp = await axios.post(
-        "/timbre",
-        addingTimbre
-      );
+      const resp = await axios.post("/timbre", addingTimbre);
       console.log(resp.data);
     } catch (error) {
       console.log(error);
@@ -137,66 +133,69 @@ const deleteTimbrerequest = async (libelle) => {
   return (
     <div className="App">
       <header className="App-header">
-        <Button className="btnadd"  onClick={() => {
+        <Button
+          className="btnadd"
+          onClick={() => {
             setIsAdd(true);
-          } }> Ajouter</Button>
+          }}
+        >
+          {" "}
+          Ajouter
+        </Button>
         <div classname="tab">
-        <Table  
-           columns={columns}
-            dataSource={liste}
+          <Table
+            columns={columns}
+            dataSource={listeservice}
             style={{ with: 15 }}
             bordered={true}
-            /> 
-          </div>
-  {/*MODIFICATION*/}
-  <Modal
-  title="modifier Timbre"
-  visible={isEdit}
-  okText="Enregistrer"
-  cancelText="Annuler"
-  onCancel={() => {
-    setIsEdit(false);
-  }}
-  onOk={() => {
-    setIsEdit(false);
-    const newListe = liste.map((Timbre) => {
-      if (Timbre.libelle === edditingTimbre.libelle) {
-        return edditingTimbre;
-      } else {
-        return Timbre;
-      }
-    });
-    setListe(newListe);
-    editTimbrerequest(edditingTimbre.libelle,edditingTimbre.montant)
-    resetEditing();
-    toast.success("Timbre modifie avec succée");
-  }}
- >
-  <Input
-    placeholder="libelle"
-    value={edditingTimbre?.libelle}
-    onChange={(e) => {
-      setEdditingTimbre({
-        ...edditingTimbre,
-        libelle: e.target.value,
-      });
-    }}
-  >
+          />
+        </div>
+        {/*MODIFICATION*/}
+        <Modal
+          title="modifier Timbre"
+          visible={isEdit}
+          okText="Enregistrer"
+          cancelText="Annuler"
+          onCancel={() => {
+            setIsEdit(false);
+          }}
+          onOk={() => {
+            setIsEdit(false);
+            const newlisteservice = listeservice.map((Timbre) => {
+              if (Timbre.libelle === edditingTimbre.libelle) {
+                return edditingTimbre;
+              } else {
+                return Timbre;
+              }
+            });
+            setlisteservice(newlisteservice);
+            editTimbrerequest(edditingTimbre.libelle, edditingTimbre.montant);
+            resetEditing();
+            toast.success("Timbre modifie avec succée");
+          }}
+        >
+          <Input
+            placeholder="libelle"
+            value={edditingTimbre?.libelle}
+            onChange={(e) => {
+              setEdditingTimbre({
+                ...edditingTimbre,
+                libelle: e.target.value,
+              });
+            }}
+          ></Input>
 
-  </Input>
- 
-  <Input placeholder='Montant'
-    value={edditingTimbre?.montant}
-    onChange={(e) => {
-      setEdditingTimbre({ ...edditingTimbre, montant: e.target.value });
-    }}
-  ></Input>
-  
+          <Input
+            placeholder="Montant"
+            value={edditingTimbre?.montant}
+            onChange={(e) => {
+              setEdditingTimbre({ ...edditingTimbre, montant: e.target.value });
+            }}
+          ></Input>
 
-
-  {/*AJOUT*/}
-  </Modal>
-  <Modal
+          {/*AJOUT*/}
+        </Modal>
+        <Modal
           title="ajouter "
           visible={isAdd}
           okText="Enregistrer"
@@ -220,8 +219,8 @@ const deleteTimbrerequest = async (libelle) => {
               });
             }}
           ></Input>
-          
-           <Input
+
+          <Input
             placeholder="montant"
             value={addingTimbre.montant}
             onChange={(e) => {
@@ -231,11 +230,9 @@ const deleteTimbrerequest = async (libelle) => {
               });
             }}
           ></Input>
-          </Modal>
-
-  </header>
-
-  </div>
-  ) 
-  };
-  export default Timbre;
+        </Modal>
+      </header>
+    </div>
+  );
+};
+export default Timbre;
