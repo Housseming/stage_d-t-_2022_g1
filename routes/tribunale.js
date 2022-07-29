@@ -4,7 +4,7 @@ const client = require("../basededonnee");
 const bodyParser = require("body-parser");
 const { validateToken } = require("../middlewares/AuthMiddleWare");
 route.post("/ajouterTribunale", (req, res) => {
-    const { lieu } = req.body;
+    const {lieu } = req.body;
     client.query(
         "INSERT INTO tribunaletable (lieu) VALUES($1)", [lieu],
         (error, result) => {
@@ -18,9 +18,9 @@ route.post("/ajouterTribunale", (req, res) => {
 });
 
 route.post("/deleteTribunale", (req, res) => {
-    const { lieu } = req.body;
+    const { id } = req.body;
     client.query(
-        "DELETE FROM tribunaletable WHERE lieu=$1", [lieu],
+        "DELETE FROM tribunaletable WHERE id=$1", [id],
         (error, result) => {
             if (error) {
                 throw error;
@@ -32,9 +32,9 @@ route.post("/deleteTribunale", (req, res) => {
 });
 
 route.post("/modifierTribunale", (req, res) => {
-    const { lieu } = req.body;
+    const { id,lieu } = req.body;
     client.query(
-        "UPDATE tribunaletable SET lieu=$1 ", [lieu],
+        "UPDATE tribunaletable SET lieu=$1 WHERE id=$2", [lieu,id],
         (error, result) => {
             if (error) {
                 console.log(error);
@@ -66,9 +66,9 @@ route.get("/service", (req, res) => {
   });
 });
 route.post("/serviceadd", (req, res) => {
-    const { nom, tribunale_id } = req.body;
+    const { nom, service_id,lundi,mardi,mercredi,jeudi,vendredi,samedi } = req.body;
     client.query(
-        "INSERT INTO servicetable (nom,tribunale_id) VALUES($1,$2)", [nom, tribunale_id],
+        "INSERT INTO servicetable (nom,service_id,lundi,mardi,mercredi,jeudi,vendredi,samedi) VALUES($1,$2,$3,$4,$5,$6,$7,$8)", [nom, service_id,lundi,mardi,mercredi,jeudi,vendredi,samedi],
         (error, result) => {
             if (error) {
                 console.log(error.message);
@@ -80,28 +80,28 @@ route.post("/serviceadd", (req, res) => {
 });
 
 route.post("/serviceeff", (req, res) => {
-    const { lieu } = req.body;
+    const { id } = req.body;
     client.query(
-        "DELETE FROM tribunaletable WHERE lieu=$1", [lieu],
+        "DELETE FROM servicetable WHERE service_id=$1", [id],
         (error, result) => {
             if (error) {
                 throw error;
             } else {
-                res.json("tribunale supprimée");
+                res.json("service supprimée");
             }
         }
     );
 });
 
 route.post("/service/update", (req, res) => {
-    const { lieu } = req.body;
+    const {id, nom,lundi,mardi,mercredi,jeudi,vendredi,samedi } = req.body;
     client.query(
-        "UPDATE tribunaletable SET lieu=$1 ", [lieu],
+        "UPDATE servicetable SET nom=$1,lundi=$2,mardi=$3,mercredi=$4,jeudi=$5,vendredi=$6,samedi=$7 WHERE service_id=$8 ", [nom,lundi,mardi,mercredi,jeudi,vendredi,samedi,id],
         (error, result) => {
             if (error) {
                 console.log(error);
             } else {
-                res.json("tribunale modifiée");
+                res.json("service modifiée");
             }
         }
     );

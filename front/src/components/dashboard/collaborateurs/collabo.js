@@ -25,7 +25,7 @@ export const Collabo = () => {
       console.log(error);
     }
   };*/
-  const [listeservice, setlisteservice] = useState([]);
+  const [liste, setliste] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(6);
@@ -181,7 +181,7 @@ export const Collabo = () => {
         console.log("non connecté");
       } else {
         console.log(response);
-        setlisteservice(response.data);
+        setliste(response.data);
       }
     } catch (error) {
       console.log(error.message);
@@ -190,7 +190,7 @@ export const Collabo = () => {
 
   useEffect(() => {
     getCollabrequest();
-  }, [listeservice]);
+  }, [liste]);
 
   //supprimer collaborateur
   const deleteCollab = (record) => {
@@ -200,10 +200,8 @@ export const Collabo = () => {
       okType: "danger",
       cancelText: "annuler",
       onOk: () => {
-        const newlisteservice = listeservice.filter(
-          (collab) => collab.id !== record.id
-        );
-        setlisteservice(newlisteservice);
+        const newliste = liste.filter((collab) => collab.id !== record.id);
+        setliste(newliste);
         deleteCollabrequest(record.id);
       },
     });
@@ -267,7 +265,7 @@ export const Collabo = () => {
 
         <Table
           columns={column}
-          dataSource={listeservice}
+          dataSource={liste}
           //scroll={{ x:10}}
           pagination={{
             current: page,
@@ -297,7 +295,7 @@ export const Collabo = () => {
           onOk={async () => {
             setIsEdit(false);
 
-            const newlisteservice = listeservice.map((collab) => {
+            const newliste = liste.map((collab) => {
               if (collab.id == edditingCollab.id) {
                 return edditingCollab;
               } else {
@@ -313,7 +311,7 @@ export const Collabo = () => {
               console.log(error);
             }
 
-            setlisteservice(newlisteservice);
+            setliste(newliste);
 
             resetEditing();
 
