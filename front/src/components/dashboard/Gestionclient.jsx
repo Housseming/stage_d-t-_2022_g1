@@ -141,57 +141,6 @@ const Gestionclient = () => {
         return record.matricule.toLowerCase().includes(value.toLowerCase());
       },
     },
-    { key: "4", title: "ville", dataIndex: "ville" },
-    { key: "5", title: "rue", dataIndex: "rue" },
-    { key: "6", title: "num", dataIndex: "num" },
-    { key: "7", title: "code_postale", dataIndex: "code_postale" },
-    { key: "8", title: "activité", dataIndex: "activité" },
-    { key: "9", title: "situation_fiscale", dataIndex: "situation_fiscale" },
-    { key: "10", title: "categorie", dataIndex: "categorie" },
-    { key: "11", title: "fax", dataIndex: "fax" },
-    { key: "12", title: "email", dataIndex: "email" },
-    {
-      key: "13",
-      title: "Actions",
-      render: (record) => {
-        return (
-          <div className="addicons">
-            <div className="divedit">
-              <AiFillEdit
-                className="edit"
-                onClick={() => {
-                  editGestionclient(record);
-                }}
-              ></AiFillEdit>
-              <p>modifier</p>
-            </div>
-            {
-              <div className="divdelete">
-                <MdDeleteForever
-                  className="delete"
-                  onClick={() => {
-                    deleteGestionclient(record);
-                  }}
-                ></MdDeleteForever>
-
-                <p>supprimer</p>
-              </div>
-            }
-          </div>
-        );
-      },
-    },
-  ];
-
-   </Input> 
-   <Button onClick={()=>{confirm();}} type='primary'> Search </Button>
-   <Button onClick={() => {clearFilters()}} type="danger">Reset </Button>
-   
-   </React.Fragment>
-   );},
-filterIcon:() =>{return <SearchOutlined/>},
-onFilter: (value,record) => {
-  return record.matricule.toLowerCase().includes(value.toLowerCase())} },
   { key: "4", title: "ville", dataIndex: "ville",filterDropdown:({ 
     setSelectedKeys,
    selectedKeys,

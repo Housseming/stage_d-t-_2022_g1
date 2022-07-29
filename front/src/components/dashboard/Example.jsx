@@ -4,7 +4,6 @@ import { Fragment } from 'react'
 import { Popover, Transition } from '@headlessui/react'
 import { PlusIcon, ServerIcon,
   ChartBarIcon,CursorClickIcon,DocumentReportIcon,MenuIcon,RefreshIcon,ShieldCheckIcon,ViewGridIcon, XIcon,ClockIcon,CurrencyYenIcon,FlagIcon 
-  
 } from '@heroicons/react/outline';
 import {
   AppstoreOutlined,
@@ -526,7 +525,7 @@ export default function Example() {
             <a
               href="/login"
               className="text-base font-medium text-gray-500 hover:text-gray-900">
-              Se connecter
+              log out
             </a>
             <a
               href="/register"
