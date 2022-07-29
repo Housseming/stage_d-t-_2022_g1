@@ -24,7 +24,8 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/login" element={<AccountBox />} />
+        
+        <Route  path="/login" element={<AccountBox />} />
         <Route path="/register" element={<RegisterBox />} />
         <Route path="/" element={<Sharedlayout />}>
           <Route path="primehuissier" element={<PrimeHuissier />} />

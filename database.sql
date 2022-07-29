@@ -1,9 +1,9 @@
 CREATE TABLE primehuissier;
 CREATE TABLE primehuissier(
     id SERIAL PRIMARY KEY ,
-    libelle VARCHAR(100) NOT NULL ,
+    libelle TEXT NOT NULL ,
     montant DOUBLE PRECISION ,
-    dessociable VARCHAR(8) NOT NULL ,
-    impot VARCHAR(8) NOT NULL ,
-    mensuel VARCHAR(8) NOT NULL ,
+    dessociable TEXT NOT NULL ,
+    impot TEXT NOT NULL ,
+    mensuel TEXT NOT NULL ,
 );

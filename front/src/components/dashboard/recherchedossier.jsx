@@ -22,11 +22,11 @@ const RechercheDossier = () => {
     reste:"",
   });
   const column = [
-    {key: "1", title: "id_dossier_dossier", dataIndex: "id_dossier_dossier"},
+    {key: "1", title: "id_dossier", dataIndex: "id_dossier"},
     {key: "2", title: "num_affaire", dataIndex: "num_affaire"},
     {key: "3", title: "emplacement", dataIndex: "emplacement"},
     {key: "4", title: "client", dataIndex: "client"},
-    {key: "5", title: "tel ", dataIndex: "tel "},
+    {key: "5", title: "tel", dataIndex: "tel"},
     {key: "6", title: "mission", dataIndex: "mission"},
     {key: "7", title: "adversaire", dataIndex: "adversaire"},
     {key: "8", title: "reste", dataIndex: "reste"},
@@ -60,7 +60,6 @@ const RechercheDossier = () => {
       },
     },
   ];
-
   //select dossier
   const getdossierrequest = async () => {
     try {
