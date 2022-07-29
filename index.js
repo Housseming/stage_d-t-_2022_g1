@@ -22,16 +22,19 @@ const registerroute = require("./routes/RouteRegister");
 const collabroute = require("./routes/RouteCollab");
 const homeroute = require("./routes/RouteHome");
 const tribunaleroute = require("./routes/tribunale");
-const cookie = require("cookie-parser");
-const verifyroute = require("./routes/verifytokenroute");
-const user = require("./routes/user");
+const cookie = require("cookie-parser"); 
+//const verifyroute = require("./routes/verifytokenroute")
+
+    const verifyroute = require("./routes/verifytokenroute")
+    
+const user = require("./routes/user")
 require("dotenv").config();
 
 app.use(cookie());
 //middleware
 app.use(bodyParser.json());
 app.use(express.json());
-//app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
+app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 //app.use(express.static(path.join(__dirname, "front")));
 app.use(express.static("front"));
 if (process.env.NODE_ENV === "production") {

@@ -32,8 +32,7 @@ route.post("/login", (req, res) => {
             const accessToken = jwt.sign(
               {
                 username: result.rows[0].username,
-                id: result.rows[0]
-                  .id /*,iss:esm el site(createur de jeton) ou bien t7otha issuer fel options,*/
+                id: result.rows[0].id 
               },
               keyaccesstoken,
               { expiresIn: "30s" }
