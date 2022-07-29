@@ -140,17 +140,10 @@ const Recettedufinance = () => {
   return (
     <div className="App">
       <header className="App-header">
-        {
-          <button
-            className="btnadd"
-            onClick={() => {
-              setIsAdd(true);
-            }}
-          >
-            {" "}
-            Ajouter
-          </button>
-        }
+      <h1>Recette du finance</h1>
+        {<button className="btnadd"  onClick={() => {
+            setIsAdd(true);
+          } }> Ajouter</button>}
         <div classname="tab">
           <Table
             columns={columns}
