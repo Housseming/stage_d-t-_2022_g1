@@ -1,11 +1,12 @@
 import React from "react";
 import axios from "axios";
 import {useState, useEffect} from "react";
-import {Table, Modal, Input} from "antd";
+import {Table, Modal, Input,Button} from "antd";
 import "antd/dist/antd.min.css";
 import {AiFillEdit} from "react-icons/ai";
 import {MdDeleteForever} from "react-icons/md";
-import {toast} from "react-toastify";
+import { toast } from "react-toastify";
+import {SearchOutlined} from "@ant-design/icons";
 const RechercheDossier = () => {
   //declaration necessaires
   const [liste, setListe] = useState([]);
@@ -25,10 +26,160 @@ const RechercheDossier = () => {
     {key: "1", title: "id_dossier", dataIndex: "id_dossier"},
     {key: "2", title: "num_affaire", dataIndex: "num_affaire"},
     {key: "3", title: "emplacement", dataIndex: "emplacement"},
-    {key: "4", title: "client", dataIndex: "client"},
+    {
+      key: "4",
+      title: "client",
+      dataIndex: "client",
+      filterDropdown: ({
+        setSelectedKeys,
+        selectedKeys,
+        clearFilters,
+        confirm,
+      }) => {
+        return (
+          <React.Fragment>
+            <Input
+              autoFocus
+              placeholder="type text"
+              value={selectedKeys[0]}
+              onChange={(e) => {
+                setSelectedKeys(e.target.value ? [e.target.value] : []);
+                confirm({closeDropdown: false});
+              }}
+              onPressEnter={() => {
+                confirm();
+              }}
+              onBlur={() => {
+                confirm();
+              }}></Input>
+            <Button
+              onClick={() => {
+                confirm();
+              }}
+              type="primary">
+              {" "}
+              Rechercher{" "}
+            </Button>
+            <Button
+              onClick={() => {
+                clearFilters();
+              }}
+              type="danger">
+              Réinitialiser{" "}
+            </Button>
+          </React.Fragment>
+        );
+      },
+      filterIcon: () => {
+        return <SearchOutlined />;
+      },
+      onFilter: (value, record) => {
+        return record.client.toLowerCase().includes(value.toLowerCase());
+      },
+    },
     {key: "5", title: "tel", dataIndex: "tel"},
-    {key: "6", title: "mission", dataIndex: "mission"},
-    {key: "7", title: "adversaire", dataIndex: "adversaire"},
+    {
+      key: "6",
+      title: "mission",
+      dataIndex: "mission",
+      filterDropdown: ({
+        setSelectedKeys,
+        selectedKeys,
+        clearFilters,
+        confirm,
+      }) => {
+        return (
+          <React.Fragment>
+            <Input
+              autoFocus
+              placeholder="type text"
+              value={selectedKeys[0]}
+              onChange={(e) => {
+                setSelectedKeys(e.target.value ? [e.target.value] : []);
+                confirm({closeDropdown: false});
+              }}
+              onPressEnter={() => {
+                confirm();
+              }}
+              onBlur={() => {
+                confirm();
+              }}></Input>
+            <Button
+              onClick={() => {
+                confirm();
+              }}
+              type="primary">
+              {" "}
+              Rechercher{" "}
+            </Button>
+            <Button
+              onClick={() => {
+                clearFilters();
+              }}
+              type="danger">
+              Réinitialiser{" "}
+            </Button>
+          </React.Fragment>
+        );
+      },
+      filterIcon: () => {
+        return <SearchOutlined />;
+      },
+      onFilter: (value, record) => {
+        return record.mission.toLowerCase().includes(value.toLowerCase());
+      },
+    },
+    {
+      key: "7",
+      title: "adversaire",
+      dataIndex: "adversaire",
+      filterDropdown: ({
+        setSelectedKeys,
+        selectedKeys,
+        clearFilters,
+        confirm,
+      }) => {
+        return (
+          <React.Fragment>
+            <Input
+              autoFocus
+              placeholder="type text"
+              value={selectedKeys[0]}
+              onChange={(e) => {
+                setSelectedKeys(e.target.value ? [e.target.value] : []);
+                confirm({closeDropdown: false});
+              }}
+              onPressEnter={() => {
+                confirm();
+              }}
+              onBlur={() => {
+                confirm();
+              }}></Input>
+            <Button
+              onClick={() => {
+                confirm();
+              }}
+              type="primary">
+              {" "}
+              Rechercher{" "}
+            </Button>
+            <Button
+              onClick={() => {
+                clearFilters();
+              }}
+              type="danger">
+              Réinitialiser{" "}
+            </Button>
+          </React.Fragment>
+        );
+      },
+      filterIcon: () => {
+        return <SearchOutlined />;
+      },
+      onFilter: (value, record) => {
+        return record.adversaire.toLowerCase().includes(value.toLowerCase());
+      },
+    },
     {key: "8", title: "reste", dataIndex: "reste"},
     {
       key: "16",
@@ -121,13 +272,43 @@ const RechercheDossier = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <button
-          className="btnadd"
-          onClick={() => {
-            setIsAdd(true);
-          }}>
-          Ajouter Dossier
-        </button>
+        <div className="boutonet">
+          <button
+            className="btnadd"
+            onClick={() => {
+              setIsAdd(true);
+            }}>
+            Reclasser Dossier
+          </button>
+          <button
+            className="btnadd"
+            onClick={() => {
+              setIsAdd(true);
+            }}>
+            Générer Facture
+          </button>
+          <button
+            className="btnadd"
+            onClick={() => {
+              setIsAdd(true);
+            }}>
+            Générer Facture Etat
+          </button>
+          <button
+            className="btnadd"
+            onClick={() => {
+              setIsAdd(true);
+            }}>
+            Ajouter Dossier
+          </button>
+          <button
+            className="btnadd"
+            onClick={() => {
+              setIsAdd(true);
+            }}>
+            Archiver Dossier
+          </button>
+        </div>
         <div className="tab">
           <Table
             columns={column}
@@ -268,7 +449,7 @@ const RechercheDossier = () => {
               });
             }}></Input>
           <Input
-            placeholder="*Mission"
+            placeholder="Mission"
             value={addingdossier.mission}
             onChange={(e) => {
               setAddingdossier({

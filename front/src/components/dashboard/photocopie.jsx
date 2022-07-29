@@ -62,7 +62,7 @@ const Parametreenextra = () => {
   };
   useEffect(() => {
     getParametrerequest();
-  }, []);
+  }, [listeservice]);
   console.log(listeservice);
 
   ////////////

@@ -10,10 +10,22 @@ const pool = require("../db");
 //create dossier
 root11.post("/recherchedossieradd", async(req, res) => {
     try {
-        const { num_affaire, emplacement, client, tel, mission, adversaire, reste } =
+        const newdossiers = await pool.query(
+            "INSERT INTO recherchedossier(client) SELECT raison FROM gestionclient ",
+            //res.json("succes"),
+        );
+        res.json(newdossiers.rows[0]);
+    } catch (err) {
+        console.error(err.message);
+    }
+});
+
+root11.post("/recherchedossieradd", async(req, res) => {
+    try {
+        const { num_affaire, emplacement, tel, mission, adversaire, reste, client } =
         req.body;
         const newdossiers = await pool.query(
-            "INSERT INTO recherchedossier (num_affaire, emplacement, client, tel, mission,adversaire,reste) VALUES($1,$2,$3,$4,$5,$6,$7)", [num_affaire, emplacement, client, tel, mission, adversaire, reste]
+            "INSERT INTO recherchedossier (num_affaire, emplacement, tel, mission,adversaire,reste) VALUES($1,$2,$3,$4,$5,$6) WHERE client=$7", [num_affaire, emplacement, tel, mission, adversaire, reste, client]
             //res.json("succes"),
         );
         res.json(newdossiers.rows[0]);

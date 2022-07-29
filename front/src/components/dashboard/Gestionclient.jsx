@@ -194,7 +194,7 @@ const Gestionclient = () => {
   };
   useEffect(() => {
     getGestionclientrequest();
-  }, []);
+  }, [listeservice]);
   console.log(listeservice);
 
   //supprimer une Gestionclient
