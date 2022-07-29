@@ -22,13 +22,11 @@ const registerroute = require("./routes/RouteRegister");
 const collabroute = require("./routes/RouteCollab");
 const homeroute = require("./routes/RouteHome");
 const tribunaleroute = require("./routes/tribunale");
-const cookie = require("cookie-parser"); <<
-<< << < HEAD
+const cookie = require("cookie-parser"); 
 //const verifyroute = require("./routes/verifytokenroute")
-    ===
-    === =
-    const verifyroute = require("./routes/verifytokenroute") >>>
-        >>> > stage - dev
+
+    const verifyroute = require("./routes/verifytokenroute")
+    
 const user = require("./routes/user")
 require("dotenv").config();
 

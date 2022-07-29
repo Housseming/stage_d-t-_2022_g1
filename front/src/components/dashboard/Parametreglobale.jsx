@@ -136,6 +136,7 @@ const deleteParametrerequest = async (timbrefiscale) => {
   return (
     <div className="App">
       <header className="App-header">
+      <h1>Parametres globales</h1>
         {/*<Button className="btnadd"  onClick={() => {
             setIsAdd(true);
           } }> Ajouter</Button>*/}

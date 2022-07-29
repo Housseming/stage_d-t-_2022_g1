@@ -33,7 +33,7 @@ route.post("/login", (req, res) => {
                                                         username: result.rows[0].username,
                                                         id: result.rows[0]
                                                             .id
-                                                            /*,iss:esm el site(createur de jeton) ou bien t7otha issuer fel options,
+                                                           
               },
               keyaccesstoken,
               { expiresIn: "30s" }

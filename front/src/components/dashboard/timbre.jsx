@@ -137,6 +137,7 @@ const deleteTimbrerequest = async (libelle) => {
   return (
     <div className="App">
       <header className="App-header">
+      <h1>Timbres</h1> 
         <Button className="btnadd"  onClick={() => {
             setIsAdd(true);
           } }> Ajouter</Button>

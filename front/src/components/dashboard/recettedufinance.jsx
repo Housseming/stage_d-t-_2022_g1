@@ -136,6 +136,7 @@ const deleteRecettedufinancerequest = async (id) => {
   return (
     <div className="App">
       <header className="App-header">
+      <h1>Recette du finance</h1>
         {<button className="btnadd"  onClick={() => {
             setIsAdd(true);
           } }> Ajouter</button>}

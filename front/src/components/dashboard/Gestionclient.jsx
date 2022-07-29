@@ -79,15 +79,231 @@ onFilter: (value,record) => {
 filterIcon:() =>{return <SearchOutlined/>},
 onFilter: (value,record) => {
   return record.matricule.toLowerCase().includes(value.toLowerCase())} },
-  { key: "4", title: "ville", dataIndex: "ville" },
-  { key: "5", title: "rue", dataIndex: "rue" },
-  { key: "6", title: "num", dataIndex: "num" },
-  { key: "7", title: "code_postale", dataIndex: "code_postale" },
-  { key: "8", title: "activité", dataIndex: "activité" },
-  { key: "9", title: "situation_fiscale", dataIndex: "situation_fiscale" },
-  { key: "10", title: "categorie", dataIndex: "categorie" },
-  { key: "11", title: "fax", dataIndex: "fax" },
-  { key: "12", title: "email", dataIndex: "email" },
+  { key: "4", title: "ville", dataIndex: "ville",filterDropdown:({ 
+    setSelectedKeys,
+   selectedKeys,
+   confirm,
+    clearFilters,
+ }) =>
+  {return ( 
+   <React.Fragment>
+  <Input 
+   autoFocus
+   placeholder="type text"
+  value={selectedKeys[0]}
+  onChange={(e)=>{setSelectedKeys(e.target.value ? [e.target.value] :[] )}}
+  onPressEnter={() => { confirm();}}
+  onBlur={()=>{confirm();}}>
+
+  </Input> 
+  <Button onClick={()=>{confirm();}} type='primary'> Search </Button>
+  <Button onClick={() => {clearFilters()}} type="danger">Reset </Button>
+  
+  </React.Fragment>
+  );},
+filterIcon:() =>{return <SearchOutlined/>},
+onFilter: (value,record) => {
+ return record.ville.toLowerCase().includes(value.toLowerCase())}  },
+  { key: "5", title: "rue", dataIndex: "rue",filterDropdown:({ 
+    setSelectedKeys,
+   selectedKeys,
+   confirm,
+    clearFilters,
+ }) =>
+  {return ( 
+   <React.Fragment>
+  <Input 
+   autoFocus
+   placeholder="type text"
+  value={selectedKeys[0]}
+  onChange={(e)=>{setSelectedKeys(e.target.value ? [e.target.value] :[] )}}
+  onPressEnter={() => { confirm();}}
+  onBlur={()=>{confirm();}}>
+
+  </Input> 
+  <Button onClick={()=>{confirm();}} type='primary'> Search </Button>
+  <Button onClick={() => {clearFilters()}} type="danger">Reset </Button>
+  
+  </React.Fragment>
+  );},
+filterIcon:() =>{return <SearchOutlined/>},
+onFilter: (value,record) => {
+ return record.rue.toLowerCase().includes(value.toLowerCase())}  },
+  { key: "6", title: "num", dataIndex: "num",filterDropdown:({ 
+    setSelectedKeys,
+   selectedKeys,
+   confirm,
+    clearFilters,
+ }) =>
+  {return ( 
+   <React.Fragment>
+  <Input 
+   autoFocus
+   placeholder="type text"
+  value={selectedKeys[0]}
+  onChange={(e)=>{setSelectedKeys(e.target.value ? [e.target.value] :[] )}}
+  onPressEnter={() => { confirm();}}
+  onBlur={()=>{confirm();}}>
+
+  </Input> 
+  <Button onClick={()=>{confirm();}} type='primary'> Search </Button>
+  <Button onClick={() => {clearFilters()}} type="danger">Reset </Button>
+  
+  </React.Fragment>
+  );},
+filterIcon:() =>{return <SearchOutlined/>},
+onFilter: (value,record) => {
+ return record.num.toLowerCase().includes(value.toLowerCase())}  },
+  { key: "7", title: "code_postale", dataIndex: "code_postale" ,filterDropdown:({ 
+    setSelectedKeys,
+   selectedKeys,
+   confirm,
+    clearFilters,
+ }) =>
+  {return ( 
+   <React.Fragment>
+  <Input 
+   autoFocus
+   placeholder="type text"
+  value={selectedKeys[0]}
+  onChange={(e)=>{setSelectedKeys(e.target.value ? [e.target.value] :[] )}}
+  onPressEnter={() => { confirm();}}
+  onBlur={()=>{confirm();}}>
+
+  </Input> 
+  <Button onClick={()=>{confirm();}} type='primary'> Search </Button>
+  <Button onClick={() => {clearFilters()}} type="danger">Reset </Button>
+  
+  </React.Fragment>
+  );},
+filterIcon:() =>{return <SearchOutlined/>},
+onFilter: (value,record) => {
+ return record.code_postale.toLowerCase().includes(value.toLowerCase())} },
+  { key: "8", title: "activité", dataIndex: "activité",filterDropdown:({ 
+    setSelectedKeys,
+   selectedKeys,
+   confirm,
+    clearFilters,
+ }) =>
+  {return ( 
+   <React.Fragment>
+  <Input 
+   autoFocus
+   placeholder="type text"
+  value={selectedKeys[0]}
+  onChange={(e)=>{setSelectedKeys(e.target.value ? [e.target.value] :[] )}}
+  onPressEnter={() => { confirm();}}
+  onBlur={()=>{confirm();}}>
+
+  </Input> 
+  <Button onClick={()=>{confirm();}} type='primary'> Search </Button>
+  <Button onClick={() => {clearFilters()}} type="danger">Reset </Button>
+  
+  </React.Fragment>
+  );},
+filterIcon:() =>{return <SearchOutlined/>},
+onFilter: (value,record) => {
+ return record.activité.toLowerCase().includes(value.toLowerCase())}  },
+  { key: "9", title: "situation_fiscale", dataIndex: "situation_fiscale",filterDropdown:({ 
+    setSelectedKeys,
+   selectedKeys,
+   confirm,
+    clearFilters,
+ }) =>
+  {return ( 
+   <React.Fragment>
+  <Input 
+   autoFocus
+   placeholder="type text"
+  value={selectedKeys[0]}
+  onChange={(e)=>{setSelectedKeys(e.target.value ? [e.target.value] :[] )}}
+  onPressEnter={() => { confirm();}}
+  onBlur={()=>{confirm();}}>
+
+  </Input> 
+  <Button onClick={()=>{confirm();}} type='primary'> Search </Button>
+  <Button onClick={() => {clearFilters()}} type="danger">Reset </Button>
+  
+  </React.Fragment>
+  );},
+filterIcon:() =>{return <SearchOutlined/>},
+onFilter: (value,record) => {
+ return record.situation_fiscale.toLowerCase().includes(value.toLowerCase())}  },
+  { key: "10", title: "categorie", dataIndex: "categorie" ,filterDropdown:({ 
+    setSelectedKeys,
+   selectedKeys,
+   confirm,
+    clearFilters,
+ }) =>
+  {return ( 
+   <React.Fragment>
+  <Input 
+   autoFocus
+   placeholder="type text"
+  value={selectedKeys[0]}
+  onChange={(e)=>{setSelectedKeys(e.target.value ? [e.target.value] :[] )}}
+  onPressEnter={() => { confirm();}}
+  onBlur={()=>{confirm();}}>
+
+  </Input> 
+  <Button onClick={()=>{confirm();}} type='primary'> Search </Button>
+  <Button onClick={() => {clearFilters()}} type="danger">Reset </Button>
+  
+  </React.Fragment>
+  );},
+filterIcon:() =>{return <SearchOutlined/>},
+onFilter: (value,record) => {
+ return record.categorie.toLowerCase().includes(value.toLowerCase())} },
+  { key: "11", title: "fax", dataIndex: "fax" ,filterDropdown:({ 
+    setSelectedKeys,
+   selectedKeys,
+   confirm,
+    clearFilters,
+ }) =>
+  {return ( 
+   <React.Fragment>
+  <Input 
+   autoFocus
+   placeholder="type text"
+  value={selectedKeys[0]}
+  onChange={(e)=>{setSelectedKeys(e.target.value ? [e.target.value] :[] )}}
+  onPressEnter={() => { confirm();}}
+  onBlur={()=>{confirm();}}>
+
+  </Input> 
+  <Button onClick={()=>{confirm();}} type='primary'> Search </Button>
+  <Button onClick={() => {clearFilters()}} type="danger">Reset </Button>
+  
+  </React.Fragment>
+  );},
+filterIcon:() =>{return <SearchOutlined/>},
+onFilter: (value,record) => {
+ return record.fax.toLowerCase().includes(value.toLowerCase())} },
+  { key: "12", title: "email", dataIndex: "email",filterDropdown:({ 
+    setSelectedKeys,
+   selectedKeys,
+   confirm,
+    clearFilters,
+ }) =>
+  {return ( 
+   <React.Fragment>
+  <Input 
+   autoFocus
+   placeholder="type text"
+  value={selectedKeys[0]}
+  onChange={(e)=>{setSelectedKeys(e.target.value ? [e.target.value] :[] )}}
+  onPressEnter={() => { confirm();}}
+  onBlur={()=>{confirm();}}>
+
+  </Input> 
+  <Button onClick={()=>{confirm();}} type='primary'> Search </Button>
+  <Button onClick={() => {clearFilters()}} type="danger">Reset </Button>
+  
+  </React.Fragment>
+  );},
+filterIcon:() =>{return <SearchOutlined/>},
+onFilter: (value,record) => {
+ return record.email.toLowerCase().includes(value.toLowerCase())}  },
   {
   key: "13",
   title: "Actions",
@@ -203,6 +419,7 @@ const deleteGestionclientrequest = async (id) => {
   return (
     <div className="App">
       <header className="App-header">
+        <h1>Les clients</h1>
         {<button className="btnadd"  onClick={() => {
             setIsAdd(true);
           } }> Ajouter</button>}
@@ -364,7 +581,7 @@ const deleteGestionclientrequest = async (id) => {
     }}
   >
  </input>
- <label>Assujetti      </label>
+ <label>Assujetti</label>y
  <input
     type="radio" name='a'
     value={edditingGestionclient?.situation_fiscale}
