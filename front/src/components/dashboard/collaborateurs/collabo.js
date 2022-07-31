@@ -17,7 +17,7 @@ export const Collabo = () => {
   //declaration necessaires
   /*const refreshToken = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/refresh", {
+      const res = await axios.get("http:///refresh", {
         withCredentials: true,
       });
       console.log(res.data);
@@ -173,7 +173,7 @@ export const Collabo = () => {
   //select collaborateur
   const getCollabrequest = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/collab", {
+      const response = await axios.get("http:///collab", {
         withCredentials: true,
       });
 
@@ -210,7 +210,7 @@ export const Collabo = () => {
   };
   const deleteCollabrequest = async (id) => {
     try {
-      const deleted = await axios.post("http://localhost:5000/delete", {
+      const deleted = await axios.post("http:///delete", {
         id: id,
       });
 
@@ -239,7 +239,7 @@ export const Collabo = () => {
   const addCollab = async () => {
     try {
       const resp = await axios.post(
-        "http://localhost:5000/collab",
+        "http:///collab",
         addingCollab
       );
       if (resp.data.error) {
@@ -306,7 +306,7 @@ export const Collabo = () => {
             });
             try {
               const resp = await axios.post(
-                "http://localhost:5000/modif",
+                "http:///modif",
                 edditingCollab
               );
             } catch (error) {
