@@ -35,11 +35,14 @@ route.post("/login", (req, res) => {
                 id: result.rows[0].id 
               },
               keyaccesstoken,
-              { expiresIn: "30s" }
+              { expiresIn: "35s" }
             );
             //payload heya data nheb ena nkhazenha eli heya parametre lowel mtaa el sign
+            if (req.cookies[`${result.rows[0].id}`]) {
+              req.cookies[`${result.rows[0].id}`] = "";
+            }
 
-            res.cookie(String(result.rows[0].username), accessToken, {
+            res.cookie(String(result.rows[0].id), accessToken, {
               path: "/",
               expires: new Date(Date.now() + 1000 * 30),
               httpOnly: true,
@@ -57,14 +60,6 @@ route.post("/login", (req, res) => {
   );
 });
 
-route.post("/", (req, res) => {
-  client.query("SELECT * FROM clienttable", (err, result) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(result.rows);
-    }
-  });
-});
+
 
 module.exports = route;
