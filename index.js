@@ -22,11 +22,11 @@ const registerroute = require("./routes/RouteRegister");
 const collabroute = require("./routes/RouteCollab");
 const homeroute = require("./routes/RouteHome");
 const tribunaleroute = require("./routes/tribunale");
-const cookie = require("cookie-parser"); 
+const cookie = require("cookie-parser");
 //const verifyroute = require("./routes/verifytokenroute")
 
-    const verifyroute = require("./routes/verifytokenroute")
-    
+const verifyroute = require("./routes/verifytokenroute")
+
 const user = require("./routes/user")
 require("dotenv").config();
 
@@ -34,15 +34,21 @@ app.use(cookie());
 //middleware
 app.use(bodyParser.json());
 app.use(express.json());
-app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
+//app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 //app.use(express.static(path.join(__dirname, "front")));
-app.use(express.static("front"));
+
 if (process.env.NODE_ENV === "production") {
-  //server static content
-  app.use(express.static(path.join(__dirname, "front")));
+    //server static content
+    app.use(express.static('front/build'));
+    app.get("*", (req, res) => {
+        req.sendFile(path.resolve(__dirname, "front/build", "index.html"));
+
+    })
+
+    // app.use(express.static(path.join(__dirname, "front/public")));
 }
 console.log(__dirname);
-console.log(path.join(__dirname, "front"));
+console.log(path.join(__dirname, "front/public"));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(root1); //parametreglobale
@@ -64,5 +70,5 @@ app.use(homeroute);
 app.use(user);
 app.use(tribunaleroute);
 app.listen(PORT, () => {
-  console.log(`running server on ${PORT}`);
+    console.log(`running server on ${PORT}`);
 });
