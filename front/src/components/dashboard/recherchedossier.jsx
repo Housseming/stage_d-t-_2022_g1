@@ -285,20 +285,6 @@ const RechercheDossier = () => {
             onClick={() => {
               setIsAdd(true);
             }}>
-            Générer Facture
-          </button>
-          <button
-            className="btnadd"
-            onClick={() => {
-              setIsAdd(true);
-            }}>
-            Générer Facture Etat
-          </button>
-          <button
-            className="btnadd"
-            onClick={() => {
-              setIsAdd(true);
-            }}>
             Ajouter Dossier
           </button>
           <button
