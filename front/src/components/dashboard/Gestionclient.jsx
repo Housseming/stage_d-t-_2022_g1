@@ -1,7 +1,7 @@
 /* This example requires Tailwind CSS v2.0+ */  
 //il vaut mieux l'id a ne pas toucher
-//aleh nafs l'id felexemple // je vais supposer que chaqun a son propre id 
-//difference entre addresse désigné et addresse //lien entre catgorie et la liste ajouter
+//aleh nafs l'id felexemple // je vais supposer que chacun a son propre id
+//difference entre addresse désigné et addresse //lien entre catgorie et la listeservice ajouter
 //collaborateur et code client??? // j'aui ajouté le fax et l'email malgre j'ai pas vu dans le tableau
 import React from "react";
 import axios from "axios";
