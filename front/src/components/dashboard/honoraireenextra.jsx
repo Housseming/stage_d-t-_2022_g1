@@ -64,7 +64,7 @@ const Honoraireenextra = () => {
   };
   useEffect(() => {
     getHonorairerequest();
-  }, []);
+  }, [listeservice]);
   console.log(listeservice);
 
   //supprimer une honoraire

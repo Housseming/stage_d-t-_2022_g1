@@ -65,7 +65,7 @@ const Transport = () => {
   };
   useEffect(() => {
     getTransportrequest();
-  }, []);
+  }, [listeservice]);
   console.log(listeservice);
 
   ////////////

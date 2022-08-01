@@ -65,7 +65,7 @@ const Timbre = () => {
   };
   useEffect(() => {
     getTimbrerequest();
-  }, []);
+  }, [listeservice]);
   console.log(listeservice);
 
   //supprimer une Timbre

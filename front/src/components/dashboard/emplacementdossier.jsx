@@ -74,7 +74,7 @@ const Emplacementdossier = () => {
   };
   useEffect(() => {
     getEmplacementdossierrequest();
-  }, []);
+  }, [listeservice]);
   console.log(listeservice);
 
   //supprimer une Emplacementdossier

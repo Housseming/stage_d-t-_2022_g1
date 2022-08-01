@@ -64,7 +64,7 @@ const Parametreglobale = () => {
   };
   useEffect(() => {
     getParametrerequest();
-  }, []);
+  }, [listeservice]);
   console.log(listeservice);
 
   //supprimer une Parametre

@@ -69,7 +69,7 @@ const Recettedufinance = () => {
   };
   useEffect(() => {
     getRecettedufinancerequest();
-  }, []);
+  }, [listeservice]);
   console.log(listeservice);
 
   //supprimer une Recettedufinance

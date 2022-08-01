@@ -26,21 +26,28 @@ const cookie = require("cookie-parser");
 const verifyroute = require("./routes/verifytokenroute");
 const user = require("./routes/user");
 const logout = require("./routes/logout")
+    //const verifyroute = require("./routes/verifytokenroute")
+
+const verifyroute = require("./routes/verifytokenroute")
+
+const user = require("./routes/user")
 require("dotenv").config();
 
 app.use(cookie());
 //middleware
 app.use(bodyParser.json());
 app.use(express.json());
-app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
-//app.use(express.static(path.join(__dirname, "front")));
-app.use(express.static("front"));
+//app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
+app.use(express.static(path.join(__dirname, "front/build")));
 if (process.env.NODE_ENV === "production") {
-  //server static content
-  app.use(express.static(path.join(__dirname, "front")));
+    //server static content
+    app.use(express.static(path.join(__dirname, "front/build")));
+    //app.get("*", (req, res) => {
+    // req.sendFile(path.resolve(__dirname, "front/build", "index.html"));
+
 }
 console.log(__dirname);
-console.log(path.join(__dirname, "front"));
+console.log(path.join(__dirname, "front/build"));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(root1); //parametreglobale
@@ -62,6 +69,9 @@ app.use(homeroute);
 app.use(user);
 app.use(tribunaleroute);
 app.use(logout);
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "front/build/index.html"));
+})
 app.listen(PORT, () => {
-  console.log(`running server on ${PORT}`);
+    console.log(`running server on ${PORT}`);
 });

@@ -5,13 +5,13 @@
 //collaborateur et code client??? // j'aui ajouté le fax et l'email malgre j'ai pas vu dans le tableau
 import React from "react";
 import axios from "axios";
-import { useState, useEffect } from "react";
-import { Table, Button, Modal, Input } from "antd";
+import {useState, useEffect} from "react";
+import {Table, Button, Modal, Input} from "antd";
 import "antd/dist/antd.min.css";
-import { AiFillEdit } from "react-icons/ai";
-import { MdDeleteForever } from "react-icons/md";
-import { toast } from "react-toastify";
-import { SearchOutlined } from "@ant-design/icons";
+import {AiFillEdit} from "react-icons/ai";
+import {MdDeleteForever} from "react-icons/md";
+import {toast} from "react-toastify";
+import {SearchOutlined} from "@ant-design/icons";
 
 const Gestionclient = () => {
   const [listeservice, setlisteservice] = useState([]);
@@ -33,7 +33,7 @@ const Gestionclient = () => {
   });
 
   const columns = [
-    { key: "1", title: "id", dataIndex: "id" },
+    {key: "1", title: "id", dataIndex: "id"},
     {
       key: "2",
       title: "raison",
@@ -52,21 +52,19 @@ const Gestionclient = () => {
               value={selectedKeys[0]}
               onChange={(e) => {
                 setSelectedKeys(e.target.value ? [e.target.value] : []);
-                confirm({ closeDropdown: false });
+                confirm({closeDropdown: false});
               }}
               onPressEnter={() => {
                 confirm();
               }}
               onBlur={() => {
                 confirm();
-              }}
-            ></Input>
+              }}></Input>
             <Button
               onClick={() => {
                 confirm();
               }}
-              type="primary"
-            >
+              type="primary">
               {" "}
               Search{" "}
             </Button>
@@ -74,8 +72,7 @@ const Gestionclient = () => {
               onClick={() => {
                 clearFilters();
               }}
-              type="danger"
-            >
+              type="danger">
               Reset{" "}
             </Button>
           </React.Fragment>
@@ -112,14 +109,12 @@ const Gestionclient = () => {
               }}
               onBlur={() => {
                 confirm();
-              }}
-            ></Input>
+              }}></Input>
             <Button
               onClick={() => {
                 confirm();
               }}
-              type="primary"
-            >
+              type="primary">
               {" "}
               Search{" "}
             </Button>
@@ -127,8 +122,7 @@ const Gestionclient = () => {
               onClick={() => {
                 clearFilters();
               }}
-              type="danger"
-            >
+              type="danger">
               Reset{" "}
             </Button>
           </React.Fragment>
@@ -444,7 +438,7 @@ onFilter: (value,record) => {
   //modifier une Gestionclient
   const editGestionclient = (record) => {
     setIsEdit(true);
-    setEdditingGestionclient({ ...record }); //copie mel record
+    setEdditingGestionclient({...record}); //copie mel record
   };
   const resetEditing = () => {
     setIsEdit(false);
@@ -499,14 +493,21 @@ onFilter: (value,record) => {
     <div className="App">
       <header className="App-header">
         <h1>Les clients</h1>
-        {<button className="btnadd"  onClick={() => {
-            setIsAdd(true);
-          } }> Ajouter</button>}
+        {
+          <button
+            className="btnadd"
+            onClick={() => {
+              setIsAdd(true);
+            }}>
+            {" "}
+            Ajouter
+          </button>
+        }
         <div classname="tab">
           <Table
             columns={columns}
             dataSource={listeservice}
-            style={{ with: 15 }}
+            style={{with: 15}}
             bordered={true}
           />
         </div>
@@ -545,8 +546,7 @@ onFilter: (value,record) => {
             ); // a ne pas toucher l'id
             resetEditing();
             toast.success("Gestionclient modifié avec succée");
-          }}
-        >
+          }}>
           <Input
             placeholder="id"
             value={edditingGestionclient?.id}
@@ -555,8 +555,7 @@ onFilter: (value,record) => {
                 ...edditingGestionclient,
                 id: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder=""
             value={edditingGestionclient?.raison}
@@ -565,8 +564,7 @@ onFilter: (value,record) => {
                 ...edditingGestionclient,
                 raison: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder=""
             value={edditingGestionclient?.matricule}
@@ -575,8 +573,7 @@ onFilter: (value,record) => {
                 ...edditingGestionclient,
                 matricule: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder=""
             value={edditingGestionclient?.ville}
@@ -585,8 +582,7 @@ onFilter: (value,record) => {
                 ...edditingGestionclient,
                 ville: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder=""
             value={edditingGestionclient?.rue}
@@ -595,8 +591,7 @@ onFilter: (value,record) => {
                 ...edditingGestionclient,
                 rue: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder=""
             value={edditingGestionclient?.num}
@@ -605,8 +600,7 @@ onFilter: (value,record) => {
                 ...edditingGestionclient,
                 num: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder=""
             value={edditingGestionclient?.code_postale}
@@ -615,8 +609,7 @@ onFilter: (value,record) => {
                 ...edditingGestionclient,
                 code_postale: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder=""
             value={edditingGestionclient?.activité}
@@ -625,8 +618,7 @@ onFilter: (value,record) => {
                 ...edditingGestionclient,
                 activité: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
 
           <input
             type="radio"
@@ -637,8 +629,7 @@ onFilter: (value,record) => {
                 ...edditingGestionclient,
                 situation_fiscale: "non Assujetti",
               });
-            }}
-          ></input>
+            }}></input>
           <label>Non Assujetti </label>
           <input
             type="radio"
@@ -649,8 +640,7 @@ onFilter: (value,record) => {
                 ...edditingGestionclient,
                 situation_fiscale: "Assujetti",
               });
-            }}
-          ></input>
+            }}></input>
           <label>Assujetti </label>
           <input
             type="radio"
@@ -661,8 +651,7 @@ onFilter: (value,record) => {
                 ...edditingGestionclient,
                 situation_fiscale: "exonoré",
               });
-            }}
-          ></input>
+            }}></input>
           <label>exonoré</label>
           <Input
             placeholder="categorie"
@@ -672,8 +661,7 @@ onFilter: (value,record) => {
                 ...edditingGestionclient,
                 categorie: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder="fax"
             value={edditingGestionclient?.fax}
@@ -682,8 +670,7 @@ onFilter: (value,record) => {
                 ...edditingGestionclient,
                 fax: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder=""
             value={edditingGestionclient?.email}
@@ -692,80 +679,68 @@ onFilter: (value,record) => {
                 ...edditingGestionclient,
                 email: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
         </Modal>
-
- <input
-    type="radio" name='a'
-    value={edditingGestionclient?.situation_fiscale}
-    onChange={(e) => {
-      setEdditingGestionclient({
-        ...edditingGestionclient,
-        situation_fiscale: 'non Assujetti',
-      });
-    }}
-  >
- </input>
- <label>Non Assujetti          </label>
- <input
-    type="radio" name='a'
-    value={edditingGestionclient?.situation_fiscale}
-    onChange={(e) => {
-      setEdditingGestionclient({
-        ...edditingGestionclient,
-        situation_fiscale: 'Assujetti',
-      });
-    }}
-  >
- </input>
- <label>Assujetti</label>y
- <input
-    type="radio" name='a'
-    value={edditingGestionclient?.situation_fiscale}
-    onChange={(e) => {
-      setEdditingGestionclient({
-        ...edditingGestionclient,
-        situation_fiscale:'exonoré',
-      });
-    }}
-  >
- </input>
- <label>exonoré</label>
- <Input
-    placeholder="categorie"
-    value={edditingGestionclient?.categorie}
-    onChange={(e) => {
-      setEdditingGestionclient({
-        ...edditingGestionclient,
-        categorie: e.target.value,
-      });
-    }}
-  >
- </Input> 
- <Input
-    placeholder="fax"
-    value={edditingGestionclient?.fax}
-    onChange={(e) => {
-      setEdditingGestionclient({
-        ...edditingGestionclient,
-        fax: e.target.value,
-      });
-    }}
-  >
- </Input>
- <Input
-    placeholder=""
-    value={edditingGestionclient?.email}
-    onChange={(e) => {
-      setEdditingGestionclient({
-        ...edditingGestionclient,
-        email: e.target.value,
-      });
-    }}
-  >
- </Input>
-
+        <input
+          type="radio"
+          name="a"
+          value={edditingGestionclient?.situation_fiscale}
+          onChange={(e) => {
+            setEdditingGestionclient({
+              ...edditingGestionclient,
+              situation_fiscale: "non Assujetti",
+            });
+          }}></input>
+        <label>Non Assujetti </label>
+        <input
+          type="radio"
+          name="a"
+          value={edditingGestionclient?.situation_fiscale}
+          onChange={(e) => {
+            setEdditingGestionclient({
+              ...edditingGestionclient,
+              situation_fiscale: "Assujetti",
+            });
+          }}></input>
+        <label>Assujetti</label>y
+        <input
+          type="radio"
+          name="a"
+          value={edditingGestionclient?.situation_fiscale}
+          onChange={(e) => {
+            setEdditingGestionclient({
+              ...edditingGestionclient,
+              situation_fiscale: "exonoré",
+            });
+          }}></input>
+        <label>exonoré</label>
+        <Input
+          placeholder="categorie"
+          value={edditingGestionclient?.categorie}
+          onChange={(e) => {
+            setEdditingGestionclient({
+              ...edditingGestionclient,
+              categorie: e.target.value,
+            });
+          }}></Input>
+        <Input
+          placeholder="fax"
+          value={edditingGestionclient?.fax}
+          onChange={(e) => {
+            setEdditingGestionclient({
+              ...edditingGestionclient,
+              fax: e.target.value,
+            });
+          }}></Input>
+        <Input
+          placeholder=""
+          value={edditingGestionclient?.email}
+          onChange={(e) => {
+            setEdditingGestionclient({
+              ...edditingGestionclient,
+              email: e.target.value,
+            });
+          }}></Input>
         <Modal
           title="ajouter "
           visible={isAdd}
@@ -778,8 +753,7 @@ onFilter: (value,record) => {
             addGestionclient();
             setIsAdd(false);
             toast.success("client_ajouté avec succès");
-          }}
-        >
+          }}>
           <Input
             placeholder="id"
             value={addingGestionclient.id}
@@ -788,8 +762,7 @@ onFilter: (value,record) => {
                 ...addingGestionclient,
                 id: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder="raison"
             value={addingGestionclient.raison}
@@ -798,8 +771,7 @@ onFilter: (value,record) => {
                 ...addingGestionclient,
                 raison: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder="matricule"
             value={addingGestionclient.matricule}
@@ -808,8 +780,7 @@ onFilter: (value,record) => {
                 ...addingGestionclient,
                 matricule: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder="ville"
             value={addingGestionclient.ville}
@@ -818,8 +789,7 @@ onFilter: (value,record) => {
                 ...addingGestionclient,
                 ville: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder="rue"
             value={addingGestionclient.rue}
@@ -828,8 +798,7 @@ onFilter: (value,record) => {
                 ...addingGestionclient,
                 rue: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder="num"
             value={addingGestionclient.num}
@@ -838,8 +807,7 @@ onFilter: (value,record) => {
                 ...addingGestionclient,
                 num: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder="code_postale"
             value={addingGestionclient.code_postale}
@@ -848,8 +816,7 @@ onFilter: (value,record) => {
                 ...addingGestionclient,
                 code_postale: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder="activité"
             value={addingGestionclient.activité}
@@ -858,8 +825,7 @@ onFilter: (value,record) => {
                 ...addingGestionclient,
                 activité: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <div ClassName="situation">
             <p>Situation_fiscale</p>
             <input
@@ -872,8 +838,7 @@ onFilter: (value,record) => {
                   ...addingGestionclient,
                   situation_fiscale: "Non Assujetti",
                 });
-              }}
-            ></input>
+              }}></input>
             <label>Non Assujetti</label>
             <input
               type="radio"
@@ -885,8 +850,7 @@ onFilter: (value,record) => {
                   ...addingGestionclient,
                   situation_fiscale: "Asujetti",
                 });
-              }}
-            ></input>
+              }}></input>
             <label>Asujetti</label>
             <input
               type="radio"
@@ -898,8 +862,7 @@ onFilter: (value,record) => {
                   ...addingGestionclient,
                   situation_fiscale: "Exonoré",
                 });
-              }}
-            ></input>
+              }}></input>
             <label>Exonoré</label>
           </div>
           <Input
@@ -910,8 +873,7 @@ onFilter: (value,record) => {
                 ...addingGestionclient,
                 categorie: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder="fax"
             value={addingGestionclient.fax}
@@ -920,8 +882,7 @@ onFilter: (value,record) => {
                 ...addingGestionclient,
                 fax: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder="email"
             value={addingGestionclient.email}
@@ -930,8 +891,7 @@ onFilter: (value,record) => {
                 ...addingGestionclient,
                 email: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
         </Modal>
       </header>
     </div>
