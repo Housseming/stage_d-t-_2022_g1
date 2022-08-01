@@ -3,7 +3,7 @@ const route = express.Router();
 const client = require("../basededonnee");
 const {
   refreshToken,
-  validateToken,
+  validateToken,getUser
 } = require("../middlewares/AuthMiddleWare");
-route.get("/refresh", refreshToken, validateToken);
+route.get("/refresh", refreshToken, validateToken,getUser);
 module.exports = route;

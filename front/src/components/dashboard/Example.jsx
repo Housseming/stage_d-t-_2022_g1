@@ -523,9 +523,9 @@ export default function Example() {
 
           <div className="flex items-center md:ml-12">
             <a
-              href="/login"
+              href="/Home"
               className="text-base font-medium text-gray-500 hover:text-gray-900">
-              log out
+              Se déconnecter
             </a>
             <a
               href="/register"

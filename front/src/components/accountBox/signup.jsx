@@ -58,6 +58,9 @@ export function Signup(props) {
         if (resp.data.error) {
           toast.warning("ce compte exite deja !");
         }
+        else{
+          Switchtologin();
+        }
       } catch (error) {
         console.log(error);
       }
