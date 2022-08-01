@@ -173,7 +173,7 @@ export const Collabo = () => {
   //select collaborateur
   const getCollabrequest = async () => {
     try {
-      const response = await axios.get("http:///collab", {
+      const response = await axios.get("/collab", {
         withCredentials: true,
       });
 
@@ -208,7 +208,7 @@ export const Collabo = () => {
   };
   const deleteCollabrequest = async (id) => {
     try {
-      const deleted = await axios.post("http:///delete", {
+      const deleted = await axios.post("/delete", {
         id: id,
       });
 
@@ -237,7 +237,7 @@ export const Collabo = () => {
   const addCollab = async () => {
     try {
       const resp = await axios.post(
-        "http:///collab",
+        "/collab",
         addingCollab
       );
       if (resp.data.error) {
@@ -304,7 +304,7 @@ export const Collabo = () => {
             });
             try {
               const resp = await axios.post(
-                "http:///modif",
+                "/modif",
                 edditingCollab
               );
             } catch (error) {
