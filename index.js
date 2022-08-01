@@ -25,6 +25,7 @@ const tribunaleroute = require("./routes/tribunale");
 const cookie = require("cookie-parser");
 const verifyroute = require("./routes/verifytokenroute");
 const user = require("./routes/user");
+const logout = require("./routes/logout")
 require("dotenv").config();
 
 app.use(cookie());
@@ -60,6 +61,7 @@ app.use(collabroute);
 app.use(homeroute);
 app.use(user);
 app.use(tribunaleroute);
+app.use(logout);
 app.listen(PORT, () => {
   console.log(`running server on ${PORT}`);
 });

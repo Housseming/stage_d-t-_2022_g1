@@ -19,11 +19,13 @@ import Utilisateur from "./components/dashboard/utilisateur";
 import Tribunale from "./components/dashboard/tribinaux_administrations/tribunale";
 import Welcome from "./components/welcome/welcome";
 import RechercheDossier from "./components/dashboard/recherchedossier";
+import Home from "./components/welcome/Home";
 import {Collabo} from "./components/dashboard/collaborateurs/collabo";
 function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/Home" element={<Home></Home>}></Route>
         <Route path="/login" element={<AccountBox />} />
         <Route path="/register" element={<RegisterBox />} />
         <Route path="/" element={<Sharedlayout />}>

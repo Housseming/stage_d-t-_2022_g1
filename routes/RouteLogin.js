@@ -37,10 +37,12 @@ route.post("/login", (req, res) => {
               keyaccesstoken,
               { expiresIn: "35s" }
             );
+            console.log("token generated",accessToken);
             //payload heya data nheb ena nkhazenha eli heya parametre lowel mtaa el sign
-            if (req.cookies[`${result.rows[0].id}`]) {
+            if (req.cookies[`${result.rows[0].id}`]) {//check if the cookie amready exists then generate a new one
               req.cookies[`${result.rows[0].id}`] = "";
             }
+            
 
             res.cookie(String(result.rows[0].id), accessToken, {
               path: "/",
