@@ -1,44 +1,10 @@
-.ant-table {
-  overflow-x: auto !important;
-  width: 800px;
-  height: 700px;
-}
 
-@media only screen and (max-width: 800px) {
-  .ant-table {
-    overflow-x: auto !important;
+.tabtribunale{
+
+  overflow-x: auto !important;
     width: 400px !important;
     height: 400px !important;
-  }
 }
-
-.ant-table td {
-  border: 0.5px solid #000000 !important;
-}
-
-.ant-table-thead > tr > th {
-  background: #6646e5 !important;
-  border: 0.5px solid #000000 !important;
-  color: white !important;
-}
-
-.btnadd {
-margin-top: 2px;
-  margin-bottom: 40px;
-  color: rgb(255, 255, 255);
-  background-color: #6646e5;
-  width: 200px;
-  height: 38px;
-  border-radius: 10px;
-  border: 3px solid #6646e5;
-  font-size: 15px;
-}
-
-.btnadd:hover {
-  background-color: white;
-  color: rgb(0, 0, 0);
-}
-
 .addingtrib{
   color:#6646e5;
   width: 20px;
@@ -54,4 +20,19 @@ margin-top: 2px;
   margin-left:20px;
   margin-top: 30px;
  
+}
+.btnaddservice{
+  margin-top: 0px;
+  margin-bottom: 20px;
+  color: rgb(255, 255, 255);
+  background-color: #6646e5;
+  width: 200px;
+  height: 38px;
+  border-radius: 10px;
+  border: 3px solid #6646e5;
+  font-size: 15px;
+}
+.btnaddservice:hover {
+  background-color: white;
+  color: rgb(0, 0, 0);
 }
