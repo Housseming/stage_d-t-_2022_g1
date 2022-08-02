@@ -20,7 +20,8 @@ import Tribunale from "./components/dashboard/tribinaux_administrations/tribunal
 import Welcome from "./components/welcome/welcome";
 import RechercheDossier from "./components/dashboard/recherchedossier";
 import Home from "./components/welcome/Home";
-import {Collabo} from "./components/dashboard/collaborateurs/collabo";
+import { Collabo } from "./components/dashboard/collaborateurs/collabo";
+import CreationDossier from "./components/dashboard/creationdossier";
 function App() {
   return (
     <BrowserRouter>
@@ -42,7 +43,8 @@ function App() {
           <Route path="collab" element={<Collabo></Collabo>}></Route>
           <Route path="Tribunale" element={<Tribunale />} />
           <Route path="welcome" element={<Welcome></Welcome>}></Route>
-          <Route path="recherchedossier" element={<RechercheDossier/>}></Route>
+          <Route path="recherchedossier" element={<RechercheDossier />}></Route>
+          <Route path="creationdossier" element={<CreationDossier/>}></Route>
 
           {/*<Route
             path="/tribunale"

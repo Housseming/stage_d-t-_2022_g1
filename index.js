@@ -27,10 +27,6 @@ const verifyroute = require("./routes/verifytokenroute");
 const user = require("./routes/user");
 const logout = require("./routes/logout")
     //const verifyroute = require("./routes/verifytokenroute")
-
-const verifyroute = require("./routes/verifytokenroute")
-
-const user = require("./routes/user")
 require("dotenv").config();
 
 app.use(cookie());

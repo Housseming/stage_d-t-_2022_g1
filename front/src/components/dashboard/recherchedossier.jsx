@@ -6,7 +6,7 @@ import "antd/dist/antd.min.css";
 import {AiFillEdit} from "react-icons/ai";
 import {MdDeleteForever} from "react-icons/md";
 import { toast } from "react-toastify";
-import {SearchOutlined} from "@ant-design/icons";
+import { SearchOutlined } from "@ant-design/icons";
 const RechercheDossier = () => {
   //declaration necessaires
   const [liste, setListe] = useState([]);
@@ -278,15 +278,16 @@ const RechercheDossier = () => {
             onClick={() => {
               setIsAdd(true);
             }}>
-            Reclasser Dossier
+            Ajouter Tache
           </button>
           <button
             className="btnadd"
             onClick={() => {
               setIsAdd(true);
             }}>
-            Ajouter Dossier
+            Reclasser Dossier
           </button>
+
           <button
             className="btnadd"
             onClick={() => {
@@ -299,7 +300,7 @@ const RechercheDossier = () => {
           <Table
             columns={column}
             dataSource={liste}
-            size="medium"
+            size="large"
             bordered={true}></Table>
         </div>
 
