@@ -1,146 +1,173 @@
-                .container {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    border: solid 1px;
-                    border-radius: 10px;
-                    width: 100%;
-                    padding: 0;
-                }
-                
-                .cascader1 {
-                    width: 250px;
-                }
-                
-                .input {
-                    width: 180px;
-                    margin-left: 10%;
-                    margin-right: 100px;
-                }
-                
-                .inputraison {
-                    width: 250px;
-                    margin-left: 10%;
-                }
-                
-                .radioet {
-                    border: solid 1px;
-                    border-color: rgba(107, 107, 243, 0.66);
-                    padding: 5px;
-                }
-                
-                .boutonet {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center !important;
-                }
-                
-                .bouton {
-                    width: 500px !important;
-                }
-                /*.boutonvalid {
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: solid 1px;
+  border-radius: 10px;
+  width: 100%;
+  padding: 0;
+}
+
+.cascader1 {
+  width: 250px;
+}
+
+.input {
+  width: 180px;
+  margin-left: 10%;
+  margin-right: 100px;
+}
+
+.inputraison {
+  width: 250px;
+  margin-left: 10%;
+}
+
+.radioet {
+  border: solid 1px;
+  border-color: rgba(107, 107, 243, 0.66);
+  padding: 5px;
+}
+
+.boutonet {
+  display: flex;
+  flex-direction: column;
+  align-items: center !important;
+}
+
+.bouton {
+  width: 500px !important;
+}
+/*.boutonvalid {
                     display: flex;
                     flex-direction: column;
                     align-items: center !important;
                     width: 500px !important;
                     margin-bottom: 5000px !important;
                 }*/
-                
-                .inputannee {
-                    width: 100px;
-                    margin-right: 150px !important;
-                }
-                
-                .mission {
-                    width: 700px !important;
-                }
 
-.tablediv{
-    margin: 0 auto;
-    margin-top: 60px;
-
-
+.inputannee {
+  width: 100px;
+  margin-right: 150px !important;
 }
-.tachetable{
-    
-      overflow-x: auto !important;
-      overflow-y: auto;
-        width: 1500px;
-        height: 1500px;
-       margin: 0 auto;
-    margin-top: 60px;
-    
+
+.mission {
+  width: 700px !important;
+}
+
+.tablediv {
+  margin: 0 auto;
+  margin-top: 60px;
+}
+.tachetable {
+  width: 1500px;
+  height: 500px;
+  margin: 0 auto;
+  margin-top: 60px;
 }
 
 @media only screen and (max-width: 900px) {
-        .tachetable{
-            margin:0 auto !important;
-            overflow-x: auto !important;
-        
-            width: 400px !important;
-            height: 400px !important;
-             margin-top: 60px;
-        }
-    }
-.formaddtache{
-    display: flex;
-    flex-direction: column;
+  .tachetable {
+    margin: 0 auto !important;
+    overflow-x: scroll !important;
+
+    width: 400px !important;
+    height: 400px !important;
+    margin-top: 60px;
+  }
 }
-.reglementdiv1{
-    display: grid;
+.formaddtache {
+  display: flex;
+  flex-direction: column;
+}
+.reglementdiv1 {
+  display: grid;
   grid-template-columns: repeat(2, 3fr);
   grid-gap: 10px;
   grid-auto-rows: minmax(40px, auto);
   margin-top: 60px;
-
-
 }
-.reglementdiv2{
-      margin-top:40px;
-    display: grid;
+.reglementdiv2 {
+  margin-top: 40px;
+  display: grid;
   grid-template-columns: repeat(2, 3fr);
   grid-gap: 10px;
   grid-auto-rows: minmax(70px, auto);
-  
-
 }
-.reglementdiv3{
-      margin-top:40px;
-    display: grid;
+.reglementdiv3 {
+  margin-top: 10px;
+  display: grid;
   grid-template-columns: repeat(2, 3fr);
   grid-gap: 10px;
   grid-auto-rows: minmax(70px, auto);
-  
-
 }
-.inputreg{
-    width:25rem;
+.inputreg {
+  width: 20rem;
 }
 @media only screen and (max-width: 900px) {
-        .reglementdiv1 {
-            display: grid;
-  grid-template-columns: repeat(1, 3fr);
-  grid-gap: 10px;
-  grid-auto-rows: minmax(100px, auto);
-            
-        }
-        .reglementdiv2 {
-            display: grid;
-  grid-template-columns: repeat(1, 3fr);
-  grid-gap: 10px;
-  grid-auto-rows: minmax(40px, auto);
-      margin-top:15px;
-
-            
-        }
-        
-    }
-.boutonreg{
-    width: 25rem!important;
+  .reglementdiv1 {
+    display: grid;
+    grid-template-columns: repeat(1, 3fr);
+    grid-gap: 10px;
+    grid-auto-rows: minmax(100px, auto);
+  }
+  .reglementdiv2 {
+    display: grid;
+    grid-template-columns: repeat(1, 3fr);
+    grid-gap: 10px;
+    grid-auto-rows: minmax(40px, auto);
+    margin-top: 15px;
+  }
+  .reglementdiv3 {
+    display: grid;
+    grid-template-columns: repeat(1, 3fr);
+    grid-gap: 10px;
+    grid-auto-rows: minmax(40px, auto);
+    margin-top: 70px;
+  }
 }
-.containerreglement{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    
+.boutonreg {
+  width: 20rem !important;
+}
+.containerreglement {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 10px;
+  border: 1px black solid;
+}
+.divcollab1 {
+  display: grid;
+  grid-template-columns: repeat(2, 3fr);
+  grid-gap: 15px;
+  grid-auto-rows: minmax(70px, auto);
+  border: 1px rgba(0, 0, 0, 0) solid;
+  padding: 3%;
+}
+@media only screen and (max-width: 900px) {
+  .divcollab1 {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: repeat(1, 3fr);
+    grid-gap: 15px;
+    grid-auto-rows: minmax(70px, auto);
+  }
+}
+.inputcoll {
+  width: 75%;
+}
+.divcollab2 {
+  display: grid;
+
+  grid-template-columns: repeat(2, 3fr);
+  grid-gap: 15px;
+  grid-auto-rows: minmax(70px, auto);
+  align-items: center;
+  border: 1px rgba(0, 0, 0, 0) solid;
+  padding: 3%;
+}
+
+
+legend{
+    text-align: center;
 }

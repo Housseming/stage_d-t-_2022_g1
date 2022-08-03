@@ -52,7 +52,7 @@ function Taches() {
     { key: "11", title: "Résolu", dataIndex: "resolu" },
   ];
   return (
-    <>
+    <header className="App-header">
       <div className="boutonet">
         <Button
           className="bouton"
@@ -71,7 +71,7 @@ function Taches() {
       </div>
       <div className="tablediv">
         <Table
-          className="tachetable"
+          
           columns={column}
           dataSource={liste}
           //scroll={{ x:10}}
@@ -83,6 +83,8 @@ function Taches() {
               setPageSize(pageSize);
             },
           }}
+          style={{ display: "flex", flex: 1 }}
+          scroll={{ x: "max-content" }}
           size="middle"
           bordered={true}
         ></Table>
@@ -149,7 +151,7 @@ function Taches() {
           <DatePicker onChange={onChange} placeholder="date de déchéance" />
         </div>
       </Modal>
-    </>
+    </header>
   );
 }
 

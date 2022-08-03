@@ -277,7 +277,7 @@ export const Collabo = () => {
           }}
           size="middle"
           bordered={true}
-          style={{ display: "flex", flex: 1 }}
+          
           scroll={{ x: "max-content" }}
         ></Table>
 
