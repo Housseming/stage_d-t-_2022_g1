@@ -1,6 +1,7 @@
 import React , {useState} from 'react'
 import { Tabs,Radio } from 'antd';
 import ClientDemandeur from '../components dossier/clientDemandeur';
+import DonneeDossier from '../components dossier/donneedossier';
 const { TabPane } = Tabs;
 export default function CreationDossier() {
   return (
@@ -10,9 +11,7 @@ export default function CreationDossier() {
          <ClientDemandeur/>
         </TabPane>
         <TabPane tab="Données Dossier" key="2">
-          <p>Content of Tab Pane 2</p>
-          <p>Content of Tab Pane 2</p>
-          <p>Content of Tab Pane 2</p>
+          <DonneeDossier/>
         </TabPane>
         <TabPane tab="Tâche(s)" key="3">
           <p>Content of Tab Pane 3</p>

@@ -1,7 +1,8 @@
 import {Cascader, Input, Radio,Button} from "antd";
 import React, {useState} from "react";
 import "./dossier.css";
-import {Marginer} from "../marginer/marginfile";
+import { Marginer } from "../marginer/marginfile";
+import TabClient from "./tabclientdemandeur";
 const options = [
   {
     value: "zhejiang",
@@ -153,6 +154,11 @@ const ClientDemandeur = () => {
           </Button>
         </div>
         <Marginer direction="vertical" margin={20} />
+        <TabClient />
+        {/*<Button className="boutonvalid" type="primary" block>
+          {" "}
+          Valider Dossier
+            </Button>*/}
       </div>
     );
 };

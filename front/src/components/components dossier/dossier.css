@@ -13,7 +13,7 @@
                 }
                 
                 .input {
-                    width: 210px;
+                    width: 180px;
                     margin-left: 10%;
                     margin-right: 100px;
                 }
@@ -37,4 +37,20 @@
                 
                 .bouton {
                     width: 500px !important;
+                }
+                /*.boutonvalid {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center !important;
+                    width: 500px !important;
+                    margin-bottom: 5000px !important;
+                }*/
+                
+                .inputannee {
+                    width: 100px;
+                    margin-right: 150px !important;
+                }
+                
+                .mission {
+                    width: 700px !important;
                 }
