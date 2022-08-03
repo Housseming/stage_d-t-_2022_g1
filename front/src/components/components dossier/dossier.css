@@ -54,3 +54,28 @@
                 .mission {
                     width: 700px !important;
                 }
+
+.tablediv{
+    margin: 0 auto;
+    margin-top: 60px;
+
+
+}
+.tachetable{
+    
+    width: 900px!important;
+}
+
+@media only screen and (max-width: 900px) {
+        .tachetable{
+            margin:0 auto !important;
+            overflow-x: auto !important;
+        
+            width: 400px !important;
+            height: 200px !important;
+        }
+    }
+.formaddtache{
+    display: flex;
+    flex-direction: column;
+}
