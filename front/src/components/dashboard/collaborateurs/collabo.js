@@ -17,7 +17,7 @@ export const Collabo = () => {
   //declaration necessaires
   /*const refreshToken = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/refresh", {
+      const res = await axios.get("http:///refresh", {
         withCredentials: true,
       });
       console.log(res.data);

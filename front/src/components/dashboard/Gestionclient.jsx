@@ -1,17 +1,17 @@
 /* This example requires Tailwind CSS v2.0+ */
 //il vaut mieux l'id a ne pas toucher
-//aleh nafs l'id felexemple // je vais supposer que chaqun a son propre id
+//aleh nafs l'id felexemple // je vais supposer que chacun a son propre id
 //difference entre addresse désigné et addresse //lien entre catgorie et la listeservice ajouter
 //collaborateur et code client??? // j'aui ajouté le fax et l'email malgre j'ai pas vu dans le tableau
 import React from "react";
 import axios from "axios";
-import { useState, useEffect } from "react";
-import { Table, Button, Modal, Input } from "antd";
+import {useState, useEffect} from "react";
+import {Table, Button, Modal, Input} from "antd";
 import "antd/dist/antd.min.css";
-import { AiFillEdit } from "react-icons/ai";
-import { MdDeleteForever } from "react-icons/md";
-import { toast } from "react-toastify";
-import { SearchOutlined } from "@ant-design/icons";
+import {AiFillEdit} from "react-icons/ai";
+import {MdDeleteForever} from "react-icons/md";
+import {toast} from "react-toastify";
+import {SearchOutlined} from "@ant-design/icons";
 
 const Gestionclient = () => {
   const [listeservice, setlisteservice] = useState([]);
@@ -33,7 +33,7 @@ const Gestionclient = () => {
   });
 
   const columns = [
-    { key: "1", title: "id", dataIndex: "id" },
+    {key: "1", title: "id", dataIndex: "id"},
     {
       key: "2",
       title: "raison",
@@ -52,21 +52,19 @@ const Gestionclient = () => {
               value={selectedKeys[0]}
               onChange={(e) => {
                 setSelectedKeys(e.target.value ? [e.target.value] : []);
-                confirm({ closeDropdown: false });
+                confirm({closeDropdown: false});
               }}
               onPressEnter={() => {
                 confirm();
               }}
               onBlur={() => {
                 confirm();
-              }}
-            ></Input>
+              }}></Input>
             <Button
               onClick={() => {
                 confirm();
               }}
-              type="primary"
-            >
+              type="primary">
               {" "}
               Search{" "}
             </Button>
@@ -74,8 +72,7 @@ const Gestionclient = () => {
               onClick={() => {
                 clearFilters();
               }}
-              type="danger"
-            >
+              type="danger">
               Reset{" "}
             </Button>
           </React.Fragment>
@@ -112,14 +109,12 @@ const Gestionclient = () => {
               }}
               onBlur={() => {
                 confirm();
-              }}
-            ></Input>
+              }}></Input>
             <Button
               onClick={() => {
                 confirm();
               }}
-              type="primary"
-            >
+              type="primary">
               {" "}
               Search{" "}
             </Button>
@@ -127,8 +122,7 @@ const Gestionclient = () => {
               onClick={() => {
                 clearFilters();
               }}
-              type="danger"
-            >
+              type="danger">
               Reset{" "}
             </Button>
           </React.Fragment>
@@ -141,49 +135,264 @@ const Gestionclient = () => {
         return record.matricule.toLowerCase().includes(value.toLowerCase());
       },
     },
-    { key: "4", title: "ville", dataIndex: "ville" },
-    { key: "5", title: "rue", dataIndex: "rue" },
-    { key: "6", title: "num", dataIndex: "num" },
-    { key: "7", title: "code_postale", dataIndex: "code_postale" },
-    { key: "8", title: "activité", dataIndex: "activité" },
-    { key: "9", title: "situation_fiscale", dataIndex: "situation_fiscale" },
-    { key: "10", title: "categorie", dataIndex: "categorie" },
-    { key: "11", title: "fax", dataIndex: "fax" },
-    { key: "12", title: "email", dataIndex: "email" },
-    {
-      key: "13",
-      title: "Actions",
-      render: (record) => {
-        return (
-          <div className="addicons">
-            <div className="divedit">
-              <AiFillEdit
-                className="edit"
-                onClick={() => {
-                  editGestionclient(record);
-                }}
-              ></AiFillEdit>
-              <p>modifier</p>
-            </div>
-            {
-              <div className="divdelete">
-                <MdDeleteForever
-                  className="delete"
-                  onClick={() => {
-                    deleteGestionclient(record);
-                  }}
-                ></MdDeleteForever>
+  { key: "4", title: "ville", dataIndex: "ville",filterDropdown:({ 
+    setSelectedKeys,
+   selectedKeys,
+   confirm,
+    clearFilters,
+ }) =>
+  {return ( 
+   <React.Fragment>
+  <Input 
+   autoFocus
+   placeholder="type text"
+  value={selectedKeys[0]}
+  onChange={(e)=>{setSelectedKeys(e.target.value ? [e.target.value] :[] )}}
+  onPressEnter={() => { confirm();}}
+  onBlur={()=>{confirm();}}>
 
-                <p>supprimer</p>
-              </div>
-            }
-          </div>
-        );
-      },
-    },
-  ];
+  </Input> 
+  <Button onClick={()=>{confirm();}} type='primary'> Search </Button>
+  <Button onClick={() => {clearFilters()}} type="danger">Reset </Button>
+  
+  </React.Fragment>
+  );},
+filterIcon:() =>{return <SearchOutlined/>},
+onFilter: (value,record) => {
+ return record.ville.toLowerCase().includes(value.toLowerCase())}  },
+  { key: "5", title: "rue", dataIndex: "rue",filterDropdown:({ 
+    setSelectedKeys,
+   selectedKeys,
+   confirm,
+    clearFilters,
+ }) =>
+  {return ( 
+   <React.Fragment>
+  <Input 
+   autoFocus
+   placeholder="type text"
+  value={selectedKeys[0]}
+  onChange={(e)=>{setSelectedKeys(e.target.value ? [e.target.value] :[] )}}
+  onPressEnter={() => { confirm();}}
+  onBlur={()=>{confirm();}}>
 
-  //select Gestionclient
+  </Input> 
+  <Button onClick={()=>{confirm();}} type='primary'> Search </Button>
+  <Button onClick={() => {clearFilters()}} type="danger">Reset </Button>
+  
+  </React.Fragment>
+  );},
+filterIcon:() =>{return <SearchOutlined/>},
+onFilter: (value,record) => {
+ return record.rue.toLowerCase().includes(value.toLowerCase())}  },
+  { key: "6", title: "num", dataIndex: "num",filterDropdown:({ 
+    setSelectedKeys,
+   selectedKeys,
+   confirm,
+    clearFilters,
+ }) =>
+  {return ( 
+   <React.Fragment>
+  <Input 
+   autoFocus
+   placeholder="type text"
+  value={selectedKeys[0]}
+  onChange={(e)=>{setSelectedKeys(e.target.value ? [e.target.value] :[] )}}
+  onPressEnter={() => { confirm();}}
+  onBlur={()=>{confirm();}}>
+
+  </Input> 
+  <Button onClick={()=>{confirm();}} type='primary'> Search </Button>
+  <Button onClick={() => {clearFilters()}} type="danger">Reset </Button>
+  
+  </React.Fragment>
+  );},
+filterIcon:() =>{return <SearchOutlined/>},
+onFilter: (value,record) => {
+ return record.num.toLowerCase().includes(value.toLowerCase())}  },
+  { key: "7", title: "code_postale", dataIndex: "code_postale" ,filterDropdown:({ 
+    setSelectedKeys,
+   selectedKeys,
+   confirm,
+    clearFilters,
+ }) =>
+  {return ( 
+   <React.Fragment>
+  <Input 
+   autoFocus
+   placeholder="type text"
+  value={selectedKeys[0]}
+  onChange={(e)=>{setSelectedKeys(e.target.value ? [e.target.value] :[] )}}
+  onPressEnter={() => { confirm();}}
+  onBlur={()=>{confirm();}}>
+
+  </Input> 
+  <Button onClick={()=>{confirm();}} type='primary'> Search </Button>
+  <Button onClick={() => {clearFilters()}} type="danger">Reset </Button>
+  
+  </React.Fragment>
+  );},
+filterIcon:() =>{return <SearchOutlined/>},
+onFilter: (value,record) => {
+ return record.code_postale.toLowerCase().includes(value.toLowerCase())} },
+  { key: "8", title: "activité", dataIndex: "activité",filterDropdown:({ 
+    setSelectedKeys,
+   selectedKeys,
+   confirm,
+    clearFilters,
+ }) =>
+  {return ( 
+   <React.Fragment>
+  <Input 
+   autoFocus
+   placeholder="type text"
+  value={selectedKeys[0]}
+  onChange={(e)=>{setSelectedKeys(e.target.value ? [e.target.value] :[] )}}
+  onPressEnter={() => { confirm();}}
+  onBlur={()=>{confirm();}}>
+
+  </Input> 
+  <Button onClick={()=>{confirm();}} type='primary'> Search </Button>
+  <Button onClick={() => {clearFilters()}} type="danger">Reset </Button>
+  
+  </React.Fragment>
+  );},
+filterIcon:() =>{return <SearchOutlined/>},
+onFilter: (value,record) => {
+ return record.activité.toLowerCase().includes(value.toLowerCase())}  },
+  { key: "9", title: "situation_fiscale", dataIndex: "situation_fiscale",filterDropdown:({ 
+    setSelectedKeys,
+   selectedKeys,
+   confirm,
+    clearFilters,
+ }) =>
+  {return ( 
+   <React.Fragment>
+  <Input 
+   autoFocus
+   placeholder="type text"
+  value={selectedKeys[0]}
+  onChange={(e)=>{setSelectedKeys(e.target.value ? [e.target.value] :[] )}}
+  onPressEnter={() => { confirm();}}
+  onBlur={()=>{confirm();}}>
+
+  </Input> 
+  <Button onClick={()=>{confirm();}} type='primary'> Search </Button>
+  <Button onClick={() => {clearFilters()}} type="danger">Reset </Button>
+  
+  </React.Fragment>
+  );},
+filterIcon:() =>{return <SearchOutlined/>},
+onFilter: (value,record) => {
+ return record.situation_fiscale.toLowerCase().includes(value.toLowerCase())}  },
+  { key: "10", title: "categorie", dataIndex: "categorie" ,filterDropdown:({ 
+    setSelectedKeys,
+   selectedKeys,
+   confirm,
+    clearFilters,
+ }) =>
+  {return ( 
+   <React.Fragment>
+  <Input 
+   autoFocus
+   placeholder="type text"
+  value={selectedKeys[0]}
+  onChange={(e)=>{setSelectedKeys(e.target.value ? [e.target.value] :[] )}}
+  onPressEnter={() => { confirm();}}
+  onBlur={()=>{confirm();}}>
+
+  </Input> 
+  <Button onClick={()=>{confirm();}} type='primary'> Search </Button>
+  <Button onClick={() => {clearFilters()}} type="danger">Reset </Button>
+  
+  </React.Fragment>
+  );},
+filterIcon:() =>{return <SearchOutlined/>},
+onFilter: (value,record) => {
+ return record.categorie.toLowerCase().includes(value.toLowerCase())} },
+  { key: "11", title: "fax", dataIndex: "fax" ,filterDropdown:({ 
+    setSelectedKeys,
+   selectedKeys,
+   confirm,
+    clearFilters,
+ }) =>
+  {return ( 
+   <React.Fragment>
+  <Input 
+   autoFocus
+   placeholder="type text"
+  value={selectedKeys[0]}
+  onChange={(e)=>{setSelectedKeys(e.target.value ? [e.target.value] :[] )}}
+  onPressEnter={() => { confirm();}}
+  onBlur={()=>{confirm();}}>
+
+  </Input> 
+  <Button onClick={()=>{confirm();}} type='primary'> Search </Button>
+  <Button onClick={() => {clearFilters()}} type="danger">Reset </Button>
+  
+  </React.Fragment>
+  );},
+filterIcon:() =>{return <SearchOutlined/>},
+onFilter: (value,record) => {
+ return record.fax.toLowerCase().includes(value.toLowerCase())} },
+  { key: "12", title: "email", dataIndex: "email",filterDropdown:({ 
+    setSelectedKeys,
+   selectedKeys,
+   confirm,
+    clearFilters,
+ }) =>
+  {return ( 
+   <React.Fragment>
+  <Input 
+   autoFocus
+   placeholder="type text"
+  value={selectedKeys[0]}
+  onChange={(e)=>{setSelectedKeys(e.target.value ? [e.target.value] :[] )}}
+  onPressEnter={() => { confirm();}}
+  onBlur={()=>{confirm();}}>
+
+  </Input> 
+  <Button onClick={()=>{confirm();}} type='primary'> Search </Button>
+  <Button onClick={() => {clearFilters()}} type="danger">Reset </Button>
+  
+  </React.Fragment>
+  );},
+filterIcon:() =>{return <SearchOutlined/>},
+onFilter: (value,record) => {
+ return record.email.toLowerCase().includes(value.toLowerCase())}  },
+  {
+  key: "13",
+  title: "Actions",
+  render: (record) => {
+    return (
+      <div className="addicons">
+        <div className="divedit">
+          <AiFillEdit
+            className="edit"
+            onClick={() => {
+              editGestionclient(record);
+            }}
+          ></AiFillEdit>
+          <p>modifier</p>
+        </div>
+      {<div className="divdelete">
+          <MdDeleteForever
+            className="delete"
+            onClick={() => {
+              deleteGestionclient(record);
+            }}
+          ></MdDeleteForever>
+
+          <p>supprimer</p>
+          </div>}
+      </div>
+    ); 
+  },
+ },
+ ];
+
+
+ //select Gestionclient
   const getGestionclientrequest = async () => {
     try {
       const response = await axios.get("/gestionclient");
@@ -229,7 +438,7 @@ const Gestionclient = () => {
   //modifier une Gestionclient
   const editGestionclient = (record) => {
     setIsEdit(true);
-    setEdditingGestionclient({ ...record }); //copie mel record
+    setEdditingGestionclient({...record}); //copie mel record
   };
   const resetEditing = () => {
     setIsEdit(false);
@@ -283,13 +492,13 @@ const Gestionclient = () => {
   return (
     <div className="App">
       <header className="App-header">
+        <h1>Les clients</h1>
         {
           <button
             className="btnadd"
             onClick={() => {
               setIsAdd(true);
-            }}
-          >
+            }}>
             {" "}
             Ajouter
           </button>
@@ -298,7 +507,7 @@ const Gestionclient = () => {
           <Table
             columns={columns}
             dataSource={listeservice}
-            style={{ with: 15 }}
+            style={{with: 15}}
             bordered={true}
           />
         </div>
@@ -337,8 +546,7 @@ const Gestionclient = () => {
             ); // a ne pas toucher l'id
             resetEditing();
             toast.success("Gestionclient modifié avec succée");
-          }}
-        >
+          }}>
           <Input
             placeholder="id"
             value={edditingGestionclient?.id}
@@ -347,8 +555,7 @@ const Gestionclient = () => {
                 ...edditingGestionclient,
                 id: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder=""
             value={edditingGestionclient?.raison}
@@ -357,8 +564,7 @@ const Gestionclient = () => {
                 ...edditingGestionclient,
                 raison: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder=""
             value={edditingGestionclient?.matricule}
@@ -367,8 +573,7 @@ const Gestionclient = () => {
                 ...edditingGestionclient,
                 matricule: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder=""
             value={edditingGestionclient?.ville}
@@ -377,8 +582,7 @@ const Gestionclient = () => {
                 ...edditingGestionclient,
                 ville: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder=""
             value={edditingGestionclient?.rue}
@@ -387,8 +591,7 @@ const Gestionclient = () => {
                 ...edditingGestionclient,
                 rue: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder=""
             value={edditingGestionclient?.num}
@@ -397,8 +600,7 @@ const Gestionclient = () => {
                 ...edditingGestionclient,
                 num: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder=""
             value={edditingGestionclient?.code_postale}
@@ -407,8 +609,7 @@ const Gestionclient = () => {
                 ...edditingGestionclient,
                 code_postale: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder=""
             value={edditingGestionclient?.activité}
@@ -417,8 +618,7 @@ const Gestionclient = () => {
                 ...edditingGestionclient,
                 activité: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
 
           <input
             type="radio"
@@ -429,8 +629,7 @@ const Gestionclient = () => {
                 ...edditingGestionclient,
                 situation_fiscale: "non Assujetti",
               });
-            }}
-          ></input>
+            }}></input>
           <label>Non Assujetti </label>
           <input
             type="radio"
@@ -441,8 +640,7 @@ const Gestionclient = () => {
                 ...edditingGestionclient,
                 situation_fiscale: "Assujetti",
               });
-            }}
-          ></input>
+            }}></input>
           <label>Assujetti </label>
           <input
             type="radio"
@@ -453,8 +651,7 @@ const Gestionclient = () => {
                 ...edditingGestionclient,
                 situation_fiscale: "exonoré",
               });
-            }}
-          ></input>
+            }}></input>
           <label>exonoré</label>
           <Input
             placeholder="categorie"
@@ -464,8 +661,7 @@ const Gestionclient = () => {
                 ...edditingGestionclient,
                 categorie: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder="fax"
             value={edditingGestionclient?.fax}
@@ -474,8 +670,7 @@ const Gestionclient = () => {
                 ...edditingGestionclient,
                 fax: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder=""
             value={edditingGestionclient?.email}
@@ -484,12 +679,68 @@ const Gestionclient = () => {
                 ...edditingGestionclient,
                 email: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
         </Modal>
-
-        {/*AJOUT*/}
-
+        <input
+          type="radio"
+          name="a"
+          value={edditingGestionclient?.situation_fiscale}
+          onChange={(e) => {
+            setEdditingGestionclient({
+              ...edditingGestionclient,
+              situation_fiscale: "non Assujetti",
+            });
+          }}></input>
+        <label>Non Assujetti </label>
+        <input
+          type="radio"
+          name="a"
+          value={edditingGestionclient?.situation_fiscale}
+          onChange={(e) => {
+            setEdditingGestionclient({
+              ...edditingGestionclient,
+              situation_fiscale: "Assujetti",
+            });
+          }}></input>
+        <label>Assujetti</label>y
+        <input
+          type="radio"
+          name="a"
+          value={edditingGestionclient?.situation_fiscale}
+          onChange={(e) => {
+            setEdditingGestionclient({
+              ...edditingGestionclient,
+              situation_fiscale: "exonoré",
+            });
+          }}></input>
+        <label>exonoré</label>
+        <Input
+          placeholder="categorie"
+          value={edditingGestionclient?.categorie}
+          onChange={(e) => {
+            setEdditingGestionclient({
+              ...edditingGestionclient,
+              categorie: e.target.value,
+            });
+          }}></Input>
+        <Input
+          placeholder="fax"
+          value={edditingGestionclient?.fax}
+          onChange={(e) => {
+            setEdditingGestionclient({
+              ...edditingGestionclient,
+              fax: e.target.value,
+            });
+          }}></Input>
+        <Input
+          placeholder=""
+          value={edditingGestionclient?.email}
+          onChange={(e) => {
+            setEdditingGestionclient({
+              ...edditingGestionclient,
+              email: e.target.value,
+            });
+          }}></Input>
         <Modal
           title="ajouter "
           visible={isAdd}
@@ -502,8 +753,7 @@ const Gestionclient = () => {
             addGestionclient();
             setIsAdd(false);
             toast.success("client_ajouté avec succès");
-          }}
-        >
+          }}>
           <Input
             placeholder="id"
             value={addingGestionclient.id}
@@ -512,8 +762,7 @@ const Gestionclient = () => {
                 ...addingGestionclient,
                 id: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder="raison"
             value={addingGestionclient.raison}
@@ -522,8 +771,7 @@ const Gestionclient = () => {
                 ...addingGestionclient,
                 raison: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder="matricule"
             value={addingGestionclient.matricule}
@@ -532,8 +780,7 @@ const Gestionclient = () => {
                 ...addingGestionclient,
                 matricule: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder="ville"
             value={addingGestionclient.ville}
@@ -542,8 +789,7 @@ const Gestionclient = () => {
                 ...addingGestionclient,
                 ville: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder="rue"
             value={addingGestionclient.rue}
@@ -552,8 +798,7 @@ const Gestionclient = () => {
                 ...addingGestionclient,
                 rue: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder="num"
             value={addingGestionclient.num}
@@ -562,8 +807,7 @@ const Gestionclient = () => {
                 ...addingGestionclient,
                 num: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder="code_postale"
             value={addingGestionclient.code_postale}
@@ -572,8 +816,7 @@ const Gestionclient = () => {
                 ...addingGestionclient,
                 code_postale: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder="activité"
             value={addingGestionclient.activité}
@@ -582,8 +825,7 @@ const Gestionclient = () => {
                 ...addingGestionclient,
                 activité: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <div ClassName="situation">
             <p>Situation_fiscale</p>
             <input
@@ -596,8 +838,7 @@ const Gestionclient = () => {
                   ...addingGestionclient,
                   situation_fiscale: "Non Assujetti",
                 });
-              }}
-            ></input>
+              }}></input>
             <label>Non Assujetti</label>
             <input
               type="radio"
@@ -609,8 +850,7 @@ const Gestionclient = () => {
                   ...addingGestionclient,
                   situation_fiscale: "Asujetti",
                 });
-              }}
-            ></input>
+              }}></input>
             <label>Asujetti</label>
             <input
               type="radio"
@@ -622,8 +862,7 @@ const Gestionclient = () => {
                   ...addingGestionclient,
                   situation_fiscale: "Exonoré",
                 });
-              }}
-            ></input>
+              }}></input>
             <label>Exonoré</label>
           </div>
           <Input
@@ -634,8 +873,7 @@ const Gestionclient = () => {
                 ...addingGestionclient,
                 categorie: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder="fax"
             value={addingGestionclient.fax}
@@ -644,8 +882,7 @@ const Gestionclient = () => {
                 ...addingGestionclient,
                 fax: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder="email"
             value={addingGestionclient.email}
@@ -654,8 +891,7 @@ const Gestionclient = () => {
                 ...addingGestionclient,
                 email: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
         </Modal>
       </header>
     </div>

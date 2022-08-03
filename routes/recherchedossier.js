@@ -10,9 +10,22 @@ const pool = require("../db");
 //create dossier
 root11.post("/recherchedossieradd", async(req, res) => {
     try {
-        const { num_affaire, emplacement, client, tel, mission, adversaire, reste } = req.body;
         const newdossiers = await pool.query(
-            "INSERT INTO dossierhuissier (num_affaire, emplacement, client, tel, mission,adversaire,reste) VALUES($1,$2,$3,$4,$5,$6,$7)", [num_affaire, emplacement, client, tel, mission, adversaire, reste]
+            "INSERT INTO recherchedossier(client) SELECT raison FROM gestionclient ",
+            //res.json("succes"),
+        );
+        res.json(newdossiers.rows[0]);
+    } catch (err) {
+        console.error(err.message);
+    }
+});
+
+root11.post("/recherchedossieradd", async(req, res) => {
+    try {
+        const { num_affaire, emplacement, tel, mission, adversaire, reste, client } =
+        req.body;
+        const newdossiers = await pool.query(
+            "INSERT INTO recherchedossier (num_affaire, emplacement, tel, mission,adversaire,reste) VALUES($1,$2,$3,$4,$5,$6) WHERE client=$7", [num_affaire, emplacement, tel, mission, adversaire, reste, client]
             //res.json("succes"),
         );
         res.json(newdossiers.rows[0]);
@@ -33,9 +46,9 @@ root11.get("/recherchedossier", async(req, res) => {
 root11.get("/recherchedossier/:id_dossier", async(req, res) => {
     try {
         const { id_dossier } = req.params;
-        const dossier = await pool.query("SELECT * FROM dossierhuissier WHERE id_dossier=$1", [
-            id_dossier,
-        ]);
+        const dossier = await pool.query(
+            "SELECT * FROM recherchedossier WHERE id_dossier=$1", [id_dossier]
+        );
         res.json(dossier.rows[0]);
     } catch (err) {
         console.error(err.message);
@@ -45,9 +58,18 @@ root11.get("/recherchedossier/:id_dossier", async(req, res) => {
 root11.post("/recherchedossier/update", async(req, res) => {
     try {
         const { id_dossier } = req.body;
-        const { num_affaire, emplacement, client, tel, mission } = req.body;
+        const { num_affaire, emplacement, client, tel, mission, adversaire, reste } = req.body;
         const updatedossier = await pool.query(
-            "UPDATE dossierhuissier SET num_affaire=$1,emplacement=$2,client=$3,tel=$4,mission=$5,adversaire=$6,reste=$7 WHERE id_dossier=$8", [num_affaire, emplacement, client, tel, mission, adversaire, reste, id_dossier]
+            "UPDATE recherchedossier SET num_affaire=$1,emplacement=$2,client=$3,tel=$4,mission=$5,adversaire=$6,reste=$7 WHERE id_dossier=$8", [
+                num_affaire,
+                emplacement,
+                client,
+                tel,
+                mission,
+                adversaire,
+                reste,
+                id_dossier,
+            ]
         );
         res.json("dossier updated");
     } catch (err) {

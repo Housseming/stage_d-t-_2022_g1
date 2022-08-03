@@ -271,7 +271,7 @@ const Tribunale = () => {
                 <div className="App">
                   <header className="App-header">
                     <button
-                      className="btnadd"
+                      className="btnaddservice"
                       onClick={() => {
                         setIsAddservice(true);
                       }}
@@ -279,10 +279,10 @@ const Tribunale = () => {
                       Ajouter un service
                     </button>
                     <div className="tab">
-                      <Table
+                      <Table className="tabtribunale"
                         columns={column}
                         dataSource={newListeService}
-                        size="medium"
+                      
                         bordered={true}
                       ></Table>
                     </div>

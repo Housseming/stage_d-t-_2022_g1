@@ -122,14 +122,8 @@ const PrimeHuissier = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <button
-          className="btnadd"
-          onClick={() => {
-            setIsAdd(true);
-          }}
-        >
-          Ajouter Primehuissier
-        </button>
+      <h1>Prime huissier</h1>
+        <button className="btnadd" onClick={()=>{setIsAdd(true)}}>Ajouter Primehuissier</button>
         <div className="tab">
           <Table
             columns={column}

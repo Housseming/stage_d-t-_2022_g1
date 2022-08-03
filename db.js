@@ -1,12 +1,12 @@
-/*const Pool = require("pg").Pool;
+const Pool = require("pg").Pool;
 require("dotenv").config();
 
 const devConfig = {
     user: process.env.PG_USER,
     password: process.env.PG_PASSWORD,
     host: process.env.PG_HOST,
-    port: process.env.PG_PORT,
     database: process.env.PG_DATABASE,
+    port: process.env.PG_PORT,
 };
 const proConfig = {
     connectionString: process.env.DATABASE_URL //jeya ml heroku addons
@@ -18,4 +18,4 @@ pool.connect(function(err) {
     console.log("Connected!");
 });
 
-module.exports = pool;*/
+module.exports = pool;

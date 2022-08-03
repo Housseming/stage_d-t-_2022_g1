@@ -64,7 +64,7 @@ const Honoraireenextra = () => {
   };
   useEffect(() => {
     getHonorairerequest();
-  }, []);
+  }, [listeservice]);
   console.log(listeservice);
 
   //supprimer une honoraire
@@ -132,9 +132,8 @@ const Honoraireenextra = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <button
-          className="btnadd"
-          onClick={() => {
+      <h1>Honoraire en extra</h1>
+        <button className="btnadd"  onClick={() => {
             setIsAdd(true);
           }}
         >

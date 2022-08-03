@@ -65,7 +65,7 @@ const Timbre = () => {
   };
   useEffect(() => {
     getTimbrerequest();
-  }, []);
+  }, [listeservice]);
   console.log(listeservice);
 
   //supprimer une Timbre
@@ -133,9 +133,8 @@ const Timbre = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <Button
-          className="btnadd"
-          onClick={() => {
+      <h1>Timbres</h1> 
+        <Button className="btnadd"  onClick={() => {
             setIsAdd(true);
           }}
         >

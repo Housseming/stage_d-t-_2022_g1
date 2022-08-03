@@ -62,7 +62,7 @@ const Parametreenextra = () => {
   };
   useEffect(() => {
     getParametrerequest();
-  }, []);
+  }, [listeservice]);
   console.log(listeservice);
 
   ////////////
@@ -92,6 +92,7 @@ const Parametreenextra = () => {
   return (
     <div className="App">
       <header className="App-header">
+      <h1>Prix de la photocopie</h1>
         {/*<Button className="btnadd"  onClick={() => {
             setIsAdd(true);
           } }> Ajouter</Button>*/}

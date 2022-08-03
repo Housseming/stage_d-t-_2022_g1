@@ -65,7 +65,7 @@ const Transport = () => {
   };
   useEffect(() => {
     getTransportrequest();
-  }, []);
+  }, [listeservice]);
   console.log(listeservice);
 
   ////////////
@@ -95,6 +95,7 @@ const Transport = () => {
   return (
     <div className="App">
       <header className="App-header">
+      <h1>Transport</h1>
         {/*<Button className="btnadd"  onClick={() => {
             setIsAdd(true);
           } }> Ajouter</Button>*/}
