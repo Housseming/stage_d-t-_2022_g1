@@ -63,7 +63,13 @@
 }
 .tachetable{
     
-    width: 900px!important;
+      overflow-x: auto !important;
+      overflow-y: auto;
+        width: 1500px;
+        height: 1500px;
+       margin: 0 auto;
+    margin-top: 60px;
+    
 }
 
 @media only screen and (max-width: 900px) {
@@ -72,10 +78,69 @@
             overflow-x: auto !important;
         
             width: 400px !important;
-            height: 200px !important;
+            height: 400px !important;
+             margin-top: 60px;
         }
     }
 .formaddtache{
     display: flex;
     flex-direction: column;
+}
+.reglementdiv1{
+    display: grid;
+  grid-template-columns: repeat(2, 3fr);
+  grid-gap: 10px;
+  grid-auto-rows: minmax(40px, auto);
+  margin-top: 60px;
+
+
+}
+.reglementdiv2{
+      margin-top:40px;
+    display: grid;
+  grid-template-columns: repeat(2, 3fr);
+  grid-gap: 10px;
+  grid-auto-rows: minmax(70px, auto);
+  
+
+}
+.reglementdiv3{
+      margin-top:40px;
+    display: grid;
+  grid-template-columns: repeat(2, 3fr);
+  grid-gap: 10px;
+  grid-auto-rows: minmax(70px, auto);
+  
+
+}
+.inputreg{
+    width:25rem;
+}
+@media only screen and (max-width: 900px) {
+        .reglementdiv1 {
+            display: grid;
+  grid-template-columns: repeat(1, 3fr);
+  grid-gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+            
+        }
+        .reglementdiv2 {
+            display: grid;
+  grid-template-columns: repeat(1, 3fr);
+  grid-gap: 10px;
+  grid-auto-rows: minmax(40px, auto);
+      margin-top:15px;
+
+            
+        }
+        
+    }
+.boutonreg{
+    width: 25rem!important;
+}
+.containerreglement{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
 }

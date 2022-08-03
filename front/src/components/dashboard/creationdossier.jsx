@@ -3,6 +3,7 @@ import { Tabs,Radio } from 'antd';
 import ClientDemandeur from '../components dossier/clientDemandeur';
 import DonneeDossier from '../components dossier/donneedossier';
 import Taches from "../components dossier/taches"
+import Reglement from '../components dossier/reglement';
 const { TabPane } = Tabs;
 export default function CreationDossier() {
   return (
@@ -18,9 +19,7 @@ export default function CreationDossier() {
           <Taches></Taches>
         </TabPane>
         <TabPane tab="Réglement" key="4">
-          <p>Content of Tab Pane 3</p>
-          <p>Content of Tab Pane 3</p>
-          <p>Content of Tab Pane 3</p>
+          <Reglement></Reglement>
         </TabPane>
         <TabPane tab="Collaborateur" key="5">
           <p>Content of Tab Pane 3</p>

@@ -101,9 +101,9 @@ function Taches() {
           <label>Tâche:</label>
           <Input type="text" placeholder="nom de la tâche"></Input>
           <label>Date Critique:</label>
-          <DatePicker onChange={onChange} />
+          <DatePicker onChange={onChange} placeholder="date critique" />
           <label>Date Rappel:</label>
-          <DatePicker onChange={onChange} />
+          <DatePicker onChange={onChange} placeholder="date rappel" />
           <label>Résolu:</label>
           <div className="radioet">
             <Radio.Group onChange={onChangeradio} value={value}>
@@ -122,7 +122,7 @@ function Taches() {
           <Cascader
             options={options}
             onChange={onChangeselect}
-            placeholder="Please select"
+            placeholder="selectionner greffier"
           />
           <label>Course:</label>
           <div className="radioet">
@@ -135,18 +135,18 @@ function Taches() {
           <Cascader
             options={options}
             onChange={onChangeselect}
-            placeholder="Please select"
+            placeholder="selectionner lieu"
           />
           <label>Service:</label>
           <Cascader
             options={options}
             onChange={onChangeselect}
-            placeholder="Please select"
+            placeholder="selectionner service"
           />
           <label>Date d'audience:</label>
-          <DatePicker onChange={onChange} />
+          <DatePicker onChange={onChange} placeholder="date d'audience" />
           <label>Date de Déchéance:</label>
-          <DatePicker onChange={onChange} />
+          <DatePicker onChange={onChange} placeholder="date de déchéance" />
         </div>
       </Modal>
     </>
