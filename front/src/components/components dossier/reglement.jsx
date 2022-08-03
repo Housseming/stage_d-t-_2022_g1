@@ -23,11 +23,11 @@ function Reglement() {
       <div className="reglementdiv1">
         <div className="inputreg">
           <label>Honoraire Avocat :</label>
-          <Input placeholder="Honoraire Avocat"></Input>
+          <Input placeholder="Honoraire Avocat" type="number"></Input>
         </div>
         <div className="inputreg">
           <label>Net à payer :</label>
-          <Input placeholder="Net à payer"></Input>
+          <Input placeholder="Net à payer" type="number"></Input>
         </div>
       </div>
       <div className="reglementdiv2">
@@ -39,7 +39,7 @@ function Reglement() {
         </Button>
       </div>
       <Table
-        className="tachetable"
+      
         columns={column}
         //scroll={{ x:10}}
         pagination={{
@@ -55,12 +55,12 @@ function Reglement() {
       ></Table>
       <div className="reglementdiv3">
         <div className="inputreg">
-          <label>Honoraire Avocat :</label>
-          <Input placeholder="Honoraire Avocat"></Input>
+          <label>Total payé:</label>
+          <Input placeholder="Total payé" type="number"></Input>
         </div>
         <div className="inputreg">
-          <label>Net à payer :</label>
-          <Input placeholder="Net à payer"></Input>
+          <label>Reste à payer :</label>
+          <Input placeholder="Reste à payer" type="number"></Input>
         </div>
       </div>
     </div>
