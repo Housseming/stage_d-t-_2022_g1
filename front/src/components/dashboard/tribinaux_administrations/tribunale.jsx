@@ -209,7 +209,7 @@ const Tribunale = () => {
     setIsEditservice(false);
     setEdditingservice(null);
   };
-  //*****************ajouter servicehuissier******************
+  //*****************ajouter service******************
   const addservice = async () => {
     try {
       const resp = await axios.post("/serviceadd", addingservice);
