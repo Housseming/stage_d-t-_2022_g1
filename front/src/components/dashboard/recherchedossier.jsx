@@ -1,12 +1,13 @@
 import React from "react";
 import axios from "axios";
 import {useState, useEffect} from "react";
-import {Table, Modal, Input,Button} from "antd";
+import {Table, Modal, Input,Button,Space} from "antd";
 import "antd/dist/antd.min.css";
 import {AiFillEdit} from "react-icons/ai";
 import {MdDeleteForever} from "react-icons/md";
 import { toast } from "react-toastify";
 import { SearchOutlined } from "@ant-design/icons";
+
 const RechercheDossier = () => {
   //declaration necessaires
   const [liste, setListe] = useState([]);
@@ -21,7 +22,10 @@ const RechercheDossier = () => {
     mission: "",
     adversaire:"",
     reste:"",
-  });
+  } );
+    const [searchText, setSearchText] = useState("");
+    const [sortedInfo, setSortedInfo] = useState({});
+    let [filteredData] = useState();
   const column = [
     {key: "1", title: "id_dossier", dataIndex: "id_dossier"},
     {key: "2", title: "num_affaire", dataIndex: "num_affaire"},
@@ -35,8 +39,10 @@ const RechercheDossier = () => {
         selectedKeys,
         clearFilters,
         confirm,
-      }) => {
+      } ) => {
+                  
         return (
+
           <React.Fragment>
             <Input
               autoFocus
@@ -269,6 +275,30 @@ const RechercheDossier = () => {
       console.log(error);
     }
   };
+  /*const reset = () => {
+    setSortedInfo({});
+    setSearchText("");
+    getGestionclientrequest();
+  };*/
+
+  {/*} const globalSearch = () => {
+    filteredData = listeservice.filter((value) => {
+      return (
+        value.num_affaire.toLowerCase().includes(searchText.toLowerCase()) ||
+        value.emplacement.toLowerCase().includes(searchText.toLowerCase()) ||
+        value.client.toLowerCase().includes(searchText.toLowerCase()) ||
+        value.tel.toLowerCase().includes(searchText.toLowerCase()) ||
+        value.mission.toLowerCase().includes(searchText.toLowerCase()) ||
+        value.adversaire.toLowerCase().includes(searchText.toLowerCase()) ||
+        value.reste
+          .toLowerCase()
+          .includes(searchText.toLowerCase())
+      );
+    });
+    setGridData(filteredData);
+    console.log("filtered", filteredData);
+    console.log("length", filteredData.length);
+  };*/}
   return (
     <div className="App">
       <header className="App-header">
@@ -296,6 +326,20 @@ const RechercheDossier = () => {
             Archiver Dossier
           </button>
         </div>
+        {/*<Space>
+          <Input
+            placeholder="Texte de recherche"
+            onChange={handleChange}
+            type="text"
+            allowClear
+            value={searchText}
+          />
+          <Button onClick={globalSearch} type="primary">
+            {" "}
+            Chercher Client{" "}
+          </Button>
+          <Button onClick={reset}> Réinitialiser </Button>
+          </Space>*/}
         <div className="tab">
           <Table
             columns={column}

@@ -5,6 +5,7 @@ import DonneeDossier from '../components dossier/donneedossier';
 import Taches from "../components dossier/taches"
 import Reglement from '../components dossier/reglement';
 import Collaborateur from '../components dossier/collaborateur';
+import SousDossier from '../components dossier/sousdossier';
 const { TabPane } = Tabs;
 export default function CreationDossier() {
   return (
@@ -26,9 +27,7 @@ export default function CreationDossier() {
           <Collaborateur></Collaborateur>
         </TabPane>
         <TabPane tab="Sous Dossier" key="6">
-          <p>Content of Tab Pane 3</p>
-          <p>Content of Tab Pane 3</p>
-          <p>Content of Tab Pane 3</p>
+          <SousDossier/>
         </TabPane>
       </Tabs>
     </div>
