@@ -123,7 +123,6 @@
     grid-template-columns: repeat(1, 3fr);
     grid-gap: 10px;
     grid-auto-rows: minmax(40px, auto);
-    margin-top: 70px;
   }
 }
 .boutonreg {
@@ -167,7 +166,6 @@
   padding: 3%;
 }
 
-
-legend{
-    text-align: center;
+legend {
+  text-align: center;
 }

@@ -98,56 +98,43 @@
   overflow-x: auto !important;
   width: 1500px;
   height: 1500px;
-  margin:0 auto !important;
+  margin: 0 auto !important;
 }
-
 
 @media only screen and (max-width: 1500px) {
   .ant-table {
     overflow-x: auto !important;
     width: 1500px !important;
-    height: 400px !important;
-    
   }
 }
 @media only screen and (max-width: 1400px) {
   .ant-table {
     overflow-x: auto !important;
     width: 1200px !important;
-    height: 400px !important;
-    
   }
 }
 @media only screen and (max-width: 1300px) {
   .ant-table {
     overflow-x: auto !important;
     width: 900px !important;
-    height: 400px !important;
-    
   }
 }
 @media only screen and (max-width: 1200px) {
   .ant-table {
     overflow-x: auto !important;
     width: 900px !important;
-    height: 400px !important;
-    
   }
 }
 @media only screen and (max-width: 1100px) {
   .ant-table {
     overflow-x: auto !important;
     width: 700px !important;
-    height: 400px !important;
-    
   }
 }
 @media only screen and (max-width: 1000px) {
   .ant-table {
     overflow-x: auto !important;
     width: 700px !important;
-    height: 400px !important;
-    
   }
 }
 
@@ -155,21 +142,18 @@
   .ant-table {
     overflow-x: auto !important;
     width: 600px !important;
-    height: 400px !important;
   }
 }
 @media only screen and (max-width: 800px) {
   .ant-table {
     overflow-x: auto !important;
     width: 600px !important;
-    height: 400px !important;
   }
 }
 @media only screen and (max-width: 700px) {
   .ant-table {
     overflow-x: auto !important;
     width: 550px !important;
-    height: 400px !important;
   }
 }
 
@@ -177,16 +161,12 @@
   .ant-table {
     overflow-x: auto !important;
     width: 400px !important;
-    height: 400px !important;
-    
   }
 }
 @media only screen and (max-width: 400px) {
   .ant-table {
     overflow-x: auto !important;
     width: 300px !important;
-    height: 400px !important;
-
   }
 }
 
