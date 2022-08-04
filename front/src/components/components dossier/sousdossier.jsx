@@ -1,5 +1,5 @@
-import {Cascader, Input, Radio, Button,InputNumber} from "antd";
-import React, {useState} from "react";
+import { Cascader, Input, Radio, Button, InputNumber } from "antd";
+import React, { useState } from "react";
 import "../components dossier/dossier.css";
 import { Marginer } from "../marginer/marginfile";
 import { DatePicker, Space } from "antd";
@@ -56,7 +56,6 @@ const SousDossier = () => {
     console.log(date, dateString);
   };
 
-
   const filter = (inputValue, path) =>
     path.some(
       (option) =>
@@ -70,65 +69,46 @@ const SousDossier = () => {
 
   return (
     <div className="container">
-      <Marginer direction="vertical" margin={20} />
-      <table>
-        <tr>
-          <th>
-            <label htmlFor="code">Code Dossier :</label>
-          </th>
-          <th>
-            <Searchi placeholder="Code Dossier"/>
-          </th>
-          <th>
-            <label>Date Création :</label>
-          </th>
-          <th>
-            <DatePicker className="input" bordered={true} placeholder="" />
-          </th>
-        </tr>
-        <Marginer direction="vertical" margin={30} />
-        <tr>
-          <th>
-            <label>Mission :</label>
-          </th>
-          <th>
-            <Input type="text" classname="mission" />
-          </th>
-        </tr>
-        <Marginer direction="vertical" margin={30} />
-        <tr>
-          <th>
-            <label htmlFor="emplacement"> Emplacement :</label>
-          </th>
-          <th>
-            <Selectdossier
-              className="input"
-              placeholder="Emplacement Dossier"
-            />
-          </th>
-          <th>
-            <label> Num Affaire :</label>
-          </th>
-          <th>
-            <Input
-              type="number"
-              className="inputraison"
-              placeholder="Numéro Affaire"
-            />
-          </th>
-        </tr>
+      <div className="sousdoss1">
+        <div className="div">
+          <label htmlFor="code">Code Dossier :</label>
 
-        <Marginer direction="vertical" margin={30} />
-        <tr>
-          <th>
-            <label>Observation(s) : </label>
-          </th>
-          <th>
-            <Input type="text" className="mission" />
-          </th>
-        </tr>
-      </table>
-      <Marginer direction="vertical" margin={40} />
+          <Searchi placeholder="Code Dossier" />
+        </div>
+        <div className="div ">
+          <label>Date Création :</label>
+
+          <DatePicker className="input" bordered={true} placeholder="" />
+        </div>
+      </div>
+      <div className="sousdoss2">
+        <div className="div">
+          <label>Mission :</label>
+
+          <Input type="text" classname="mission" />
+        </div>
+        <div className="div">
+          <label htmlFor="emplacement"> Emplacement :</label>
+
+          <Selectdossier className="input" placeholder="Emplacement Dossier" />
+        </div>
+      </div>
+      <div className="sousdoss3">
+        <div className="div">
+          <label> Num Affaire :</label>
+
+          <Input
+            type="number"
+            className="inputraison"
+            placeholder="Numéro Affaire"
+          />
+        </div>
+        <div className="div">
+          <label>Observation(s) : </label>
+
+          <Input type="text" className="mission" />
+        </div>
+      </div>
     </div>
   );
 };

@@ -8,7 +8,7 @@ function Collaborateur() {
   };
   const [value, setValue] = useState(1);
   return (
-    <div className="collabcontainer">
+    <div className="container">
       <div className="divcollab1">
         <div className="inputcoll">
           <label>Code Collaborateur :</label>

@@ -9,7 +9,7 @@ import SousDossier from '../components dossier/sousdossier';
 const { TabPane } = Tabs;
 export default function CreationDossier() {
   return (
-    <div className="card-container">
+    <div className="dosscontainer">
       <Tabs type="card">
         <TabPane tab="Client & Demandeur" key="1">
          <ClientDemandeur/>

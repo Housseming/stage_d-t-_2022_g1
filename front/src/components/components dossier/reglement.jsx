@@ -19,7 +19,7 @@ function Reglement() {
       { key: "11", title: "Résolu", dataIndex: "resolu" },
     ];
   return (
-    <div className="containerreglement">
+    <div className="container">
       <div className="reglementdiv1">
         <div className="inputreg">
           <label>Honoraire Avocat :</label>
@@ -39,7 +39,6 @@ function Reglement() {
         </Button>
       </div>
       <Table
-      
         columns={column}
         //scroll={{ x:10}}
         pagination={{
@@ -52,6 +51,8 @@ function Reglement() {
         }}
         size="middle"
         bordered={true}
+        style={{ display: "flex", flex: 1 }}
+        scroll={{ x: "max-content" }}
       ></Table>
       <div className="reglementdiv3">
         <div className="inputreg">

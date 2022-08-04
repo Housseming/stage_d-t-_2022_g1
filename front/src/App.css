@@ -1,3 +1,4 @@
+
 .edit {
   color: #6646e5;
   width: 25px;
@@ -41,7 +42,11 @@
 }
 
 .App {
+  display: flex;
+  flex-direction: column;
   text-align: center;
+  margin:0 auto;
+  
 }
 
 .App-logo {
@@ -96,15 +101,16 @@
 
 .ant-table {
   overflow-x: auto !important;
-  width: 1500px;
+  width: 1200px;
   height: 1500px;
   margin: 0 auto !important;
+ 
 }
 
 @media only screen and (max-width: 1500px) {
   .ant-table {
     overflow-x: auto !important;
-    width: 1500px !important;
+    width: 1200px !important;
   }
 }
 @media only screen and (max-width: 1400px) {

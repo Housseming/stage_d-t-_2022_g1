@@ -52,7 +52,7 @@ function Taches() {
     { key: "11", title: "Résolu", dataIndex: "resolu" },
   ];
   return (
-    <header className="App-header">
+    <div className="container">
       <div className="boutonet">
         <Button
           className="bouton"
@@ -151,7 +151,7 @@ function Taches() {
           <DatePicker onChange={onChange} placeholder="date de déchéance" />
         </div>
       </Modal>
-    </header>
+    </div>
   );
 }
 

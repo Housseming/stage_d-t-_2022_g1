@@ -1,11 +1,12 @@
 import React from "react";
 import axios from "axios";
-import {useState, useEffect} from "react";
-import {Table, Modal, Input,Button} from "antd";
+import { useState, useEffect } from "react";
+import { Table, Modal, Input, Button } from "antd";
 import "antd/dist/antd.min.css";
-import {AiFillEdit} from "react-icons/ai";
-import {MdDeleteForever} from "react-icons/md";
+import { AiFillEdit } from "react-icons/ai";
+import { MdDeleteForever } from "react-icons/md";
 import { toast } from "react-toastify";
+import { Marginer } from "../marginer/marginfile";
 const TabDossier = () => {
   //declaration necessaires
   const [listeservice, setlisteservice] = useState([]);
@@ -21,12 +22,12 @@ const TabDossier = () => {
     Adresseavocat: "",
   });
   const column = [
-    {key: "1", title: "Nom", dataIndex: "Nom"},
-    {key: "2", title: "Registre", dataIndex: "Registre"},
-    {key: "3", title: "adresse", dataIndex: "adresse"},
-    {key: "4", title: "Adresse Désignée", dataIndex: "AdresseDesigne"},
-    {key: "5", title: "Avocat", dataIndex: "Avocat"},
-    {key: "6", title: "Adresse Avocat", dataIndex: "Adresseavocat"},
+    { key: "1", title: "Nom", dataIndex: "Nom" },
+    { key: "2", title: "Registre", dataIndex: "Registre" },
+    { key: "3", title: "adresse", dataIndex: "adresse" },
+    { key: "4", title: "Adresse Désignée", dataIndex: "AdresseDesigne" },
+    { key: "5", title: "Avocat", dataIndex: "Avocat" },
+    { key: "6", title: "Adresse Avocat", dataIndex: "Adresseavocat" },
     {
       key: "16",
       title: "Actions",
@@ -38,7 +39,8 @@ const TabDossier = () => {
                 className="edit"
                 onClick={() => {
                   editdossier(record);
-                }}></AiFillEdit>
+                }}
+              ></AiFillEdit>
               <pre>
                 <p>modifier </p>
               </pre>
@@ -48,7 +50,8 @@ const TabDossier = () => {
                 className="delete"
                 onClick={() => {
                   deletedossier(record);
-                }}></MdDeleteForever>
+                }}
+              ></MdDeleteForever>
 
               <p>supprimer</p>
             </div>
@@ -103,7 +106,7 @@ const TabDossier = () => {
   //modifier un dossier
   const editdossier = (record) => {
     setIsEdit(true);
-    setEdditingdossier({...record}); //copie mel record
+    setEdditingdossier({ ...record }); //copie mel record
   };
   const resetEditing = () => {
     setIsEdit(false);
@@ -119,21 +122,29 @@ const TabDossier = () => {
     }
   };
   return (
-    <div className="App">
-      <Button
-              className="btnadd"
-              type="primary" 
-        onClick={() => {
-          setIsAdd(true);
-        }}>
-        Valider Dossier
-      </Button>
+    <div className="container2">
+      <div className="boutonvalid">
+        <Button
+          className="bouton"
+          type="primary"
+          block
+          onClick={() => {
+            setIsAdd(true);
+          }}
+        >
+          Valider Dossier
+        </Button>
+        <Marginer direction="vertical" margin={10} />
+      </div>
       <div className="tab">
         <Table
           columns={column}
           dataSource={listeservice}
-          size="medium"
-          bordered={true}></Table>
+          size="meduim"
+          bordered={true}
+          style={{ display: "flex", flex: 1 }}
+          scroll={{ x: "max-content" }}
+        ></Table>
       </div>
 
       <Modal
@@ -164,7 +175,8 @@ const TabDossier = () => {
           setlisteservice(newlisteservice);
           resetEditing();
           toast.success("dossier modifié(e) avec succès");
-        }}>
+        }}
+      >
         <Input
           placeholder="Nom du Client"
           value={edditingdossier?.Nom}
@@ -173,14 +185,19 @@ const TabDossier = () => {
               ...edditingdossier,
               Nom: e.target.value,
             });
-          }}></Input>
+          }}
+        ></Input>
         {/*edditingdossier? s'il n'est pas null*/}
         <Input
           placeholder="Tapez le Registre"
           value={edditingdossier?.Registre}
           onChange={(e) => {
-            setEdditingdossier({...edditingdossier, Registre: e.target.value});
-          }}></Input>
+            setEdditingdossier({
+              ...edditingdossier,
+              Registre: e.target.value,
+            });
+          }}
+        ></Input>
         <Input
           placeholder="Adresse "
           value={edditingdossier?.adresse}
@@ -189,7 +206,8 @@ const TabDossier = () => {
               ...edditingdossier,
               adresse: e.target.value,
             });
-          }}></Input>
+          }}
+        ></Input>
         <Input
           placeholder="Adresse Désignée"
           value={edditingdossier?.AdresseDesigne}
@@ -198,13 +216,15 @@ const TabDossier = () => {
               ...edditingdossier,
               AdresseDesigne: e.target.value,
             });
-          }}></Input>
+          }}
+        ></Input>
         <Input
           placeholder="Numéro de téléphone"
           value={edditingdossier?.Avocat}
           onChange={(e) => {
-            setEdditingdossier({...edditingdossier, Avocat: e.target.value});
-          }}></Input>
+            setEdditingdossier({ ...edditingdossier, Avocat: e.target.value });
+          }}
+        ></Input>
       </Modal>
       <Modal
         title="ajouter dossier"
@@ -218,7 +238,8 @@ const TabDossier = () => {
           adddossier();
           setIsAdd(false);
           toast.success("dossier ajoutée avec succès");
-        }}>
+        }}
+      >
         <Input
           placeholder="Nom du dossier"
           value={addingdossier.Nom}
@@ -227,7 +248,8 @@ const TabDossier = () => {
               ...addingdossier,
               Nom: e.target.value,
             });
-          }}></Input>
+          }}
+        ></Input>
         <Input
           placeholder="Tapez le Registre"
           value={addingdossier.Registre}
@@ -236,7 +258,8 @@ const TabDossier = () => {
               ...addingdossier,
               Registre: e.target.value,
             });
-          }}></Input>
+          }}
+        ></Input>
         <Input
           placeholder="Adresse "
           value={addingdossier.adresse}
@@ -245,7 +268,8 @@ const TabDossier = () => {
               ...addingdossier,
               adresse: e.target.value,
             });
-          }}></Input>
+          }}
+        ></Input>
         <Input
           placeholder="Adresse Désignée "
           value={addingdossier.AdresseDesigne}
@@ -254,7 +278,8 @@ const TabDossier = () => {
               ...addingdossier,
               AdresseDesigne: e.target.value,
             });
-          }}></Input>
+          }}
+        ></Input>
         <Input
           placeholder="Numéro de téléphone"
           value={addingdossier.Avocat}
@@ -263,7 +288,8 @@ const TabDossier = () => {
               ...addingdossier,
               Avocat: e.target.value,
             });
-          }}></Input>
+          }}
+        ></Input>
         <Input
           placeholder="Adresseavocat"
           value={addingdossier.Adresseavocat}
@@ -272,7 +298,8 @@ const TabDossier = () => {
               ...addingdossier,
               Adresseavocat: e.target.value,
             });
-          }}></Input>
+          }}
+        ></Input>
         <Input
           placeholder="E-mail"
           value={addingdossier.Email}
@@ -281,7 +308,8 @@ const TabDossier = () => {
               ...addingdossier,
               Email: e.target.value,
             });
-          }}></Input>
+          }}
+        ></Input>
       </Modal>
     </div>
   );

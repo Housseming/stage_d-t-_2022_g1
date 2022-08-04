@@ -121,169 +121,179 @@ const TabClient = () => {
     }
   };
   return (
-    <div className="App">
-        <button
-          className="btnadd"
-          onClick={() => {
-            setIsAdd(true);
-          }}>
-          Ajouter client
-        </button>
-        <div className="tab">
-          <Table
-            columns={column}
-            dataSource={listeservice}
-            size="medium"
-            bordered={true}></Table>
-        </div>
+    <div className="container2">
+      <div className="tab">
+        <Table
+          columns={column}
+          dataSource={listeservice}
+          size="medium"
+          bordered={true}
+          style={{ display: "flex", flex: 1 }}
+          scroll={{ x: "max-content" }}
+        ></Table>
+      </div>
 
-        <Modal
-          title="modifier client"
-          visible={isEdit}
-          okText="Enregistrer"
-          cancelText="Annuler"
-          onCancel={() => {
-            setIsEdit(false);
-          }}
-          onOk={async () => {
-            setIsEdit(false);
-            const newlisteservice = listeservice.map((client) => {
-              if (client.id == edditingclient.id) {
-                return edditingclient;
-              } else {
-                return client;
-              }
-            });
-            try {
-              const addclient = await axios.post(
-                "/client/update",
-                edditingclient
-              );
-            } catch (error) {
-              console.log("error");
+      <Modal
+        title="modifier client"
+        visible={isEdit}
+        okText="Enregistrer"
+        cancelText="Annuler"
+        onCancel={() => {
+          setIsEdit(false);
+        }}
+        onOk={async () => {
+          setIsEdit(false);
+          const newlisteservice = listeservice.map((client) => {
+            if (client.id == edditingclient.id) {
+              return edditingclient;
+            } else {
+              return client;
             }
-            setlisteservice(newlisteservice);
-            resetEditing();
-            toast.success("client modifié(e) avec succès");
-          }}>
-          <Input
-            placeholder="Nom du Client"
-            value={edditingclient?.Nom}
-            onChange={(e) => {
-              setEdditingclient({
-                ...edditingclient,
-                Nom: e.target.value,
-              });
-            }}></Input>
-          {/*edditingclient? s'il n'est pas null*/}
-          <Input
-            placeholder="Tapez le CIN"
-            value={edditingclient?.CIN}
-            onChange={(e) => {
-              setEdditingclient({...edditingclient, CIN: e.target.value});
-            }}></Input>
-          <Input
-            placeholder="Adresse "
-            value={edditingclient?.adresse}
-            onChange={(e) => {
-              setEdditingclient({
-                ...edditingclient,
-                adresse: e.target.value,
-              });
-            }}></Input>
-          <Input
-            placeholder="Adresse Désignée"
-            value={edditingclient?.AdresseDesigne}
-            onChange={(e) => {
-              setEdditingclient({
-                ...edditingclient,
-                AdresseDesigne: e.target.value,
-              });
-            }}></Input>
-          <Input
-            placeholder="Numéro de téléphone"
-            value={edditingclient?.Tel}
-            onChange={(e) => {
-              setEdditingclient({...edditingclient, Tel: e.target.value});
-            }}></Input>
-        </Modal>
-        <Modal
-          title="ajouter client"
-          visible={isAdd}
-          okText="Enregistrer"
-          cancelText="Annuler"
-          onCancel={() => {
-            setIsAdd(false);
+          });
+          try {
+            const addclient = await axios.post(
+              "/client/update",
+              edditingclient
+            );
+          } catch (error) {
+            console.log("error");
+          }
+          setlisteservice(newlisteservice);
+          resetEditing();
+          toast.success("client modifié(e) avec succès");
+        }}
+      >
+        <Input
+          placeholder="Nom du Client"
+          value={edditingclient?.Nom}
+          onChange={(e) => {
+            setEdditingclient({
+              ...edditingclient,
+              Nom: e.target.value,
+            });
           }}
-          onOk={() => {
-            addclient();
-            setIsAdd(false);
-            toast.success("client ajoutée avec succès");
-          }}>
-          <Input
-            placeholder="Nom du client"
-            value={addingclient.Nom}
-            onChange={(e) => {
-              setAddingclient({
-                ...addingclient,
-                Nom: e.target.value,
-              });
-            }}></Input>
-          <Input
-            placeholder="Tapez le CIN"
-            value={addingclient.CIN}
-            onChange={(e) => {
-              setAddingclient({
-                ...addingclient,
-                CIN: e.target.value,
-              });
-            }}></Input>
-          <Input
-            placeholder="Adresse "
-            value={addingclient.adresse}
-            onChange={(e) => {
-              setAddingclient({
-                ...addingclient,
-                adresse: e.target.value,
-              });
-            }}></Input>
-          <Input
-            placeholder="Adresse Désignée "
-            value={addingclient.AdresseDesigne}
-            onChange={(e) => {
-              setAddingclient({
-                ...addingclient,
-                AdresseDesigne: e.target.value,
-              });
-            }}></Input>
-          <Input
-            placeholder="Numéro de téléphone"
-            value={addingclient.Tel}
-            onChange={(e) => {
-              setAddingclient({
-                ...addingclient,
-                Tel: e.target.value,
-              });
-            }}></Input>
-          <Input
-            placeholder="Fax"
-            value={addingclient.Fax}
-            onChange={(e) => {
-              setAddingclient({
-                ...addingclient,
-                Fax: e.target.value,
-              });
-                  }}></Input>
-              <Input
-            placeholder="E-mail"
-            value={addingclient.Email}
-            onChange={(e) => {
-              setAddingclient({
-                ...addingclient,
-                Email: e.target.value,
-              });
-            }}></Input>
-        </Modal>
+        ></Input>
+        {/*edditingclient? s'il n'est pas null*/}
+        <Input
+          placeholder="Tapez le CIN"
+          value={edditingclient?.CIN}
+          onChange={(e) => {
+            setEdditingclient({ ...edditingclient, CIN: e.target.value });
+          }}
+        ></Input>
+        <Input
+          placeholder="Adresse "
+          value={edditingclient?.adresse}
+          onChange={(e) => {
+            setEdditingclient({
+              ...edditingclient,
+              adresse: e.target.value,
+            });
+          }}
+        ></Input>
+        <Input
+          placeholder="Adresse Désignée"
+          value={edditingclient?.AdresseDesigne}
+          onChange={(e) => {
+            setEdditingclient({
+              ...edditingclient,
+              AdresseDesigne: e.target.value,
+            });
+          }}
+        ></Input>
+        <Input
+          placeholder="Numéro de téléphone"
+          value={edditingclient?.Tel}
+          onChange={(e) => {
+            setEdditingclient({ ...edditingclient, Tel: e.target.value });
+          }}
+        ></Input>
+      </Modal>
+      <Modal
+        title="ajouter client"
+        visible={isAdd}
+        okText="Enregistrer"
+        cancelText="Annuler"
+        onCancel={() => {
+          setIsAdd(false);
+        }}
+        onOk={() => {
+          addclient();
+          setIsAdd(false);
+          toast.success("client ajoutée avec succès");
+        }}
+      >
+        <Input
+          placeholder="Nom du client"
+          value={addingclient.Nom}
+          onChange={(e) => {
+            setAddingclient({
+              ...addingclient,
+              Nom: e.target.value,
+            });
+          }}
+        ></Input>
+        <Input
+          placeholder="Tapez le CIN"
+          value={addingclient.CIN}
+          onChange={(e) => {
+            setAddingclient({
+              ...addingclient,
+              CIN: e.target.value,
+            });
+          }}
+        ></Input>
+        <Input
+          placeholder="Adresse "
+          value={addingclient.adresse}
+          onChange={(e) => {
+            setAddingclient({
+              ...addingclient,
+              adresse: e.target.value,
+            });
+          }}
+        ></Input>
+        <Input
+          placeholder="Adresse Désignée "
+          value={addingclient.AdresseDesigne}
+          onChange={(e) => {
+            setAddingclient({
+              ...addingclient,
+              AdresseDesigne: e.target.value,
+            });
+          }}
+        ></Input>
+        <Input
+          placeholder="Numéro de téléphone"
+          value={addingclient.Tel}
+          onChange={(e) => {
+            setAddingclient({
+              ...addingclient,
+              Tel: e.target.value,
+            });
+          }}
+        ></Input>
+        <Input
+          placeholder="Fax"
+          value={addingclient.Fax}
+          onChange={(e) => {
+            setAddingclient({
+              ...addingclient,
+              Fax: e.target.value,
+            });
+          }}
+        ></Input>
+        <Input
+          placeholder="E-mail"
+          value={addingclient.Email}
+          onChange={(e) => {
+            setAddingclient({
+              ...addingclient,
+              Email: e.target.value,
+            });
+          }}
+        ></Input>
+      </Modal>
     </div>
   );
 };

@@ -48,7 +48,7 @@ const Searchi = () => {
     <AutoComplete
       dropdownMatchSelectWidth={252}
       style={{
-        width: 300,
+        width: 280,
       }}
       options={options}
       onSelect={onSelect}
