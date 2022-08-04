@@ -12,6 +12,7 @@ import { AiFillEdit } from "react-icons/ai";
 import { MdDeleteForever } from "react-icons/md";
 import { toast } from "react-toastify";
 import { SearchOutlined } from "@ant-design/icons";
+import { Marginer } from "../marginer/marginfile";
 
 const Gestionclient = () => {
   const [listeservice, setlisteservice] = useState([]);
@@ -77,7 +78,7 @@ const Gestionclient = () => {
               type="primary"
             >
               {" "}
-              Search{" "}
+              Chercher Client{" "}
             </Button>
             <Button
               onClick={() => {
@@ -85,7 +86,7 @@ const Gestionclient = () => {
               }}
               type="danger"
             >
-              Reset{" "}
+              Réinitialiser{" "}
             </Button>
           </React.Fragment>
         );
@@ -274,30 +275,40 @@ console.log('length',filteredData.length)}
     <div className="App">
       <header className="App-header">
         <h1>Les clients</h1>
-        {<button className="btnadd"  onClick={() => {
-            setIsAdd(true);
-          } }> Ajouter </button> }
-          <Space>
-          <Input placeholder="ENTER SERACH TEXT" onChange = {handleChange}
-          type="text"
-          allowClear
-          value={searchText}
-              />
-             <Button onClick= { globalSearch } type="primary" > Search </Button>
-            <Button onClick={reset}> Reset </Button>
-            </Space>
-     
+        {
+          <button
+            className="btnadd"
+            onClick={() => {
+              setIsAdd(true);
+            }}>
+            {" "}
+            Ajouter{" "}
+          </button>
+        }
+        <Space>
+          <Input
+            placeholder="Texte de recherche"
+            onChange={handleChange}
+            type="text"
+            allowClear
+            value={searchText}
+          />
+          <Button onClick={globalSearch} type="primary">
+            {" "}
+            Chercher Client{" "}
+          </Button>
+          <Button onClick={reset}> Réinitialiser </Button>
+        </Space>
+        <Marginer direction="vertical" margin={50} />
         <div classname="tab">
-        
           <Table
             columns={columns}
-            
-            dataSource={(gridData && gridData.length )? gridData : listeservice }
-            style={{ with: 15 }}
+            dataSource={gridData && gridData.length ? gridData : listeservice}
+            style={{with: 15}}
             bordered={true}
           />
         </div>
-        { /*MODIFICATION*/ }
+        {/*MODIFICATION*/}
         <Modal
           title="modifier "
           visible={isEdit}
@@ -332,8 +343,7 @@ console.log('length',filteredData.length)}
             ); // a ne pas toucher l'id
             resetEditing();
             toast.success("Gestionclient modifié avec succée");
-          }}
-        >
+          }}>
           <Input
             placeholder="id"
             value={edditingGestionclient?.id}
@@ -342,8 +352,7 @@ console.log('length',filteredData.length)}
                 ...edditingGestionclient,
                 id: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder=""
             value={edditingGestionclient?.raison}
@@ -352,8 +361,7 @@ console.log('length',filteredData.length)}
                 ...edditingGestionclient,
                 raison: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder=""
             value={edditingGestionclient?.matricule}
@@ -362,8 +370,7 @@ console.log('length',filteredData.length)}
                 ...edditingGestionclient,
                 matricule: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder=""
             value={edditingGestionclient?.ville}
@@ -372,8 +379,7 @@ console.log('length',filteredData.length)}
                 ...edditingGestionclient,
                 ville: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder=""
             value={edditingGestionclient?.rue}
@@ -382,8 +388,7 @@ console.log('length',filteredData.length)}
                 ...edditingGestionclient,
                 rue: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder=""
             value={edditingGestionclient?.num}
@@ -392,8 +397,7 @@ console.log('length',filteredData.length)}
                 ...edditingGestionclient,
                 num: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder=""
             value={edditingGestionclient?.code_postale}
@@ -402,8 +406,7 @@ console.log('length',filteredData.length)}
                 ...edditingGestionclient,
                 code_postale: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder=""
             value={edditingGestionclient?.activité}
@@ -412,8 +415,7 @@ console.log('length',filteredData.length)}
                 ...edditingGestionclient,
                 activité: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
 
           <input
             type="radio"
@@ -424,8 +426,7 @@ console.log('length',filteredData.length)}
                 ...edditingGestionclient,
                 situation_fiscale: "non Assujetti",
               });
-            }}
-          ></input>
+            }}></input>
           <label>Non Assujetti </label>
           <input
             type="radio"
@@ -436,8 +437,7 @@ console.log('length',filteredData.length)}
                 ...edditingGestionclient,
                 situation_fiscale: "Assujetti",
               });
-            }}
-          ></input>
+            }}></input>
           <label>Assujetti </label>
           <input
             type="radio"
@@ -448,8 +448,7 @@ console.log('length',filteredData.length)}
                 ...edditingGestionclient,
                 situation_fiscale: "exonoré",
               });
-            }}
-          ></input>
+            }}></input>
           <label>exonoré</label>
           <Input
             placeholder="categorie"
@@ -459,8 +458,7 @@ console.log('length',filteredData.length)}
                 ...edditingGestionclient,
                 categorie: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder="fax"
             value={edditingGestionclient?.fax}
@@ -469,8 +467,7 @@ console.log('length',filteredData.length)}
                 ...edditingGestionclient,
                 fax: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder=""
             value={edditingGestionclient?.email}
@@ -479,80 +476,68 @@ console.log('length',filteredData.length)}
                 ...edditingGestionclient,
                 email: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
         </Modal>
-
- <input
-    type="radio" name='a'
-    value={edditingGestionclient?.situation_fiscale}
-    onChange={(e) => {
-      setEdditingGestionclient({
-        ...edditingGestionclient,
-        situation_fiscale: 'non Assujetti',
-      });
-    }}
-  >
- </input>
- <label>Non Assujetti          </label>
- <input
-    type="radio" name='a'
-    value={edditingGestionclient?.situation_fiscale}
-    onChange={(e) => {
-      setEdditingGestionclient({
-        ...edditingGestionclient,
-        situation_fiscale: 'Assujetti',
-      });
-    }}
-  >
- </input>
- <label>Assujetti</label>y
- <input
-    type="radio" name='a'
-    value={edditingGestionclient?.situation_fiscale}
-    onChange={(e) => {
-      setEdditingGestionclient({
-        ...edditingGestionclient,
-        situation_fiscale:'exonoré',
-      });
-    }}
-  >
- </input>
- <label>exonoré</label>
- <Input
-    placeholder="categorie"
-    value={edditingGestionclient?.categorie}
-    onChange={(e) => {
-      setEdditingGestionclient({
-        ...edditingGestionclient,
-        categorie: e.target.value,
-      });
-    }}
-  >
- </Input> 
- <Input
-    placeholder="fax"
-    value={edditingGestionclient?.fax}
-    onChange={(e) => {
-      setEdditingGestionclient({
-        ...edditingGestionclient,
-        fax: e.target.value,
-      });
-    }}
-  >
- </Input>
- <Input
-    placeholder=""
-    value={edditingGestionclient?.email}
-    onChange={(e) => {
-      setEdditingGestionclient({
-        ...edditingGestionclient,
-        email: e.target.value,
-      });
-    }}
-  >
- </Input>
-
+        <input
+          type="radio"
+          name="a"
+          value={edditingGestionclient?.situation_fiscale}
+          onChange={(e) => {
+            setEdditingGestionclient({
+              ...edditingGestionclient,
+              situation_fiscale: "non Assujetti",
+            });
+          }}></input>
+        <label>Non Assujetti </label>
+        <input
+          type="radio"
+          name="a"
+          value={edditingGestionclient?.situation_fiscale}
+          onChange={(e) => {
+            setEdditingGestionclient({
+              ...edditingGestionclient,
+              situation_fiscale: "Assujetti",
+            });
+          }}></input>
+        <label>Assujetti</label>y
+        <input
+          type="radio"
+          name="a"
+          value={edditingGestionclient?.situation_fiscale}
+          onChange={(e) => {
+            setEdditingGestionclient({
+              ...edditingGestionclient,
+              situation_fiscale: "exonoré",
+            });
+          }}></input>
+        <label>exonoré</label>
+        <Input
+          placeholder="categorie"
+          value={edditingGestionclient?.categorie}
+          onChange={(e) => {
+            setEdditingGestionclient({
+              ...edditingGestionclient,
+              categorie: e.target.value,
+            });
+          }}></Input>
+        <Input
+          placeholder="fax"
+          value={edditingGestionclient?.fax}
+          onChange={(e) => {
+            setEdditingGestionclient({
+              ...edditingGestionclient,
+              fax: e.target.value,
+            });
+          }}></Input>
+        <Input
+          placeholder=""
+          value={edditingGestionclient?.email}
+          onChange={(e) => {
+            setEdditingGestionclient({
+              ...edditingGestionclient,
+              email: e.target.value,
+            });
+          }}></Input>
         <Modal
           title="ajouter "
           visible={isAdd}
@@ -565,8 +550,7 @@ console.log('length',filteredData.length)}
             addGestionclient();
             setIsAdd(false);
             toast.success("client_ajouté avec succès");
-          }}
-        >
+          }}>
           <Input
             placeholder="id"
             value={addingGestionclient.id}
@@ -575,8 +559,7 @@ console.log('length',filteredData.length)}
                 ...addingGestionclient,
                 id: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder="raison"
             value={addingGestionclient.raison}
@@ -585,8 +568,7 @@ console.log('length',filteredData.length)}
                 ...addingGestionclient,
                 raison: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder="matricule"
             value={addingGestionclient.matricule}
@@ -595,8 +577,7 @@ console.log('length',filteredData.length)}
                 ...addingGestionclient,
                 matricule: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder="ville"
             value={addingGestionclient.ville}
@@ -605,8 +586,7 @@ console.log('length',filteredData.length)}
                 ...addingGestionclient,
                 ville: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder="rue"
             value={addingGestionclient.rue}
@@ -615,8 +595,7 @@ console.log('length',filteredData.length)}
                 ...addingGestionclient,
                 rue: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder="num"
             value={addingGestionclient.num}
@@ -625,8 +604,7 @@ console.log('length',filteredData.length)}
                 ...addingGestionclient,
                 num: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder="code_postale"
             value={addingGestionclient.code_postale}
@@ -635,8 +613,7 @@ console.log('length',filteredData.length)}
                 ...addingGestionclient,
                 code_postale: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder="activité"
             value={addingGestionclient.activité}
@@ -645,8 +622,7 @@ console.log('length',filteredData.length)}
                 ...addingGestionclient,
                 activité: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <div ClassName="situation">
             <p>Situation_fiscale</p>
             <input
@@ -659,8 +635,7 @@ console.log('length',filteredData.length)}
                   ...addingGestionclient,
                   situation_fiscale: "Non Assujetti",
                 });
-              }}
-            ></input>
+              }}></input>
             <label>Non Assujetti</label>
             <input
               type="radio"
@@ -672,8 +647,7 @@ console.log('length',filteredData.length)}
                   ...addingGestionclient,
                   situation_fiscale: "Asujetti",
                 });
-              }}
-            ></input>
+              }}></input>
             <label>Asujetti</label>
             <input
               type="radio"
@@ -685,8 +659,7 @@ console.log('length',filteredData.length)}
                   ...addingGestionclient,
                   situation_fiscale: "Exonoré",
                 });
-              }}
-            ></input>
+              }}></input>
             <label>Exonoré</label>
           </div>
           <Input
@@ -697,8 +670,7 @@ console.log('length',filteredData.length)}
                 ...addingGestionclient,
                 categorie: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder="fax"
             value={addingGestionclient.fax}
@@ -707,8 +679,7 @@ console.log('length',filteredData.length)}
                 ...addingGestionclient,
                 fax: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
           <Input
             placeholder="email"
             value={addingGestionclient.email}
@@ -717,8 +688,7 @@ console.log('length',filteredData.length)}
                 ...addingGestionclient,
                 email: e.target.value,
               });
-            }}
-          ></Input>
+            }}></Input>
         </Modal>
       </header>
     </div>
