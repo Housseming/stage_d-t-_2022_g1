@@ -66,9 +66,9 @@ route.get("/service", (req, res) => {
   });
 });
 route.post("/serviceadd", (req, res) => {
-    const { nom, service_id,lundi,mardi,mercredi,jeudi,vendredi,samedi } = req.body;
+    const {nom,tribunale_id,lundi,mardi,mercredi,jeudi,vendredi,samedi } = req.body;
     client.query(
-        "INSERT INTO servicetable (nom,service_id,lundi,mardi,mercredi,jeudi,vendredi,samedi) VALUES($1,$2,$3,$4,$5,$6,$7,$8)", [nom, service_id,lundi,mardi,mercredi,jeudi,vendredi,samedi],
+        "INSERT INTO servicetable (nom,tribunale_id,lundi,mardi,mercredi,jeudi,vendredi,samedi) VALUES($1,$2,$3,$4,$5,$6,$7,$8)", [nom, tribunale_id,lundi,mardi,mercredi,jeudi,vendredi,samedi],
         (error, result) => {
             if (error) {
                 console.log(error.message);
