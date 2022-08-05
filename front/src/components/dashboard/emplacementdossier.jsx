@@ -11,6 +11,8 @@ import { MdDeleteForever } from "react-icons/md";
 import { toast } from "react-toastify";
 
 const Emplacementdossier = () => {
+    const [page, setPage] = useState(1);
+    const [pageSize, setPageSize] = useState(6);
   const [listeservice, setlisteservice] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
   const [edditingEmplacementdossier, setEdditingEmplacementdossier] =
@@ -146,17 +148,32 @@ const Emplacementdossier = () => {
   return (
     <div className="App">
       <header className="App-header">
-      <h1>Emplacement dossier</h1>
-        {<button className="btnadd"  onClick={() => {
-            setIsAdd(true);
-          } }> Ajouter</button>}
+        <h1>Emplacement dossier</h1>
+        {
+          <button
+            className="btnadd"
+            onClick={() => {
+              setIsAdd(true);
+            }}
+          >
+            {" "}
+            Ajouter
+          </button>
+        }
         <div classname="tab">
           <Table
             columns={columns}
             dataSource={listeservice}
-            style={{ with: 15 }}
             bordered={true}
-            pagination={false}
+            pagination={{
+              current: page,
+              pageSize: pageSize,
+              onChange: (page, pageSize) => {
+                setPage(page);
+                setPageSize(pageSize);
+              },
+            }}
+            scroll={{ x: "max-content" }}
           />
         </div>
         {/*MODIFICATION*/}

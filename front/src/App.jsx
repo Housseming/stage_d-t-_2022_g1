@@ -22,6 +22,7 @@ import RechercheDossier from "./components/dashboard/recherchedossier";
 import Home from "./components/welcome/Home";
 import { Collabo } from "./components/dashboard/collaborateurs/collabo";
 import CreationDossier from "./components/dashboard/creationdossier";
+import Footer from "./components/FOOTER/footer";
 function App() {
   return (
     <BrowserRouter>
@@ -52,6 +53,7 @@ function App() {
   ></Route>*/}
         </Route>
       </Routes>
+      <Footer></Footer>
       <ToastContainer position="top-center"></ToastContainer>
     </BrowserRouter>
   );

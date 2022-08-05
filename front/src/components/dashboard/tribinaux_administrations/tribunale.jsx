@@ -11,7 +11,7 @@ import {
 } from "antd";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import ScrollTable from "scroll-antd-table";
+
 
 import Tableau from "./service";
 import "./trib.css";
@@ -25,6 +25,8 @@ const Tribunale = () => {
   const [isEdittrib, setIsEdittrib] = useState(false);
   const [edditingtrib, setEdditingtrib] = useState({lieu:""});
   const [isAddtrib, setIsAddtrib] = useState(false);
+   const [page, setPage] = useState(1);
+   const [pageSize, setPageSize] = useState(6);
   const [addingtrib, setAddingtrib] = useState({
     lieu: "",
   });
@@ -285,8 +287,17 @@ const Tribunale = () => {
                       dataSource={newListeService}
                       bottomHeight={0}
                       bordered={true}
-                      
-
+                      pagination={{
+                        current: page,
+                        pageSize: pageSize,
+                        onChange: (page, pageSize) => {
+                          setPage(page);
+                          setPageSize(pageSize);
+                        },
+                      }}
+                   
+                       
+                      scroll={{ x: "max-content" }}
                     ></Table>
                   </div>
 
