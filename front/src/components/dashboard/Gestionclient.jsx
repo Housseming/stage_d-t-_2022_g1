@@ -6,7 +6,7 @@
 import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { Table, Button, Modal, Input,Space } from "antd";
+import { Table, Button, Modal, Input,Space,Cascader } from "antd";
 import "antd/dist/antd.min.css";
 import { AiFillEdit } from "react-icons/ai";
 import { MdDeleteForever } from "react-icons/md";
@@ -15,6 +15,57 @@ import { SearchOutlined } from "@ant-design/icons";
 import { Marginer } from "../marginer/marginfile";
 
 const Gestionclient = () => {
+  const [listecodecollab, setListecodecollab] = useState([
+  
+  ]);
+  const options= [
+    {
+      value: "zhejiang",
+      label: "Zhejiang",
+      children: [
+        {
+          value: "hangzhou",
+          label: "Hangzhou",
+          children: [
+            {
+              value: "xihu",
+              label: "West Lake",
+            },
+            {
+              value: "xiasha",
+              label: "Xia Sha",
+              disabled: true,
+            },
+          ],
+        },
+      ],
+    },
+    {
+      value: "jiangsu",
+      label: "Jiangsu",
+      children: [
+        {
+          value: "nanjing",
+          label: "Nanjing",
+          children: [
+            {
+              value: "zhonghuamen",
+              label: "Zhong Hua men",
+            },
+          ],
+        },
+      ],
+    },
+  ];
+  const onChange = (value, selectedOptions) => {
+    console.log(value, selectedOptions);
+  };
+
+  const filter = (inputValue, path) =>
+    path.some(
+      (listecodecollab) =>
+        listecodecollab.label.toLowerCase().indexOf(inputValue.toLowerCase()) > -1
+    );
   const [listeservice, setlisteservice] = useState([]);
   const [gridData, setGridData] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
@@ -228,7 +279,7 @@ const Gestionclient = () => {
     }
   }; ///////////////////// Ajout
   //lien aveclback pour l'ajout
-
+const [Listecollab,setListecollab] = useState([]);
   const [isAdd, setIsAdd] = useState(false);
 
   const addGestionclient = async () => {
@@ -249,6 +300,33 @@ const reset = () => {
   getGestionclientrequest();
 
 }
+ const getCollabrequest = async () => {
+   try {
+     const response = await axios.get("/collab", {
+       withCredentials: true,
+     });
+
+     
+       console.log("salem",response);
+       setListecollab(response.data);
+       console.log("salem3",Listecollab);
+       for(var i=0;i<Listecollab.length;i++){
+        var codecollab = {value:Listecollab[i].id + ":" + Listecollab[i].username,label:Listecollab[i].id + ":" + Listecollab[i].username} 
+        listecodecollab[i]= codecollab;
+          console.log(i);
+       }
+       //setListecodecollab([{Listecollab.id + ":" + Listecollab.username}])
+       console.log("salem2",listecodecollab)
+
+     
+   } catch (error) {
+     console.log(error.message);
+   }
+ };
+
+ useEffect(() => {
+   getCollabrequest();
+ }, [Listecollab,listecodecollab]);
 
 const globalSearch = () => {filteredData = listeservice.filter((value)=> {
   return (  
@@ -280,7 +358,8 @@ console.log('length',filteredData.length)}
             className="btnadd"
             onClick={() => {
               setIsAdd(true);
-            }}>
+            }}
+          >
             {" "}
             Ajouter{" "}
           </button>
@@ -304,7 +383,7 @@ console.log('length',filteredData.length)}
           <Table
             columns={columns}
             dataSource={gridData && gridData.length ? gridData : listeservice}
-            style={{with: 15}}
+            style={{ with: 15 }}
             bordered={true}
           />
         </div>
@@ -343,7 +422,8 @@ console.log('length',filteredData.length)}
             ); // a ne pas toucher l'id
             resetEditing();
             toast.success("Gestionclient modifié avec succée");
-          }}>
+          }}
+        >
           <Input
             placeholder="id"
             value={edditingGestionclient?.id}
@@ -352,7 +432,8 @@ console.log('length',filteredData.length)}
                 ...edditingGestionclient,
                 id: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
           <Input
             placeholder=""
             value={edditingGestionclient?.raison}
@@ -361,7 +442,8 @@ console.log('length',filteredData.length)}
                 ...edditingGestionclient,
                 raison: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
           <Input
             placeholder=""
             value={edditingGestionclient?.matricule}
@@ -370,7 +452,8 @@ console.log('length',filteredData.length)}
                 ...edditingGestionclient,
                 matricule: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
           <Input
             placeholder=""
             value={edditingGestionclient?.ville}
@@ -379,7 +462,8 @@ console.log('length',filteredData.length)}
                 ...edditingGestionclient,
                 ville: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
           <Input
             placeholder=""
             value={edditingGestionclient?.rue}
@@ -388,7 +472,8 @@ console.log('length',filteredData.length)}
                 ...edditingGestionclient,
                 rue: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
           <Input
             placeholder=""
             value={edditingGestionclient?.num}
@@ -397,7 +482,8 @@ console.log('length',filteredData.length)}
                 ...edditingGestionclient,
                 num: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
           <Input
             placeholder=""
             value={edditingGestionclient?.code_postale}
@@ -406,7 +492,8 @@ console.log('length',filteredData.length)}
                 ...edditingGestionclient,
                 code_postale: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
           <Input
             placeholder=""
             value={edditingGestionclient?.activité}
@@ -415,7 +502,8 @@ console.log('length',filteredData.length)}
                 ...edditingGestionclient,
                 activité: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
 
           <input
             type="radio"
@@ -426,7 +514,8 @@ console.log('length',filteredData.length)}
                 ...edditingGestionclient,
                 situation_fiscale: "non Assujetti",
               });
-            }}></input>
+            }}
+          ></input>
           <label>Non Assujetti </label>
           <input
             type="radio"
@@ -437,7 +526,8 @@ console.log('length',filteredData.length)}
                 ...edditingGestionclient,
                 situation_fiscale: "Assujetti",
               });
-            }}></input>
+            }}
+          ></input>
           <label>Assujetti </label>
           <input
             type="radio"
@@ -448,7 +538,8 @@ console.log('length',filteredData.length)}
                 ...edditingGestionclient,
                 situation_fiscale: "exonoré",
               });
-            }}></input>
+            }}
+          ></input>
           <label>exonoré</label>
           <Input
             placeholder="categorie"
@@ -458,7 +549,8 @@ console.log('length',filteredData.length)}
                 ...edditingGestionclient,
                 categorie: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
           <Input
             placeholder="fax"
             value={edditingGestionclient?.fax}
@@ -467,7 +559,8 @@ console.log('length',filteredData.length)}
                 ...edditingGestionclient,
                 fax: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
           <Input
             placeholder=""
             value={edditingGestionclient?.email}
@@ -476,7 +569,8 @@ console.log('length',filteredData.length)}
                 ...edditingGestionclient,
                 email: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
         </Modal>
         <input
           type="radio"
@@ -487,7 +581,8 @@ console.log('length',filteredData.length)}
               ...edditingGestionclient,
               situation_fiscale: "non Assujetti",
             });
-          }}></input>
+          }}
+        ></input>
         <label>Non Assujetti </label>
         <input
           type="radio"
@@ -498,7 +593,8 @@ console.log('length',filteredData.length)}
               ...edditingGestionclient,
               situation_fiscale: "Assujetti",
             });
-          }}></input>
+          }}
+        ></input>
         <label>Assujetti</label>y
         <input
           type="radio"
@@ -509,7 +605,8 @@ console.log('length',filteredData.length)}
               ...edditingGestionclient,
               situation_fiscale: "exonoré",
             });
-          }}></input>
+          }}
+        ></input>
         <label>exonoré</label>
         <Input
           placeholder="categorie"
@@ -519,7 +616,8 @@ console.log('length',filteredData.length)}
               ...edditingGestionclient,
               categorie: e.target.value,
             });
-          }}></Input>
+          }}
+        ></Input>
         <Input
           placeholder="fax"
           value={edditingGestionclient?.fax}
@@ -528,7 +626,8 @@ console.log('length',filteredData.length)}
               ...edditingGestionclient,
               fax: e.target.value,
             });
-          }}></Input>
+          }}
+        ></Input>
         <Input
           placeholder=""
           value={edditingGestionclient?.email}
@@ -537,7 +636,8 @@ console.log('length',filteredData.length)}
               ...edditingGestionclient,
               email: e.target.value,
             });
-          }}></Input>
+          }}
+        ></Input>
         <Modal
           title="ajouter "
           visible={isAdd}
@@ -550,7 +650,18 @@ console.log('length',filteredData.length)}
             addGestionclient();
             setIsAdd(false);
             toast.success("client_ajouté avec succès");
-          }}>
+          }}
+        >
+          <Cascader
+            className="cascader1"
+            options={listecodecollab}
+            onChange={onChange}
+            placeholder="selectionner code client"
+            showSearch={{
+              filter,
+            }}
+            onSearch={(value) => console.log(value)}
+          />
           <Input
             placeholder="id"
             value={addingGestionclient.id}
@@ -559,7 +670,8 @@ console.log('length',filteredData.length)}
                 ...addingGestionclient,
                 id: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
           <Input
             placeholder="raison"
             value={addingGestionclient.raison}
@@ -568,7 +680,8 @@ console.log('length',filteredData.length)}
                 ...addingGestionclient,
                 raison: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
           <Input
             placeholder="matricule"
             value={addingGestionclient.matricule}
@@ -577,7 +690,8 @@ console.log('length',filteredData.length)}
                 ...addingGestionclient,
                 matricule: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
           <Input
             placeholder="ville"
             value={addingGestionclient.ville}
@@ -586,7 +700,8 @@ console.log('length',filteredData.length)}
                 ...addingGestionclient,
                 ville: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
           <Input
             placeholder="rue"
             value={addingGestionclient.rue}
@@ -595,7 +710,8 @@ console.log('length',filteredData.length)}
                 ...addingGestionclient,
                 rue: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
           <Input
             placeholder="num"
             value={addingGestionclient.num}
@@ -604,7 +720,8 @@ console.log('length',filteredData.length)}
                 ...addingGestionclient,
                 num: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
           <Input
             placeholder="code_postale"
             value={addingGestionclient.code_postale}
@@ -613,7 +730,8 @@ console.log('length',filteredData.length)}
                 ...addingGestionclient,
                 code_postale: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
           <Input
             placeholder="activité"
             value={addingGestionclient.activité}
@@ -622,7 +740,8 @@ console.log('length',filteredData.length)}
                 ...addingGestionclient,
                 activité: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
           <div ClassName="situation">
             <p>Situation_fiscale</p>
             <input
@@ -635,7 +754,8 @@ console.log('length',filteredData.length)}
                   ...addingGestionclient,
                   situation_fiscale: "Non Assujetti",
                 });
-              }}></input>
+              }}
+            ></input>
             <label>Non Assujetti</label>
             <input
               type="radio"
@@ -647,7 +767,8 @@ console.log('length',filteredData.length)}
                   ...addingGestionclient,
                   situation_fiscale: "Asujetti",
                 });
-              }}></input>
+              }}
+            ></input>
             <label>Asujetti</label>
             <input
               type="radio"
@@ -659,7 +780,8 @@ console.log('length',filteredData.length)}
                   ...addingGestionclient,
                   situation_fiscale: "Exonoré",
                 });
-              }}></input>
+              }}
+            ></input>
             <label>Exonoré</label>
           </div>
           <Input
@@ -670,7 +792,8 @@ console.log('length',filteredData.length)}
                 ...addingGestionclient,
                 categorie: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
           <Input
             placeholder="fax"
             value={addingGestionclient.fax}
@@ -679,7 +802,8 @@ console.log('length',filteredData.length)}
                 ...addingGestionclient,
                 fax: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
           <Input
             placeholder="email"
             value={addingGestionclient.email}
@@ -688,7 +812,8 @@ console.log('length',filteredData.length)}
                 ...addingGestionclient,
                 email: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
         </Modal>
       </header>
     </div>

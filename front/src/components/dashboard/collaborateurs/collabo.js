@@ -277,7 +277,6 @@ export const Collabo = () => {
           }}
           size="middle"
           bordered={true}
-          
           scroll={{ x: "max-content" }}
         ></Table>
 
@@ -303,10 +302,7 @@ export const Collabo = () => {
               }
             });
             try {
-              const resp = await axios.post(
-                "/modif",
-                edditingCollab
-              );
+              const resp = await axios.post("/modif", edditingCollab);
             } catch (error) {
               console.log(error);
             }
@@ -481,6 +477,16 @@ export const Collabo = () => {
               setAddingCollab({
                 ...addingCollab,
                 ville: e.target.value,
+              });
+            }}
+          ></Input>
+          <Input
+            placeholder="rue"
+            value={addingCollab.rue}
+            onChange={(e) => {
+              setAddingCollab({
+                ...addingCollab,
+                rue: e.target.value,
               });
             }}
           ></Input>

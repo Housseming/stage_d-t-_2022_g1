@@ -296,8 +296,6 @@ const Tribunale = () => {
                           setPageSize(pageSize);
                         },
                       }}
-                   
-                       
                       scroll={{ x: "max-content" }}
                     ></Table>
                   </div>
@@ -538,6 +536,7 @@ const Tribunale = () => {
                                       ...addingservice,
                                       lundi: "audience",
                                     });
+                                    console.log(addingservice);
                                   } else {
                                     setAddingservice({
                                       ...addingservice,
@@ -558,7 +557,100 @@ const Tribunale = () => {
                                       ...addingservice,
                                       mardi: "audience",
                                     });
-                                  } else {
+                                  }
+                                }}
+                              >
+                                Mardi
+                              </Checkbox>
+                            </Col>
+                            <Col span={6}>
+                              <Checkbox
+                                value="mercredi"
+                                onChange={(e) => {
+                                  if (e.target.checked) {
+                                    setAddingservice({
+                                      ...addingservice,
+                                      mercredi: "audience",
+                                    });
+                                  }
+                                }}
+                              >
+                                Mercredi
+                              </Checkbox>
+                            </Col>
+                            <Col span={6}>
+                              <Checkbox
+                                value="jeudi"
+                                onChange={(e) => {
+                                  if (e.target.checked) {
+                                    setAddingservice({
+                                      ...addingservice,
+                                      jeudi: "audience",
+                                    });
+                                  }
+                                }}
+                              >
+                                Jeudi
+                              </Checkbox>
+                            </Col>
+                            <Col span={6}>
+                              <Checkbox
+                                value="vendredi"
+                                onChange={(e) => {
+                                  if (e.target.checked) {
+                                    setAddingservice({
+                                      ...addingservice,
+                                      vendredi: "audience",
+                                    });
+                                  }
+                                }}
+                              >
+                                Vendredi
+                              </Checkbox>
+                            </Col>
+                            <Col span={6}>
+                              <Checkbox
+                                value="samedi"
+                                onChange={(e) => {
+                                  if (e.target.checked) {
+                                    setAddingservice({
+                                      ...addingservice,
+                                      samedi: "audience",
+                                    });
+                                  }
+                                }}
+                              >
+                                Samedi
+                              </Checkbox>
+                            </Col>
+                          </Row>
+                        </Checkbox.Group>
+                      </div>
+                      <div className="jours">
+                        <h1>Jours de course</h1>
+
+                        <Checkbox.Group onChange={onChange}>
+                          <Row>
+                            <Col span={6}>
+                              <Checkbox
+                                value="lundi"
+                                onChange={(e) => {
+                                  if (e.target.checked) {
+                                    setAddingservice({
+                                      ...addingservice,
+                                      lundi: "course",
+                                    });
+                                  }
+                                }}
+                              >
+                                Lundi
+                              </Checkbox>
+                            </Col>
+                            <Col span={6}>
+                              <Checkbox
+                                value="mardi"
+                                onChange={(e) => {
+                                  if (e.target.checked) {
                                     setAddingservice({
                                       ...addingservice,
                                       mardi: "course",
@@ -576,11 +668,6 @@ const Tribunale = () => {
                                   if (e.target.checked) {
                                     setAddingservice({
                                       ...addingservice,
-                                      mercredi: "audience",
-                                    });
-                                  } else {
-                                    setAddingservice({
-                                      ...addingservice,
                                       mercredi: "course",
                                     });
                                   }
@@ -594,11 +681,6 @@ const Tribunale = () => {
                                 value="jeudi"
                                 onChange={(e) => {
                                   if (e.target.checked) {
-                                    setAddingservice({
-                                      ...addingservice,
-                                      jeudi: "audience",
-                                    });
-                                  } else {
                                     setAddingservice({
                                       ...addingservice,
                                       jeudi: "course",
@@ -616,61 +698,13 @@ const Tribunale = () => {
                                   if (e.target.checked) {
                                     setAddingservice({
                                       ...addingservice,
-                                      vendredi: "audience",
-                                    });
-                                  } else {
-                                    setAddingservice({
-                                      ...addingservice,
-                                      vendredi: "course",
+                                      mercredi: "course",
                                     });
                                   }
                                 }}
                               >
                                 Vendredi
                               </Checkbox>
-                            </Col>
-                            <Col span={6}>
-                              <Checkbox
-                                value="samedi"
-                                onChange={(e) => {
-                                  if (e.target.checked) {
-                                    setAddingservice({
-                                      ...addingservice,
-                                      samedi: "audience",
-                                    });
-                                  } else {
-                                    setAddingservice({
-                                      ...addingservice,
-                                      samedi: "course",
-                                    });
-                                  }
-                                }}
-                              >
-                                Samedi
-                              </Checkbox>
-                            </Col>
-                          </Row>
-                        </Checkbox.Group>
-                      </div>
-                      <div className="jours">
-                        <h1>Jours de course</h1>
-
-                        <Checkbox.Group onChange={onChange}>
-                          <Row>
-                            <Col span={6}>
-                              <Checkbox value="lundi">Lundi</Checkbox>
-                            </Col>
-                            <Col span={6}>
-                              <Checkbox value="mardi">Mardi</Checkbox>
-                            </Col>
-                            <Col span={6}>
-                              <Checkbox value="mercredi">Mercredi</Checkbox>
-                            </Col>
-                            <Col span={6}>
-                              <Checkbox value="jeudi">Jeudi</Checkbox>
-                            </Col>
-                            <Col span={6}>
-                              <Checkbox value="vendredi">Vendredi</Checkbox>
                             </Col>
                             <Col span={6}>
                               <Checkbox value="samedi">Samedi</Checkbox>
