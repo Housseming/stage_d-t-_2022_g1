@@ -572,72 +572,12 @@ console.log('length',filteredData.length)}
             }}
           ></Input>
         </Modal>
-        <input
-          type="radio"
-          name="a"
-          value={edditingGestionclient?.situation_fiscale}
-          onChange={(e) => {
-            setEdditingGestionclient({
-              ...edditingGestionclient,
-              situation_fiscale: "non Assujetti",
-            });
-          }}
-        ></input>
-        <label>Non Assujetti </label>
-        <input
-          type="radio"
-          name="a"
-          value={edditingGestionclient?.situation_fiscale}
-          onChange={(e) => {
-            setEdditingGestionclient({
-              ...edditingGestionclient,
-              situation_fiscale: "Assujetti",
-            });
-          }}
-        ></input>
-        <label>Assujetti</label>y
-        <input
-          type="radio"
-          name="a"
-          value={edditingGestionclient?.situation_fiscale}
-          onChange={(e) => {
-            setEdditingGestionclient({
-              ...edditingGestionclient,
-              situation_fiscale: "exonoré",
-            });
-          }}
-        ></input>
-        <label>exonoré</label>
-        <Input
-          placeholder="categorie"
-          value={edditingGestionclient?.categorie}
-          onChange={(e) => {
-            setEdditingGestionclient({
-              ...edditingGestionclient,
-              categorie: e.target.value,
-            });
-          }}
-        ></Input>
-        <Input
-          placeholder="fax"
-          value={edditingGestionclient?.fax}
-          onChange={(e) => {
-            setEdditingGestionclient({
-              ...edditingGestionclient,
-              fax: e.target.value,
-            });
-          }}
-        ></Input>
-        <Input
-          placeholder=""
-          value={edditingGestionclient?.email}
-          onChange={(e) => {
-            setEdditingGestionclient({
-              ...edditingGestionclient,
-              email: e.target.value,
-            });
-          }}
-        ></Input>
+   
+        
+
+        
+       
+      
         <Modal
           title="ajouter "
           visible={isAdd}
