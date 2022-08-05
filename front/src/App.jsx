@@ -23,6 +23,8 @@ import Home from "./components/welcome/Home";
 import { Collabo } from "./components/dashboard/collaborateurs/collabo";
 import CreationDossier from "./components/dashboard/creationdossier";
 import Footer from "./components/FOOTER/footer";
+import Dossiers from "./components/dashboard/Dossiers";
+
 function App() {
   return (
     <BrowserRouter>
@@ -45,7 +47,8 @@ function App() {
           <Route path="Tribunale" element={<Tribunale />} />
           <Route path="welcome" element={<Welcome></Welcome>}></Route>
           <Route path="recherchedossier" element={<RechercheDossier />}></Route>
-          <Route path="creationdossier" element={<CreationDossier/>}></Route>
+          <Route path="creationdossier" element={<CreationDossier />}></Route>
+          <Route path="dossiers" element={<Dossiers />}></Route>
 
           {/*<Route
             path="/tribunale"
