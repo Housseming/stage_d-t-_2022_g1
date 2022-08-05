@@ -11,7 +11,6 @@ import {
 } from "antd";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import ScrollTable from "scroll-antd-table";
 
 import Tableau from "./service";
 import "./trib.css";

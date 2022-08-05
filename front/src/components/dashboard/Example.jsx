@@ -108,7 +108,7 @@ const resources2 = [
     name: "Emplacement Dossier",
     description:
       "",
-    href: "#",
+    href: "dossiers",
   },
   {
     name: "Creation",
