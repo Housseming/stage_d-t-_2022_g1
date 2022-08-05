@@ -12,11 +12,9 @@ import {
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-
-
 import Tableau from "./service";
 import "./trib.css";
-import {GoDiffAdded} from "react-icons/go"
+import { GoDiffAdded } from "react-icons/go";
 import { AiFillEdit } from "react-icons/ai";
 import { MdDeleteForever } from "react-icons/md";
 import { toast } from "react-toastify";
@@ -24,10 +22,10 @@ const { TabPane } = Tabs;
 const Tribunale = () => {
   const [listeTrib, setListeTrib] = useState([]);
   const [isEdittrib, setIsEdittrib] = useState(false);
-  const [edditingtrib, setEdditingtrib] = useState({lieu:""});
+  const [edditingtrib, setEdditingtrib] = useState({ lieu: "" });
   const [isAddtrib, setIsAddtrib] = useState(false);
-   const [page, setPage] = useState(1);
-   const [pageSize, setPageSize] = useState(6);
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(6);
   const [addingtrib, setAddingtrib] = useState({
     lieu: "",
   });
@@ -70,9 +68,9 @@ const Tribunale = () => {
   };
 
   //*************************modifier tribunale**************
-  const edittrib = (id,lieu) => {
+  const edittrib = (id, lieu) => {
     setIsEdittrib(true);
-    setEdditingtrib({id:id,lieu:lieu}); //copie mel record
+    setEdditingtrib({ id: id, lieu: lieu }); //copie mel record
   };
   const resetEditingtrib = () => {
     setIsEdittrib(false);
@@ -92,7 +90,6 @@ const Tribunale = () => {
     console.log("checked = ", checkedValues);
   };
 
-
   const [listeservice, setListeservice] = useState([]);
   const [isEditservice, setIsEditservice] = useState(false);
   const [edditingservice, setEdditingservice] = useState({
@@ -108,7 +105,6 @@ const Tribunale = () => {
   const [isAddservice, setIsAddservice] = useState(false);
   const [addingservice, setAddingservice] = useState({
     nom: "",
-    tribunale_id: "",
     lundi: "",
     mardi: "",
     mercredi: "",
@@ -170,10 +166,8 @@ const Tribunale = () => {
   };
   useEffect(() => {
     gettribunalerequest();
-  }, [listeTrib]);
-  useEffect(() => {
     getservicerequest();
-  }, [listeservice]);
+  }, [listeTrib, listeservice]);
 
   console.log(listeservice);
 
@@ -223,17 +217,21 @@ const Tribunale = () => {
       console.log(error);
     }
   };
-
+  /***************tabposition */
   const [tabPosition, setTabPosition] = useState("left");
 
   const changeTabPosition = (e) => {
     setTabPosition(e.target.value);
   };
-
+  /**********************return comp****************************/
   return (
     <>
-      <button className="ajouter" onClick={() => {
-                      setIsAddtrib(true)}}>
+      <button
+        className="ajouter"
+        onClick={() => {
+          setIsAddtrib(true);
+        }}
+      >
         <div className="ajoutertrib">
           <GoDiffAdded className="addingtrib"></GoDiffAdded>
           <pre>
@@ -277,6 +275,10 @@ const Tribunale = () => {
                   <button
                     className="btnaddservice"
                     onClick={() => {
+                      setAddingservice({
+                        ...addingservice,
+                        tribunale_id: trib.id,
+                      });
                       setIsAddservice(true);
                     }}
                   >
@@ -512,6 +514,7 @@ const Tribunale = () => {
                       toast.success("service ajouté avec succès");
                     }}
                   >
+                    <Input value={trib.id}></Input>
                     <Input
                       placeholder="tapez le nom du service"
                       value={addingservice.nom}
@@ -787,15 +790,6 @@ const Tribunale = () => {
         })}
       </Tabs>
     </>
-  );
-};
-const Tribu = (tribunaleId) => {
-  return (
-    <div>
-      <AiFillEdit></AiFillEdit>
-      <h1>{tribunaleId}</h1>
-      <MdDeleteForever></MdDeleteForever>
-    </div>
   );
 };
 
