@@ -3,16 +3,19 @@
 //aleh nafs l'id felexemple // je vais supposer que chaqun a son propre id
 //difference entre addresse désigné et addresse //lien entre catgorie et la listeservice ajouter
 //collaborateur et code client??? // j'aui ajouté le fax et l'email malgre j'ai pas vu dans le tableau
+//l(ajout fde lid annulle khiir ahawka malezmouch yidakhel haja kdima namloha felback unique) different ala fazet eya lelcode client besh matodkhlsh badha (ashel) amltha ken front felajout w lmodifier naaresh ftableau eli wrah mawjoud wale edheya nesel aleha
 import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { Table, Button, Modal, Input,Space,Cascader } from "antd";
+import { Table, Button, Modal, Input,Space,Cascader,Radio } from "antd";
 import "antd/dist/antd.min.css";
 import { AiFillEdit } from "react-icons/ai";
 import { MdDeleteForever } from "react-icons/md";
 import { toast } from "react-toastify";
 import { SearchOutlined } from "@ant-design/icons";
 import { Marginer } from "../marginer/marginfile";
+
+
 
 const Gestionclient = () => {
   const [listecodecollab, setListecodecollab] = useState([
@@ -66,6 +69,7 @@ const Gestionclient = () => {
       (listecodecollab) =>
         listecodecollab.label.toLowerCase().indexOf(inputValue.toLowerCase()) > -1
     );
+  const [value, setValue] = useState(0);
   const [listeservice, setlisteservice] = useState([]);
   const [gridData, setGridData] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
@@ -84,6 +88,10 @@ const Gestionclient = () => {
     fax: "",
     email: "",
   });
+  const onChangeradio = (e) => {
+    console.log("radio checked", e.target.value);
+    setValue(e.target.value);
+  };
   const[searchText,setSearchText]=useState("");
   const[sortedInfo,setSortedInfo]=useState({});
   let [filteredData]=useState();
@@ -290,7 +298,7 @@ const [Listecollab,setListecollab] = useState([]);
       console.log(error);
     }
   };
-  
+  //tebaa lrecherche
 const handleChange = (e) => {setSearchText(e.target.value);
 if(e.target.value ==="")
 getGestionclientrequest();}
@@ -306,8 +314,9 @@ const reset = () => {
        withCredentials: true,
      });
 
-     
+     //pour la liste select lors de l'ajout
        console.log("salem",response);
+      
        setListecollab(response.data);
        console.log("salem3",Listecollab);
        for(var i=0;i<Listecollab.length;i++){
@@ -327,7 +336,7 @@ const reset = () => {
  useEffect(() => {
    getCollabrequest();
  }, [Listecollab,listecodecollab]);
-
+//recherche
 const globalSearch = () => {filteredData = listeservice.filter((value)=> {
   return (  
     value.raison.toLowerCase().includes(searchText.toLowerCase()) ||
@@ -383,7 +392,7 @@ console.log('length',filteredData.length)}
           <Table
             columns={columns}
             dataSource={gridData && gridData.length ? gridData : listeservice}
-            style={{ with: 15 }}
+            
             bordered={true}
           />
         </div>
@@ -596,12 +605,24 @@ console.log('length',filteredData.length)}
             className="cascader1"
             options={listecodecollab}
             onChange={onChange}
-            placeholder="selectionner code client"
+            placeholder="selectionner code collaborateur "
             showSearch={{
               filter,
             }}
             onSearch={(value) => console.log(value)}
           />
+           <Input
+            placeholder="code client"
+            value={addingGestionclient.id+'/'+addingGestionclient.raison[0]}
+          //  onChange={(e) => {
+            //</Modal>  setAddingGestionclient({
+              //  ...addingGestionclient,
+                //id: e.target.value,
+             // });
+           // }}
+            
+            
+          ></Input>
           <Input
             placeholder="id"
             value={addingGestionclient.id}
@@ -611,6 +632,7 @@ console.log('length',filteredData.length)}
                 id: e.target.value,
               });
             }}
+
           ></Input>
           <Input
             placeholder="raison"
@@ -684,45 +706,50 @@ console.log('length',filteredData.length)}
           ></Input>
           <div ClassName="situation">
             <p>Situation_fiscale</p>
-            <input
-              type="radio"
-              name="a"
+            <div className="radioet">
+            <Radio.Group  onChange={onChangeradio} value={value}>
+            <Radio
+            
               placeholder="situation_fiscale"
-              value={addingGestionclient.situation_fiscale}
-              onChange={(e) => {
+              value={1}
+
+              onChange={(e) =>
+                 {if( e.target.checked){
                 setAddingGestionclient({
                   ...addingGestionclient,
-                  situation_fiscale: "Non Assujetti",
-                });
+                  situation_fiscale: "non Assujetti",
+                });}
               }}
-            ></input>
-            <label>Non Assujetti</label>
-            <input
-              type="radio"
-              name="a"
+            > non Assujeti
+            </Radio>
+           
+            <Radio
+            
               placeholder="situation_fiscale"
-              value={addingGestionclient.situation_fiscale}
+              value={2}
               onChange={(e) => {
+                
                 setAddingGestionclient({
                   ...addingGestionclient,
                   situation_fiscale: "Asujetti",
                 });
               }}
-            ></input>
-            <label>Asujetti</label>
-            <input
-              type="radio"
-              name="a"
+            >Assujeti</Radio>
+          
+            <Radio
+              
               placeholder="situation_fiscale"
-              value={addingGestionclient.situation_fiscale}
+              value={3}
               onChange={(e) => {
                 setAddingGestionclient({
                   ...addingGestionclient,
                   situation_fiscale: "Exonoré",
                 });
               }}
-            ></input>
-            <label>Exonoré</label>
+            >Exonoré</Radio>
+            
+            </Radio.Group>
+          </div>
           </div>
           <Input
             placeholder="categorie"

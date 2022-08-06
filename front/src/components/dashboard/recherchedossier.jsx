@@ -14,6 +14,8 @@ const RechercheDossier = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [edditingdossier, setEdditingdossier] = useState(null);
   const [isAdd, setIsAdd] = useState(false);
+  const [gridData, setGridData] = useState([]);
+  
   const [addingdossier, setAddingdossier] = useState({
     num_affaire: "",
     emplacement: "",
@@ -230,6 +232,32 @@ const RechercheDossier = () => {
     getdossierrequest();
   });
   console.log(liste);
+   //la barre de la recherche
+   const globalSearch = () => {filteredData = liste.filter((value)=> {
+    return (  
+      value.id_dossier.toLowerCase().includes(searchText.toLowerCase()) ||
+      value.num_affaire.toLowerCase().includes(searchText.toLowerCase()) ||
+      value.emplacement.toLowerCase().includes(searchText.toLowerCase()) ||
+      value.client.toLowerCase().includes(searchText.toLowerCase()) ||
+      value.tel.toLowerCase().includes(searchText.toLowerCase()) ||
+      value.mission.toLowerCase().includes(searchText.toLowerCase()) ||
+      value.adversaire.toLowerCase().includes(searchText.toLowerCase()) 
+
+    );
+  
+  });
+  setGridData(filteredData)
+  console.log('filtered',filteredData)
+  console.log('length',filteredData.length)}
+  const handleChange = (e) => {setSearchText(e.target.value);
+    if(e.target.value ==="")
+     getdossierrequest();}
+    const reset = () => {
+      setSortedInfo({});
+      setSearchText("");
+       getdossierrequest();
+    
+    }
 
   //supprimer dossier
   const deletedossier = (record) => {
@@ -282,7 +310,7 @@ const RechercheDossier = () => {
   };*/
 
   {/*} const globalSearch = () => {
-    filteredData = listeservice.filter((value) => {
+    filteredData = liste.filter((value) => {
       return (
         value.num_affaire.toLowerCase().includes(searchText.toLowerCase()) ||
         value.emplacement.toLowerCase().includes(searchText.toLowerCase()) ||
@@ -340,10 +368,24 @@ const RechercheDossier = () => {
           </Button>
           <Button onClick={reset}> Réinitialiser </Button>
           </Space>*/}
+           <Space>
+          <Input
+            placeholder="Texte de recherche"
+            onChange={handleChange}
+            type="text"
+            allowClear
+            value={searchText}
+          />
+          <Button onClick={globalSearch} type="primary">
+            {" "}
+            Chercher dossier{" "}
+          </Button>
+          <Button onClick={reset}> Réinitialiser </Button>
+        </Space>
         <div className="tab">
           <Table
             columns={column}
-            dataSource={liste}
+            dataSource={gridData && gridData.length ? gridData : liste}
             size="large"
             bordered={true}></Table>
         </div>
