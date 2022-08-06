@@ -1,12 +1,14 @@
 import React from "react";
 import axios from "axios";
 import {useState, useEffect} from "react";
-import {Table, Modal, Input,Button,Space} from "antd";
+import { Table, Modal, Input, Button, Space } from "antd";
+import "../../App.css"
 import "antd/dist/antd.min.css";
 import {AiFillEdit} from "react-icons/ai";
 import {MdDeleteForever} from "react-icons/md";
 import { toast } from "react-toastify";
 import { SearchOutlined } from "@ant-design/icons";
+import { Marginer } from "../marginer/marginfile";
 
 const RechercheDossier = () => {
   //declaration necessaires
@@ -303,72 +305,43 @@ const RechercheDossier = () => {
       console.log(error);
     }
   };
-  /*const reset = () => {
-    setSortedInfo({});
-    setSearchText("");
-    getGestionclientrequest();
-  };*/
 
-  {/*} const globalSearch = () => {
-    filteredData = liste.filter((value) => {
-      return (
-        value.num_affaire.toLowerCase().includes(searchText.toLowerCase()) ||
-        value.emplacement.toLowerCase().includes(searchText.toLowerCase()) ||
-        value.client.toLowerCase().includes(searchText.toLowerCase()) ||
-        value.tel.toLowerCase().includes(searchText.toLowerCase()) ||
-        value.mission.toLowerCase().includes(searchText.toLowerCase()) ||
-        value.adversaire.toLowerCase().includes(searchText.toLowerCase()) ||
-        value.reste
-          .toLowerCase()
-          .includes(searchText.toLowerCase())
-      );
-    });
-    setGridData(filteredData);
-    console.log("filtered", filteredData);
-    console.log("length", filteredData.length);
-  };*/}
   return (
     <div className="App">
       <header className="App-header">
         <div className="boutonet">
-          <button
-            className="btnadd"
-            onClick={() => {
-              setIsAdd(true);
-            }}>
-            Ajouter Tache
-          </button>
-          <button
-            className="btnadd"
-            onClick={() => {
-              setIsAdd(true);
-            }}>
-            Reclasser Dossier
-          </button>
-
-          <button
-            className="btnadd"
-            onClick={() => {
-              setIsAdd(true);
-            }}>
-            Archiver Dossier
-          </button>
+          <table>
+            <tr>
+              <td>
+                <button
+                  className="btnadd"
+                  onClick={() => {
+                    setIsAdd(true);
+                  }}>
+                  Ajouter Tache
+                </button>
+              </td>
+              <td>
+                <button
+                  className="btnadd"
+                  onClick={() => {
+                    setIsAdd(true);
+                  }}>
+                  Reclasser Dossier
+                </button>
+              </td>
+              <button
+                className="btnadd"
+                onClick={() => {
+                  setIsAdd(true);
+                }}>
+                Archiver Dossier
+              </button>
+            </tr>
+          </table>
         </div>
-        {/*<Space>
-          <Input
-            placeholder="Texte de recherche"
-            onChange={handleChange}
-            type="text"
-            allowClear
-            value={searchText}
-          />
-          <Button onClick={globalSearch} type="primary">
-            {" "}
-            Chercher Client{" "}
-          </Button>
-          <Button onClick={reset}> Réinitialiser </Button>
-          </Space>*/}
-           <Space>
+        <Marginer direction="vertical" margin={20} />
+        <Space>
           <Input
             placeholder="Texte de recherche"
             onChange={handleChange}
@@ -382,6 +355,7 @@ const RechercheDossier = () => {
           </Button>
           <Button onClick={reset}> Réinitialiser </Button>
         </Space>
+        <Marginer direction="vertical" margin={50} />
         <div className="tab">
           <Table
             columns={column}
