@@ -43,8 +43,8 @@ function App() {
           <Route path="recettedufinance" element={<Recettedufinance />} />
           <Route path="emplacementdossier" element={<Emplacementdossier />} />
           <Route path="gestionclient" element={<Gestionclient />} />
-          <Route path="collab" element={<Collabo></Collabo>}></Route>
-          <Route path="Tribunale" element={<Tribunale />} />
+          <Route path="collaborateurs" element={<Collabo></Collabo>}></Route>
+          <Route path="Tribunaux_et_administrations" element={<Tribunale />} />
           <Route path="welcome" element={<Welcome></Welcome>}></Route>
           <Route path="recherchedossier" element={<RechercheDossier />}></Route>
           <Route path="creationdossier" element={<CreationDossier />}></Route>
