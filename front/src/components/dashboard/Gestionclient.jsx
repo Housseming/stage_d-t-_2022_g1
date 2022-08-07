@@ -429,6 +429,7 @@ const deleteGestionclientrequest = async (id) => {
             dataSource={liste}
             style={{ with:15 }}
             bordered={true}
+<<<<<<< Updated upstream
             /> 
           </div>
   {/*MODIFICATION*/}
@@ -557,6 +558,223 @@ const deleteGestionclientrequest = async (id) => {
     }}
   >
  </Input>
+=======
+          />
+        </div>
+        {/*MODIFICATION*/}
+        <Modal
+          title="modifier "
+          visible={isEdit}
+          okText="Enregistrer"
+          cancelText="Annuler"
+          onCancel={() => {
+            setIsEdit(false);
+          }}
+          onOk={() => {
+            setIsEdit(false);
+            const newlisteservice = listeservice.map((Gestionclient) => {
+              if (Gestionclient.id === edditingGestionclient.id) {
+                return edditingGestionclient;
+              } else {
+                return Gestionclient;
+              }
+            });
+            setlisteservice(newlisteservice);
+            editGestionclientrequest(
+              edditingGestionclient.id,
+              edditingGestionclient.raison,
+              edditingGestionclient.matricule,
+              edditingGestionclient.ville,
+              edditingGestionclient.rue,
+              edditingGestionclient.num,
+              edditingGestionclient.code_postale,
+              edditingGestionclient.activité,
+              edditingGestionclient.situation_fiscale,
+              edditingGestionclient.categorie,
+              edditingGestionclient.fax,
+              edditingGestionclient.email
+            ); // a ne pas toucher l'id
+            resetEditing();
+            toast.success("Gestionclient modifié avec succée");
+          }}
+        >
+           <Cascader
+            className="cascader1"
+            options={listecodecollab}
+            onChange={onChange}
+            placeholder="selectionner code collaborateur "
+            showSearch={{
+              filter,
+            }}
+            onSearch={(value) => console.log(value)}
+          />
+           <Input
+            placeholder="code client"
+            value={edditingGestionclient.id+'/'+edditingGestionclient.raison[0]}
+            ></Input>
+          
+          
+            <Input
+            placeholder="id"
+            value={edditingGestionclient?.id}
+            onChange={(e) => {
+              setEdditingGestionclient({
+                ...edditingGestionclient,
+                id: e.target.value,
+              });
+            }}
+          ></Input>
+          <Input
+            placeholder=""
+            value={edditingGestionclient?.raison}
+            onChange={(e) => {
+              setEdditingGestionclient({
+                ...edditingGestionclient,
+                raison: e.target.value,
+              });
+            }}
+          ></Input>
+          <Input
+            placeholder=""
+            value={edditingGestionclient?.matricule}
+            onChange={(e) => {
+              setEdditingGestionclient({
+                ...edditingGestionclient,
+                matricule: e.target.value,
+              });
+            }}
+          ></Input>
+          <Input
+            placeholder=""
+            value={edditingGestionclient?.ville}
+            onChange={(e) => {
+              setEdditingGestionclient({
+                ...edditingGestionclient,
+                ville: e.target.value,
+              });
+            }}
+          ></Input>
+          <Input
+            placeholder=""
+            value={edditingGestionclient?.rue}
+            onChange={(e) => {
+              setEdditingGestionclient({
+                ...edditingGestionclient,
+                rue: e.target.value,
+              });
+            }}
+          ></Input>
+          <Input
+            placeholder=""
+            value={edditingGestionclient?.num}
+            onChange={(e) => {
+              setEdditingGestionclient({
+                ...edditingGestionclient,
+                num: e.target.value,
+              });
+            }}
+          ></Input>
+          <Input
+            placeholder=""
+            value={edditingGestionclient?.code_postale}
+            onChange={(e) => {
+              setEdditingGestionclient({
+                ...edditingGestionclient,
+                code_postale: e.target.value,
+              });
+            }}
+          ></Input>
+          <Input
+            placeholder=""
+            value={edditingGestionclient?.activité}
+            onChange={(e) => {
+              setEdditingGestionclient({
+                ...edditingGestionclient,
+                activité: e.target.value,
+              });
+            }}
+          ></Input>
+<div ClassName="situation">
+            <p>Situation_fiscale</p>
+            <div className="radioet">
+            <Radio.Group  onChange={onChangeradio} value={value}>
+            <Radio
+            
+              placeholder="situation_fiscale"
+              value={1}
+
+              onChange={(e) =>
+                 {if( e.target.checked){
+                setEdditingGestionclient({
+                  ...edditingGestionclient,
+                  situation_fiscale: "non Assujetti",
+                });}
+              }}
+            > non Assujeti
+            </Radio>
+           
+            <Radio
+            
+              placeholder="situation_fiscale"
+              value={2}
+              onChange={(e) => {
+                
+                setEdditingGestionclient({
+                  ...edditingGestionclient,
+                  situation_fiscale: "Asujetti",
+                });
+              }}
+            >Assujeti</Radio>
+          
+            <Radio
+              
+              placeholder="situation_fiscale"
+              value={3}
+              onChange={(e) => {  
+                setEdditingGestionclient({
+                  ...edditingGestionclient,
+                  situation_fiscale: "Exonoré",
+                });
+              }}
+            >Exonoré</Radio>
+            
+            </Radio.Group>
+</div>
+        </div>
+          <Input
+            placeholder="categorie"
+            value={edditingGestionclient?.categorie}
+            onChange={(e) => {
+              setEdditingGestionclient({
+                ...edditingGestionclient,
+                categorie: e.target.value,
+              });
+            }}
+          ></Input>
+          <Input
+            placeholder="fax"
+            value={edditingGestionclient?.fax}
+            onChange={(e) => {
+              setEdditingGestionclient({
+                ...edditingGestionclient,
+                fax: e.target.value,
+              });
+            }}
+          ></Input>
+          <Input
+            placeholder=""
+            value={edditingGestionclient?.email}
+            onChange={(e) => {
+              setEdditingGestionclient({
+                ...edditingGestionclient,
+                email: e.target.value,
+              });
+            }}
+          ></Input>
+        </Modal>
+   
+        
+>>>>>>> Stashed changes
 
  <input
     type="radio" name='a'
