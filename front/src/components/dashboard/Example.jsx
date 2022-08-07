@@ -37,7 +37,7 @@ const solutions1 = [
   {
     name: "Tribunaux et Administrations",
     description: "",
-    href: "/tribunale",
+    href: "Tribunaux_et_administrations",
     icon: RefreshIcon,
   },
   {
@@ -61,7 +61,7 @@ const solutions1 = [
   {
     name: "Collaborateur",
     description: " ",
-    href: "collab",
+    href: "collaborateurs",
     icon: ClockIcon,
   },
   {

@@ -26,9 +26,42 @@ const Tribunale = () => {
   const [isAddtrib, setIsAddtrib] = useState(false);
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(6);
+  const [disabled, setDisabled] = useState({
+    check1: false,
+    check2: false,
+    check3: false,
+    check4: false,
+    check5: false,
+    check6: false,
+  });
+  const [disabled2, setDisabled2] = useState({
+    check1: false,
+    check2: false,
+    check3: false,
+    check4: false,
+    check5: false,
+    check6: false,
+  });
+  const [checking, setChecking] = useState({
+    check1: false,
+    check2: false,
+    check3: false,
+    check4: false,
+    check5: false,
+    check6: false,
+  });
+  const [checking2, setChecking2] = useState({
+    check1: false,
+    check2: false,
+    check3: false,
+    check4: false,
+    check5: false,
+    check6: false,
+  });
   const [addingtrib, setAddingtrib] = useState({
     lieu: "",
   });
+  const optionschecked = ["lundi", "mardi", "mercredi", "vendredi", "samedi"];
 
   //**********select tribunale********************
   const gettribunalerequest = async () => {
@@ -94,7 +127,6 @@ const Tribunale = () => {
   const [isEditservice, setIsEditservice] = useState(false);
   const [edditingservice, setEdditingservice] = useState({
     nom: "",
-    tribunale_id: "",
     lundi: "",
     mardi: "",
     mercredi: "",
@@ -146,8 +178,9 @@ const Tribunale = () => {
                   deleteservice(record);
                 }}
               ></MdDeleteForever>
-
-              <p>supprimer</p>
+              <pre>
+                <p>supprimer</p>
+              </pre>
             </div>
           </div>
         );
@@ -166,8 +199,10 @@ const Tribunale = () => {
   };
   useEffect(() => {
     gettribunalerequest();
+  });
+  useEffect(() => {
     getservicerequest();
-  }, [listeTrib, listeservice]);
+  });
 
   console.log(listeservice);
 
@@ -202,7 +237,8 @@ const Tribunale = () => {
   //*************************modifier un service**************
   const editservice = (record) => {
     setIsEditservice(true);
-    setEdditingservice({ ...record }); //copie mel record
+    setEdditingservice({ ...record });
+    console.log("saleeem",edditingservice) //copie mel record
   };
   const resetEditing = () => {
     setIsEditservice(false);
@@ -347,10 +383,27 @@ const Tribunale = () => {
                     <div className="audcourse">
                       <div className="jours">
                         <h1>Jours de l'audience</h1>
-                        <Checkbox.Group onChange={onChange}>
+                        <Checkbox.Group
+                          onChange={onChange}
+                          defaultValue={[
+                            edditingservice?.lundi == "audience" ? "lundi" : "",
+                            edditingservice?.mardi == "audience" ? "mardi" : "",
+                            edditingservice?.mercredi == "audience"
+                              ? "mercredi"
+                              : "",
+                            edditingservice?.jeudi == "audience" ? "jeudi" : "",
+                            edditingservice?.vendredi == "audience"
+                              ? "vendredi"
+                              : "",
+                            edditingservice?.samedi == "audience"
+                              ? "samedi"
+                              : "",
+                          ]}
+                        >
                           <Row>
                             <Col span={6}>
                               <Checkbox
+                              
                                 value="lundi"
                                 onChange={(e) => {
                                   if (e.target.checked) {
@@ -358,7 +411,114 @@ const Tribunale = () => {
                                       ...edditingservice,
                                       lundi: "audience",
                                     });
-                                  } else {
+                                  }
+                                }}
+                              >
+                                Lundi
+                              </Checkbox>
+                            </Col>
+                            <Col span={6}>
+                              <Checkbox
+                                value="mardi"
+                                onChange={(e) => {
+                                  if (e.target.checked) {
+                                    setEdditingservice({
+                                      ...edditingservice,
+                                      mardi: "audience",
+                                    });
+                                  }
+                                }}
+                              >
+                                Mardi
+                              </Checkbox>
+                            </Col>
+                            <Col span={6}>
+                              <Checkbox
+                                value="mercredi"
+                                onChange={(e) => {
+                                  if (e.target.checked) {
+                                    setEdditingservice({
+                                      ...edditingservice,
+                                      mercredi: "audience",
+                                    });
+                                  }
+                                }}
+                              >
+                                Mercredi
+                              </Checkbox>
+                            </Col>
+                            <Col span={6}>
+                              <Checkbox
+                                value="jeudi"
+                                onChange={(e) => {
+                                  if (e.target.checked) {
+                                    setEdditingservice({
+                                      ...edditingservice,
+                                      jeudi: "audience",
+                                    });
+                                  }
+                                }}
+                              >
+                                Jeudi
+                              </Checkbox>
+                            </Col>
+                            <Col span={6}>
+                              <Checkbox
+                                value="vendredi"
+                                onChange={(e) => {
+                                  if (e.target.checked) {
+                                    setEdditingservice({
+                                      ...edditingservice,
+                                      vendredi: "audience",
+                                    });
+                                  }
+                                }}
+                              >
+                                Vendredi
+                              </Checkbox>
+                            </Col>
+                            <Col span={6}>
+                              <Checkbox
+                                value="samedi"
+                                onChange={(e) => {
+                                  if (e.target.checked) {
+                                    setEdditingservice({
+                                      ...edditingservice,
+                                      samedi: "audience",
+                                    });
+                                  }
+                                }}
+                              >
+                                Samedi
+                              </Checkbox>
+                            </Col>
+                          </Row>
+                        </Checkbox.Group>
+                      </div>
+                      <div className="jours">
+                        <h1>Jours de course</h1>
+
+                        <Checkbox.Group
+                          onChange={onChange}
+                          defaultValue={[
+                            edditingservice?.lundi == "course" ? "lundi" : "",
+                            edditingservice?.mardi == "course" ? "mardi" : "",
+                            edditingservice?.mercredi == "course"
+                              ? "mercredi"
+                              : "",
+                            edditingservice?.jeudi == "course" ? "jeudi" : "",
+                            edditingservice?.vendredi == "course"
+                              ? "vendredi"
+                              : "",
+                            edditingservice?.samedi == "course" ? "samedi" : "",
+                          ]}
+                        >
+                          <Row>
+                            <Col span={6}>
+                              <Checkbox
+                                value="lundi"
+                                onChange={(e) => {
+                                  if (e.target.checked) {
                                     setEdditingservice({
                                       ...edditingservice,
                                       lundi: "course",
@@ -376,11 +536,6 @@ const Tribunale = () => {
                                   if (e.target.checked) {
                                     setEdditingservice({
                                       ...edditingservice,
-                                      mardi: "audience",
-                                    });
-                                  } else {
-                                    setEdditingservice({
-                                      ...edditingservice,
                                       mardi: "course",
                                     });
                                   }
@@ -394,11 +549,6 @@ const Tribunale = () => {
                                 value="mercredi"
                                 onChange={(e) => {
                                   if (e.target.checked) {
-                                    setEdditingservice({
-                                      ...edditingservice,
-                                      mercredi: "audience",
-                                    });
-                                  } else {
                                     setEdditingservice({
                                       ...edditingservice,
                                       mercredi: "course",
@@ -416,11 +566,6 @@ const Tribunale = () => {
                                   if (e.target.checked) {
                                     setEdditingservice({
                                       ...edditingservice,
-                                      jeudi: "audience",
-                                    });
-                                  } else {
-                                    setEdditingservice({
-                                      ...edditingservice,
                                       jeudi: "course",
                                     });
                                   }
@@ -434,11 +579,6 @@ const Tribunale = () => {
                                 value="vendredi"
                                 onChange={(e) => {
                                   if (e.target.checked) {
-                                    setEdditingservice({
-                                      ...edditingservice,
-                                      vendredi: "audience",
-                                    });
-                                  } else {
                                     setEdditingservice({
                                       ...edditingservice,
                                       vendredi: "course",
@@ -456,11 +596,6 @@ const Tribunale = () => {
                                   if (e.target.checked) {
                                     setEdditingservice({
                                       ...edditingservice,
-                                      samedi: "audience",
-                                    });
-                                  } else {
-                                    setEdditingservice({
-                                      ...edditingservice,
                                       samedi: "course",
                                     });
                                   }
@@ -468,32 +603,6 @@ const Tribunale = () => {
                               >
                                 Samedi
                               </Checkbox>
-                            </Col>
-                          </Row>
-                        </Checkbox.Group>
-                      </div>
-                      <div className="jours">
-                        <h1>Jours de course</h1>
-
-                        <Checkbox.Group onChange={onChange}>
-                          <Row>
-                            <Col span={6}>
-                              <Checkbox value="lundi">Lundi</Checkbox>
-                            </Col>
-                            <Col span={6}>
-                              <Checkbox value="mardi">Mardi</Checkbox>
-                            </Col>
-                            <Col span={6}>
-                              <Checkbox value="mercredi">Mercredi</Checkbox>
-                            </Col>
-                            <Col span={6}>
-                              <Checkbox value="jeudi">Jeudi</Checkbox>
-                            </Col>
-                            <Col span={6}>
-                              <Checkbox value="vendredi">Vendredi</Checkbox>
-                            </Col>
-                            <Col span={6}>
-                              <Checkbox value="samedi">Samedi</Checkbox>
                             </Col>
                           </Row>
                         </Checkbox.Group>
@@ -507,11 +616,29 @@ const Tribunale = () => {
                     cancelText="Annuler"
                     onCancel={() => {
                       setIsAddservice(false);
+                      setAddingservice({
+                        nom: "",
+                        lundi: "",
+                        mardi: "",
+                        mercredi: "",
+                        jeudi: "",
+                        vendredi: "",
+                        samedi: "",
+                      });
                     }}
                     onOk={() => {
                       addservice();
                       setIsAddservice(false);
                       toast.success("service ajouté avec succès");
+                      setAddingservice({
+                        nom: "",
+                        lundi: "",
+                        mardi: "",
+                        mercredi: "",
+                        jeudi: "",
+                        vendredi: "",
+                        samedi: "",
+                      });
                     }}
                   >
                     <Input value={trib.id}></Input>
@@ -532,6 +659,8 @@ const Tribunale = () => {
                           <Row>
                             <Col span={6}>
                               <Checkbox
+                                disabled={disabled2.check1}
+                                
                                 value="lundi"
                                 onChange={(e) => {
                                   if (e.target.checked) {
@@ -539,12 +668,10 @@ const Tribunale = () => {
                                       ...addingservice,
                                       lundi: "audience",
                                     });
-                                    console.log(addingservice);
+                                    setDisabled({ ...disabled, check1: true });
+                                    
                                   } else {
-                                    setAddingservice({
-                                      ...addingservice,
-                                      lundi: "course",
-                                    });
+                                    setDisabled({ ...disabled, check1: false });
                                   }
                                 }}
                               >
@@ -553,6 +680,8 @@ const Tribunale = () => {
                             </Col>
                             <Col span={6}>
                               <Checkbox
+                               
+                                disabled={disabled2.check2}
                                 value="mardi"
                                 onChange={(e) => {
                                   if (e.target.checked) {
@@ -560,6 +689,10 @@ const Tribunale = () => {
                                       ...addingservice,
                                       mardi: "audience",
                                     });
+                                   
+                                    setDisabled({ ...disabled, check2: true });
+                                  } else {
+                                    setDisabled({ ...disabled, check2: false });
                                   }
                                 }}
                               >
@@ -568,6 +701,8 @@ const Tribunale = () => {
                             </Col>
                             <Col span={6}>
                               <Checkbox
+                                
+                                disabled={disabled2.check3}
                                 value="mercredi"
                                 onChange={(e) => {
                                   if (e.target.checked) {
@@ -575,6 +710,10 @@ const Tribunale = () => {
                                       ...addingservice,
                                       mercredi: "audience",
                                     });
+                                   
+                                    setDisabled({ ...disabled, check3: true });
+                                  } else {
+                                    setDisabled({ ...disabled, check3: false });
                                   }
                                 }}
                               >
@@ -583,6 +722,8 @@ const Tribunale = () => {
                             </Col>
                             <Col span={6}>
                               <Checkbox
+                              
+                                disabled={disabled2.check4}
                                 value="jeudi"
                                 onChange={(e) => {
                                   if (e.target.checked) {
@@ -590,6 +731,10 @@ const Tribunale = () => {
                                       ...addingservice,
                                       jeudi: "audience",
                                     });
+                                    setDisabled({ ...disabled, check4: true });
+                                    
+                                  } else {
+                                    setDisabled({ ...disabled, check4: false });
                                   }
                                 }}
                               >
@@ -598,6 +743,8 @@ const Tribunale = () => {
                             </Col>
                             <Col span={6}>
                               <Checkbox
+                               
+                                disabled={disabled2.check5}
                                 value="vendredi"
                                 onChange={(e) => {
                                   if (e.target.checked) {
@@ -605,6 +752,10 @@ const Tribunale = () => {
                                       ...addingservice,
                                       vendredi: "audience",
                                     });
+                                    setDisabled({ ...disabled, check5: true });
+                                    
+                                  } else {
+                                    setDisabled({ ...disabled, check5: false });
                                   }
                                 }}
                               >
@@ -613,6 +764,8 @@ const Tribunale = () => {
                             </Col>
                             <Col span={6}>
                               <Checkbox
+                       
+                                disabled={disabled2.check6}
                                 value="samedi"
                                 onChange={(e) => {
                                   if (e.target.checked) {
@@ -620,6 +773,10 @@ const Tribunale = () => {
                                       ...addingservice,
                                       samedi: "audience",
                                     });
+                                    setDisabled({ ...disabled, check6: true });
+                                  
+                                  } else {
+                                    setDisabled({ ...disabled, check6: false });
                                   }
                                 }}
                               >
@@ -637,11 +794,23 @@ const Tribunale = () => {
                             <Col span={6}>
                               <Checkbox
                                 value="lundi"
+                                
+                                disabled={disabled.check1}
                                 onChange={(e) => {
                                   if (e.target.checked) {
                                     setAddingservice({
                                       ...addingservice,
                                       lundi: "course",
+                                    });
+                                    
+                                    setDisabled2({
+                                      ...disabled2,
+                                      check1: true,
+                                    });
+                                  } else {
+                                    setDisabled2({
+                                      ...disabled2,
+                                      check1: false,
                                     });
                                   }
                                 }}
@@ -652,11 +821,23 @@ const Tribunale = () => {
                             <Col span={6}>
                               <Checkbox
                                 value="mardi"
+                               
+                                disabled={disabled.check2}
                                 onChange={(e) => {
                                   if (e.target.checked) {
                                     setAddingservice({
                                       ...addingservice,
                                       mardi: "course",
+                                    });
+                                  
+                                    setDisabled2({
+                                      ...disabled2,
+                                      check2: true,
+                                    });
+                                  } else {
+                                    setDisabled2({
+                                      ...disabled2,
+                                      check2: false,
                                     });
                                   }
                                 }}
@@ -666,12 +847,24 @@ const Tribunale = () => {
                             </Col>
                             <Col span={6}>
                               <Checkbox
+                                
                                 value="mercredi"
+                                disabled={disabled.check3}
                                 onChange={(e) => {
                                   if (e.target.checked) {
                                     setAddingservice({
                                       ...addingservice,
                                       mercredi: "course",
+                                    });
+                                  
+                                    setDisabled2({
+                                      ...disabled2,
+                                      check3: true,
+                                    });
+                                  } else {
+                                    setDisabled2({
+                                      ...disabled2,
+                                      check3: false,
                                     });
                                   }
                                 }}
@@ -681,12 +874,24 @@ const Tribunale = () => {
                             </Col>
                             <Col span={6}>
                               <Checkbox
+                           
                                 value="jeudi"
+                                disabled={disabled.check4}
                                 onChange={(e) => {
                                   if (e.target.checked) {
                                     setAddingservice({
                                       ...addingservice,
                                       jeudi: "course",
+                                    });
+                                 
+                                    setDisabled2({
+                                      ...disabled2,
+                                      check4: true,
+                                    });
+                                  } else {
+                                    setDisabled2({
+                                      ...disabled2,
+                                      check4: false,
                                     });
                                   }
                                 }}
@@ -696,12 +901,24 @@ const Tribunale = () => {
                             </Col>
                             <Col span={6}>
                               <Checkbox
+                                
                                 value="vendredi"
+                                disabled={disabled.check5}
                                 onChange={(e) => {
                                   if (e.target.checked) {
                                     setAddingservice({
                                       ...addingservice,
-                                      mercredi: "course",
+                                      vendredi: "course",
+                                    });
+                               
+                                    setDisabled2({
+                                      ...disabled2,
+                                      check5: true,
+                                    });
+                                  } else {
+                                    setDisabled2({
+                                      ...disabled2,
+                                      check5: false,
                                     });
                                   }
                                 }}
@@ -710,7 +927,31 @@ const Tribunale = () => {
                               </Checkbox>
                             </Col>
                             <Col span={6}>
-                              <Checkbox value="samedi">Samedi</Checkbox>
+                              <Checkbox
+                               
+                                value="samedi"
+                                disabled={disabled.check6}
+                                onChange={(e) => {
+                                  if (e.target.checked) {
+                                    setAddingservice({
+                                      ...addingservice,
+                                      samedi: "course",
+                                    });
+                                  
+                                    setDisabled2({
+                                      ...disabled2,
+                                      check6: true,
+                                    });
+                                  } else {
+                                    setDisabled2({
+                                      ...disabled2,
+                                      check6: false,
+                                    });
+                                  }
+                                }}
+                              >
+                                Samedi
+                              </Checkbox>
                             </Col>
                           </Row>
                         </Checkbox.Group>
