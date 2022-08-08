@@ -1,13 +1,13 @@
 /* This example requires Tailwind CSS v2.0+ */
 //il vaut mieux l'id a ne pas toucher
 //aleh nafs l'id felexemple // je vais supposer que chaqun a son propre id
-//difference entre addresse désigné et addresse //lien entre catgorie et la listeservice ajouter
+//difference entre addresse désigné et addresse //lien entre catgorie et la listeservice Ajouter
 //collaborateur et code client??? // j'aui ajouté le fax et l'email malgre j'ai pas vu dans le tableau
 //l(ajout fde lid annulle khiir ahawka malezmouch yidakhel haja kdima namloha felback unique) different ala fazet eya lelcode client besh matodkhlsh badha (ashel) amltha ken front felajout w lmodifier naaresh ftableau eli wrah mawjoud wale edheya nesel aleha
 import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { Table, Button, Modal, Input,Space,Cascader,Radio } from "antd";
+import { Table, Button, Modal, Input,Space,Cascader,Radio,Checkbox } from "antd";
 import "antd/dist/antd.min.css";
 import { AiFillEdit } from "react-icons/ai";
 import { MdDeleteForever } from "react-icons/md";
@@ -70,6 +70,7 @@ const Gestionclient = () => {
         listecodecollab.label.toLowerCase().indexOf(inputValue.toLowerCase()) > -1
     );
   const [value, setValue] = useState(0);
+  const [val, setVal] = useState();
   const [listeservice, setlisteservice] = useState([]);
   const [gridData, setGridData] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
@@ -88,6 +89,15 @@ const Gestionclient = () => {
     fax: "",
     email: "",
   });
+  const onChange1 = (e) => {
+    if (e.target.checked)
+    {setVal("");
+   { console.log(`checked = ${e.target.checked}`);
+   }
+    }
+    else {setVal(addingGestionclient.id+'/'+addingGestionclient.raison[0]);
+         console.log(`not checked = ${e.target.checked}`)}
+  };
   const onChangeradio = (e) => {
     console.log("radio checked", e.target.value);
     setValue(e.target.value);
@@ -210,7 +220,7 @@ const Gestionclient = () => {
   useEffect(() => {
     getGestionclientrequest();
   }, []);
-  console.log("listeservice",listeservice);
+  //console.log("listeservice",listeservice);
 
   //supprimer une Gestionclient
   const deleteGestionclient = (record) => {
@@ -315,17 +325,17 @@ const reset = () => {
      });
 
      //pour la liste select lors de l'ajout
-       console.log("salem",response);
+      // console.log("salem",response);
       
        setListecollab(response.data);
-       console.log("salem3",Listecollab);
+      // console.log("salem3",Listecollab);
        for(var i=0;i<Listecollab.length;i++){
         var codecollab = {value:Listecollab[i].id + ":" + Listecollab[i].username,label:Listecollab[i].id + ":" + Listecollab[i].username} 
         listecodecollab[i]= codecollab;
-          console.log(i);
+         // console.log(i);
        }
        //setListecodecollab([{Listecollab.id + ":" + Listecollab.username}])
-       console.log("salem2",listecodecollab)
+      // console.log("salem2",listecodecollab)
 
      
    } catch (error) {
@@ -433,6 +443,22 @@ console.log('length',filteredData.length)}
             toast.success("Gestionclient modifié avec succée");
           }}
         >
+             <Cascader
+            className="cascader1"
+            options={listecodecollab}
+            onChange={onChange}
+            placeholder="selectionner code collaborateur "
+            showSearch={{
+              filter,
+            }}
+            onSearch={(value) => console.log(value)}
+          />
+
+           <Input
+            placeholder="code client"
+            
+           value={val}
+           ></Input>
           <Input
             placeholder="id"
             value={edditingGestionclient?.id}
@@ -443,6 +469,7 @@ console.log('length',filteredData.length)}
               });
             }}
           ></Input>
+          
           <Input
             placeholder=""
             value={edditingGestionclient?.raison}
@@ -514,42 +541,54 @@ console.log('length',filteredData.length)}
             }}
           ></Input>
 
-          <input
-            type="radio"
-            name="a"
-            value={edditingGestionclient?.situation_fiscale}
-            onChange={(e) => {
-              setEdditingGestionclient({
-                ...edditingGestionclient,
-                situation_fiscale: "non Assujetti",
-              });
-            }}
-          ></input>
-          <label>Non Assujetti </label>
-          <input
-            type="radio"
-            name="a"
-            value={edditingGestionclient?.situation_fiscale}
-            onChange={(e) => {
-              setEdditingGestionclient({
-                ...edditingGestionclient,
-                situation_fiscale: "Assujetti",
-              });
-            }}
-          ></input>
-          <label>Assujetti </label>
-          <input
-            type="radio"
-            name="a"
-            value={edditingGestionclient?.situation_fiscale}
-            onChange={(e) => {
-              setEdditingGestionclient({
-                ...edditingGestionclient,
-                situation_fiscale: "exonoré",
-              });
-            }}
-          ></input>
-          <label>exonoré</label>
+<div ClassName="situation">
+            <p>Situation_fiscale</p>
+            <div className="radioet">
+            <Radio.Group  onChange={onChangeradio} value={value}>
+            <Radio
+            
+              placeholder="situation_fiscale"
+              value={1}
+
+              onChange={(e) =>
+                 {if( e.target.checked)
+                  {
+                setEdditingGestionclient({
+                  ...edditingGestionclient,
+                  situation_fiscale: "non Assujetti",
+                });}
+              }}
+            > non Assujeti
+            </Radio>
+           
+            <Radio
+            
+              placeholder="situation_fiscale"
+              value={2}
+              onChange={(e) => {
+                
+                setEdditingGestionclient({
+                  ...edditingGestionclient,
+                  situation_fiscale: "Asujetti",
+                });
+              }}
+            >Assujeti</Radio>
+          
+            <Radio
+              
+              placeholder="situation_fiscale"
+              value={3}
+              onChange={(e) => {
+                setEdditingGestionclient({
+                  ...edditingGestionclient,
+                  situation_fiscale: "Exonoré",
+                });
+              }}
+            >Exonoré</Radio>
+            
+            </Radio.Group>
+          </div>
+          </div>
           <Input
             placeholder="categorie"
             value={edditingGestionclient?.categorie}
@@ -588,7 +627,7 @@ console.log('length',filteredData.length)}
        
       
         <Modal
-          title="ajouter "
+          title="Ajouter un client "
           visible={isAdd}
           okText="Enregistrer"
           cancelText="Annuler"
@@ -605,15 +644,17 @@ console.log('length',filteredData.length)}
             className="cascader1"
             options={listecodecollab}
             onChange={onChange}
-            placeholder="selectionner code collaborateur "
+            placeholder="Selectionner code collaborateur "
             showSearch={{
               filter,
             }}
             onSearch={(value) => console.log(value)}
           />
+             <br/><Checkbox onChange={onChange1}>  Saisie Manuel(codeclient)</Checkbox>;
+
            <Input
             placeholder="code client"
-            value={addingGestionclient.id+'/'+addingGestionclient.raison[0]}
+            value={val}
           //  onChange={(e) => {
             //</Modal>  setAddingGestionclient({
               //  ...addingGestionclient,
