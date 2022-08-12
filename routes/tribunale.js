@@ -93,17 +93,18 @@ route.post("/serviceeff", (req, res) => {
     );
 });
 
-route.post("/service/update", (req, res) => {
-    const {id, nom,lundi,mardi,mercredi,jeudi,vendredi,samedi } = req.body;
+route.post("/updateservice", (req, res) => {
+    const {id,tribunale_id,nom,lundi,mardi,mercredi,jeudi,vendredi,samedi } = req.body;
     client.query(
-        "UPDATE servicetable SET nom=$1,lundi=$2,mardi=$3,mercredi=$4,jeudi=$5,vendredi=$6,samedi=$7 WHERE service_id=$8 ", [nom,lundi,mardi,mercredi,jeudi,vendredi,samedi,id],
-        (error, result) => {
-            if (error) {
-                console.log(error);
-            } else {
-                res.json("service modifiée");
-            }
+      "UPDATE servicetable SET nom=$1,lundi=$2,mardi=$3,mercredi=$4,jeudi=$5,vendredi=$6,samedi=$7,tribunale_id=$8 WHERE service_id=$9 ",
+      [nom, lundi, mardi, mercredi, jeudi, vendredi, samedi, tribunale_id,id],
+      (error, result) => {
+        if (error) {
+          console.log(error);
+        } else {
+          res.json("service modifiée");
         }
+      }
     );
 });
 
