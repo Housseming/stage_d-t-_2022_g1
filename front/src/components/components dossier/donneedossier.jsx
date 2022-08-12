@@ -1,60 +1,58 @@
-import { Cascader, Input, Radio, Button, InputNumber } from "antd";
-import React, { useState } from "react";
+import {Input, Radio, Button, InputNumber } from "antd";
+import React, { useState, useEffect } from "react";
 import "../components dossier/dossier.css";
 import { Marginer } from "../marginer/marginfile";
 import { DatePicker, Space } from "antd";
 import Selection from "./selectioninput";
+
+import { Cascader } from "rsuite";
+  
 import Selectdossier from "./selectemplacement";
 import TabDossier from "./tabdossier";
+import axios from "axios";
 const options = [
   {
-    value: "emplacement",
-    label: "emplacement",
-    children: [
-      {
-        value: "child",
-        label: "child",
-        children: [
-          {
-            value: "childd1",
-            label: "childd1",
-          },
-          {
-            value: "child2",
-            label: "child2",
-            disabled: true,
-          },
-        ],
-      },
-    ],
+    value: "المحكمة الإبتدائية بمنوبة",
+    label: "المحكمة الإبتدائية بمنوبة",
   },
+
+  { value: "المحكمة الإبتدائية بأريانة", label: "المحكمة الإبتدائية بأريانة" },
+
+  { value: "المحكمة الإبتدائية بنعروس", label: "المحكمة الإبتدائية بنعروس" },
+];
+const option = [
   {
-    value: "emplacement1",
-    label: "emplacement 1",
-    children: [
-      {
-        value: "emplacement 2",
-        label: "emplacement2",
-        children: [
-          {
-            value: "child1",
-            label: "child1",
-          },
-        ],
-      },
-    ],
-  },
+    value: "emplacement",
+    label: "emplacement"},
+    
+  
+    {value: "emplacement1",
+    label: "emplacement 1"}
+    
+  
 ];
 
 const DonneeDossier = () => {
   const [value, setValue] = useState(1);
+  const [listeTrib, setListeTrib] = useState([]);
+  const [listelieutrib, setListelieutrib] = useState([]);
+  const onChangelieu = (value, selectedOptions) => {
+    console.log(value, selectedOptions);
+  };
+  const [valuecascader,setValuecascader] = useState("")
   const onChange = (value, selectedOptions) => {
+    setValuecascader(value)
     console.log(value, selectedOptions);
   };
   const onChangedate = (date, dateString) => {
     console.log(date, dateString);
   };
 
+  const filterlieu = (inputValue, path) =>
+    path.some(
+      (option) =>
+        option.label.toLowerCase().indexOf(inputValue.toLowerCase()) > -1
+    );
   const filter = (inputValue, path) =>
     path.some(
       (option) =>
@@ -65,6 +63,32 @@ const DonneeDossier = () => {
     console.log("radio checked", e.target.value);
     setValue(e.target.value);
   };
+  //**********select tribunale********************
+
+  const gettribunalerequest = async () => {
+      
+    try {
+      const response = await axios.get("/tribunale");
+      console.log(response.data);
+
+      setListeTrib(response.data);
+      
+      for (var i = 0; i < listeTrib.length; i++) {
+        var lieutrib = {
+          value: listeTrib[i].lieu + "/" +i,
+          label: listeTrib[i].lieu,
+        };
+        listelieutrib[i] = lieutrib;
+      }
+      console.log("c bon",listelieutrib)
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  useEffect(() => {
+    gettribunalerequest();
+  });
 
   return (
     <div className="container">
@@ -76,7 +100,6 @@ const DonneeDossier = () => {
             picker="year"
             placeholder="Année"
           />
-          
         </div>
       </div>
       <div className="client2">
@@ -120,13 +143,10 @@ const DonneeDossier = () => {
 
           <Cascader
             className="cascader1"
-            options={options}
-            onChange={onChange}
+            data={listelieutrib}
             placeholder="Chercher lieu"
-            showSearch={{
-              filter,
-            }}
-            onSearch={(value) => console.log(value)}
+            menuWidth={400}
+            style={{ width: 224, display: 'block', marginBottom: 10 }}
           />
         </div>
         <div className="div">

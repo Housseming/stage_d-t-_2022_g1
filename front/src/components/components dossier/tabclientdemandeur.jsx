@@ -61,7 +61,7 @@ const TabClient = () => {
   ];
 
   //select client
-  const getclientrequest = async () => {
+  /*const getclientrequest = async () => {
     try {
       const response = await axios.get("/client");
       setlisteservice(response.data);
@@ -72,7 +72,7 @@ const TabClient = () => {
   useEffect(() => {
     getclientrequest();
   });
-  console.log(listeservice);
+  console.log(listeservice);*/
 
   //supclientr client
   const deleteclient = (record) => {

@@ -61,7 +61,7 @@ const TabDossier = () => {
     },
   ];
 
-  //select dossier
+  /*select dossier
   const getdossierrequest = async () => {
     try {
       const response = await axios.get("/dossier");
@@ -73,7 +73,7 @@ const TabDossier = () => {
   useEffect(() => {
     getdossierrequest();
   });
-  console.log(listeservice);
+  console.log(listeservice);*/
 
   //supdossierr dossier
   const deletedossier = (record) => {
