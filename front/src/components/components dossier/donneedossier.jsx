@@ -4,7 +4,7 @@ import "../components dossier/dossier.css";
 import { Marginer } from "../marginer/marginfile";
 import { DatePicker, Space } from "antd";
 import Selection from "./selectioninput";
-
+import "rsuite/dist/rsuite.css";
 import { Cascader } from "rsuite";
   
 import Selectdossier from "./selectemplacement";
