@@ -4,6 +4,7 @@ import {useState, useEffect} from "react";
 import {Table, Modal, Input} from "antd";
 import "antd/dist/antd.min.css";
 import {AiFillEdit} from "react-icons/ai";
+import {  Button, Space,Cascader } from "antd";
 import {MdDeleteForever} from "react-icons/md";
 import {toast} from "react-toastify";
 const Dossiers = () => {
@@ -12,6 +13,8 @@ const Dossiers = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [edditingdossier, setEdditingdossier] = useState(null);
   const [isAdd, setIsAdd] = useState(false);
+  
+ 
   const [addingdossier, setAddingdossier] = useState({
     id_dossier: "",
     num_affaire: "",
@@ -74,6 +77,7 @@ const Dossiers = () => {
     getdossierrequest();
   });
   console.log(listeservice);
+ 
 
   //supdossierr dossier
   const deletedossier = (record) => {
@@ -112,6 +116,7 @@ const Dossiers = () => {
     <div className="App">
       <header className="App-header">
         <h1> Emplacement dossier </h1>
+       
         <div className="tab">
           <Table
             columns={column}
