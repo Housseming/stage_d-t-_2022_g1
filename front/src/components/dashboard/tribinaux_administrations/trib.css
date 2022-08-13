@@ -31,23 +31,3 @@
   background-color: white;
   color: rgb(0, 0, 0);
 }
-.tabsdesign{
-  width: 20rem!important;
-  height: 10rem!important;
-}
-.tabselement{
-    display: flex!important;
-  flex-direction: column!important;
-  align-items: center!important;
-   width: 20rem!important;
-  height: 10rem!important;
- 
-  
-}
-.divboutontrib{
-     display: flex!important;
-  flex-direction: row!important;
-   width: 20rem!important;
-  height: 10rem!important;
-  
-}

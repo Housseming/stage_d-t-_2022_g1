@@ -1,11 +1,9 @@
-import {Input, Radio, Button, InputNumber ,Cascader } from "antd";
-import React, { useState, useEffect  } from "react";
+import { Input, Radio, Button, InputNumber, Cascader } from "antd";
+import React, { useState, useEffect, useMemo } from "react";
 import { Marginer } from "../marginer/marginfile";
 import { DatePicker, Space } from "antd";
 import Selection from "./selectioninput";
 
-
-  
 import Selectdossier from "./selectemplacement";
 import TabDossier from "./tabdossier";
 import axios from "axios";
@@ -22,13 +20,10 @@ const options = [
 const option = [
   {
     value: "emplacement",
-    label: "emplacement"},
-    
-  
-    {value: "emplacement1",
-    label: "emplacement 1"}
-    
-  
+    label: "emplacement",
+  },
+
+  { value: "emplacement1", label: "emplacement 1" },
 ];
 
 const DonneeDossier = () => {
@@ -38,10 +33,10 @@ const DonneeDossier = () => {
   const onChangelieu = (value, selectedOptions) => {
     console.log(value, selectedOptions);
   };
-  const [valuecascader,setValuecascader] = useState("")
+
   const onChange = (value, selectedOptions) => {
-    setValuecascader(value)
     console.log(value, selectedOptions);
+    gettribunalerequest();
   };
   const onChangedate = (date, dateString) => {
     console.log(date, dateString);
@@ -65,31 +60,26 @@ const DonneeDossier = () => {
   //**********select tribunale********************
 
   const gettribunalerequest = async () => {
-      
     try {
       const response = await axios.get("/tribunale");
       console.log(response.data);
 
       setListeTrib(response.data);
-      
-      for (var i = 0; i < listeTrib.length; i++) {
-        var lieutrib = {
-          value: listeTrib[i].lieu + "/" +i,
-          label: listeTrib[i].lieu,
-        };
-        listelieutrib[i] = lieutrib;
-      }
-      console.log("c bon",listelieutrib)
+      console.log("hellolistetrib", listeTrib);
     } catch (error) {
       console.log(error.message);
     }
   };
-
-  useEffect(() => {
+  const liste = useMemo(() => {
     gettribunalerequest();
-    
-  });
-  
+    return listeTrib.map((trib) => ({
+      value: trib.id,
+      label: trib.lieu,
+    }));
+  }, [listeTrib]);
+
+  //const listesaved = useMemo(()=>gettribunalerequest(),[listeTrib,listelieutrib])
+
   return (
     <div className="container">
       <div className="client1">
@@ -143,7 +133,7 @@ const DonneeDossier = () => {
 
           <Cascader
             className="cascader1"
-            options={listelieutrib}
+            options={liste}
             placeholder="Chercher lieu"
             onChange={onChange}
             showSearch={{
