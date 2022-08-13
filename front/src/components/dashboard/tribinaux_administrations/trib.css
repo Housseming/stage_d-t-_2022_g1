@@ -1,0 +1,53 @@
+
+
+.addingtrib{
+  color:#6646e5;
+  width: 20px;
+  height: 20px;
+  
+}
+.ajoutertrib{
+  display: flex;
+  flex-direction:row;
+  
+}
+.ajouter{
+  margin-left:20px;
+  margin-top: 30px;
+ 
+}
+.btnaddservice{
+  margin-top: 0px;
+  margin-bottom: 20px;
+  color: rgb(255, 255, 255);
+  background-color: #6646e5;
+  width: 200px;
+  height: 38px;
+  border-radius: 10px;
+  border: 3px solid #6646e5;
+  font-size: 15px;
+}
+.btnaddservice:hover {
+  background-color: white;
+  color: rgb(0, 0, 0);
+}
+.tabsdesign{
+  width: 20rem!important;
+  height: 10rem!important;
+}
+.tabselement{
+    display: flex!important;
+  flex-direction: column!important;
+  align-items: center!important;
+   width: 20rem!important;
+  height: 10rem!important;
+ 
+  
+}
+.divboutontrib{
+     display: flex!important;
+  flex-direction: row!important;
+   width: 20rem!important;
+  height: 10rem!important;
+  
+}

@@ -1,149 +1,228 @@
-.edit {
-    color: #6646e5;
-    width: 25px;
-    height: 30px;
-}
-
-.delete {
-    color: red;
-    width: 25px;
-    height: 30px;
-}
-
-.edit:hover {
-    color: rgba(0, 19, 139, 0.503);
-}
-
-.delete:hover {
-    color: rgba(255, 0, 0, 0.296);
-}
-
-.tableau {
-    margin-top: 100px;
-}
-
-.addicons {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
-
-.divedit {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.divdelete {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.App {
-    text-align: center;
-}
-
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
+    .edit {
+        color: #6646e5;
+        width: 25px;
+        height: 30px;
+    }
+    
+    .delete {
+        color: red;
+        width: 25px;
+        height: 30px;
+    }
+    
+    .edit:hover {
+        color: rgba(0, 19, 139, 0.503);
+    }
+    
+    .delete:hover {
+        color: rgba(255, 0, 0, 0.296);
+    }
+    
+    .tableau {
+        margin-top: 100px;
+    }
+    
+    .addicons {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+    
+    .divedit {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .divdelete {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .App {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        margin: 0 auto;
+    }
+    
     .App-logo {
-        animation: App-logo-spin infinite 20s linear;
+        height: 40vmin;
+        pointer-events: none;
     }
-}
-
-.App-header {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
-}
-
-.App-link {
-    color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
+    
+    @media (prefers-reduced-motion: no-preference) {
+        .App-logo {
+            animation: App-logo-spin infinite 20s linear;
+        }
     }
-    to {
-        transform: rotate(360deg);
+    
+    .App-header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: calc(10px + 2vmin);
+        color: white;
+        margin: 0 auto;
     }
-}
-
-.btnadd {
-    margin-top: 100px;
-    margin-bottom: 40px;
-    color: rgb(255, 255, 255);
-    background-color: #6646e5;
-    width: 200px;
-    height: 38px;
-    border-radius: 10px;
-    border: 3px solid #6646e5;
-    font-size: 15px;
-}
-
-.btnadd:hover {
-    background-color: white;
-    color: rgb(0, 0, 0);
-}
-
-.ant-table {
-    overflow-x: auto !important;
-    width: 1500px;
-    height: 1500px;
-}
-
-@media only screen and (max-width: 800px) {
+    
+    .App-link {
+        color: #61dafb;
+    }
+    
+    @keyframes App-logo-spin {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+    
+    .btnadd {
+        /*margin-top: 100px;*/
+        /*margin-bottom: 40px;*/
+        color: rgb(255, 255, 255);
+        background-color: #6646e5;
+        width: 200px;
+        height: 38px;
+        border-radius: 10px;
+        border: 3px solid #6646e5;
+        font-size: 15px;
+    }
+    
+    .btnadd:hover {
+        background-color: white;
+        color: rgb(0, 0, 0);
+    }
+    
     .ant-table {
         overflow-x: auto !important;
-        width: 400px !important;
-        height: 400px !important;
+        width: 1200px;
+        margin: auto !important;
     }
-}
-
-.ant-table td {
-    border: 0.5px solid #000000 !important;
-}
-
-.ant-table-thead>tr>th {
-    background: #6646e5 !important;
-    border: 0.5px solid #000000 !important;
-    color: white !important;
-}
-
-.btnsearch {
-    color: white;
-    background-color: #6646e5;
-    width: 100px;
-    height: 30px;
-    border: 3px solid #6646e5;
-}
-
-.btnsearch:hover {
-    background-color: white;
-    color: rgb(0, 0, 0);
-}
-
-.searchicon {
-    color: white;
-    width: 40px;
-    height: 25px;
-}
-
-.searchicon:hover {
-    background-color: #ffffffb7;
-    color: #6646e5;
-}
-
-.TabPane {
-    width: 500px;
-    height: 500px;
-}
+    
+    @media only screen and (max-width: 1500px) {
+        .ant-table {
+            overflow-x: auto !important;
+            width: 1200px !important;
+        }
+    }
+    
+    @media only screen and (max-width: 1400px) {
+        .ant-table {
+            overflow-x: auto !important;
+            width: 1200px !important;
+        }
+    }
+    
+    @media only screen and (max-width: 1300px) {
+        .ant-table {
+            overflow-x: auto !important;
+            width: 900px !important;
+        }
+    }
+    
+    @media only screen and (max-width: 1200px) {
+        .ant-table {
+            overflow-x: auto !important;
+            width: 900px !important;
+        }
+    }
+    
+    @media only screen and (max-width: 1100px) {
+        .ant-table {
+            overflow-x: auto !important;
+            width: 700px !important;
+        }
+    }
+    
+    @media only screen and (max-width: 1000px) {
+        .ant-table {
+            overflow-x: auto !important;
+            width: 700px !important;
+        }
+    }
+    
+    @media only screen and (max-width: 900px) {
+        .ant-table {
+            overflow-x: auto !important;
+            width: 600px !important;
+        }
+    }
+    
+    @media only screen and (max-width: 800px) {
+        .ant-table {
+            overflow-x: auto !important;
+            width: 600px !important;
+        }
+    }
+    
+    @media only screen and (max-width: 700px) {
+        .ant-table {
+            overflow-x: auto !important;
+            width: 550px !important;
+        }
+    }
+    
+    @media only screen and (max-width: 600px) {
+        .ant-table {
+            overflow-x: auto !important;
+            width: 400px !important;
+        }
+    }
+    
+    @media only screen and (max-width: 400px) {
+        .ant-table {
+            overflow-x: auto !important;
+            width: 300px !important;
+        }
+    }
+    
+    .ant-table td {
+        border: 0.5px solid #000000 !important;
+    }
+    
+    .ant-table-thead>tr>th {
+        background: #6646e5 !important;
+        border: 0.5px solid #000000 !important;
+        color: white !important;
+    }
+    
+    .btnsearch {
+        color: white;
+        background-color: #6646e5;
+        width: 100px;
+        height: 30px;
+        border: 3px solid #6646e5;
+    }
+    
+    .btnsearch:hover {
+        background-color: white;
+        color: rgb(0, 0, 0);
+    }
+    
+    .searchicon {
+        color: white;
+        width: 40px;
+        height: 25px;
+    }
+    
+    .searchicon:hover {
+        background-color: #ffffffb7;
+        color: #6646e5;
+    }
+    
+    .jours {
+        background-color: #6646e531;
+        border: 1.5px solid #6646e5;
+        padding: 7px;
+        margin-bottom: 20px;
+    }
+    
+    .audcourse {
+        display: flex;
+        flex-direction: column;
+        padding-top: 15px;
+    }

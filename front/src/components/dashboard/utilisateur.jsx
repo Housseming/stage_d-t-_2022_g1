@@ -1,20 +1,20 @@
 import React from "react";
 import axios from "axios";
-import {useState, useEffect} from "react";
-import {Table, Modal, Input} from "antd";
+import { useState, useEffect } from "react";
+import { Table, Modal, Input } from "antd";
 import "antd/dist/antd.min.css";
-import {AiFillEdit} from "react-icons/ai";
-import {MdDeleteForever} from "react-icons/md";
-import {toast} from "react-toastify";
+import { AiFillEdit } from "react-icons/ai";
+import { MdDeleteForever } from "react-icons/md";
+import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 const Utilisateur = () => {
   //declaration necessaires
-  const [liste, setListe] = useState([]);
+  const [listeservice, setlisteservice] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
-  const [edditingutilisateur, setEdditingutilisateur] = useState( {
+  const [edditingutilisateur, setEdditingutilisateur] = useState({
     login: "",
     mdp: "",
-    domaine:"",
+    domaine: "",
   });
   const [isAdd, setIsAdd] = useState(false);
   const [addingutilisateur, setAddingutilisateur] = useState({
@@ -23,9 +23,9 @@ const Utilisateur = () => {
     domaine: "",
   });
   const column = [
-    {key: "1", title: "login", dataIndex: "login"},
-    {key: "2", title: "mdp", dataIndex: "mdp"},
-    {key: "3", title: "domaine", dataIndex: "domaine"},
+    { key: "1", title: "login", dataIndex: "login" },
+    { key: "2", title: "mdp", dataIndex: "mdp" },
+    { key: "3", title: "domaine", dataIndex: "domaine" },
     {
       key: "16",
       title: "Actions",
@@ -37,7 +37,8 @@ const Utilisateur = () => {
                 className="edit"
                 onClick={() => {
                   editutilisateur(record);
-                }}></AiFillEdit>
+                }}
+              ></AiFillEdit>
 
               <p>modifier </p>
             </div>
@@ -46,7 +47,8 @@ const Utilisateur = () => {
                 className="delete"
                 onClick={() => {
                   deleteutilisateur(record);
-                }}></MdDeleteForever>
+                }}
+              ></MdDeleteForever>
               <pre>
                 <p> supprimer</p>
               </pre>
@@ -61,7 +63,7 @@ const Utilisateur = () => {
   const getutilisateurrequest = async () => {
     try {
       const response = await axios.get("/utilisateur");
-      setListe(response.data);
+      setlisteservice(response.data);
     } catch (error) {
       console.log(error.message);
     }
@@ -69,7 +71,7 @@ const Utilisateur = () => {
   useEffect(() => {
     getutilisateurrequest();
   });
-  console.log(liste);
+  console.log(listeservice);
 
   //suprimer utilisateur
   const deleteutilisateur = (record) => {
@@ -79,8 +81,10 @@ const Utilisateur = () => {
       okType: "danger",
       cancelText: "annuler",
       onOk: () => {
-        const newListe = liste.filter((utilisateur) => utilisateur.login !== record.login);
-        setListe(newListe);
+        const newlisteservice = listeservice.filter(
+          (utilisateur) => utilisateur.login !== record.login
+        );
+        setlisteservice(newlisteservice);
         deleteutilisateurrequest(record.login);
         toast.success("utilisateur supprimé avec succès");
       },
@@ -88,12 +92,9 @@ const Utilisateur = () => {
   };
   const deleteutilisateurrequest = async (login) => {
     try {
-      const deleted = await axios.post(
-        "/utilisateureff",
-        {
-          login: login,
-        }
-      );
+      const deleted = await axios.post("/utilisateureff", {
+        login: login,
+      });
       console.log("utlisateur supprimé");
     } catch (error) {
       console.log(error);
@@ -103,7 +104,7 @@ const Utilisateur = () => {
   //modifier un utilisateur
   const editutilisateur = (record) => {
     setIsEdit(true);
-    setEdditingutilisateur({...record}); //copie mel record
+    setEdditingutilisateur({ ...record }); //copie mel record
   };
   const resetEditing = () => {
     setIsEdit(false);
@@ -112,10 +113,7 @@ const Utilisateur = () => {
   //ajouter utilisateur
   const addutilisateur = async () => {
     try {
-      const resp = await axios.post(
-        "/utilisateuradd",
-        addingutilisateur
-      );
+      const resp = await axios.post("/utilisateuradd", addingutilisateur);
       console.log(resp.data);
     } catch (error) {
       console.log(error);
@@ -124,20 +122,22 @@ const Utilisateur = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Liste Des Utilisateurs</h1>
+        <h1>listeservice Des Utilisateurs</h1>
         <button
           className="btnadd"
           onClick={() => {
             setIsAdd(true);
-          }}>
+          }}
+        >
           Ajouter Utilisateur
         </button>
         <div className="tab">
           <Table
             columns={column}
-            dataSource={liste}
+            dataSource={listeservice}
             size="small"
-            bordered={true}></Table>
+            bordered={true}
+          ></Table>
         </div>
 
         <Modal
@@ -150,25 +150,26 @@ const Utilisateur = () => {
           }}
           onOk={async () => {
             setIsEdit(false);
-            const newListe = liste.map( ( utilisateur ) => {
-              if ( utilisateur.login === edditingutilisateur.login ) {
+            const newlisteservice = listeservice.map((utilisateur) => {
+              if (utilisateur.login === edditingutilisateur.login) {
                 return edditingutilisateur;
               } else {
                 return utilisateur;
               }
-            } );
-              try {
-                const addutilisateur = await axios.post(
-                  "/utilisateur/update",
-                  edditingutilisateur
-                );
-              } catch (error) {
-                console.log("error");
-              }
-            setListe(newListe);
+            });
+            try {
+              const addutilisateur = await axios.post(
+                "/utilisateur/update",
+                edditingutilisateur
+              );
+            } catch (error) {
+              console.log("error");
+            }
+            setlisteservice(newlisteservice);
             resetEditing();
             toast.success("utilisateur modifié avec succès");
-          }}>
+          }}
+        >
           <Input
             placeholder="Tapez le Nom d'utilisateur"
             value={edditingutilisateur?.login}
@@ -177,7 +178,8 @@ const Utilisateur = () => {
                 ...edditingutilisateur,
                 login: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
           <Input
             placeholder="Tapez le Mot de passe de l'utilisateur ajouté"
             value={edditingutilisateur?.mdp}
@@ -186,7 +188,8 @@ const Utilisateur = () => {
                 ...edditingutilisateur,
                 mdp: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
           <Input
             placeholder="tapez le domaine d'utilisation"
             value={edditingutilisateur?.domaine}
@@ -195,7 +198,8 @@ const Utilisateur = () => {
                 ...edditingutilisateur,
                 domaine: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
         </Modal>
         <Modal
           title="ajouter utilisateur"
@@ -209,7 +213,8 @@ const Utilisateur = () => {
             addutilisateur();
             setIsAdd(false);
             toast.success("utilisateur ajoutée avec succès");
-          }}>
+          }}
+        >
           <Input
             placeholder="tapez le nom d'utilisateur"
             value={addingutilisateur.login}
@@ -218,7 +223,8 @@ const Utilisateur = () => {
                 ...addingutilisateur,
                 login: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
           <Input
             placeholder="Tapez le Mot de passe"
             value={addingutilisateur.mdp}
@@ -227,7 +233,8 @@ const Utilisateur = () => {
                 ...addingutilisateur,
                 mdp: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
           <Input
             placeholder="Tapez le domaine d'utilisation de l'utilisateur "
             value={addingutilisateur.domaine}
@@ -236,7 +243,8 @@ const Utilisateur = () => {
                 ...addingutilisateur,
                 domaine: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
         </Modal>
       </header>
     </div>

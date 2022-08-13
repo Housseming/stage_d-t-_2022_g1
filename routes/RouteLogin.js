@@ -29,18 +29,22 @@ route.post("/login", (req, res) => {
                                         if (match) {
                                             console.log("matching");
 
-                                            const accessToken = jwt.sign({
-                                                        username: result.rows[0].username,
-                                                        id: result.rows[0]
-                                                            .id
-                                                           
+            const accessToken = jwt.sign(
+              {
+                username: result.rows[0].username,
+                id: result.rows[0].id 
               },
               keyaccesstoken,
-              { expiresIn: "30s" }
+              { expiresIn: "35s" }
             );
+            console.log("token generated",accessToken);
             //payload heya data nheb ena nkhazenha eli heya parametre lowel mtaa el sign
+            if (req.cookies[`${result.rows[0].id}`]) {//check if the cookie amready exists then generate a new one
+              req.cookies[`${result.rows[0].id}`] = "";
+            }
+            
 
-            res.cookie(String(result.rows[0].username), accessToken, {
+            res.cookie(String(result.rows[0].id), accessToken, {
               path: "/",
               expires: new Date(Date.now() + 1000 * 30),
               httpOnly: true,
@@ -58,14 +62,6 @@ route.post("/login", (req, res) => {
   );
 });
 
-route.post("/", (req, res) => {
-  client.query("SELECT * FROM clienttable", (err, result) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(result.rows);
-    }
-  });
-});
+
 
 module.exports = route;

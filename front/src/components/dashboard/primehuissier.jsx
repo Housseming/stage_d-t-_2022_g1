@@ -1,58 +1,60 @@
 import React from "react";
 import axios from "axios";
-import {useState, useEffect} from "react";
-import {Table, Modal, Input} from "antd";
+import { useState, useEffect } from "react";
+import { Table, Modal, Input } from "antd";
 import "antd/dist/antd.min.css";
-import {AiFillEdit} from "react-icons/ai";
-import {MdDeleteForever} from "react-icons/md";
+import { AiFillEdit } from "react-icons/ai";
+import { MdDeleteForever } from "react-icons/md";
 import { toast } from "react-toastify";
 const PrimeHuissier = () => {
   //declaration necessaires
-  const [liste, setListe] = useState([]);
+  const [listeservice, setlisteservice] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
-    const [edditingprime, setEdditingprime] = useState( null );
-    const [isAdd, setIsAdd] = useState( false );
-    const [addingprime, setAddingprime] = useState( {
-        libelle: "",
-        montant: "",
-        dessociable: "",
-        impot: "",
-        mensuel:"",
-    } );
+  const [edditingprime, setEdditingprime] = useState(null);
+  const [isAdd, setIsAdd] = useState(false);
+  const [addingprime, setAddingprime] = useState({
+    libelle: "",
+    montant: "",
+    dessociable: "",
+    impot: "",
+    mensuel: "",
+  });
   const column = [
-    {key: "1", title: "ID", dataIndex: "id"},
-    {key: "2", title: "libelle", dataIndex: "libelle"},
-    {key: "3", title: "montant", dataIndex: "montant"},
-    {key: "4", title: "dessociable", dataIndex: "dessociable"},
-    {key: "5", title: "impot", dataIndex: "impot"},
-    {key: "6", title: "mensuel", dataIndex: "mensuel"},
+    { key: "1", title: "ID", dataIndex: "id" },
+    { key: "2", title: "libelle", dataIndex: "libelle" },
+    { key: "3", title: "montant", dataIndex: "montant" },
+    { key: "4", title: "dessociable", dataIndex: "dessociable" },
+    { key: "5", title: "impot", dataIndex: "impot" },
+    { key: "6", title: "mensuel", dataIndex: "mensuel" },
     {
       key: "16",
       title: "Actions",
       render: (record) => {
-          return (
-            <div className="addicons">
-              <div className="divedit">
-                <AiFillEdit
-                  className="edit"
-                  onClick={() => {
-                    editprime(record);
-                  }}></AiFillEdit>
-                <pre>
-                  <p>modifier  </p>
-                </pre>
-              </div>
-              <div className="divdelete">
-                <MdDeleteForever
-                  className="delete"
-                  onClick={() => {
-                    deleteprime(record);
-                  }}></MdDeleteForever>
-
-                <p>supprimer</p>
-              </div>
+        return (
+          <div className="addicons">
+            <div className="divedit">
+              <AiFillEdit
+                className="edit"
+                onClick={() => {
+                  editprime(record);
+                }}
+              ></AiFillEdit>
+              <pre>
+                <p>modifier </p>
+              </pre>
             </div>
-          );
+            <div className="divdelete">
+              <MdDeleteForever
+                className="delete"
+                onClick={() => {
+                  deleteprime(record);
+                }}
+              ></MdDeleteForever>
+
+              <p>supprimer</p>
+            </div>
+          </div>
+        );
       },
     },
   ];
@@ -61,7 +63,7 @@ const PrimeHuissier = () => {
   const getprimerequest = async () => {
     try {
       const response = await axios.get("/primehuissier");
-      setListe(response.data);
+      setlisteservice(response.data);
     } catch (error) {
       console.log(error.message);
     }
@@ -69,7 +71,7 @@ const PrimeHuissier = () => {
   useEffect(() => {
     getprimerequest();
   });
-  console.log(liste);
+  console.log(listeservice);
 
   //supprimer primehuissier
   const deleteprime = (record) => {
@@ -79,8 +81,10 @@ const PrimeHuissier = () => {
       okType: "danger",
       cancelText: "annuler",
       onOk: () => {
-        const newListe = liste.filter((prime) => prime.id !== record.id);
-        setListe(newListe);
+        const newlisteservice = listeservice.filter(
+          (prime) => prime.id !== record.id
+        );
+        setlisteservice(newlisteservice);
         deleteprimerequest(record.id);
         toast.success("primehuissier supprimée avec succés");
       },
@@ -88,12 +92,9 @@ const PrimeHuissier = () => {
   };
   const deleteprimerequest = async (id) => {
     try {
-      const deleted = await axios.post(
-        "/primehuissiereff",
-        {
-          id: id,
-        }
-      );
+      const deleted = await axios.post("/primehuissiereff", {
+        id: id,
+      });
       console.log("prime supprimé");
     } catch (error) {
       console.log(error);
@@ -103,7 +104,7 @@ const PrimeHuissier = () => {
   //modifier un primehuissier
   const editprime = (record) => {
     setIsEdit(true);
-    setEdditingprime({...record}); //copie mel record
+    setEdditingprime({ ...record }); //copie mel record
   };
   const resetEditing = () => {
     setIsEdit(false);
@@ -112,16 +113,13 @@ const PrimeHuissier = () => {
   //ajouter primehuissier
   const addprime = async () => {
     try {
-      const resp = await axios.post(
-        "/primehuissieradd",
-        addingprime
-      );
+      const resp = await axios.post("/primehuissieradd", addingprime);
       console.log(resp.data);
     } catch (error) {
       console.log(error);
     }
   };
-    return (
+  return (
     <div className="App">
       <header className="App-header">
       <h1>Prime huissier</h1>
@@ -129,9 +127,10 @@ const PrimeHuissier = () => {
         <div className="tab">
           <Table
             columns={column}
-            dataSource={liste}
+            dataSource={listeservice}
             size="medium"
-            bordered={true}></Table>
+            bordered={true}
+          ></Table>
         </div>
 
         <Modal
@@ -144,25 +143,26 @@ const PrimeHuissier = () => {
           }}
           onOk={async () => {
             setIsEdit(false);
-            const newListe = liste.map((prime) => {
+            const newlisteservice = listeservice.map((prime) => {
               if (prime.id == edditingprime.id) {
                 return edditingprime;
               } else {
                 return prime;
               }
-            } );
-              try {
-                const addprime = await axios.post(
-                  "/primehuissier/update",
-                  edditingprime
-                );
-              } catch (error) {
-                console.log("error");
-              }
-            setListe(newListe);
+            });
+            try {
+              const addprime = await axios.post(
+                "/primehuissier/update",
+                edditingprime
+              );
+            } catch (error) {
+              console.log("error");
+            }
+            setlisteservice(newlisteservice);
             resetEditing();
             toast.success("primehuissier modifié avec succès");
-          }}>
+          }}
+        >
           <Input
             placeholder="Tapez le libelle"
             value={edditingprime?.libelle}
@@ -171,32 +171,40 @@ const PrimeHuissier = () => {
                 ...edditingprime,
                 libelle: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
           {/*edditingprime? s'il n'est pas null*/}
           <Input
             placeholder="Tapez le Montant"
             value={edditingprime?.montant}
             onChange={(e) => {
-              setEdditingprime({...edditingprime, montant: e.target.value});
-            }}></Input>
+              setEdditingprime({ ...edditingprime, montant: e.target.value });
+            }}
+          ></Input>
           <Input
             placeholder="Confirmez le dessociable ?"
             value={edditingprime?.dessociable}
             onChange={(e) => {
-              setEdditingprime({...edditingprime, dessociable: e.target.value});
-            }}></Input>
+              setEdditingprime({
+                ...edditingprime,
+                dessociable: e.target.value,
+              });
+            }}
+          ></Input>
           <Input
             placeholder="Confimez l'impot ?"
             value={edditingprime?.impot}
             onChange={(e) => {
-              setEdditingprime({...edditingprime, impot: e.target.value});
-            }}></Input>
+              setEdditingprime({ ...edditingprime, impot: e.target.value });
+            }}
+          ></Input>
           <Input
             placeholder="Confirmez le Mensuel"
             value={edditingprime?.mensuel}
             onChange={(e) => {
-              setEdditingprime({...edditingprime, mensuel: e.target.value});
-            }}></Input>
+              setEdditingprime({ ...edditingprime, mensuel: e.target.value });
+            }}
+          ></Input>
         </Modal>
         <Modal
           title="ajouter primehuissier"
@@ -210,7 +218,8 @@ const PrimeHuissier = () => {
             addprime();
             setIsAdd(false);
             toast.success("Primehuissier ajoutée avec succès");
-          }}>
+          }}
+        >
           <Input
             placeholder="tapez le libéllé"
             value={addingprime.libelle}
@@ -219,7 +228,8 @@ const PrimeHuissier = () => {
                 ...addingprime,
                 libelle: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
           <Input
             placeholder="Tapez le Montant"
             value={addingprime.montant}
@@ -228,7 +238,8 @@ const PrimeHuissier = () => {
                 ...addingprime,
                 montant: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
           <Input
             placeholder="Confirmez le dessociable ?"
             value={addingprime.dessociable}
@@ -237,7 +248,8 @@ const PrimeHuissier = () => {
                 ...addingprime,
                 dessociable: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
           <Input
             placeholder="Confirmez l'impot ?"
             value={addingprime.impot}
@@ -246,7 +258,8 @@ const PrimeHuissier = () => {
                 ...addingprime,
                 impot: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
           <Input
             placeholder="Confirmez le Mensuel"
             value={addingprime.mensuel}
@@ -255,11 +268,11 @@ const PrimeHuissier = () => {
                 ...addingprime,
                 mensuel: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
         </Modal>
       </header>
-        </div>
-
+    </div>
   );
 };
 

@@ -19,11 +19,18 @@ import Utilisateur from "./components/dashboard/utilisateur";
 import Tribunale from "./components/dashboard/tribinaux_administrations/tribunale";
 import Welcome from "./components/welcome/welcome";
 import RechercheDossier from "./components/dashboard/recherchedossier";
-import {Collabo} from "./components/dashboard/collaborateurs/collabo";
+import Home from "./components/welcome/Home";
+import { Collabo } from "./components/dashboard/collaborateurs/collabo";
+import CreationDossier from "./components/dashboard/creationdossier";
+import Footer from "./components/FOOTER/footer";
+import Dossiers from "./components/dashboard/Dossiers";
+
+
 function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/Home" element={<Home></Home>}></Route>
         <Route path="/login" element={<AccountBox />} />
         <Route path="/register" element={<RegisterBox />} />
         <Route path="/" element={<Sharedlayout />}>
@@ -37,10 +44,12 @@ function App() {
           <Route path="recettedufinance" element={<Recettedufinance />} />
           <Route path="emplacementdossier" element={<Emplacementdossier />} />
           <Route path="gestionclient" element={<Gestionclient />} />
-          <Route path="collab" element={<Collabo></Collabo>}></Route>
-          <Route path="Tribunale" element={<Tribunale />} />
+          <Route path="collaborateurs" element={<Collabo></Collabo>}></Route>
+          <Route path="Tribunaux_et_administrations" element={<Tribunale />} />
           <Route path="welcome" element={<Welcome></Welcome>}></Route>
-          <Route path="recherchedossier" element={<RechercheDossier/>}></Route>
+          <Route path="recherchedossier" element={<RechercheDossier />}></Route>
+          <Route path="creationdossier" element={<CreationDossier />}></Route>
+          <Route path="dossiers" element={<Dossiers />}></Route>
 
           {/*<Route
             path="/tribunale"
@@ -48,6 +57,7 @@ function App() {
   ></Route>*/}
         </Route>
       </Routes>
+      <Footer></Footer>
       <ToastContainer position="top-center"></ToastContainer>
     </BrowserRouter>
   );

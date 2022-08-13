@@ -17,7 +17,7 @@ export const Collabo = () => {
   //declaration necessaires
   /*const refreshToken = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/refresh", {
+      const res = await axios.get("http:///refresh", {
         withCredentials: true,
       });
       console.log(res.data);
@@ -25,7 +25,7 @@ export const Collabo = () => {
       console.log(error);
     }
   };*/
-  const [liste, setListe] = useState([]);
+  const [liste, setliste] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(6);
@@ -173,7 +173,7 @@ export const Collabo = () => {
   //select collaborateur
   const getCollabrequest = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/collab", {
+      const response = await axios.get("/collab", {
         withCredentials: true,
       });
 
@@ -181,7 +181,7 @@ export const Collabo = () => {
         console.log("non connecté");
       } else {
         console.log(response);
-        setListe(response.data);
+        setliste(response.data);
       }
     } catch (error) {
       console.log(error.message);
@@ -200,15 +200,15 @@ export const Collabo = () => {
       okType: "danger",
       cancelText: "annuler",
       onOk: () => {
-        const newListe = liste.filter((collab) => collab.id !== record.id);
-        setListe(newListe);
+        const newliste = liste.filter((collab) => collab.id !== record.id);
+        setliste(newliste);
         deleteCollabrequest(record.id);
       },
     });
   };
   const deleteCollabrequest = async (id) => {
     try {
-      const deleted = await axios.post("http://localhost:5000/delete", {
+      const deleted = await axios.post("/delete", {
         id: id,
       });
 
@@ -237,7 +237,7 @@ export const Collabo = () => {
   const addCollab = async () => {
     try {
       const resp = await axios.post(
-        "http://localhost:5000/collab",
+        "/collab",
         addingCollab
       );
       if (resp.data.error) {
@@ -277,7 +277,6 @@ export const Collabo = () => {
           }}
           size="middle"
           bordered={true}
-          style={{ display: "flex", flex: 1 }}
           scroll={{ x: "max-content" }}
         ></Table>
 
@@ -295,7 +294,7 @@ export const Collabo = () => {
           onOk={async () => {
             setIsEdit(false);
 
-            const newListe = liste.map((collab) => {
+            const newliste = liste.map((collab) => {
               if (collab.id == edditingCollab.id) {
                 return edditingCollab;
               } else {
@@ -303,15 +302,12 @@ export const Collabo = () => {
               }
             });
             try {
-              const resp = await axios.post(
-                "http://localhost:5000/modif",
-                edditingCollab
-              );
+              const resp = await axios.post("/modif", edditingCollab);
             } catch (error) {
               console.log(error);
             }
 
-            setListe(newListe);
+            setliste(newliste);
 
             resetEditing();
 
@@ -481,6 +477,16 @@ export const Collabo = () => {
               setAddingCollab({
                 ...addingCollab,
                 ville: e.target.value,
+              });
+            }}
+          ></Input>
+          <Input
+            placeholder="rue"
+            value={addingCollab.rue}
+            onChange={(e) => {
+              setAddingCollab({
+                ...addingCollab,
+                rue: e.target.value,
               });
             }}
           ></Input>

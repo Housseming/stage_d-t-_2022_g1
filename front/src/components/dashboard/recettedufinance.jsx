@@ -10,119 +10,123 @@ import { AiFillEdit } from "react-icons/ai";
 import { MdDeleteForever } from "react-icons/md";
 import { toast } from "react-toastify";
 
-
-
-const  Recettedufinance = () => {
-  const [liste, setListe] = useState([]);
+const Recettedufinance = () => {
+  const [listeservice, setlisteservice] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
-  const [edditingRecettedufinance, setEdditingRecettedufinance] = useState(null);
+  const [edditingRecettedufinance, setEdditingRecettedufinance] =
+    useState(null);
   const [addingRecettedufinance, setAddingRecettedufinance] = useState({
-    id:"",
+    id: "",
     libelle: "",
     montant: "",
-    
-  
   });
-  
-  const columns= [{ key: "1", title: "libelle", dataIndex: "libelle" },
-  { key: "2", title: "montant", dataIndex: "montant" },
-  { key:"3" , title:"id", dataIndex:"id"},
-  {key: "4",
-  title: "Actions",
-  render: (record) => {
-    return (
-      <div className="addicons">
-        <div className="divedit">
-          <AiFillEdit
-            className="edit"
-            onClick={() => {
-              editRecettedufinance(record);
-            }}
-          ></AiFillEdit>
-          <p>modifier</p>
-        </div>
-      {<div className="divdelete">
-          <MdDeleteForever
-            className="delete"
-            onClick={() => {
-              deleteRecettedufinance(record);
-            }}
-          ></MdDeleteForever>
 
-          <p>supprimer</p>
-          </div>}
-      </div>
-    ); 
-  },
- },
- ];
+  const columns = [
+    { key: "1", title: "libelle", dataIndex: "libelle" },
+    { key: "2", title: "montant", dataIndex: "montant" },
+    { key: "3", title: "id", dataIndex: "id" },
+    {
+      key: "4",
+      title: "Actions",
+      render: (record) => {
+        return (
+          <div className="addicons">
+            <div className="divedit">
+              <AiFillEdit
+                className="edit"
+                onClick={() => {
+                  editRecettedufinance(record);
+                }}
+              ></AiFillEdit>
+              <p>modifier</p>
+            </div>
+            {
+              <div className="divdelete">
+                <MdDeleteForever
+                  className="delete"
+                  onClick={() => {
+                    deleteRecettedufinance(record);
+                  }}
+                ></MdDeleteForever>
 
+                <p>supprimer</p>
+              </div>
+            }
+          </div>
+        );
+      },
+    },
+  ];
 
- //select Recettedufinance
+  //select Recettedufinance
   const getRecettedufinancerequest = async () => {
     try {
       const response = await axios.get("/recettedufinance");
-      setListe(response.data);// aleh liste dhaherli khtr tji liste [{:}]
-    } catch (error) { 
-      console.log( error.message );
+      setlisteservice(response.data); // aleh listeservice dhaherli khtr tji listeservice [{:}]
+    } catch (error) {
+      console.log(error.message);
     }
   };
   useEffect(() => {
     getRecettedufinancerequest();
-  }, []);
-  console.log(liste);
+  }, [listeservice]);
+  console.log(listeservice);
 
- //supprimer une Recettedufinance
- const deleteRecettedufinance = (record) => {
-  Modal.confirm({
-    title: "Vous etes sur de supprimer cette ligne?",
-    okText: "oui",
-    okType: "danger",
-    cancelText: "annuler",
-    onOk: () => {
-      const newListe = liste.filter((Recettedufinance) => Recettedufinance.id !== record.id);
-      setListe(newListe);
-      deleteRecettedufinancerequest(record.id);
-      toast.success("Recettedufinance supprimé avec succès");
-    },
-  });
-};
-const deleteRecettedufinancerequest = async (id) => {
-  try {
-    const deleted = await axios.post("/recettedufinance/delete", {
-     id:id ,
+  //supprimer une Recettedufinance
+  const deleteRecettedufinance = (record) => {
+    Modal.confirm({
+      title: "Vous etes sur de supprimer cette ligne?",
+      okText: "oui",
+      okType: "danger",
+      cancelText: "annuler",
+      onOk: () => {
+        const newlisteservice = listeservice.filter(
+          (Recettedufinance) => Recettedufinance.id !== record.id
+        );
+        setlisteservice(newlisteservice);
+        deleteRecettedufinancerequest(record.id);
+        toast.success("Recettedufinance supprimé avec succès");
+      },
     });
-    console.log("Recettedufinance supprimé");
-  } catch (error) {
-    console.log(error);
-  }
- };
+  };
+  const deleteRecettedufinancerequest = async (id) => {
+    try {
+      const deleted = await axios.post("/recettedufinance/delete", {
+        id: id,
+      });
+      console.log("Recettedufinance supprimé");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   ////////////
   //modifier une Recettedufinance
- const editRecettedufinance = (record) => {
-  setIsEdit(true);
-  setEdditingRecettedufinance({ ...record }); //copie mel record
- };
+  const editRecettedufinance = (record) => {
+    setIsEdit(true);
+    setEdditingRecettedufinance({ ...record }); //copie mel record
+  };
   const resetEditing = () => {
     setIsEdit(false);
     setEdditingRecettedufinance(null);
   };
   //lien aveclback pour la modif
-  const editRecettedufinancerequest = async (id,libelle,montant) => {
+  const editRecettedufinancerequest = async (id, libelle, montant) => {
     try {
       const modified = await axios.post("/recettedufinance/modif", {
-        id:id,libelle:libelle ,montant:montant
+        id: id,
+        libelle: libelle,
+        montant: montant,
       });
-      console.log("Recettedufinance modifié",libelle);
+      console.log("Recettedufinance modifié", libelle);
     } catch (error) {
       console.log(error);
     }
-   };///////////////////// Ajout
-   //lien aveclback pour l'ajout
-   const [isAdd, setIsAdd] = useState(false);
-   
-   const addRecettedufinance = async () => {
+  }; ///////////////////// Ajout
+  //lien aveclback pour l'ajout
+  const [isAdd, setIsAdd] = useState(false);
+
+  const addRecettedufinance = async () => {
     try {
       const resp = await axios.post(
         "/recettedufinance",
@@ -141,77 +145,75 @@ const deleteRecettedufinancerequest = async (id) => {
             setIsAdd(true);
           } }> Ajouter</button>}
         <div classname="tab">
-        <Table  
-           columns={columns}
-            dataSource={liste}
+          <Table
+            columns={columns}
+            dataSource={listeservice}
             style={{ with: 15 }}
             bordered={true}
-            /> 
-          </div>
-  {/*MODIFICATION*/}
-  <Modal
-  title="modifier Recettedufinance"
-  visible={isEdit}
-  okText="Enregistrer"
-  cancelText="Annuler"
-  onCancel={() => {
-    setIsEdit(false);
-  }}
-  onOk={() => {
-    setIsEdit(false);
-    const newListe = liste.map((Recettedufinance) => {
-      if (Recettedufinance.id === edditingRecettedufinance.id) {
-        return edditingRecettedufinance;
-      } else {
-        return Recettedufinance;
-      }
-    });
-    setListe(newListe);
-    editRecettedufinancerequest(edditingRecettedufinance.id,edditingRecettedufinance.libelle,edditingRecettedufinance.montant)
-    resetEditing();
-    toast.success("Recettedufinance modifie avec succée");
-  }}
- >
-  <Input
-    placeholder="id"
-    value={edditingRecettedufinance?.id}
-    onChange={(e) => {
-      setEdditingRecettedufinance({
-        ...edditingRecettedufinance,
-        id: e.target.value,
-      });
-    }}
-  >
+          />
+        </div>
+        {/*MODIFICATION*/}
+        <Modal
+          title="modifier Recettedufinance"
+          visible={isEdit}
+          okText="Enregistrer"
+          cancelText="Annuler"
+          onCancel={() => {
+            setIsEdit(false);
+          }}
+          onOk={() => {
+            setIsEdit(false);
+            const newlisteservice = listeservice.map((Recettedufinance) => {
+              if (Recettedufinance.id === edditingRecettedufinance.id) {
+                return edditingRecettedufinance;
+              } else {
+                return Recettedufinance;
+              }
+            });
+            setlisteservice(newlisteservice);
+            editRecettedufinancerequest(
+              edditingRecettedufinance.id,
+              edditingRecettedufinance.libelle,
+              edditingRecettedufinance.montant
+            );
+            resetEditing();
+            toast.success("Recettedufinance modifie avec succée");
+          }}
+        >
+          <Input
+            placeholder="id"
+            value={edditingRecettedufinance?.id}
+            onChange={(e) => {
+              setEdditingRecettedufinance({
+                ...edditingRecettedufinance,
+                id: e.target.value,
+              });
+            }}
+          ></Input>
+          <Input
+            placeholder="libelle"
+            value={edditingRecettedufinance?.libelle}
+            onChange={(e) => {
+              setEdditingRecettedufinance({
+                ...edditingRecettedufinance,
+                libelle: e.target.value,
+              });
+            }}
+          ></Input>
+          <Input
+            placeholder="montant"
+            value={edditingRecettedufinance?.montant}
+            onChange={(e) => {
+              setEdditingRecettedufinance({
+                ...edditingRecettedufinance,
+                montant: e.target.value,
+              });
+            }}
+          ></Input>
 
-  </Input>
-  <Input placeholder="libelle"
-    value={edditingRecettedufinance?.libelle}
-    onChange={(e) => {
-      setEdditingRecettedufinance({ 
-        ...edditingRecettedufinance, 
-        libelle: e.target.value });
-    }}
-  ></Input>
-  <Input
-    placeholder="montant"
-    value={edditingRecettedufinance?.montant}
-    onChange={(e) => {
-      setEdditingRecettedufinance({
-        ...edditingRecettedufinance,
-        montant: e.target.value,
-      });
-    }}
-  >
-
-  </Input>
-  
- 
-  
-
-
-  {/*AJOUT*/}
-  </Modal>
-  <Modal
+          {/*AJOUT*/}
+        </Modal>
+        <Modal
           title="ajouter "
           visible={isAdd}
           okText="Enregistrer"
@@ -245,7 +247,7 @@ const deleteRecettedufinancerequest = async (id) => {
               });
             }}
           ></Input>
-           <Input
+          <Input
             placeholder="montant"
             value={addingRecettedufinance.montant}
             onChange={(e) => {
@@ -255,12 +257,9 @@ const deleteRecettedufinancerequest = async (id) => {
               });
             }}
           ></Input>
-           
-          </Modal>
-
-  </header>
-
-  </div>
-  ) 
-  };
-  export default Recettedufinance;
+        </Modal>
+      </header>
+    </div>
+  );
+};
+export default Recettedufinance;

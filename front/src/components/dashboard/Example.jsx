@@ -4,7 +4,6 @@ import { Fragment } from 'react'
 import { Popover, Transition } from '@headlessui/react'
 import { PlusIcon, ServerIcon,
   ChartBarIcon,CursorClickIcon,DocumentReportIcon,MenuIcon,RefreshIcon,ShieldCheckIcon,ViewGridIcon, XIcon,ClockIcon,CurrencyYenIcon,FlagIcon 
-  
 } from '@heroicons/react/outline';
 import {
   AppstoreOutlined,
@@ -30,55 +29,60 @@ const solutions = [
   },]
 const solutions1 = [
   {
-    name: 'Emplacement dossier',
+    name: "Emplacement dossier",
     description: "",
-    href: 'emplacementdossier',
+    href: "emplacementdossier",
     icon: ViewGridIcon,
   },
   {
-    name: 'Tribunaux et Administrations',
-    description: '',
-    href: '#',
+    name: "Tribunaux et Administrations",
+    description: "",
+    href: "Tribunaux_et_administrations",
     icon: RefreshIcon,
   },
   {
-    name: 'Type dossier',
-    description: ' ',
-    href: '#',
+    name: "Type dossier",
+    description: " ",
+    href: "#",
     icon: DocumentReportIcon,
   },
   {
     name: "Utilisateur",
-    description:
-      " ",
+    description: " ",
     href: "/utilisateur",
     icon: ShieldCheckIcon,
   },
   {
-    name: 'Huissier',
-    description: ' ',
-    href: 'primehuissier',
+    name: "Huissier",
+    description: " ",
+    href: "primehuissier",
     icon: ClockIcon,
   },
   {
-    name: 'primeorateur',
-    description: '',
-    href: '#',
+    name: "Collaborateur",
+    description: " ",
+    href: "collaborateurs",
+    icon: ClockIcon,
+  },
+  {
+    name: "primeorateur",
+    description: "",
+    href: "#",
     icon: CurrencyYenIcon,
   },
   {
-    name: 'Greffier',
-    description: ' ',
-    href: '#',
-    icon: FlagIcon ,
+    name: "Greffier",
+    description: " ",
+    href: "#",
+    icon: FlagIcon,
   },
   {
-    name: 'Prime Greffier',
-    description: ' ',
-    href: '#',
+    name: "Prime Greffier",
+    description: " ",
+    href: "#",
     icon: DocumentReportIcon,
   },
-]
+];
 
 const  client0 = [{name:'Gestion Client',
 href:'gestionclient',icon: PlusIcon},
@@ -104,13 +108,13 @@ const resources2 = [
     name: "Emplacement Dossier",
     description:
       "",
-    href: "#",
+    href: "dossiers",
   },
   {
     name: "Creation",
     description:
       "",
-    href: "#",
+    href: "/creationdossier",
   },
   {
     name: "Gestion Archive",
@@ -524,9 +528,9 @@ export default function Example() {
 
           <div className="flex items-center md:ml-12">
             <a
-              href="/login"
+              href="/Home"
               className="text-base font-medium text-gray-500 hover:text-gray-900">
-              Se connecter
+              Se déconnecter
             </a>
             <a
               href="/register"
@@ -547,7 +551,7 @@ export default function Example() {
         leaveTo="opacity-0 scale-95">
         <Popover.Panel
           focus
-          className="absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden">
+          className="relative top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden">
               <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white divide-y-2 divide-gray-50">
              <div className="pt-5 pb-6 px-5">
               <div className="flex items-center justify-between">

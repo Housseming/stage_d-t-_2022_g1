@@ -20,7 +20,7 @@ export function Login(props) {
   let navigate = useNavigate();
   const Send = async () => {
     try {
-      const resp = await axios.post("http://localhost:5000/login", {
+      const resp = await axios.post("/login", {
         username: username,
 
         password: password,
@@ -29,7 +29,7 @@ export function Login(props) {
         toast.error(resp.data.error);
       } //khater ki naamlou login saye maach ykoun mawjoud asslan el response.data.error
       else {
-        navigate("/");
+        navigate("/welcome");
       }
     } catch (error) {
       console.log(error);

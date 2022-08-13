@@ -15,16 +15,18 @@ const validateToken = (req, res, next) => {
   console.log(accessToken);
   if (!accessToken) {
     //idha marajanech el acesstoken
-    return res.json({ error: "utilisateur non connecté" });
-  } else {
-    const validToken = jwt.verify(String(accessToken), keyaccesstoken);
-    if (validToken) {
-      console.log("token verifyed");
-      next();
-    } else {
-      res.json({ message: "invalid token" });
-    }
+    res.json({ error: "utilisateur non connecté" });
   }
+  jwt.verify(String(accessToken), keyaccesstoken, (err, user) => {
+    if (err) {
+      return res.status(400).json({ message: "Invalid TOken" });
+    }
+    console.log(user.id);
+    req.id = user.id;
+    req.username = user.username;
+  });
+
+  next();
 };
 
 //refreshToken
@@ -38,29 +40,29 @@ const refreshToken = (req, res, next) => {
     if (err) {
       console.log(err);
       return res.status(403).json({ message: "authentification failed" });
-    } else {
-      console.log("refresh user");
-      console.log(user);
-      res.clearCookie(`${user.username}`);
-      req.cookies[`${user.username}`] = "";
-      const token = jwt.sign(
-        {
-          username: user.username,
-          id: user.id,
-          /*,iss:esm el site(createur de jeton) ou bien t7otha issuer fel options*/
-        },
-        keyaccesstoken,
-        { expiresIn: "30s" }
-      );
-      res.cookie(String(user.username), token, {
-        path: "/",
-        expires: new Date(Date.now() + 1000 * 30),
-        httpOnly: true,
-        sameSite: "lax",
-      });
-      req.username = user.username;
-      next();
     }
+    console.log("refresh user");
+    console.log(user);
+    res.clearCookie(`${user.id}`);
+    req.cookies[`${user.id}`]="";
+    const token = jwt.sign(
+      {
+        username: user.username,
+        id: user.id,
+      },
+      keyaccesstoken,
+      { expiresIn: "35s" }
+    );
+    console.log("regenerated Token",token)
+    res.cookie(String(user.id), token, {
+      path: "/",
+      expires: new Date(Date.now() + 1000 * 30),
+      httpOnly: true,
+      sameSite: "lax",
+    });
+    req.id = user.id;
+    req.username = user.username;
+    next();
   });
 };
 //getUser
@@ -68,14 +70,34 @@ const getUser = async (req, res, next) => {
   const userId = req.id;
   let user;
   try {
-    user = await client.query("SELECT * FROM clienttable WHERE id=$1",[id])
+    user = await client.query("SELECT * FROM clienttable WHERE id=$1", [
+      userId,
+    ]);
   } catch (err) {
     return new Error(err);
   }
   if (!user) {
     return res.status(404).json({ messsage: "User Not FOund" });
   }
+  console.log("user is :");
+  console.log(user);
   return res.status(200).json({ user });
 };
+const logout = (req, res, next) => {
+  const cookies = req.headers.cookie;
+  const prevToken = cookies.split("=")[1];
+  if (!prevToken) {
+    return res.status(400).json({ message: "Couldn't find token" });
+  }
+  jwt.verify(String(prevToken), process.env.JWT_SECRET_KEY, (err, user) => {
+    if (err) {
+      console.log(err);
+      return res.status(403).json({ message: "Authentication failed" });
+    }
+    res.clearCookie(`${user.id}`);
+    req.cookies[`${user.id}`] = "";
+    return res.status(200).json({ message: "Successfully Logged Out" });
+  });
+};
 
-module.exports = { validateToken, refreshToken , getUser };
+module.exports = { validateToken, refreshToken, getUser ,logout};

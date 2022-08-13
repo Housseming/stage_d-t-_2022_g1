@@ -8,126 +8,122 @@ import { AiFillEdit } from "react-icons/ai";
 import { MdDeleteForever } from "react-icons/md";
 import { toast } from "react-toastify";
 
-
-
-const  Honoraireenextra = () => {
-  const [liste, setListe] = useState([]);
+const Honoraireenextra = () => {
+  const [listeservice, setlisteservice] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
   const [edditingHonoraire, setEdditingHonoraire] = useState(null);
   const [addingHonoraire, setAddingHonoraire] = useState({
     libelle: "",
     libelle_francais: "",
     montant: 0,
-  
   });
-  
-  const columns= [{ key: "1", title: "libelle", dataIndex: "libelle" },
-  { key: "2", title: "libelle_francais", dataIndex: "libelle_francais" },
-  { key: "3", title: "montant", dataIndex: "montant" },
- {
-  key: "4",
-  title: "Actions",
-  render: (record) => {
-    return (
-      <div className="addicons">
-        <div className="divedit">
-          <AiFillEdit
-            className="edit"
-            onClick={() => {
-              editHonoraire(record);
-            }}
-          ></AiFillEdit>
-          <p>modifier</p>
-        </div>
-        <div className="divdelete">
-          <MdDeleteForever
-            className="delete"
-            onClick={() => {
-              deleteHonoraire(record);
-            }}
-          ></MdDeleteForever>
 
-          <p>supprimer</p>
-        </div>
-      </div>
-    ); 
-  },
- },
- ];
+  const columns = [
+    { key: "1", title: "libelle", dataIndex: "libelle" },
+    { key: "2", title: "libelle_francais", dataIndex: "libelle_francais" },
+    { key: "3", title: "montant", dataIndex: "montant" },
+    {
+      key: "4",
+      title: "Actions",
+      render: (record) => {
+        return (
+          <div className="addicons">
+            <div className="divedit">
+              <AiFillEdit
+                className="edit"
+                onClick={() => {
+                  editHonoraire(record);
+                }}
+              ></AiFillEdit>
+              <p>modifier</p>
+            </div>
+            <div className="divdelete">
+              <MdDeleteForever
+                className="delete"
+                onClick={() => {
+                  deleteHonoraire(record);
+                }}
+              ></MdDeleteForever>
 
+              <p>supprimer</p>
+            </div>
+          </div>
+        );
+      },
+    },
+  ];
 
- //select Honoraire
+  //select Honoraire
   const getHonorairerequest = async () => {
     try {
       const response = await axios.get("/honoraireenextra");
-      setListe(response.data);// aleh liste dhaherli khtr tji liste [{:}]
+      setlisteservice(response.data); // aleh listeservice dhaherli khtr tji listeservice [{:}]
     } catch (error) {
       console.log(error.message);
     }
   };
   useEffect(() => {
     getHonorairerequest();
-  }, []);
-  console.log(liste);
+  }, [listeservice]);
+  console.log(listeservice);
 
- //supprimer une honoraire
- const deleteHonoraire = (record) => {
-  Modal.confirm({
-    title: "Vous etes sur de supprimer l'honoraire?",
-    okText: "oui",
-    okType: "danger",
-    cancelText: "annuler",
-    onOk: () => {
-      const newListe = liste.filter((honoraire) => honoraire.libelle !== record.libelle);
-      setListe(newListe);
-      deleteHonorairerequest(record.libelle);
-      toast.success("Honoraire supprimé avec succès");
-    },
-  });
-};
-const deleteHonorairerequest = async (libelle) => {
-  try {
-    const deleted = await axios.post("/honoraireenextra/delete", {
-      libelle:libelle ,
+  //supprimer une honoraire
+  const deleteHonoraire = (record) => {
+    Modal.confirm({
+      title: "Vous etes sur de supprimer l'honoraire?",
+      okText: "oui",
+      okType: "danger",
+      cancelText: "annuler",
+      onOk: () => {
+        const newlisteservice = listeservice.filter(
+          (honoraire) => honoraire.libelle !== record.libelle
+        );
+        setlisteservice(newlisteservice);
+        deleteHonorairerequest(record.libelle);
+        toast.success("Honoraire supprimé avec succès");
+      },
     });
-    console.log("Honoraire supprimé");
-  } catch (error) {
-    console.log(error);
-  }
- };
-
+  };
+  const deleteHonorairerequest = async (libelle) => {
+    try {
+      const deleted = await axios.post("/honoraireenextra/delete", {
+        libelle: libelle,
+      });
+      console.log("Honoraire supprimé");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   ////////////
   //modifier une Honoraire
- const editHonoraire = (record) => {
-  setIsEdit(true);
-  setEdditingHonoraire({ ...record }); //copie mel record
- };
- 
+  const editHonoraire = (record) => {
+    setIsEdit(true);
+    setEdditingHonoraire({ ...record }); //copie mel record
+  };
+
   const resetEditing = () => {
     setIsEdit(false);
     setEdditingHonoraire(null);
   };
   //lien aveclback pour la modif
-  const editHonorairerequest = async (libelle,montant) => {
+  const editHonorairerequest = async (libelle, montant) => {
     try {
       const modified = await axios.post("/honoraireenextra/modif", {
-        libelle:libelle ,montant:montant
+        libelle: libelle,
+        montant: montant,
       });
       console.log("Honoraire modifié");
     } catch (error) {
       console.log(error);
     }
-   };///////////////////// Ajout
-   //lien aveclback pour l'ajout
-   const [isAdd, setIsAdd] = useState(false);
-   
-   const addHonoraire = async () => {
+  }; ///////////////////// Ajout
+  //lien aveclback pour l'ajout
+  const [isAdd, setIsAdd] = useState(false);
+
+  const addHonoraire = async () => {
     try {
-      const resp = await axios.post(
-        "/honoraireenextra",
-        addingHonoraire
-      );
+      const resp = await axios.post("/honoraireenextra", addingHonoraire);
       console.log(resp.data);
     } catch (error) {
       console.log(error);
@@ -139,69 +135,80 @@ const deleteHonorairerequest = async (libelle) => {
       <h1>Honoraire en extra</h1>
         <button className="btnadd"  onClick={() => {
             setIsAdd(true);
-          } }> Ajouter</button>
+          }}
+        >
+          {" "}
+          Ajouter
+        </button>
         <div classname="tab">
-        <Table  
-           columns={columns}
-            dataSource={liste}
+          <Table
+            columns={columns}
+            dataSource={listeservice}
             style={{ with: 15 }}
             bordered={true}
-            /> 
-          </div>
-  {/*MODIFICATION*/}
-  <Modal
-  title="modifier Honoraire"
-  visible={isEdit}
-  okText="Enregistrer"
-  cancelText="Annuler"
-  onCancel={() => {
-    setIsEdit(false);
-  }}
-  onOk={() => {
-    setIsEdit(false);
-    const newListe = liste.map((Honoraire) => {
-      if (Honoraire.libelle === edditingHonoraire.libelle) {
-        return edditingHonoraire;
-      } else {
-        return Honoraire;
-      }
-    });
-    setListe(newListe);
-    editHonorairerequest(edditingHonoraire.libelle,edditingHonoraire.montant)
-    resetEditing();
-    toast.success("Honoraire modifie avec succée");
-  }}
- >
-  <Input
-    placeholder="libelle"
-    value={edditingHonoraire?.libelle}
-    onChange={(e) => {
-      setEdditingHonoraire({
-        ...edditingHonoraire,
-        libelle: e.target.value,
-      });
-    }}
-  >
+          />
+        </div>
+        {/*MODIFICATION*/}
+        <Modal
+          title="modifier Honoraire"
+          visible={isEdit}
+          okText="Enregistrer"
+          cancelText="Annuler"
+          onCancel={() => {
+            setIsEdit(false);
+          }}
+          onOk={() => {
+            setIsEdit(false);
+            const newlisteservice = listeservice.map((Honoraire) => {
+              if (Honoraire.libelle === edditingHonoraire.libelle) {
+                return edditingHonoraire;
+              } else {
+                return Honoraire;
+              }
+            });
+            setlisteservice(newlisteservice);
+            editHonorairerequest(
+              edditingHonoraire.libelle,
+              edditingHonoraire.montant
+            );
+            resetEditing();
+            toast.success("Honoraire modifie avec succée");
+          }}
+        >
+          <Input
+            placeholder="libelle"
+            value={edditingHonoraire?.libelle}
+            onChange={(e) => {
+              setEdditingHonoraire({
+                ...edditingHonoraire,
+                libelle: e.target.value,
+              });
+            }}
+          ></Input>
+          <Input
+            placeholder="libelle_français"
+            value={edditingHonoraire?.libelle_francais}
+            onChange={(e) => {
+              setEdditingHonoraire({
+                ...edditingHonoraire,
+                libelle_francais: e.target.value,
+              });
+            }}
+          ></Input>
+          <Input
+            placeholder="Montant"
+            value={edditingHonoraire?.montant}
+            onChange={(e) => {
+              setEdditingHonoraire({
+                ...edditingHonoraire,
+                montant: e.target.value,
+              });
+            }}
+          ></Input>
 
-  </Input>
-  <Input placeholder="libelle_français"
-    value={edditingHonoraire?.libelle_francais}
-    onChange={(e) => {
-      setEdditingHonoraire({ ...edditingHonoraire, libelle_francais: e.target.value });
-    }}
-  ></Input>
-  <Input placeholder='Montant'
-    value={edditingHonoraire?.montant}
-    onChange={(e) => {
-      setEdditingHonoraire({ ...edditingHonoraire, montant: e.target.value });
-    }}
-  ></Input>
-  
-
-
-  {/*AJOUT*/}
-  </Modal>
-  <Modal
+          {/*AJOUT*/}
+        </Modal>
+        <Modal
           title="ajouter "
           visible={isAdd}
           okText="Enregistrer"
@@ -225,7 +232,7 @@ const deleteHonorairerequest = async (libelle) => {
               });
             }}
           ></Input>
-           <Input
+          <Input
             placeholder="libelle_francais"
             value={addingHonoraire.libelle_francais}
             onChange={(e) => {
@@ -235,7 +242,7 @@ const deleteHonorairerequest = async (libelle) => {
               });
             }}
           ></Input>
-           <Input
+          <Input
             placeholder="montant"
             value={addingHonoraire.montant}
             onChange={(e) => {
@@ -245,11 +252,9 @@ const deleteHonorairerequest = async (libelle) => {
               });
             }}
           ></Input>
-          </Modal>
-
-  </header>
-
-  </div>
-  ) 
-  };
-  export default Honoraireenextra;
+        </Modal>
+      </header>
+    </div>
+  );
+};
+export default Honoraireenextra;

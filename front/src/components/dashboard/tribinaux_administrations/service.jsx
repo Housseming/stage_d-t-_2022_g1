@@ -1,15 +1,14 @@
 import React from "react";
 import axios from "axios";
-import {useState, useEffect} from "react";
-import {Table, Modal, Input} from "antd";
+import { useState, useEffect } from "react";
+import { Table, Modal, Input } from "antd";
 import "antd/dist/antd.min.css";
-import {AiFillEdit} from "react-icons/ai";
-import {MdDeleteForever} from "react-icons/md";
-import {toast} from "react-toastify";
+import { AiFillEdit } from "react-icons/ai";
+import { MdDeleteForever } from "react-icons/md";
+import { toast } from "react-toastify";
 
 const Tableau = () => {
-
-  const [liste, setListe] = useState([]);
+  const [listeservice, setlisteservice] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
   const [edditingservice, setEdditingservice] = useState(null);
   const [isAdd, setIsAdd] = useState(false);
@@ -21,18 +20,18 @@ const Tableau = () => {
     jeudi: "",
     vendredi: "",
     samedi: "",
-    dimanche:"",
+    dimanche: "",
   });
   const column = [
-    {key: "1", title: "ID", dataIndex: "id"},
-    {key: "2", title: "nom", dataIndex: "nom"},
-    {key: "3", title: "lundi", dataIndex: "lundi"},
-    {key: "4", title: "mardi", dataIndex: "mardi"},
-    {key: "5", title: "mercredi", dataIndex: "mercredi"},
-    {key: "6", title: "jeudi", dataIndex: "jeudi"},
-    {key: "7", title: "vendredi", dataIndex: "vendredi"},
-    {key: "8", title: "samedi", dataIndex: "samedi"},
-    {key: "9", title: "dimanche", dataIndex: "dimanche"},
+    { key: "1", title: "ID", dataIndex: "id" },
+    { key: "2", title: "nom", dataIndex: "nom" },
+    { key: "3", title: "lundi", dataIndex: "lundi" },
+    { key: "4", title: "mardi", dataIndex: "mardi" },
+    { key: "5", title: "mercredi", dataIndex: "mercredi" },
+    { key: "6", title: "jeudi", dataIndex: "jeudi" },
+    { key: "7", title: "vendredi", dataIndex: "vendredi" },
+    { key: "8", title: "samedi", dataIndex: "samedi" },
+    { key: "9", title: "dimanche", dataIndex: "dimanche" },
     {
       key: "16",
       title: "Actions",
@@ -44,7 +43,8 @@ const Tableau = () => {
                 className="edit"
                 onClick={() => {
                   editservice(record);
-                }}></AiFillEdit>
+                }}
+              ></AiFillEdit>
               <pre>
                 <p>modifier </p>
               </pre>
@@ -54,7 +54,8 @@ const Tableau = () => {
                 className="delete"
                 onClick={() => {
                   deleteservice(record);
-                }}></MdDeleteForever>
+                }}
+              ></MdDeleteForever>
 
               <p>supprimer</p>
             </div>
@@ -68,9 +69,7 @@ const Tableau = () => {
   const getservicerequest = async () => {
     try {
       const response = await axios.get("/service");
-      setListe(response.data);
-      
-      
+      setlisteservice(response.data);
     } catch (error) {
       console.log(error.message);
     }
@@ -78,7 +77,7 @@ const Tableau = () => {
   useEffect(() => {
     getservicerequest();
   });
-  console.log(liste);
+  console.log(listeservice);
 
   //supprimer service
   const deleteservice = (record) => {
@@ -88,8 +87,10 @@ const Tableau = () => {
       okType: "danger",
       cancelText: "annuler",
       onOk: () => {
-        const newListe = liste.filter((service) => service.id !== record.id);
-        setListe(newListe);
+        const newlisteservice = listeservice.filter(
+          (service) => service.id !== record.id
+        );
+        setlisteservice(newlisteservice);
         deleteservicerequest(record.id);
         toast.success("service supprimé avec succès");
       },
@@ -97,12 +98,9 @@ const Tableau = () => {
   };
   const deleteservicerequest = async (id) => {
     try {
-      const deleted = await axios.post(
-        "/serviceeff",
-        {
-          id: id,
-        }
-      );
+      const deleted = await axios.post("/serviceeff", {
+        id: id,
+      });
       console.log("service supprimé");
     } catch (error) {
       console.log(error);
@@ -112,7 +110,7 @@ const Tableau = () => {
   //modifier un service
   const editservice = (record) => {
     setIsEdit(true);
-    setEdditingservice({...record}); //copie mel record
+    setEdditingservice({ ...record }); //copie mel record
   };
   const resetEditing = () => {
     setIsEdit(false);
@@ -121,10 +119,7 @@ const Tableau = () => {
   //ajouter servicehuissier
   const addservice = async () => {
     try {
-      const resp = await axios.post(
-        "/serviceadd",
-        addingservice
-      );
+      const resp = await axios.post("/serviceadd", addingservice);
       console.log(resp.data);
     } catch (error) {
       console.log(error);
@@ -137,18 +132,20 @@ const Tableau = () => {
           className="btnadd"
           onClick={() => {
             setIsAdd(true);
-          }}>
+          }}
+        >
           Ajouter un service
         </button>
         <div className="tab">
           <Table
             columns={column}
-            dataSource={liste}
+            dataSource={listeservice}
             size="medium"
-            bordered={true}></Table>
+            bordered={true}
+          ></Table>
         </div>
 
-              <Modal
+        <Modal
           title="modifier service"
           visible={isEdit}
           okText="Enregistrer"
@@ -158,7 +155,7 @@ const Tableau = () => {
           }}
           onOk={async () => {
             setIsEdit(false);
-            const newListe = liste.map((service) => {
+            const newlisteservice = listeservice.map((service) => {
               if (service.id == edditingservice.id) {
                 return edditingservice;
               } else {
@@ -173,10 +170,11 @@ const Tableau = () => {
             } catch (error) {
               console.log("error");
             }
-            setListe(newListe);
+            setlisteservice(newlisteservice);
             resetEditing();
             toast.success("service modifié avec succès");
-          }}>
+          }}
+        >
           <Input
             placeholder="Tapez le nom"
             value={edditingservice?.nom}
@@ -185,33 +183,41 @@ const Tableau = () => {
                 ...edditingservice,
                 nom: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
           <Input
             placeholder="Tapez le lundi"
             value={edditingservice?.lundi}
             onChange={(e) => {
-              setEdditingservice({...edditingservice, lundi: e.target.value});
-            }}></Input>
+              setEdditingservice({ ...edditingservice, lundi: e.target.value });
+            }}
+          ></Input>
           <Input
             placeholder="Confirmez le mardi ?"
             value={edditingservice?.mardi}
             onChange={(e) => {
-              setEdditingservice({...edditingservice, mardi: e.target.value});
-            }}></Input>
+              setEdditingservice({ ...edditingservice, mardi: e.target.value });
+            }}
+          ></Input>
           <Input
             placeholder="Confimez l'mercredi ?"
             value={edditingservice?.mercredi}
             onChange={(e) => {
-              setEdditingservice({...edditingservice, mercredi: e.target.value});
-            }}></Input>
+              setEdditingservice({
+                ...edditingservice,
+                mercredi: e.target.value,
+              });
+            }}
+          ></Input>
           <Input
             placeholder="Confirmez le jeudi"
             value={edditingservice?.jeudi}
             onChange={(e) => {
-              setEdditingservice({...edditingservice, jeudi: e.target.value});
-            }}></Input>
+              setEdditingservice({ ...edditingservice, jeudi: e.target.value });
+            }}
+          ></Input>
         </Modal>
-              {/*<Modal
+        {/*<Modal
           title="ajouter un service"
           visible={isAdd}
           okText="Enregistrer"
@@ -271,7 +277,7 @@ const Tableau = () => {
             }}></Input>
         </Modal>*/}
       </header>
-        </div>
-        );
+    </div>
+  );
 };
 export default Tableau;
