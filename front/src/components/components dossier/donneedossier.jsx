@@ -1,11 +1,10 @@
-import {Input, Radio, Button, InputNumber } from "antd";
-import React, { useState, useEffect } from "react";
-import "../components dossier/dossier.css";
+import {Input, Radio, Button, InputNumber ,Cascader } from "antd";
+import React, { useState, useEffect  } from "react";
 import { Marginer } from "../marginer/marginfile";
 import { DatePicker, Space } from "antd";
 import Selection from "./selectioninput";
-import "rsuite/dist/rsuite.css";
-import { Cascader } from "rsuite";
+
+
   
 import Selectdossier from "./selectemplacement";
 import TabDossier from "./tabdossier";
@@ -88,8 +87,9 @@ const DonneeDossier = () => {
 
   useEffect(() => {
     gettribunalerequest();
+    
   });
-
+  
   return (
     <div className="container">
       <div className="client1">
@@ -143,10 +143,13 @@ const DonneeDossier = () => {
 
           <Cascader
             className="cascader1"
-            data={listelieutrib}
+            options={listelieutrib}
             placeholder="Chercher lieu"
-            menuWidth={400}
-            style={{ width: 224, display: 'block', marginBottom: 10 }}
+            onChange={onChange}
+            showSearch={{
+              filter,
+            }}
+            onSearch={(value) => console.log(value)}
           />
         </div>
         <div className="div">

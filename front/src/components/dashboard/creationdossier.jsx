@@ -1,11 +1,12 @@
 import React , {useState} from 'react'
 import { Tabs,Radio } from 'antd';
 import ClientDemandeur from '../components dossier/clientDemandeur';
-import DonneeDossier from '../components dossier/donneedossier';
+import DonneeDossier from "../components dossier/donneedossier";
 import Taches from "../components dossier/taches"
 import Reglement from '../components dossier/reglement';
 import Collaborateur from '../components dossier/collaborateur';
 import SousDossier from '../components dossier/sousdossier';
+import "../components dossier/dossier.css";
 const { TabPane } = Tabs;
 export default function CreationDossier() {
   return (
