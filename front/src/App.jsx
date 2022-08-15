@@ -30,10 +30,10 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/Home" element={<Home></Home>}></Route>
+        <Route path="/" element={<Home></Home>}></Route>
         <Route path="/login" element={<AccountBox />} />
         <Route path="/register" element={<RegisterBox />} />
-        <Route path="/" element={<Sharedlayout />}>
+        <Route path="/home" element={<Sharedlayout />}>
           <Route path="primehuissier" element={<PrimeHuissier />} />
           <Route path="utilisateur" element={<Utilisateur />} />
           <Route path="Parametreglobale" element={<Parametreglobale />} />
@@ -50,14 +50,9 @@ function App() {
           <Route path="recherchedossier" element={<RechercheDossier />}></Route>
           <Route path="creationdossier" element={<CreationDossier />}></Route>
           <Route path="dossiers" element={<Dossiers />}></Route>
-
-          {/*<Route
-            path="/tribunale"
-            element={<Tribunale/>}
-  ></Route>*/}
         </Route>
       </Routes>
-      <Footer></Footer>
+      {/*<Footer></Footer>*/}
       <ToastContainer position="top-center"></ToastContainer>
     </BrowserRouter>
   );
