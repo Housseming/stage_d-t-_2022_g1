@@ -7,7 +7,8 @@ import image from "./backgroundavocat.jpg";
 import image1 from "./avocatimage1.png";
 import image2 from "./avocatimage2.png";
 import image3 from "./avocatimage3.png";
-import { Card, Row, Col } from "antd";
+import { useNavigate } from "react-router-dom";
+import { Card, Row, Col ,Button } from "antd";
 
 import { FcFinePrint, FcBusinessman, FcSalesPerformance } from "react-icons/fc";
 
@@ -20,6 +21,7 @@ function Home() {
 
     textAlign: "center",
   };
+   let navigate = useNavigate();
   /* const sendLogout = async() =>{
     const res = await axios.post("/logout", null, {
       withCredentials: true,
@@ -37,7 +39,7 @@ function Home() {
   }*/
 
   return (
-    <>
+    <div style={{backgroundColor:"white"}}>
       <Navbar></Navbar>
       <div className="divcontainerhome">
         <div className="divhome">
@@ -82,11 +84,13 @@ function Home() {
               </Col>
             </Row>
           </div>
+        </div>
+        <div className="divphotos">
           <div className="divhome1">
-            <div className="imgbackground">
-              <img src={image3} alt="image3" style={{ width: 600 }} />
+            <div className="imgbackground3">
+              <img src={image3} alt="image3" />
             </div>
-            <div className="hellotext">
+            <div className="hellotext3">
               <h1>Gestion des clients</h1>
               <p>
                 Une manière simple pour organiser et protéger les donnnées de
@@ -95,30 +99,30 @@ function Home() {
             </div>
           </div>
           <div className="divhome1">
-            <div className="imgbackground1">
-              <img src={image2} alt="image2" style={{ width: 600 }} />
+            <div className="imgbackground2">
+              <img src={image2} alt="image2" />
             </div>
-            <div className="hellotext">
+            <div className="hellotext2">
               <h1>Gestion des dossiers</h1>
               <p>Archiver,Ajouter et Modifier vos dossiers </p>
             </div>
           </div>
           <div className="divhome1">
-            <div className="imgbackground">
-              <img src={image1} alt="image1" style={{ width: 600 }} />
+            <div className="imgbackground1">
+              <img src={image1} alt="image1" />
             </div>
-            <div className="hellotext">
+            <div className="hellotext1" id="login">
               <h1>Pour commencer !</h1>
               <p>
-                {" "}
                 veuillez vous inscrire ou vous connectez si vous avez déjà un
                 compte
               </p>
+              <button className="loginfromhome" onClick={()=>{navigate("/login");}}>Se Connecter</button>
             </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

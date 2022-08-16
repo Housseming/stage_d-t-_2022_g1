@@ -1,7 +1,7 @@
 
 
 .addingtrib{
-  color:#6646e5;
+  color:#0583f2;
   width: 20px;
   height: 20px;
   
@@ -20,11 +20,11 @@
   margin-top: 0px;
   margin-bottom: 20px;
   color: rgb(255, 255, 255);
-  background-color: #6646e5;
+  background-color: #0583f2;
   width: 200px;
   height: 38px;
   border-radius: 10px;
-  border: 3px solid #6646e5;
+  border: 3px solid #0583f2;
   font-size: 15px;
 }
 .btnaddservice:hover {

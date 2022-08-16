@@ -62,9 +62,10 @@ export const SubmitButton = styled.button`
   background: rgb(2, 0, 36);
   background: linear-gradient(
     50deg,
-    rgba(2, 0, 36, 1) 0%,
-    rgba(9, 30, 121, 1) 30%,
-    rgba(0, 212, 255, 1) 100%
+    rgba(27, 46, 53, 21) 0%,
+    rgba(0, 102, 213, 84) 50%,
+    rgba(5, 131, 242, 95) 70%,
+    rgba(34, 136, 255, 95) 100%
   );
   &:hover {
     filter: brightness(1.03);
