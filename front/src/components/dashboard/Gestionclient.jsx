@@ -6,8 +6,8 @@
 //l(ajout fde lid annulle khiir ahawka malezmouch yidakhel haja kdima namloha felback unique) different ala fazet eya lelcode client besh matodkhlsh badha (ashel) amltha ken front felajout w lmodifier naaresh ftableau eli wrah mawjoud wale edheya nesel aleha
 import React from "react";
 import axios from "axios";
-import { useState, useEffect } from "react";
-import { Table, Button, Modal, Input,Space,Cascader,Radio,Checkbox } from "antd";
+import { useState, useEffect, useMemo } from "react";
+import { Table, Button, Modal, Input, Space, Cascader, Radio, Checkbox } from "antd";
 import "antd/dist/antd.min.css";
 import { AiFillEdit } from "react-icons/ai";
 import { MdDeleteForever } from "react-icons/md";
@@ -20,9 +20,9 @@ import { Marginer } from "../marginer/marginfile";
 
 const Gestionclient = () => {
   const [listecodecollab, setListecodecollab] = useState([
-  
+
   ]);
-  const options= [
+  const options = [
     {
       value: "zhejiang",
       label: "Zhejiang",
@@ -72,6 +72,8 @@ const Gestionclient = () => {
     );
   const [value, setValue] = useState(0);
   const [val, setVal] = useState();
+  const [check, setCheck] = useState(false);
+  const [check1, setCheck1] = useState(true);
   const [listeservice, setlisteservice] = useState([]);
   const [gridData, setGridData] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
@@ -91,24 +93,26 @@ const Gestionclient = () => {
     email: "",
   });
   const onChange1 = (e) => {
-    var cb= document.getElementById('abc')
-    var input1= document.getElementById('1')
-    var input2=document.getElementById('2')
-    if(cb.checked==true) {input1.style.display="block"
-    input2.style.display="none"
-  }
-    else{
-      input1.style.display="none";
-    input2.style.display="block"}
-  
+    var cb = document.getElementById('abc')
+    var input1 = document.getElementById('1')
+    var input2 = document.getElementById('2')
+    if (cb.checked == true) {setCheck(true);setCheck1(false);
+      input1.style.display = "block"//yidhaher
+      input2.style.display = "none"
+    }
+    else {setCheck1(true);setCheck(false);
+      input1.style.display = "none";
+      input2.style.display = "block"
+    }
+
   };
   const onChangeradio = (e) => {
     console.log("radio checked", e.target.value);
     setValue(e.target.value);
   };
-  const[searchText,setSearchText]=useState("");
-  const[sortedInfo,setSortedInfo]=useState({});
-  let [filteredData]=useState();
+  const [searchText, setSearchText] = useState("");
+  const [sortedInfo, setSortedInfo] = useState({});
+  let [filteredData] = useState();
 
   const columns = [
     { key: "1", title: "id", dataIndex: "id" },
@@ -116,7 +120,7 @@ const Gestionclient = () => {
       key: "2",
       title: "raison",
       dataIndex: "raison",
-      
+
     },
     {
       key: "3",
@@ -171,48 +175,48 @@ const Gestionclient = () => {
         return record.matricule.toLowerCase().includes(value.toLowerCase());
       },
     },
-  { key: "4", title: "ville", dataIndex: "ville"  },
-  { key: "5", title: "rue", dataIndex: "rue" },
-  { key: "6", title: "num", dataIndex: "num"  },
-  { key: "7", title: "code_postale", dataIndex: "code_postale"  },
-  { key: "8", title: "activité", dataIndex: "activité" },
-  { key: "9", title: "situation_fiscale", dataIndex: "situation_fiscale"  },
-  { key: "10", title: "categorie", dataIndex: "categorie"},
-  { key: "11", title: "fax", dataIndex: "fax" },
-  { key: "12", title: "email", dataIndex: "email" },
-  {
-  key: "13",
-  title: "Actions",
-  render: (record) => {
-    return (
-      <div className="addicons">
-        <div className="divedit">
-          <AiFillEdit
-            className="edit"
-            onClick={() => {
-              editGestionclient(record);
-            }}
-          ></AiFillEdit>
-          <p>modifier</p>
-        </div>
-      {<div className="divdelete">
-          <MdDeleteForever
-            className="delete"
-            onClick={() => {
-              deleteGestionclient(record);
-            }}
-          ></MdDeleteForever>
+    { key: "4", title: "ville", dataIndex: "ville" },
+    { key: "5", title: "rue", dataIndex: "rue" },
+    { key: "6", title: "num", dataIndex: "num" },
+    { key: "7", title: "code_postale", dataIndex: "code_postale" },
+    { key: "8", title: "activité", dataIndex: "activité" },
+    { key: "9", title: "situation_fiscale", dataIndex: "situation_fiscale" },
+    { key: "10", title: "categorie", dataIndex: "categorie" },
+    { key: "11", title: "fax", dataIndex: "fax" },
+    { key: "12", title: "email", dataIndex: "email" },
+    {
+      key: "13",
+      title: "Actions",
+      render: (record) => {
+        return (
+          <div className="addicons">
+            <div className="divedit">
+              <AiFillEdit
+                className="edit"
+                onClick={() => {
+                  editGestionclient(record);
+                }}
+              ></AiFillEdit>
+              <p>modifier</p>
+            </div>
+            {<div className="divdelete">
+              <MdDeleteForever
+                className="delete"
+                onClick={() => {
+                  deleteGestionclient(record);
+                }}
+              ></MdDeleteForever>
 
-          <p>supprimer</p>
-          </div>}
-      </div>
-    ); 
-  },
- },
- ];
+              <p>supprimer</p>
+            </div>}
+          </div>
+        );
+      },
+    },
+  ];
 
 
- //select Gestionclient
+  //select Gestionclient
   const getGestionclientrequest = async () => {
     try {
       const response = await axios.get("/gestionclient");
@@ -290,9 +294,9 @@ const Gestionclient = () => {
         code_postale: code_postale,
         activité: activité,
         situation_fiscale: situation_fiscale,
-        categorie:categorie,
-        fax:fax,
-        email:email
+        categorie: categorie,
+        fax: fax,
+        email: email
 
       });
       console.log("emplacement_dossier_modifié");
@@ -301,7 +305,7 @@ const Gestionclient = () => {
     }
   }; ///////////////////// Ajout
   //lien aveclback pour l'ajout
-const [Listecollab,setListecollab] = useState([]);
+  const [Listecollab, setListecollab] = useState([]);
   const [isAdd, setIsAdd] = useState(false);
 
   const addGestionclient = async () => {
@@ -313,63 +317,70 @@ const [Listecollab,setListecollab] = useState([]);
     }
   };
   //tebaa lrecherche
-const handleChange = (e) => {setSearchText(e.target.value);
-if(e.target.value ==="")
-getGestionclientrequest();}
-const reset = () => {
-  setSortedInfo({});
-  setSearchText("");
-  getGestionclientrequest();
+  const handleChange = (e) => {
+    setSearchText(e.target.value);
+    if (e.target.value === "")
+      getGestionclientrequest();
+  }
+  const reset = () => {
+    setSortedInfo({});
+    setSearchText("");
+    getGestionclientrequest();
 
-}
- const getCollabrequest = async () => {
-   try {
-     const response = await axios.get("/collab", {
-       withCredentials: true,
-     });
+  }
+  const getCollabrequest = async () => {
+    try {
+      const response = await axios.get("/collab", {
+        withCredentials: true,
+      });
 
-     //pour la liste select lors de l'ajout
+      //pour la liste select lors de l'ajout
       // console.log("salem",response);
-      
-       setListecollab(response.data);
+
+      setListecollab(response.data);
       // console.log("salem3",Listecollab);
-       for(var i=0;i<Listecollab.length;i++){
-        var codecollab = {value:Listecollab[i].id + ":" + Listecollab[i].username,label:Listecollab[i].id + ":" + Listecollab[i].username} 
-        listecodecollab[i]= codecollab;
-         // console.log(i);
-       }
-       //setListecodecollab([{Listecollab.id + ":" + Listecollab.username}])
-      // console.log("salem2",listecodecollab)
+      // 
+    }
+    //setListecodecollab([{Listecollab.id + ":" + Listecollab.username}])
+    // console.log("salem2",listecodecollab)
 
-     
-   } catch (error) {
-     console.log(error.message);
-   }
- };
 
- useEffect(() => {
-   getCollabrequest();
- }, [Listecollab,listecodecollab]);
-//recherche
-const globalSearch = () => {filteredData = listeservice.filter((value)=> {
-  return (  
-    value.raison.toLowerCase().includes(searchText.toLowerCase()) ||
-    value.matricule.toLowerCase().includes(searchText.toLowerCase()) ||
-    value.ville.toLowerCase().includes(searchText.toLowerCase()) ||
-    value.rue.toLowerCase().includes(searchText.toLowerCase()) ||
-    value.code_postale.toLowerCase().includes(searchText.toLowerCase()) ||
-    value.activité.toLowerCase().includes(searchText.toLowerCase()) ||
-    value.situation_fiscale.toLowerCase().includes(searchText.toLowerCase()) ||
-    value.categorie.toLowerCase().includes(searchText.toLowerCase()) ||
-    value.fax.toLowerCase().includes(searchText.toLowerCase()) ||
-    value.email.toLowerCase().includes(searchText.toLowerCase()) 
+    catch (error) {
+      console.log(error.message);
+    }
+  };
+  const liste = useMemo(() => {
+    getCollabrequest();
+    return Listecollab.map((trib) => ({
+      value: trib.id,
+      label: trib.id + ":" + trib.username,
+    }));
+  }, [Listecollab]);
+  // useEffect(() => {
+  // getCollabrequest();
+  //}, [Listecollab,listecodecollab]);
+  //recherche
+  const globalSearch = () => {
+    filteredData = listeservice.filter((value) => {
+      return (
+        value.raison.toLowerCase().includes(searchText.toLowerCase()) ||
+        value.matricule.toLowerCase().includes(searchText.toLowerCase()) ||
+        value.ville.toLowerCase().includes(searchText.toLowerCase()) ||
+        value.rue.toLowerCase().includes(searchText.toLowerCase()) ||
+        value.code_postale.toLowerCase().includes(searchText.toLowerCase()) ||
+        value.activité.toLowerCase().includes(searchText.toLowerCase()) ||
+        value.situation_fiscale.toLowerCase().includes(searchText.toLowerCase()) ||
+        value.categorie.toLowerCase().includes(searchText.toLowerCase()) ||
+        value.fax.toLowerCase().includes(searchText.toLowerCase()) ||
+        value.email.toLowerCase().includes(searchText.toLowerCase())
 
-  );
+      );
 
-});
-setGridData(filteredData)
-console.log('filtered',filteredData)
-console.log('length',filteredData.length)}
+    });
+    setGridData(filteredData)
+    console.log('filtered', filteredData)
+    console.log('length', filteredData.length)
+  }
 
 
   return (
@@ -406,7 +417,7 @@ console.log('length',filteredData.length)}
           <Table
             columns={columns}
             dataSource={gridData && gridData.length ? gridData : listeservice}
-            
+
             bordered={true}
           />
         </div>
@@ -447,9 +458,9 @@ console.log('length',filteredData.length)}
             toast.success("Gestionclient modifié avec succée");
           }}
         >
-             <Cascader
+          <Cascader
             className="cascader1"
-            options={listecodecollab}
+            options={liste}
             onChange={onChange}
             placeholder="selectionner code collaborateur "
             showSearch={{
@@ -458,11 +469,11 @@ console.log('length',filteredData.length)}
             onSearch={(value) => console.log(value)}
           />
 
-           <Input
+          <Input
             placeholder="code client"
-            
-           value={val}
-           ></Input>
+
+            value={val}
+          ></Input>
           <Input
             placeholder="id"
             value={edditingGestionclient?.id}
@@ -473,7 +484,7 @@ console.log('length',filteredData.length)}
               });
             }}
           ></Input>
-          
+
           <Input
             placeholder=""
             value={edditingGestionclient?.raison}
@@ -545,53 +556,53 @@ console.log('length',filteredData.length)}
             }}
           ></Input>
 
-<div ClassName="situation">
+          <div ClassName="situation">
             <p>Situation_fiscale</p>
             <div className="radioet">
-            <Radio.Group  onChange={onChangeradio} value={value}>
-            <Radio
-            
-              placeholder="situation_fiscale"
-              value={1}
+              <Radio.Group onChange={onChangeradio} value={value}>
+                <Radio
 
-              onChange={(e) =>
-                 {if( e.target.checked)
-                  {
-                setEdditingGestionclient({
-                  ...edditingGestionclient,
-                  situation_fiscale: "non Assujetti",
-                });}
-              }}
-            > non Assujeti
-            </Radio>
-           
-            <Radio
-            
-              placeholder="situation_fiscale"
-              value={2}
-              onChange={(e) => {
-                
-                setEdditingGestionclient({
-                  ...edditingGestionclient,
-                  situation_fiscale: "Asujetti",
-                });
-              }}
-            >Assujeti</Radio>
-          
-            <Radio
-              
-              placeholder="situation_fiscale"
-              value={3}
-              onChange={(e) => {
-                setEdditingGestionclient({
-                  ...edditingGestionclient,
-                  situation_fiscale: "Exonoré",
-                });
-              }}
-            >Exonoré</Radio>
-            
-            </Radio.Group>
-          </div>
+                  placeholder="situation_fiscale"
+                  value={1}
+
+                  onChange={(e) => {
+                    if (e.target.checked) {
+                      setEdditingGestionclient({
+                        ...edditingGestionclient,
+                        situation_fiscale: "non Assujetti",
+                      });
+                    }
+                  }}
+                > non Assujeti
+                </Radio>
+
+                <Radio
+
+                  placeholder="situation_fiscale"
+                  value={2}
+                  onChange={(e) => {
+
+                    setEdditingGestionclient({
+                      ...edditingGestionclient,
+                      situation_fiscale: "Asujetti",
+                    });
+                  }}
+                >Assujeti</Radio>
+
+                <Radio
+
+                  placeholder="situation_fiscale"
+                  value={3}
+                  onChange={(e) => {
+                    setEdditingGestionclient({
+                      ...edditingGestionclient,
+                      situation_fiscale: "Exonoré",
+                    });
+                  }}
+                >Exonoré</Radio>
+
+              </Radio.Group>
+            </div>
           </div>
           <Input
             placeholder="categorie"
@@ -624,12 +635,12 @@ console.log('length',filteredData.length)}
             }}
           ></Input>
         </Modal>
-   
-        
 
-        
-       
-      
+
+
+
+
+
         <Modal
           title="Ajouter un client "
           visible={isAdd}
@@ -646,7 +657,7 @@ console.log('length',filteredData.length)}
         >
           <Cascader
             className="cascader1"
-            options={listecodecollab}
+            options={liste}
             onChange={onChange}
             placeholder="Selectionner code collaborateur "
             showSearch={{
@@ -654,29 +665,37 @@ console.log('length',filteredData.length)}
             }}
             onSearch={(value) => console.log(value)}
           />
-             <br/><Checkbox  id="abc"  onChange={onChange1}>  Saisie Manuel(codeclient)</Checkbox>;
-             <div id='1'>
-           <Input 
-            placeholder="code client"
-            value={val}
-            onChange={(e) => {setVal(e.target.value)
-            }
-           
-          }
-            
-          ></Input>
+          <br />
+
+          <Checkbox id="abc" onChange={onChange1}>  Saisie Manuel(codeclient)</Checkbox> :
+
+          {check &&
+            <div id='1'>
+              <Input
+                placeholder="code client"
+                value={val}
+                onChange={(e) => {
+                  setVal(e.target.value)
+                }
+
+                }
+              ></Input>
+            </div>}
+
+
+          {check1 &&
+           <div id='2'>
+            <Input disabled
+              placeholder="code client"
+              value={addingGestionclient.id + '/' + addingGestionclient.raison[0]}
+
+            //amltha win lmatricule lval ghadi win yiwali yaml feha
+
+            ></Input>
           </div>
-          <div id='2'>
-          <Input  disabled
-            placeholder="code client"
-            value={addingGestionclient.id+'/'+addingGestionclient.raison[0]}
-          
-          //amltha win lmatricule lval ghadi win yiwali yaml feha
-            
-          ></Input>
-          </div>
-            
-          
+}
+
+
           <Input
             placeholder="id"
             value={addingGestionclient.id}
@@ -759,54 +778,55 @@ console.log('length',filteredData.length)}
             }}
           ></Input>
           <div ClassName="situation">
-          <fieldset>
-    <legend>Situation Fiscale</legend>
-         
-            <div className="radioet">
-            <Radio.Group  onChange={onChangeradio} value={value}>
-            <Radio
-            
-              placeholder="situation_fiscale"
-              value={1}
+            <fieldset>
+              <legend>Situation Fiscale</legend>
 
-              onChange={(e) =>
-                 {if( e.target.checked){
-                setAddingGestionclient({
-                  ...addingGestionclient,
-                  situation_fiscale: "non Assujetti",
-                });}
-              }}
-            > non Assujeti
-            </Radio>
-           
-            <Radio
-            
-              placeholder="situation_fiscale"
-              value={2}
-              onChange={(e) => {
-                
-                setAddingGestionclient({
-                  ...addingGestionclient,
-                  situation_fiscale: "Asujetti",
-                });
-              }}
-            >Assujeti</Radio>
-          
-            <Radio
-              
-              placeholder="situation_fiscale"
-              value={3}
-              onChange={(e) => {
-                setAddingGestionclient({
-                  ...addingGestionclient,
-                  situation_fiscale: "Exonoré",
-                });
-              }}
-            >Exonoré</Radio>
-            
-            </Radio.Group>
-          </div>
-          </fieldset>
+              <div className="radioet">
+                <Radio.Group onChange={onChangeradio} value={value}>
+                  <Radio
+
+                    placeholder="situation_fiscale"
+                    value={1}
+
+                    onChange={(e) => {
+                      if (e.target.checked) {
+                        setAddingGestionclient({
+                          ...addingGestionclient,
+                          situation_fiscale: "non Assujetti",
+                        });
+                      }
+                    }}
+                  > non Assujeti
+                  </Radio>
+
+                  <Radio
+
+                    placeholder="situation_fiscale"
+                    value={2}
+                    onChange={(e) => {
+
+                      setAddingGestionclient({
+                        ...addingGestionclient,
+                        situation_fiscale: "Asujetti",
+                      });
+                    }}
+                  >Assujeti</Radio>
+
+                  <Radio
+
+                    placeholder="situation_fiscale"
+                    value={3}
+                    onChange={(e) => {
+                      setAddingGestionclient({
+                        ...addingGestionclient,
+                        situation_fiscale: "Exonoré",
+                      });
+                    }}
+                  >Exonoré</Radio>
+
+                </Radio.Group>
+              </div>
+            </fieldset>
           </div>
           <Input
             placeholder="categorie"

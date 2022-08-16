@@ -25,7 +25,7 @@ const Navbar = () => {
     }
   }, [showLinks]);
   return (
-    <nav>
+    <nav className="navhome">
       <div className="nav-center">
         <div className="nav-header">
           <div className="divparent">
