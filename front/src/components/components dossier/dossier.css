@@ -2,6 +2,10 @@
   width: 250px;
 
 }
+.cascader2 {
+  width: 472px !important;
+
+}
 .dosscontainer {
   display: flex;
   flex-direction: column;

@@ -96,11 +96,13 @@ const Gestionclient = () => {
     var cb = document.getElementById('abc')
     var input1 = document.getElementById('1')
     var input2 = document.getElementById('2')
-    if (cb.checked == true) {setCheck(true);setCheck1(false);
+    if (cb.checked == true) {
+      setCheck(true); setCheck1(false);
       input1.style.display = "block"//yidhaher
       input2.style.display = "none"
     }
-    else {setCheck1(true);setCheck(false);
+    else {
+      setCheck1(true); setCheck(false);
       input1.style.display = "none";
       input2.style.display = "block"
     }
@@ -116,65 +118,8 @@ const Gestionclient = () => {
 
   const columns = [
     { key: "1", title: "id", dataIndex: "id" },
-    {
-      key: "2",
-      title: "raison",
-      dataIndex: "raison",
-
-    },
-    {
-      key: "3",
-      title: "matricule",
-      dataIndex: "matricule",
-      filterDropdown: ({
-        setSelectedKeys,
-        selectedKeys,
-        confirm,
-        clearFilters,
-      }) => {
-        return (
-          <React.Fragment>
-            <Input
-              autoFocus
-              placeholder="type text"
-              value={selectedKeys[0]}
-              onChange={(e) => {
-                setSelectedKeys(e.target.value ? [e.target.value] : []);
-              }}
-              onPressEnter={() => {
-                confirm();
-              }}
-              onBlur={() => {
-                confirm();
-              }}
-            ></Input>
-            <Button
-              onClick={() => {
-                confirm();
-              }}
-              type="primary"
-            >
-              {" "}
-              Chercher Client{" "}
-            </Button>
-            <Button
-              onClick={() => {
-                clearFilters();
-              }}
-              type="danger"
-            >
-              Réinitialiser{" "}
-            </Button>
-          </React.Fragment>
-        );
-      },
-      filterIcon: () => {
-        return <SearchOutlined />;
-      },
-      onFilter: (value, record) => {
-        return record.matricule.toLowerCase().includes(value.toLowerCase());
-      },
-    },
+    {key: "2",title: "raison",dataIndex: "raison" },
+    {key: "3",title: "matricule",dataIndex: "matricule"},
     { key: "4", title: "ville", dataIndex: "ville" },
     { key: "5", title: "rue", dataIndex: "rue" },
     { key: "6", title: "num", dataIndex: "num" },
@@ -459,7 +404,8 @@ const Gestionclient = () => {
           }}
         >
           <Cascader
-            className="cascader1"
+
+            className="cascader2"
             options={liste}
             onChange={onChange}
             placeholder="selectionner code collaborateur "
@@ -656,7 +602,7 @@ const Gestionclient = () => {
           }}
         >
           <Cascader
-            className="cascader1"
+            className="cascader2"
             options={liste}
             onChange={onChange}
             placeholder="Selectionner code collaborateur "
@@ -667,7 +613,7 @@ const Gestionclient = () => {
           />
           <br />
 
-          <Checkbox id="abc" onChange={onChange1}>  Saisie Manuel(codeclient)</Checkbox> :
+          <Checkbox id="abc" onChange={onChange1}> Saisie Manuel ( code client ) </Checkbox>:
 
           {check &&
             <div id='1'>
@@ -684,16 +630,16 @@ const Gestionclient = () => {
 
 
           {check1 &&
-           <div id='2'>
-            <Input disabled
-              placeholder="code client"
-              value={addingGestionclient.id + '/' + addingGestionclient.raison[0]}
+            <div id='2'>
+              <Input disabled
+                placeholder="code client"
+                value={addingGestionclient.id + '/' + addingGestionclient.raison[0]}
 
-            //amltha win lmatricule lval ghadi win yiwali yaml feha
+              //amltha win lmatricule lval ghadi win yiwali yaml feha
 
-            ></Input>
-          </div>
-}
+              ></Input>
+            </div>
+          }
 
 
           <Input
