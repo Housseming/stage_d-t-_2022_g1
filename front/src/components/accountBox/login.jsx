@@ -29,7 +29,7 @@ export function Login(props) {
         toast.error(resp.data.error);
       } //khater ki naamlou login saye maach ykoun mawjoud asslan el response.data.error
       else {
-        navigate("home/welcome");
+        navigate("/home");
       }
     } catch (error) {
       console.log(error);
