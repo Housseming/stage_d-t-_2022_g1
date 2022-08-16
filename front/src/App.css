@@ -226,3 +226,6 @@
         flex-direction: column;
         padding-top: 15px;
     }
+    .divnavbar{
+        width: 500rem!important;
+    }
