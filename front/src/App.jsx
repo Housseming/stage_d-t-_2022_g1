@@ -24,7 +24,7 @@ import { Collabo } from "./components/dashboard/collaborateurs/collabo";
 import CreationDossier from "./components/dashboard/creationdossier";
 import Footer from "./components/FOOTER/footer";
 import Dossiers from "./components/dashboard/Dossiers";
-
+import About from "./components/welcome/about";
 
 function App() {
   return (
@@ -33,6 +33,7 @@ function App() {
         <Route path="/" element={<Home></Home>}></Route>
         <Route path="/login" element={<AccountBox />} />
         <Route path="/register" element={<RegisterBox />} />
+
         <Route path="/home" element={<Sharedlayout />}>
           <Route path="primehuissier" element={<PrimeHuissier />} />
           <Route path="utilisateur" element={<Utilisateur />} />

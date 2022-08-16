@@ -1,7 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
 import { FaBars } from "react-icons/fa";
 
-import { links } from "./data";
+
+
+import { links} from "./data";
 
 import { GoLaw } from "react-icons/go";
 import { AiFillHome } from "react-icons/ai";
@@ -50,6 +52,7 @@ const Navbar = () => {
             })}
           </ul>
         </div>
+        
       </div>
     </nav>
   );

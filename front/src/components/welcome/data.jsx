@@ -8,12 +8,12 @@ export const links = [
   },
   {
     id: 2,
-    url: "/about",
+    url: "/#about",
     text: "A propos",
   },
   {
     id: 3,
-    url: "/projects",
+    url: "/login",
     text: "Se connecter",
   },
 

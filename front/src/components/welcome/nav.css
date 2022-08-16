@@ -38,28 +38,16 @@
   --max-width: 1170px;
   --fixed-width: 620px;
 }
-/*
-=============== 
-Global Styles
-===============
-*/
-
-*,
 ul {
   list-style-type: none;
 }
-a {
-  text-decoration: none;
-}
 
-/*
-=============== 
-Navbar
-===============
-*/
 nav {
   background: #0583f2;
   box-shadow: #000000f5;
+
+
+  
 }
 .nav-header {
   display: flex;
@@ -135,14 +123,8 @@ nav {
     color: black;
     background-color: transparent !important;
   }
-  .social-icons {
-    display: flex;
-  }
-  .social-icons a {
-    margin: 0 0.5rem;
-    color: #2481a6;
-    transition: var(--transition);
-  }
+ 
+
 }
 
 .logonavbar {
@@ -164,8 +146,13 @@ nav {
 .hellotext {
   float: right;
   width: 50%;
-  margin-top: 16%;
+  margin-top: 20%;
   font-size: 1.9rem;
+ 
+}
+.hellotext h1{
+  color:#0583f2;
+  font-weight: bold;
 }
 @media screen and (max-width: 1100px) {
   .hellotext {
@@ -182,3 +169,59 @@ nav {
     font-size: 0.5rem;
   }
 }
+
+.divcontainerhome{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.divcards{
+  padding-left: 2%;
+  width: 90%;
+  
+}
+.cardclass{
+  width: 100%;
+  height: 10rem;
+  display: flex!important;
+  align-items: center!important;
+  flex-direction: column!important;
+  border: #0583f2 solid 2px;
+  
+}
+.logocard{
+  width: 60px;
+  height: 60px;
+}
+.titrecards h1{
+  font-size: 1.7rem;
+  color:#FFC107;
+  
+  
+}
+
+.cardcontainer{
+  display: flex!important;
+  align-items: center!important;
+  flex-direction: column!important;
+
+}
+.cardcontainer h1 {
+  font-size: 1.2rem;
+  color:black;
+
+}
+
+.cardcontainer:hover h1{
+  
+  font-size: 1.2rem;
+  color:#0583f2;
+
+}
+.divhome1{
+  margin-top: 9rem;
+  
+
+}
+
