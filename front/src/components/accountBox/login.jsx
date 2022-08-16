@@ -75,10 +75,9 @@ export function Login(props) {
         Connexion
       </SubmitButton>
       <Marginer direction="vertical" margin="1em" />
-      <MutedLink href="/login#">
-        Vous n'avez pas de compte ?
+      <MutedLink href="/login#" onClick={Switchtosignup}>
         <BoldLink href="/login#" onClick={Switchtosignup}>
-          Enregistrez-vous
+          Vous n'avez pas de compte ? Enregistrez-vous
         </BoldLink>{" "}
       </MutedLink>
     </BoxContainer>

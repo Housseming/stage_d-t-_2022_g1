@@ -84,7 +84,7 @@ export function Signup(props) {
           value={username}
           onChange={(e) => {
             setUsername(e.target.value);
-            console.log(username)
+            console.log(username);
           }}
         />
         <Marginer direction="vertical" margin={20} />
@@ -108,8 +108,10 @@ export function Signup(props) {
           type="password"
           placeholder="Mot de Passe"
           value={password}
-          onChange={(e) => {setPassword(e.target.value)
-          console.log(password)}}
+          onChange={(e) => {
+            setPassword(e.target.value);
+            console.log(password);
+          }}
         />
         {/*<Marginer direction="vertical" margin={10} />
         <label>
@@ -128,7 +130,7 @@ export function Signup(props) {
       </SubmitButton>
       <Marginer direction="vertical" margin="1em" />
       <MutedLink href="/login#" onClick={Switchtologin}>
-        Connectez-vous Si vous avez un compte !
+        <BoldLink>Connectez-vous Si vous avez un compte !</BoldLink>
       </MutedLink>
     </BoxContainer>
   );
