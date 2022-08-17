@@ -129,8 +129,7 @@ const Gestionclient = () => {
     { key: "10", title: "categorie", dataIndex: "categorie" },
     { key: "11", title: "fax", dataIndex: "fax" },
     { key: "12", title: "email", dataIndex: "email" },
-    {
-      key: "13",
+    {key: "13",
       title: "Actions",
       render: (record) => {
         return (
