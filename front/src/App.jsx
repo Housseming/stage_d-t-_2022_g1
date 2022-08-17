@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import React from "react";
 //import Axios from 'axios';
 import Parametreglobale from "./components/dashboard/Parametreglobale"
@@ -30,34 +30,27 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/">
-          <Route index element={<Home></Home>}></Route>
-          <Route path="login" element={<AccountBox />} />
-          <Route path="register" element={<RegisterBox />} />
-          <Route path="home" element={<Sharedlayout />}>
-            <Route path="primehuissier" element={<PrimeHuissier />} />
-            <Route path="utilisateur" element={<Utilisateur />} />
-            <Route path="Parametreglobale" element={<Parametreglobale />} />
-            <Route path="honoraireenextra" element={<Honoraireenextra />} />
-            <Route path="timbre" element={<Timbre />} />
-            <Route path="photocopie" element={<Photocopie />} />
-            <Route path="transport" element={<Transport />} />
-            <Route path="recettedufinance" element={<Recettedufinance />} />
-            <Route path="emplacementdossier" element={<Emplacementdossier />} />
-            <Route path="gestionclient" element={<Gestionclient />} />
-            <Route path="collaborateurs" element={<Collabo></Collabo>}></Route>
-            <Route
-              path="Tribunaux_et_administrations"
-              element={<Tribunale />}
-            />
-            <Route path="welcome" element={<Welcome></Welcome>}></Route>
-            <Route
-              path="recherchedossier"
-              element={<RechercheDossier />}
-            ></Route>
-            <Route path="creationdossier" element={<CreationDossier />}></Route>
-            <Route path="dossiers" element={<Dossiers />}></Route>
-          </Route>
+        <Route path="/" element={<Home/>}></Route>
+        <Route path="/login" element={<AccountBox />} />
+        <Route path="/register" element={<RegisterBox />} />
+
+        <Route path="/home" element={<Sharedlayout />}>
+          <Route path="primehuissier" element={<PrimeHuissier />} />
+          <Route path="utilisateur" element={<Utilisateur />} />
+          <Route path="Parametreglobale" element={<Parametreglobale />} />
+          <Route path="honoraireenextra" element={<Honoraireenextra />} />
+          <Route path="/home/timbre" element={<Navigate to="/home/timbre" />} />
+          <Route path="photocopie" element={<Photocopie />} />
+          <Route path="transport" element={<Transport />} />
+          <Route path="recettedufinance" element={<Recettedufinance />} />
+          <Route path="emplacementdossier" element={<Emplacementdossier />} />
+          <Route path="gestionclient" element={<Gestionclient />} />
+          <Route path="collaborateurs" element={<Collabo></Collabo>}></Route>
+          <Route path="Tribunaux_et_administrations" element={<Tribunale />} />
+          <Route path="welcome" element={<Welcome></Welcome>}></Route>
+          <Route path="recherchedossier" element={<RechercheDossier />}></Route>
+          <Route path="creationdossier" element={<CreationDossier />}></Route>
+          <Route path="dossiers" element={<Dossiers />}></Route>
         </Route>
       </Routes>
       {/*<Footer></Footer>*/}

@@ -80,7 +80,7 @@ const solutions1 = [
   {
     name: "Utilisateur",
     description: " ",
-    href: "/home/utilisateur",
+    href: "utilisateur",
     icon: UserAddIcon,
   },
   {
@@ -147,19 +147,19 @@ const resources2 = [
   {
     name: "Recherche",
     description: "",
-    href: "/home/recherchedossier",
+    href: "recherchedossier",
     icon: DocumentSearchIcon,
   },
   {
     name: "Emplacement Dossier",
     description: "",
-    href: "/home/dossiers",
+    href: "dossiers",
     icon: FolderIcon,
   },
   {
     name: "Creation",
     description: "",
-    href: "/home/creationdossier",
+    href: "creationdossier",
     icon: FolderAddIcon,
   },
   {
@@ -279,7 +279,8 @@ export default function Example() {
                             </a>
                           ))}
 
-                          <Navigation></Navigation>
+                          <Navigation
+                          />
                           {solutions1.map((item) => (
                             <a
                               key={item.name}

@@ -1,4 +1,4 @@
-/*const Pool = require("pg").Pool;
+const Pool = require("pg").Pool;
 require("dotenv").config();
 
 const devConfig = {
@@ -14,8 +14,8 @@ const proConfig = {
 }
 const pool = new Pool(process.env.NODE_ENV === "production" ? proConfig : devConfig);
 pool.connect(function(err) {
-    if (err) {throw (err)};
+    if (err) { throw (err) };
     console.log("Connected!");
 });
 
-module.exports = pool;*/
+module.exports = pool;

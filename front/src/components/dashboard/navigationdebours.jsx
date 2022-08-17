@@ -43,28 +43,28 @@ const Navigation = () => {
   {
   
     
-      navigate("/home/timbre")
+      navigate("timbre")
   
   }
   if (e.keyPath[0]==2)
   {
   
     
-      navigate("/home/photocopie")
+      navigate("photocopie")
   
   }
   if (e.keyPath[0]==3)
   {
   
     
-      navigate("/home/transport")
+      navigate("transport")
   
   }
   if (e.keyPath[0]==4)
   {
   
     
-      navigate("/home/recettedufinance")
+      navigate("recettedufinance")
   
   }
  

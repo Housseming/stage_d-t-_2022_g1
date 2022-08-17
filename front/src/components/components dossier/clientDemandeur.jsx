@@ -1,9 +1,11 @@
 import { Cascader, Input, Radio, Button } from "antd";
-import React, { useState } from "react";
+import React, { useState,useMemo } from "react";
 import "./dossier.css";
 import { Marginer } from "../marginer/marginfile";
 import TabClient from "./tabclientdemandeur";
-const options = [
+import axios from "axios";
+
+/*const options = [
   {
     value: "zhejiang",
     label: "Zhejiang",
@@ -41,10 +43,11 @@ const options = [
       },
     ],
   },
-];
+];*/
 
 const ClientDemandeur = () => {
-  const [value, setValue] = useState(1);
+  const [value, setValue] = useState( 1 );
+  const [listeClient, setListeClient] = useState([]);
   const onChange = (value, selectedOptions) => {
     console.log(value, selectedOptions);
   };
@@ -54,6 +57,23 @@ const ClientDemandeur = () => {
       (option) =>
         option.label.toLowerCase().indexOf(inputValue.toLowerCase()) > -1
     );
+  const getclientrequest = async () => {
+    try {
+      const response = await axios.get("/gestionclient");
+      console.log(response.data);
+
+      setListeClient(response.data);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+  const liste = useMemo(() => {
+    getclientrequest();
+    return listeClient.map((client) => ({
+      value: client.id,
+      label: client.raison +":"+client.id+":"+client.raison[0],
+    }));
+  }, [listeClient]);
 
   const onChangeradio = (e) => {
     console.log("radio checked", e.target.value);
@@ -68,7 +88,7 @@ const ClientDemandeur = () => {
 
           <Cascader
             className="cascader1"
-            options={options}
+            options={liste}
             onChange={onChange}
             placeholder="selectionner code client"
             showSearch={{
