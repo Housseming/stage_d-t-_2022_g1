@@ -30,27 +30,34 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home></Home>}></Route>
-        <Route path="/login" element={<AccountBox />} />
-        <Route path="/register" element={<RegisterBox />} />
-
-        <Route path="/home" element={<Sharedlayout />}>
-          <Route path="primehuissier" element={<PrimeHuissier />} />
-          <Route path="utilisateur" element={<Utilisateur />} />
-          <Route path="Parametreglobale" element={<Parametreglobale />} />
-          <Route path="honoraireenextra" element={<Honoraireenextra />} />
-          <Route path="timbre" element={<Timbre />} />
-          <Route path="photocopie" element={<Photocopie />} />
-          <Route path="transport" element={<Transport />} />
-          <Route path="recettedufinance" element={<Recettedufinance />} />
-          <Route path="emplacementdossier" element={<Emplacementdossier />} />
-          <Route path="gestionclient" element={<Gestionclient />} />
-          <Route path="collaborateurs" element={<Collabo></Collabo>}></Route>
-          <Route path="Tribunaux_et_administrations" element={<Tribunale />} />
-          <Route path="welcome" element={<Welcome></Welcome>}></Route>
-          <Route path="recherchedossier" element={<RechercheDossier />}></Route>
-          <Route path="creationdossier" element={<CreationDossier />}></Route>
-          <Route path="dossiers" element={<Dossiers />}></Route>
+        <Route path="/">
+          <Route index element={<Home></Home>}></Route>
+          <Route path="login" element={<AccountBox />} />
+          <Route path="register" element={<RegisterBox />} />
+          <Route path="home" element={<Sharedlayout />}>
+            <Route path="primehuissier" element={<PrimeHuissier />} />
+            <Route path="utilisateur" element={<Utilisateur />} />
+            <Route path="Parametreglobale" element={<Parametreglobale />} />
+            <Route path="honoraireenextra" element={<Honoraireenextra />} />
+            <Route path="timbre" element={<Timbre />} />
+            <Route path="photocopie" element={<Photocopie />} />
+            <Route path="transport" element={<Transport />} />
+            <Route path="recettedufinance" element={<Recettedufinance />} />
+            <Route path="emplacementdossier" element={<Emplacementdossier />} />
+            <Route path="gestionclient" element={<Gestionclient />} />
+            <Route path="collaborateurs" element={<Collabo></Collabo>}></Route>
+            <Route
+              path="Tribunaux_et_administrations"
+              element={<Tribunale />}
+            />
+            <Route path="welcome" element={<Welcome></Welcome>}></Route>
+            <Route
+              path="recherchedossier"
+              element={<RechercheDossier />}
+            ></Route>
+            <Route path="creationdossier" element={<CreationDossier />}></Route>
+            <Route path="dossiers" element={<Dossiers />}></Route>
+          </Route>
         </Route>
       </Routes>
       {/*<Footer></Footer>*/}

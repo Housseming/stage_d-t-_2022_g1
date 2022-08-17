@@ -1,43 +1,74 @@
 /* This example requires Tailwind CSS v2.0+ */
 
-import { Fragment } from 'react'
-import { Popover, Transition } from '@headlessui/react'
-import { PlusIcon, ServerIcon,ScaleIcon,CogIcon,CreditCardIcon,
-  ChartBarIcon,CursorClickIcon,DocumentReportIcon,MenuIcon,RefreshIcon,ShieldCheckIcon,ViewGridIcon, XIcon,ClockIcon,CurrencyYenIcon,FlagIcon ,FolderOpenIcon,
-LibraryIcon,FolderIcon, UserCircleIcon, UserIcon, DocumentSearchIcon, ArchiveIcon, DocumentIcon} from '@heroicons/react/outline';
+import { Fragment } from "react";
+import { Popover, Transition } from "@headlessui/react";
+import {
+  PlusIcon,
+  ServerIcon,
+  ScaleIcon,
+  CogIcon,
+  CreditCardIcon,
+  ChartBarIcon,
+  CursorClickIcon,
+  DocumentReportIcon,
+  MenuIcon,
+  RefreshIcon,
+  ShieldCheckIcon,
+  ViewGridIcon,
+  XIcon,
+  ClockIcon,
+  CurrencyYenIcon,
+  FlagIcon,
+  FolderOpenIcon,
+  LibraryIcon,
+  FolderIcon,
+  UserCircleIcon,
+  UserIcon,
+  DocumentSearchIcon,
+  ArchiveIcon,
+  DocumentIcon,
+} from "@heroicons/react/outline";
 import {
   AppstoreOutlined,
   MailOutlined,
-  SettingOutlined,CubeIcon
+  SettingOutlined,
+  CubeIcon,
 } from "@ant-design/icons";
-import Navigation from './navigationdebours';
-import { ChevronDownIcon, FolderAddIcon, PencilAltIcon, UserAddIcon, UserGroupIcon } from '@heroicons/react/solid';
+import Navigation from "./navigationdebours";
+import {
+  ChevronDownIcon,
+  FolderAddIcon,
+  PencilAltIcon,
+  UserAddIcon,
+  UserGroupIcon,
+} from "@heroicons/react/solid";
 
 const solutions = [
   {
-    name: 'Paramètre globale',
-    description: '',
-    href: 'Parametreglobale',
+    name: "Paramètre globale",
+    description: "",
+    href: "/home/Parametreglobale",
     icon: CogIcon,
-
   },
   {
-    name: 'honoraire en extra',
-    description: '',
-    href: 'honoraireenextra',
+    name: "honoraire en extra",
+    description: "",
+    href: "/home/honoraireenextra",
     icon: CreditCardIcon,
-  },]
+  },
+];
+
 const solutions1 = [
   {
     name: "Emplacement dossier",
     description: "",
-    href: "emplacementdossier",
+    href: "/home/emplacementdossier",
     icon: FolderOpenIcon,
   },
   {
     name: "Tribunaux et Administrations",
     description: "",
-    href: "Tribunaux_et_administrations",
+    href: "/home/Tribunaux_et_administrations",
     icon: LibraryIcon,
   },
   {
@@ -49,19 +80,19 @@ const solutions1 = [
   {
     name: "Utilisateur",
     description: " ",
-    href: "/utilisateur",
+    href: "/home/utilisateur",
     icon: UserAddIcon,
   },
   {
     name: "Huissier",
     description: " ",
-    href: "primehuissier",
+    href: "/home/primehuissier",
     icon: UserCircleIcon,
   },
   {
     name: "Collaborateur",
     description: " ",
-    href: "collaborateurs",
+    href: "/home/collaborateurs",
     icon: UserGroupIcon,
   },
   {
@@ -84,65 +115,74 @@ const solutions1 = [
   },
 ];
 
-const  client0 = [{name:'Gestion Client',
-href:'gestionclient',icon: UserIcon},
-{name:'Fiche Signalitique',href:'#', icon: DocumentIcon}]
+const client0 = [
+  { name: "Gestion Client", href: "/home/gestionclient", icon: UserIcon },
+  { name: "Fiche Signalitique", href: "#", icon: DocumentIcon },
+];
 const resources = [
   {
-    name: 'Help Center',
-    description: '',
-    href: '#',
+    name: "Help Center",
+    description: "",
+    href: "#",
   },
-  { name: 'Guides', description: 'Learn how to maximize our platform to get the most out of it.', href: '#' },
-  { name: 'Events', description: 'See what meet-ups and other events we might be planning near you.', href: '#' },
-  { name: 'Security', description: 'Understand how we take your privacy seriously.', href: '#' },
-]
+  {
+    name: "Guides",
+    description:
+      "Learn how to maximize our platform to get the most out of it.",
+    href: "#",
+  },
+  {
+    name: "Events",
+    description:
+      "See what meet-ups and other events we might be planning near you.",
+    href: "#",
+  },
+  {
+    name: "Security",
+    description: "Understand how we take your privacy seriously.",
+    href: "#",
+  },
+];
 const resources2 = [
   {
     name: "Recherche",
-    description:
-      "",
-    href: "/recherchedossier",
-    icon:DocumentSearchIcon,
+    description: "",
+    href: "/home/recherchedossier",
+    icon: DocumentSearchIcon,
   },
   {
     name: "Emplacement Dossier",
-    description:
-      "",
-    href: "dossiers",
-    icon:FolderIcon
+    description: "",
+    href: "/home/dossiers",
+    icon: FolderIcon,
   },
   {
     name: "Creation",
-    description:
-      "",
-    href: "/creationdossier",
-    icon:FolderAddIcon
+    description: "",
+    href: "/home/creationdossier",
+    icon: FolderAddIcon,
   },
   {
     name: "Gestion Archive",
     description: "",
     href: "#",
-    icon:ArchiveIcon
+    icon: ArchiveIcon,
   },
 ];
 const resources3 = [
   {
     name: "Tâche",
-    description:
-      "",
+    description: "",
     href: "#",
   },
   {
     name: "Huissier",
-    description:
-      "",
+    description: "",
     href: "#",
   },
   {
     name: "Echéance",
-    description:
-      "",
+    description: "",
     href: "#",
   },
   {
@@ -158,7 +198,7 @@ const resources3 = [
 ];
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(" ");
 }
 
 export default function Example() {
@@ -572,7 +612,6 @@ export default function Example() {
             >
               Se déconnecter
             </a>
-            
           </div>
         </div>
       </div>
@@ -682,4 +721,3 @@ export default function Example() {
     </Popover>
   );
 }
-
