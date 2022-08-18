@@ -20,47 +20,8 @@ import { Marginer } from "../marginer/marginfile";
 
 const Gestionclient = () => {
   const [listecodecollab, setListecodecollab] = useState([
-
   ]);
-  const options = [
-    {
-      value: "zhejiang",
-      label: "Zhejiang",
-      children: [
-        {
-          value: "hangzhou",
-          label: "Hangzhou",
-          children: [
-            {
-              value: "xihu",
-              label: "West Lake",
-            },
-            {
-              value: "xiasha",
-              label: "Xia Sha",
-              disabled: true,
-            },
-          ],
-        },
-      ],
-    },
-    {
-      value: "jiangsu",
-      label: "Jiangsu",
-      children: [
-        {
-          value: "nanjing",
-          label: "Nanjing",
-          children: [
-            {
-              value: "zhonghuamen",
-              label: "Zhong Hua men",
-            },
-          ],
-        },
-      ],
-    },
-  ];
+
   const onChange = (value, selectedOptions) => {
     console.log(value, selectedOptions);
   };

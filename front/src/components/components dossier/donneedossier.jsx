@@ -208,7 +208,7 @@ const DonneeDossier = () => {
         </div>
       </div>
 
-      <div className="boutonet">
+      {/*<div className="boutonet">
         <Button className="bouton" type="primary" block>
           {" "}
           Ajouter Adversaire
@@ -218,7 +218,7 @@ const DonneeDossier = () => {
           {" "}
           Retirer Adversaire{" "}
         </Button>
-      </div>
+          </div>*/}
       <TabDossier />
     </div>
   );
