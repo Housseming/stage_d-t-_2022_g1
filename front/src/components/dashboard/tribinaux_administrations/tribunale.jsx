@@ -9,7 +9,7 @@ import {
   Col,
   Row,
 } from "antd";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect ,useMemo} from "react";
 import axios from "axios";
 
 import Tableau from "./service";
@@ -221,8 +221,9 @@ const Tribunale = () => {
   useEffect(() => {
     getservicerequest();
   });
+ 
 
-  console.log(listeservice);
+
 
   //*****************supprimer service*****************
   const deleteservice = (record) => {
@@ -409,7 +410,7 @@ const Tribunale = () => {
                         <h1>Jours de l'audience</h1>
                         <Checkbox.Group
                           onChange={onChange}
-                          defaultValue={[
+                          Value={[
                             edditingservice.lundi == "audience" ? "lundi" : "",
                             edditingservice.mardi == "audience" ? "mardi" : "",
                             edditingservice.mercredi == "audience"
@@ -737,7 +738,7 @@ const Tribunale = () => {
                       setDisabled2(false, false, false, false, false, false);
                     }}
                   >
-                    <Input value={trib.lieu}></Input>
+                    
                     <Input
                       placeholder="tapez le nom du service"
                       value={addingservice.nom}

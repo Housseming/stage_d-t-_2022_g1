@@ -20,7 +20,8 @@ const DonneeDossier = () => {
   };
   const onChange = (value, selectedOptions) => {
     console.log(value, selectedOptions);
-    const newlisteser = listeser.filter((ser) => ser.value == selectedOptions[0].value);
+    const newlisteser = listeser.filter((ser) => 
+    ser.value.substring(value.indexOf(":"),value.length) == selectedOptions[0].value);
     setListeserviceinput(newlisteser);
     console.log(listeserviceinput,"ena liste service jdida")
     
@@ -103,7 +104,7 @@ const DonneeDossier = () => {
     getservicerequest();
 
     return listeservice.map((ser) => ({
-      value: ser.tribunale_id,
+      value: ser.tribunale_id +":"+ ser.service_id,
       label: ser.nom,
     }));
   }, [listeservice]);
