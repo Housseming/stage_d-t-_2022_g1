@@ -25,7 +25,7 @@ import CreationDossier from "./components/dashboard/creationdossier";
 import Footer from "./components/FOOTER/footer";
 import Dossiers from "./components/dashboard/Dossiers";
 import About from "./components/welcome/about";
-
+import Error from "./components/dashboard/error"
 function App() {
   return (
     <BrowserRouter>
@@ -57,6 +57,7 @@ function App() {
             <Route path="creationdossier" element={<CreationDossier />}></Route>
             <Route path="dossiers" element={<Dossiers />}></Route>
           </Route>
+          <Route path="*" element={<Error></Error>}></Route>
         </Route>
       </Routes>
       {/*<Footer></Footer>*/}

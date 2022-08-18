@@ -18,7 +18,7 @@ const Emplacementdossier = () => {
   const [edditingEmplacementdossier, setEdditingEmplacementdossier] =
     useState(null);
   const [addingEmplacementdossier, setAddingEmplacementdossier] = useState({
-    id: "",
+    
     libelle: "",
   });
 
@@ -45,20 +45,22 @@ const Emplacementdossier = () => {
                   editEmplacementdossier(record);
                 }}
               ></AiFillEdit>
-              <p>modifier</p>
+              <pre>
+                <p>modifier </p>
+              </pre>
             </div>
-            {
-              <div className="divdelete">
-                <MdDeleteForever
-                  className="delete"
-                  onClick={() => {
-                    deleteEmplacementdossier(record);
-                  }}
-                ></MdDeleteForever>
+            <div className="divdelete">
+              <MdDeleteForever
+                className="delete"
+                onClick={() => {
+                  deleteEmplacementdossier(record);
+                }}
+              ></MdDeleteForever>
 
+              <pre>
                 <p>supprimer</p>
-              </div>
-            }
+              </pre>
+            </div>
           </div>
         );
       },
@@ -88,11 +90,11 @@ const Emplacementdossier = () => {
       cancelText: "annuler",
       onOk: () => {
         const newlisteservice = listeservice.filter(
-          (Emplacementdossier) => Emplacementdossier.libelle !== record.libelle
+          (Emplacementdossier) => Emplacementdossier.id !== record.id
         );
         setlisteservice(newlisteservice);
-        deleteEmplacementdossierrequest(record.libelle);
-        toast.success("Emplacementdossier supprimé avec succès");
+        deleteEmplacementdossierrequest(record.id);
+        toast.success("Emplacement dossier supprimé avec succès");
       },
     });
   };
@@ -203,16 +205,7 @@ const Emplacementdossier = () => {
             toast.success("Emplacementdossier modifié avec succée");
           }}
         >
-          <Input
-            placeholder="id"
-            value={edditingEmplacementdossier?.id}
-            onChange={(e) => {
-              setEdditingEmplacementdossier({
-                ...edditingEmplacementdossier,
-                id: e.target.value,
-              });
-            }}
-          ></Input>
+          
           <Input
             placeholder="libelle"
             value={edditingEmplacementdossier?.libelle}
@@ -240,16 +233,7 @@ const Emplacementdossier = () => {
             toast.success("Emplacement_dossier_ajouté avec succès");
           }}
         >
-          <Input
-            placeholder="id"
-            value={addingEmplacementdossier.id}
-            onChange={(e) => {
-              setAddingEmplacementdossier({
-                ...addingEmplacementdossier,
-                id: e.target.value,
-              });
-            }}
-          ></Input>
+          
           <Input
             placeholder="libelle"
             value={addingEmplacementdossier.libelle}
