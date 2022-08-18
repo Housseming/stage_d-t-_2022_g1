@@ -20,12 +20,15 @@ const DonneeDossier = () => {
   };
   const onChange = (value, selectedOptions) => {
     console.log(value, selectedOptions);
-    const newlisteser = listeser.filter((ser) => ser.value == value[0]);
+    const newlisteser = listeser.filter((ser) => 
+    ser.value.substring(value.indexOf(":"),value.length) == selectedOptions[0].value);
     setListeserviceinput(newlisteser);
     console.log(listeserviceinput,"ena liste service jdida")
+    
   };
   const onChangeservice = (value, selectedOptions) => {
     console.log(value, selectedOptions);
+    
   };
   const onChangedate = (date, dateString) => {
     console.log(date, dateString);
@@ -51,7 +54,7 @@ const DonneeDossier = () => {
   const gettribunalerequest = async () => {
     try {
       const response = await axios.get("/tribunale");
-     // console.log(response.data);
+      //console.log(response.data);
 
       setListeTrib(response.data);
      // console.log("hellolistetrib", listeTrib);
@@ -87,6 +90,7 @@ const DonneeDossier = () => {
       label: trib.lieu,
     }));
   }, [listeTrib]);
+
   const listeemp = useMemo(() => {
     getemplacementdossierrequest();
 
@@ -95,11 +99,12 @@ const DonneeDossier = () => {
       label: emp.libelle,
     }));
   }, [listeemplacement]);
+
   const listeser = useMemo(() => {
     getservicerequest();
 
     return listeservice.map((ser) => ({
-      value: ser.tribunale_id,
+      value: ser.tribunale_id +":"+ ser.service_id,
       label: ser.nom,
     }));
   }, [listeservice]);
