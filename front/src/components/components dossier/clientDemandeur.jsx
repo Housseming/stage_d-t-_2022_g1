@@ -49,6 +49,7 @@ const ClientDemandeur = () => {
   const [value, setValue] = useState( 1 );
   const [listeClient, setListeClient] = useState( [] );
   const [matricule, setMatricule] = useState("");
+  const [newclient,setNewclient] = useState([]);
 
   const filter = (inputValue, path) =>
     path.some(
@@ -79,7 +80,9 @@ const ClientDemandeur = () => {
     const newlistclient = liste.filter(
       (ser) => ser.id == selectedOptions[0].value
     );
-    setMatricule(newlistclient[0].matricule);
+    console.log(newlistclient)
+    setNewclient(newlistclient)
+    setMatricule(newclient[0].matricule);
   };
   /*function onChange( selectedOptions ) {
     setMatricule( selectedOptions.listeClient.value.matricule );
