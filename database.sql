@@ -5,5 +5,5 @@ CREATE TABLE primehuissier(
     montant DOUBLE PRECISION ,
     dessociable TEXT NOT NULL ,
     impot TEXT NOT NULL ,
-    mensuel TEXT NOT NULL 
+    mensuel TEXT NOT NULL
 );
