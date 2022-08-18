@@ -1,7 +1,7 @@
-import { Input, Radio, Button, InputNumber, Cascader } from "antd";
-import React, { useState, useEffect, useMemo } from "react";
-import { Marginer } from "../marginer/marginfile";
-import { DatePicker, Space } from "antd";
+import {Input, Radio, Button, InputNumber, Cascader} from "antd";
+import React, {useState, useEffect, useMemo} from "react";
+import {Marginer} from "../marginer/marginfile";
+import {DatePicker, Space} from "antd";
 import Selection from "./selectioninput";
 
 import Selectdossier from "./selectemplacement";
@@ -20,15 +20,16 @@ const DonneeDossier = () => {
   };
   const onChange = (value, selectedOptions) => {
     console.log(value, selectedOptions);
-    const newlisteser = listeser.filter((ser) => 
-    ser.value.substring(value.indexOf(":"),value.length) == selectedOptions[0].value);
+    const newlisteser = listeser.filter(
+      (ser) =>
+        ser.value.substring(value.indexOf(":"), value.length) ==
+        selectedOptions[0].value
+    );
     setListeserviceinput(newlisteser);
-    console.log(listeserviceinput,"ena liste service jdida")
-    
+    console.log(listeserviceinput, "ena liste service jdida");
   };
   const onChangeservice = (value, selectedOptions) => {
     console.log(value, selectedOptions);
-    
   };
   const onChangedate = (date, dateString) => {
     console.log(date, dateString);
@@ -57,7 +58,7 @@ const DonneeDossier = () => {
       //console.log(response.data);
 
       setListeTrib(response.data);
-     // console.log("hellolistetrib", listeTrib);
+      // console.log("hellolistetrib", listeTrib);
     } catch (error) {
       console.log(error.message);
     }
@@ -104,7 +105,7 @@ const DonneeDossier = () => {
     getservicerequest();
 
     return listeservice.map((ser) => ({
-      value: ser.tribunale_id +":"+ ser.service_id,
+      value: ser.tribunale_id + ":" + ser.service_id,
       label: ser.nom,
     }));
   }, [listeservice]);
@@ -113,16 +114,6 @@ const DonneeDossier = () => {
 
   return (
     <div className="container">
-      <div className="client1">
-        <div className="dateinput">
-          <label>Année</label>
-          <DatePicker
-            onChange={onChangedate}
-            picker="year"
-            placeholder="Année"
-          />
-        </div>
-      </div>
       <div className="client2">
         <div className="div">
           <label>Type Dossier:</label>
@@ -133,6 +124,16 @@ const DonneeDossier = () => {
           <label htmlFor="code">Code Dossier :</label>
 
           <InputNumber className="input" placeholder="Code Dossier" />
+          <div className="client1">
+            <div className="dateinput">
+              <label>Année</label>
+              <DatePicker
+                onChange={onChangedate}
+                picker="year"
+                placeholder="Année"
+              />
+            </div>
+          </div>
         </div>
       </div>
       <div className="client2">

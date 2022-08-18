@@ -49,15 +49,15 @@ const ClientDemandeur = () => {
   const [value, setValue] = useState( 1 );
   const [listeClient, setListeClient] = useState( [] );
   const [matricule, setMatricule] = useState( "" );
+  const [newclient, setNewclient] = useState( [] );
+  const [ischecked, setIschecked] = useState( false );
   const [donnee, setDonnee] = useState({
     matricule: "",
     raison: "",
     num: "",
     activité: "",
     categorie: "",
-  });
-  const [newclient, setNewclient] = useState( [] );
-  
+  } );
 
   const filter = (inputValue, path) =>
     path.some(
@@ -92,22 +92,25 @@ const ClientDemandeur = () => {
     setNewclient( newlistclient )
     setMatricule( newclient[0].matricule );
 
-    setDonnee( {
+    setDonnee({
       matricule: newclient[0].matricule,
       raison: newclient[0].raison,
-      categorie:newclient[0].categorie,
+      categorie: newclient[0].categorie,
       num: newclient[0].num,
-    } )
-    console.log(donnee,"donnee")
-    
-  };
-
-
-  const onChangeradio = (e) => {
-    console.log("radio checked", e.target.value);
-    setValue(e.target.value);
-  };
-
+      activité:newclient[0].activité,
+      situation_fiscale: newclient[0].situation_fiscale,
+    });
+  }
+    const onChangeradio = (e) => {
+      console.log("radio checked", e.target.value);
+      if (donnee.situation_fiscale === "Assujetti") {
+        setValue(1);
+      } else if (donnee.situation_fiscale === "Non Assujetti") {
+        setValue(2);
+      } else {
+        setValue(3);
+      }
+    };
   return (
     <div className="container">
       <div className="reglementdiv1">
@@ -122,39 +125,47 @@ const ClientDemandeur = () => {
             showSearch={{
               filter,
             }}
-            onSearch={( value ) => {
-              console.log( value );
-          
+            onSearch={(value) => {
+              console.log(value);
             }}
-            
-            
-            
-            
-          
-            
           />
         </div>
 
         <div className="div">
           <label htmlFor="cin">Matricule Fiscale/CIN :</label>
 
-          <Input type="text" className="input" placeholder="CIN" value={donnee.matricule}/>
+          <Input
+            type="text"
+            className="input"
+            placeholder="CIN"
+            value={donnee.matricule}
+          />
         </div>
       </div>
       <div className="reglementdiv2">
         <div className="div">
           <label htmlFor="raisonsociale">Raison Sociale/Nom :</label>
 
-          <Input type="text" placeholder="Raison Sociale" value={donnee.raison}/>
+          <Input
+            type="text"
+            placeholder="Raison Sociale"
+            value={donnee.raison}
+          />
         </div>
 
         <div className="div">
           <label>Situation Fiscale :</label>
           <div className="radioet">
-            <Radio.Group onChange={onChangeradio} value={value}>
-              <Radio value={1}>Non Assujetie</Radio>
-              <Radio value={2}>Assujetie</Radio>
-              <Radio value={3}>exonoré</Radio>
+            <Radio.Group onChange={onChangeradio}>
+              <Radio  value={1}>
+                Non Assujetie
+              </Radio>
+              <Radio  value={2}>
+                Assujetie
+              </Radio>
+              <Radio  value={3}>
+                exonoré
+              </Radio>
             </Radio.Group>
           </div>
         </div>
@@ -163,13 +174,21 @@ const ClientDemandeur = () => {
         <div className="div">
           <label>Activité Contribuale : </label>
 
-          <Input type="text" placeholder="Activité Contribuale" />
+          <Input
+            type="text"
+            placeholder="Activité Contribuale"
+            value={donnee.activité}
+          />
         </div>
 
         <div className="div">
           <label htmlFor="typeclient"> Type Client :</label>
 
-          <Input type="text" placeholder="type client" />
+          <Input
+            type="text"
+            placeholder="type client"
+            value={donnee.categorie}
+          />
         </div>
       </div>
       <div className="reglementdiv4">
@@ -179,6 +198,7 @@ const ClientDemandeur = () => {
             type="number"
             className="inputraison"
             placeholder="Numéro de tel"
+            value={donnee.num}
           />
         </div>
       </div>
@@ -201,7 +221,8 @@ const ClientDemandeur = () => {
           {" "}
           Valider Dossier
             </Button>*/}
-    </div>);
-  };
+    </div>
+  );
+};
 
-export default ClientDemandeur;
+  export default ClientDemandeur;
