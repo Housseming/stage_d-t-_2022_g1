@@ -53,7 +53,7 @@ const DonneeDossier = () => {
   const gettribunalerequest = async () => {
     try {
       const response = await axios.get("/tribunale");
-     // console.log(response.data);
+      //console.log(response.data);
 
       setListeTrib(response.data);
      // console.log("hellolistetrib", listeTrib);
@@ -89,6 +89,7 @@ const DonneeDossier = () => {
       label: trib.lieu,
     }));
   }, [listeTrib]);
+
   const listeemp = useMemo(() => {
     getemplacementdossierrequest();
 
@@ -97,6 +98,7 @@ const DonneeDossier = () => {
       label: emp.libelle,
     }));
   }, [listeemplacement]);
+
   const listeser = useMemo(() => {
     getservicerequest();
 
