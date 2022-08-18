@@ -210,13 +210,13 @@ export default function Example() {
             <span className="sr-only">Workflow</span>
             <ScaleIcon
               className="h-8 w-auto sm:h-10"
-              src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+              src="https://tailwindui.com/img/logos/workflow-mark-blue-500.svg"
               alt=""
             />
           </a>
         </div>
         <div className="-mr-2 -my-2 md:hidden">
-          <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+          <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
             <span className="sr-only">Open menu</span>
             <MenuIcon className="h-6 w-6" aria-hidden="true" />
           </Popover.Button>
@@ -229,7 +229,7 @@ export default function Example() {
                   <Popover.Button
                     className={classNames(
                       open ? "text-gray-900" : "t ext-gray-500",
-                      "group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                      "group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ringblue-500"
                     )}
                   >
                     <span>Paramètre</span>
@@ -315,7 +315,7 @@ export default function Example() {
                   <Popover.Button
                     className={classNames(
                       open ? "text-gray-900" : "text-gray-500",
-                      "group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                      "group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                     )}
                   >
                     <span>Clients</span>
@@ -379,7 +379,7 @@ export default function Example() {
                   <Popover.Button
                     className={classNames(
                       open ? "text-gray-900" : "text-gray-500",
-                      "group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                      "group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                     )}
                   >
                     <span>Dossiers</span>
@@ -440,7 +440,7 @@ export default function Example() {
                   <Popover.Button
                     className={classNames(
                       open ? "text-gray-900" : "text-gray-500",
-                      "group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                      "group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                     )}
                   >
                     <span>Rappel</span>
@@ -492,7 +492,7 @@ export default function Example() {
                   <Popover.Button
                     className={classNames(
                       open ? "text-gray-900" : "text-gray-500",
-                      "group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                      "group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                     )}
                   >
                     <span>Réglement</span>
@@ -555,7 +555,7 @@ export default function Example() {
                   <Popover.Button
                     className={classNames(
                       open ? "text-gray-900" : "text-gray-500",
-                      "group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                      "group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                     )}
                   >
                     <span>Etat Huissier</span>
@@ -635,12 +635,12 @@ export default function Example() {
                 <div>
                   <img
                     className="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+                    src="https://tailwindui.com/img/logos/workflow-mark-blue-600.svg"
                     alt="Workflow"
                   />
                 </div>
                 <div className="-mr-2">
-                  <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                  <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
                     <span className="sr-only">Close menu</span>
                     <XIcon className="h-6 w-6" aria-hidden="true" />
                   </Popover.Button>
@@ -708,7 +708,7 @@ export default function Example() {
                   Existing customer?{" "}
                   <a
                     href="/login"
-                    className="text-indigo-600 hover:text-indigo-500"
+                    className="text-blue-600 hover:text-blue-500"
                   >
                     Se connecter
                   </a>

@@ -7,36 +7,25 @@ import Selection from "./selectioninput";
 import Selectdossier from "./selectemplacement";
 import TabDossier from "./tabdossier";
 import axios from "axios";
-const options = [
-  {
-    value: "المحكمة الإبتدائية بمنوبة",
-    label: "المحكمة الإبتدائية بمنوبة",
-  },
-
-  { value: "المحكمة الإبتدائية بأريانة", label: "المحكمة الإبتدائية بأريانة" },
-
-  { value: "المحكمة الإبتدائية بنعروس", label: "المحكمة الإبتدائية بنعروس" },
-];
-const option = [
-  {
-    value: "emplacement",
-    label: "emplacement",
-  },
-
-  { value: "emplacement1", label: "emplacement 1" },
-];
 
 const DonneeDossier = () => {
   const [value, setValue] = useState(1);
   const [listeTrib, setListeTrib] = useState([]);
-  const [listelieutrib, setListelieutrib] = useState([]);
-  const onChangelieu = (value, selectedOptions) => {
+  const [listeservice, setListeservice] = useState([]);
+  const [listeserviceinput, setListeserviceinput] = useState([]);
+  const [listeemplacement, setListeemplacement] = useState([]);
+
+  const onChangeemp = (value, selectedOptions) => {
     console.log(value, selectedOptions);
   };
-
   const onChange = (value, selectedOptions) => {
     console.log(value, selectedOptions);
-    gettribunalerequest();
+    const newlisteser = listeser.filter((ser) => ser.value == value[0]);
+    setListeserviceinput(newlisteser);
+    console.log(listeserviceinput,"ena liste service jdida")
+  };
+  const onChangeservice = (value, selectedOptions) => {
+    console.log(value, selectedOptions);
   };
   const onChangedate = (date, dateString) => {
     console.log(date, dateString);
@@ -62,21 +51,58 @@ const DonneeDossier = () => {
   const gettribunalerequest = async () => {
     try {
       const response = await axios.get("/tribunale");
-      console.log(response.data);
+     // console.log(response.data);
 
       setListeTrib(response.data);
-      console.log("hellolistetrib", listeTrib);
+     // console.log("hellolistetrib", listeTrib);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+  //*************select emplacement dossier ******************/
+  const getemplacementdossierrequest = async () => {
+    try {
+      const response = await axios.get("/emplacementdossier");
+      //console.log(response.data);
+
+      setListeemplacement(response.data);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+  /************select services ************/
+  const getservicerequest = async () => {
+    try {
+      const response = await axios.get("/service");
+      setListeservice(response.data);
     } catch (error) {
       console.log(error.message);
     }
   };
   const liste = useMemo(() => {
     gettribunalerequest();
+
     return listeTrib.map((trib) => ({
       value: trib.id,
       label: trib.lieu,
     }));
   }, [listeTrib]);
+  const listeemp = useMemo(() => {
+    getemplacementdossierrequest();
+
+    return listeemplacement.map((emp) => ({
+      value: emp.id,
+      label: emp.libelle,
+    }));
+  }, [listeemplacement]);
+  const listeser = useMemo(() => {
+    getservicerequest();
+
+    return listeservice.map((ser) => ({
+      value: ser.tribunale_id,
+      label: ser.nom,
+    }));
+  }, [listeservice]);
 
   //const listesaved = useMemo(()=>gettribunalerequest(),[listeTrib,listelieutrib])
 
@@ -115,7 +141,16 @@ const DonneeDossier = () => {
         <div className="div">
           <label htmlFor="emplacement"> Emplacement :</label>
 
-          <Selectdossier className="input" placeholder="Emplacement Dossier" />
+          <Cascader
+            className="cascader1"
+            options={listeemp}
+            placeholder="emplacements dossiers"
+            onChange={onChangeemp}
+            showSearch={{
+              filter,
+            }}
+            onSearch={(value) => console.log(value)}
+          />
         </div>
         <div className="div">
           <label> Num Affaire :</label>
@@ -147,8 +182,8 @@ const DonneeDossier = () => {
 
           <Cascader
             className="cascader1"
-            options={options}
-            onChange={onChange}
+            options={listeserviceinput}
+            onChange={onChangeservice}
             showSearch={{
               filter,
             }}

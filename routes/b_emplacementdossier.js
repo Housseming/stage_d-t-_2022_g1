@@ -10,10 +10,10 @@ const pool = require("../db")
 
 root7.post("/emplacementdossier", async(req, res) => {
     try {
-        const { id, libelle } = req.body;
+        const { libelle } = req.body;
 
 
-        const newTodo2 = await pool.query(" INSERT INTO public.emplacementdossier (id,libelle) VALUES ($1,$2) ", [id, libelle]);
+        const newTodo2 = await pool.query(" INSERT INTO public.emplacementdossier (libelle) VALUES ($1) ", [libelle]);
         res.json(newTodo2);
 
 
@@ -53,7 +53,7 @@ root7.get("/emplacementdossier", async(req, res) => {
 root7.post("/emplacementdossier/delete", async(req, res) => {
     try {
         const { id } = req.body;
-        const newTodo1 = await pool.query(" DELETE FROM public.emplacementdossier WHERE id=$1", [id]);
+        const newTodo1 = await pool.query("DELETE FROM public.emplacementdossier WHERE id=$1", [id]);
         res.json(newTodo1);
         res.json("emplacement was deleted");
 
