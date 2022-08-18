@@ -47,10 +47,8 @@ import axios from "axios";
 
 const ClientDemandeur = () => {
   const [value, setValue] = useState( 1 );
-  const [listeClient, setListeClient] = useState([]);
-  const onChange = (value, selectedOptions) => {
-    console.log(value, selectedOptions);
-  };
+  const [listeClient, setListeClient] = useState( [] );
+  const [matricule, setMatricule] = useState("");
 
   const filter = (inputValue, path) =>
     path.some(
@@ -73,8 +71,19 @@ const ClientDemandeur = () => {
       value: client.id,
       label: client.raison +":"+client.id+":"+client.raison[0],
     }));
-  }, [listeClient]);
+  }, [listeClient] );
 
+ 
+  const onChange = (value, selectedOptions) => {
+    console.log( value, "lefriki", selectedOptions );
+    const newlistclient = liste.filter(
+      (ser) => ser.id == selectedOptions[0].value
+    );
+    setMatricule(newlistclient[0].matricule);
+  };
+  /*function onChange( selectedOptions ) {
+    setMatricule( selectedOptions.listeClient.value.matricule );
+  }*/
   const onChangeradio = (e) => {
     console.log("radio checked", e.target.value);
     setValue(e.target.value);
@@ -101,7 +110,7 @@ const ClientDemandeur = () => {
         <div className="div">
           <label htmlFor="cin">Matricule Fiscale/CIN :</label>
 
-          <Input type="number" className="input" placeholder="CIN" />
+          <Input type="number" className="input" placeholder="CIN" value={matricule}  onChange={onchange} />
         </div>
       </div>
       <div className="reglementdiv2">
