@@ -49,7 +49,13 @@ const ClientDemandeur = () => {
   const [value, setValue] = useState( 1 );
   const [listeClient, setListeClient] = useState( [] );
   const [matricule, setMatricule] = useState( "" );
-  const [raison, setRaison] = useState( "" );
+  /*const [donnee, setDonnee] = useState({
+    matricule: "",
+    raison: "",
+    num: "",
+    activité: "",
+    categorie: "",
+  });*/
   const [newclient, setNewclient] = useState( [] );
   
 
@@ -77,15 +83,24 @@ const ClientDemandeur = () => {
   }, [listeClient] );
 
  
-  const onChange = (value, selectedOptions) => {
+  const onChange = ( value, selectedOptions ) => {
     console.log( value, "lefriki", selectedOptions );
     const newlistclient = listeClient.filter(
-      (ser) => ser.id == selectedOptions[0].value
+      ( ser ) => ser.id == selectedOptions[0].value
     );
-    console.log(newlistclient,"KING")
-    setNewclient(newlistclient)
-    setMatricule(newclient[0].matricule);
+    console.log( newlistclient, "KING" )
+    setNewclient( newlistclient )
+    setMatricule( newclient[0].matricule );
+}
+    setDonnee( {
+      matricule: newclient[0].matricule,
+      raison: newclient[0].raison,
+      categorie:newclient[0].categorie,
+      num: newclient[0].num,
+    } )
+    
   };
+
   /*function onChange( selectedOptions ) {
     setMatricule( selectedOptions.listeClient.value.matricule );
   }*/
@@ -108,21 +123,24 @@ const ClientDemandeur = () => {
             showSearch={{
               filter,
             }}
-            onSearch={(value) => console.log(value)}
+            onSearch={( value ) => {
+              console.log( value );
+          
+            }}
           />
         </div>
 
         <div className="div">
           <label htmlFor="cin">Matricule Fiscale/CIN :</label>
 
-          <Input type="number" className="input" placeholder="CIN" value={matricule}  onChange={onchange} />
+          <Input type="number" className="input" placeholder="CIN" value={donnee.matricule}  onChange={onchange} />
         </div>
       </div>
       <div className="reglementdiv2">
         <div className="div">
           <label htmlFor="raisonsociale">Raison Sociale/Nom :</label>
 
-          <Input type="text" placeholder="Raison Sociale" />
+          <Input type="text" placeholder="Raison Sociale"  onchange={onchange} />
         </div>
 
         <div className="div">
