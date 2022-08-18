@@ -20,12 +20,14 @@ const DonneeDossier = () => {
   };
   const onChange = (value, selectedOptions) => {
     console.log(value, selectedOptions);
-    const newlisteser = listeser.filter((ser) => ser.value == value[0]);
+    const newlisteser = listeser.filter((ser) => ser.value == selectedOptions[0].value);
     setListeserviceinput(newlisteser);
     console.log(listeserviceinput,"ena liste service jdida")
+    
   };
   const onChangeservice = (value, selectedOptions) => {
     console.log(value, selectedOptions);
+    
   };
   const onChangedate = (date, dateString) => {
     console.log(date, dateString);
