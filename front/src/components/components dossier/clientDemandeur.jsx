@@ -49,13 +49,13 @@ const ClientDemandeur = () => {
   const [value, setValue] = useState( 1 );
   const [listeClient, setListeClient] = useState( [] );
   const [matricule, setMatricule] = useState( "" );
-  /*const [donnee, setDonnee] = useState({
+  const [donnee, setDonnee] = useState({
     matricule: "",
     raison: "",
     num: "",
     activité: "",
     categorie: "",
-  });*/
+  });
   const [newclient, setNewclient] = useState( [] );
   
 
@@ -91,19 +91,18 @@ const ClientDemandeur = () => {
     console.log( newlistclient, "KING" )
     setNewclient( newlistclient )
     setMatricule( newclient[0].matricule );
-}
+
     setDonnee( {
       matricule: newclient[0].matricule,
       raison: newclient[0].raison,
       categorie:newclient[0].categorie,
       num: newclient[0].num,
     } )
+    console.log(donnee,"donnee")
     
   };
 
-  /*function onChange( selectedOptions ) {
-    setMatricule( selectedOptions.listeClient.value.matricule );
-  }*/
+
   const onChangeradio = (e) => {
     console.log("radio checked", e.target.value);
     setValue(e.target.value);
@@ -127,20 +126,26 @@ const ClientDemandeur = () => {
               console.log( value );
           
             }}
+            
+            
+            
+            
+          
+            
           />
         </div>
 
         <div className="div">
           <label htmlFor="cin">Matricule Fiscale/CIN :</label>
 
-          <Input type="number" className="input" placeholder="CIN" value={donnee.matricule}  onChange={onchange} />
+          <Input type="text" className="input" placeholder="CIN" value={donnee.matricule}/>
         </div>
       </div>
       <div className="reglementdiv2">
         <div className="div">
           <label htmlFor="raisonsociale">Raison Sociale/Nom :</label>
 
-          <Input type="text" placeholder="Raison Sociale"  onchange={onchange} />
+          <Input type="text" placeholder="Raison Sociale" value={donnee.raison}/>
         </div>
 
         <div className="div">
@@ -196,7 +201,7 @@ const ClientDemandeur = () => {
           {" "}
           Valider Dossier
             </Button>*/}
-    </div>
-  );
-};
+    </div>);
+  };
+
 export default ClientDemandeur;

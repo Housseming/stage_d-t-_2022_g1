@@ -80,7 +80,7 @@ const solutions1 = [
   {
     name: "Utilisateur",
     description: " ",
-    href: "utilisateur",
+    href: "/home/utilisateur",
     icon: UserAddIcon,
   },
   {
@@ -147,19 +147,19 @@ const resources2 = [
   {
     name: "Recherche",
     description: "",
-    href: "recherchedossier",
+    href: "/home/recherchedossier",
     icon: DocumentSearchIcon,
   },
   {
     name: "Emplacement Dossier",
     description: "",
-    href: "dossiers",
+    href: "/home/dossiers",
     icon: FolderIcon,
   },
   {
     name: "Creation",
     description: "",
-    href: "creationdossier",
+    href: "/home/creationdossier",
     icon: FolderAddIcon,
   },
   {
