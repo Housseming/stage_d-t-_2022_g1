@@ -9,25 +9,26 @@ import { toast } from "react-toastify";
 import { Marginer } from "../marginer/marginfile";
 const TabDossier = () => {
   //declaration necessaires
-  const [listeservice, setlisteservice] = useState([]);
+  const [listeservice, setListeservice] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
-  const [edditingdossier, setEdditingdossier] = useState(null);
+  const [edditingadversaire, setEdditingadversaire] = useState(null);
   const [isAdd, setIsAdd] = useState(false);
-  const [addingdossier, setAddingdossier] = useState({
-    Nom: "",
-    Registre: "",
+  const [addingadversaire, setAddingadversaire] = useState( {
+    nom: "",
+    registre: "",
     adresse: "",
-    AdresseDesigne: "",
-    Avocat: "",
-    Adresseavocat: "",
+    adressedesigne: "",
+    avocat: "",
+    adresseavocat: "",
   });
   const column = [
-    { key: "1", title: "Nom", dataIndex: "Nom" },
-    { key: "2", title: "Registre", dataIndex: "Registre" },
+  {key:"0",title:"id",dataIndex:"id"},
+    { key: "1", title: "Nom", dataIndex: "nom" },
+    { key: "2", title: "Registre", dataIndex: "registre" },
     { key: "3", title: "adresse", dataIndex: "adresse" },
-    { key: "4", title: "Adresse Désignée", dataIndex: "AdresseDesigne" },
-    { key: "5", title: "Avocat", dataIndex: "Avocat" },
-    { key: "6", title: "Adresse Avocat", dataIndex: "Adresseavocat" },
+    { key: "4", title: "Adresse Désignée", dataIndex: "adressedesigne" },
+    { key: "5", title: "Avocat", dataIndex: "avocat" },
+    { key: "6", title: "Adresse Avocat", dataIndex: "adresseavocat" },
     {
       key: "16",
       title: "Actions",
@@ -38,7 +39,7 @@ const TabDossier = () => {
               <AiFillEdit
                 className="edit"
                 onClick={() => {
-                  editdossier(record);
+                  editadversaire(record);
                 }}
               ></AiFillEdit>
               <pre>
@@ -49,7 +50,7 @@ const TabDossier = () => {
               <MdDeleteForever
                 className="delete"
                 onClick={() => {
-                  deletedossier(record);
+                  deleteadversaire(record);
                 }}
               ></MdDeleteForever>
 
@@ -61,61 +62,61 @@ const TabDossier = () => {
     },
   ];
 
-  /*select dossier
-  const getdossierrequest = async () => {
+  //select adversaire
+  const getadversairerequest = async () => {
     try {
-      const response = await axios.get("/dossier");
-      setlisteservice(response.data);
+      const response = await axios.get("/adversaire");
+      setListeservice(response.data);
     } catch (error) {
       console.log(error.message);
     }
   };
   useEffect(() => {
-    getdossierrequest();
+    getadversairerequest();
   });
-  console.log(listeservice);*/
+  console.log(listeservice);
 
-  //supdossierr dossier
-  const deletedossier = (record) => {
+  //supprimer adversaire
+  const deleteadversaire = (record) => {
     Modal.confirm({
-      title: "Vous etes sure de supprimer ce dossier?",
+      title: "Vous etes sure de supprimer cet adversaire?",
       okText: "oui",
       okType: "danger",
       cancelText: "annuler",
       onOk: () => {
         const newlisteservice = listeservice.filter(
-          (dossier) => dossier.id !== record.id
+          (adversaire) => adversaire.id !== record.id
         );
-        setlisteservice(newlisteservice);
-        deletedossierrequest(record.id);
-        toast.success("dossier supprimée avec succés");
+        setListeservice(newlisteservice);
+        deleteadversairerequest(record.id);
+        toast.success("adversaire supprimée avec succés");
       },
     });
   };
-  const deletedossierrequest = async (id) => {
+  const deleteadversairerequest = async (id) => {
     try {
-      const deleted = await axios.post("/dossiereff", {
+      const deleted = await axios.post("/adversaireeff", {
         id: id,
       });
-      console.log("dossier supprimé");
+      console.log("adversaire supprimé");
     } catch (error) {
       console.log(error);
     }
   };
 
-  //modifier un dossier
-  const editdossier = (record) => {
+  //modifier un adversaire
+  const editadversaire = (record) => {
     setIsEdit(true);
-    setEdditingdossier({ ...record }); //copie mel record
+    setEdditingadversaire({ ...record }); //copie mel record
   };
   const resetEditing = () => {
     setIsEdit(false);
-    setEdditingdossier(null);
+    setEdditingadversaire(null);
   };
-  //ajouter dossier
-  const adddossier = async () => {
+  //ajouter adversaire
+  const addadversaire = async () => {
     try {
-      const resp = await axios.post("/dossieradd", addingdossier);
+      const resp = await axios.post("/adversaireadd", addingadversaire);
       console.log(resp.data);
     } catch (error) {
       console.log(error);
@@ -123,20 +124,32 @@ const TabDossier = () => {
   };
   return (
     <div className="container2">
-      
+
+      <div className="boutonvalid">
+        <Button
+          className="btnadd"
+          type="primary"
+          block
+          onClick={() => {
+            setIsAdd(true);
+          }}>
+          Ajouter Adversaire
+        </Button>
+        <Marginer direction="vertical" margin={10} />
+      </div>
+
       <div className="tab">
         <Table
           columns={column}
           dataSource={listeservice}
           size="meduim"
           bordered={true}
-          style={{ display: "flex", flex: 1 }}
-          scroll={{ x: "max-content" }}
-        ></Table>
+          style={{display: "flex", flex: 1}}
+          scroll={{x: "max-content"}}></Table>
       </div>
 
       <Modal
-        title="modifier dossier"
+        title="modifier adversaire"
         visible={isEdit}
         okText="Enregistrer"
         cancelText="Annuler"
@@ -145,159 +158,144 @@ const TabDossier = () => {
         }}
         onOk={async () => {
           setIsEdit(false);
-          const newlisteservice = listeservice.map((dossier) => {
-            if (dossier.id == edditingdossier.id) {
-              return edditingdossier;
+          const newlisteservice = listeservice.map((adversaire) => {
+            if (adversaire.id == edditingadversaire.id) {
+              return edditingadversaire;
             } else {
-              return dossier;
+              return adversaire;
             }
           });
           try {
-            const adddossier = await axios.post(
-              "/dossier/update",
-              edditingdossier
+            const addadversaire = await axios.post(
+              "/adversaire/update",
+              edditingadversaire
             );
           } catch (error) {
             console.log("error");
           }
-          setlisteservice(newlisteservice);
+          setListeservice(newlisteservice);
           resetEditing();
-          toast.success("dossier modifié(e) avec succès");
-        }}
-      >
+          toast.success("adversaire modifié(e) avec succès");
+        }}>
         <Input
           placeholder="Nom du Client"
-          value={edditingdossier?.Nom}
+          value={edditingadversaire?.Nom}
           onChange={(e) => {
-            setEdditingdossier({
-              ...edditingdossier,
+            setEdditingadversaire({
+              ...edditingadversaire,
               Nom: e.target.value,
             });
-          }}
-        ></Input>
-        {/*edditingdossier? s'il n'est pas null*/}
+          }}></Input>
+        {/*edditingadversaire? s'il n'est pas null*/}
         <Input
           placeholder="Tapez le Registre"
-          value={edditingdossier?.Registre}
+          value={edditingadversaire?.Registre}
           onChange={(e) => {
-            setEdditingdossier({
-              ...edditingdossier,
+            setEdditingadversaire({
+              ...edditingadversaire,
               Registre: e.target.value,
             });
-          }}
-        ></Input>
+          }}></Input>
         <Input
           placeholder="Adresse "
-          value={edditingdossier?.adresse}
+          value={edditingadversaire?.adresse}
           onChange={(e) => {
-            setEdditingdossier({
-              ...edditingdossier,
+            setEdditingadversaire({
+              ...edditingadversaire,
               adresse: e.target.value,
             });
-          }}
-        ></Input>
+          }}></Input>
         <Input
           placeholder="Adresse Désignée"
-          value={edditingdossier?.AdresseDesigne}
+          value={edditingadversaire?.AdresseDesigne}
           onChange={(e) => {
-            setEdditingdossier({
-              ...edditingdossier,
+            setEdditingadversaire({
+              ...edditingadversaire,
               AdresseDesigne: e.target.value,
             });
-          }}
-        ></Input>
+          }}></Input>
         <Input
           placeholder="Numéro de téléphone"
-          value={edditingdossier?.Avocat}
+          value={edditingadversaire?.Avocat}
           onChange={(e) => {
-            setEdditingdossier({ ...edditingdossier, Avocat: e.target.value });
-          }}
-        ></Input>
+            setEdditingadversaire({...edditingadversaire, Avocat: e.target.value});
+          }}></Input>
       </Modal>
       <Modal
-        title="ajouter dossier"
+        title="Ajouter Adversaire"
         visible={isAdd}
         okText="Enregistrer"
         cancelText="Annuler"
         onCancel={() => {
-          setIsAdd(false);
+          setIsAdd( false );
         }}
         onOk={() => {
-          adddossier();
+          addadversaire();
           setIsAdd(false);
-          toast.success("dossier ajoutée avec succès");
-        }}
-      >
+          toast.success( "Adversaire ajoutée avec succès" );
+          setAddingadversaire({
+            nom: "",
+            registre: "",
+            adresse: "",
+            adressedesigne: "",
+            avocat: "",
+            adresseavocat: "",
+          });
+        }}>
         <Input
-          placeholder="Nom du dossier"
-          value={addingdossier.Nom}
+          placeholder="Nom de l'adversaire"
+          value={addingadversaire.nom}
           onChange={(e) => {
-            setAddingdossier({
-              ...addingdossier,
-              Nom: e.target.value,
+            setAddingadversaire({
+              ...addingadversaire,
+              nom: e.target.value,
             });
-          }}
-        ></Input>
+          }}></Input>
         <Input
-          placeholder="Tapez le Registre"
-          value={addingdossier.Registre}
+          placeholder="Registre de commerce"
+          value={addingadversaire.registre}
           onChange={(e) => {
-            setAddingdossier({
-              ...addingdossier,
-              Registre: e.target.value,
+            setAddingadversaire({
+              ...addingadversaire,
+              registre: e.target.value,
             });
-          }}
-        ></Input>
+          }}></Input>
         <Input
-          placeholder="Adresse "
-          value={addingdossier.adresse}
+          placeholder="Adresse de l'adversaire"
+          value={addingadversaire.adresse}
           onChange={(e) => {
-            setAddingdossier({
-              ...addingdossier,
+            setAddingadversaire({
+              ...addingadversaire,
               adresse: e.target.value,
             });
-          }}
-        ></Input>
+          }}></Input>
         <Input
           placeholder="Adresse Désignée "
-          value={addingdossier.AdresseDesigne}
+          value={addingadversaire.adressedesigne}
           onChange={(e) => {
-            setAddingdossier({
-              ...addingdossier,
-              AdresseDesigne: e.target.value,
+            setAddingadversaire({
+              ...addingadversaire,
+              adressedesigne: e.target.value,
             });
-          }}
-        ></Input>
+          }}></Input>
         <Input
-          placeholder="Numéro de téléphone"
-          value={addingdossier.Avocat}
+          placeholder="Avocat"
+          value={addingadversaire.avocat}
           onChange={(e) => {
-            setAddingdossier({
-              ...addingdossier,
-              Avocat: e.target.value,
+            setAddingadversaire({
+              ...addingadversaire,
+              avocat: e.target.value,
             });
-          }}
-        ></Input>
+          }}></Input>
         <Input
-          placeholder="Adresseavocat"
-          value={addingdossier.Adresseavocat}
+          placeholder="Adresse de L'avocat"
+          value={addingadversaire.adresseavocat}
           onChange={(e) => {
-            setAddingdossier({
-              ...addingdossier,
-              Adresseavocat: e.target.value,
+            setAddingadversaire({
+              ...addingadversaire,
+              adresseavocat: e.target.value,
             });
-          }}
-        ></Input>
-        <Input
-          placeholder="E-mail"
-          value={addingdossier.Email}
-          onChange={(e) => {
-            setAddingdossier({
-              ...addingdossier,
-              Email: e.target.value,
-            });
-          }}
-        ></Input>
+          }}></Input>
       </Modal>
     </div>
   );

@@ -38,19 +38,19 @@ function Taches() {
   const [value, setValue] = useState(1);
 
   const column = [
-    { key: "1", title: "Tâche", dataIndex: "tache" },
+    {key: "0", title: "id", dataIndex: "id"},
+    {key: "1", title: "Tâche", dataIndex: "tache"},
 
-    { key: "2", title: "Date Critique", dataIndex: "date_critique" },
-    { key: "3", title: "Date Rappel", dataIndex: "date_rappel" },
-    { key: "4", title: "Date_audience", dataIndex: "date_audience" },
-    { key: "5", title: "Date_Déchéance", dataIndex: "date_decheance" },
-    { key: "6", title: "Personne_Chargé", dataIndex: "collaborateur" },
-    { key: "7", title: "Greffier", dataIndex: "greffier" },
-    { key: "8", title: "Course", dataIndex: "course" },
-    { key: "9", title: "Lieux", dataIndex: "fax" },
-    { key: "10", title: "Service", dataIndex: "service" },
-    { key: "11", title: "Résolu", dataIndex: "resolu" },
-    { key: "12", title: "Tâche", dataIndex: "tache" },
+    {key: "2", title: "Date Critique", dataIndex: "date_critique"},
+    {key: "3", title: "Date Rappel", dataIndex: "date_rappel"},
+    {key: "4", title: "Date_audience", dataIndex: "date_audience"},
+    {key: "5", title: "Date_Déchéance", dataIndex: "date_decheance"},
+    {key: "6", title: "Personne_Chargé", dataIndex: "collaborateur"},
+    {key: "7", title: "Greffier", dataIndex: "greffier"},
+    {key: "8", title: "Course", dataIndex: "course"},
+    {key: "9", title: "Lieux", dataIndex: "fax"},
+    {key: "10", title: "Service", dataIndex: "service"},
+    {key: "11", title: "Résolu", dataIndex: "resolu"},
   ];
   return (
     <div className="container">

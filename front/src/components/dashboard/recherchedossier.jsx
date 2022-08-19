@@ -1,14 +1,38 @@
 import React from "react";
 import axios from "axios";
+
 import { useState, useEffect } from "react";
 import { Table, Modal, Input, Button, Space } from "antd";
 import "../../App.css";
+
+import {useState, useEffect} from "react";
+import { Table, Modal, Input, Button, Space,DatePicker, Radio,Cascader } from "antd";
+import "../../App.css"
+
 import "antd/dist/antd.min.css";
 import { AiFillEdit } from "react-icons/ai";
 import { MdDeleteForever } from "react-icons/md";
 import { toast } from "react-toastify";
 import { SearchOutlined } from "@ant-design/icons";
 import { Marginer } from "../marginer/marginfile";
+ const options = [
+   {
+     value: "zhejiang",
+     label: "Zhejiang",
+     children: [
+       {
+         value: "hangzhou",
+         label: "Hangzhou",
+         children: [
+           {
+             value: "xihu",
+             label: "West Lake",
+           },
+         ],
+       },
+     ],
+   },
+ ];
 
 const RechercheDossier = () => {
   //declaration necessaires
@@ -16,7 +40,23 @@ const RechercheDossier = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [edditingdossier, setEdditingdossier] = useState(null);
   const [isAdd, setIsAdd] = useState(false);
+
   const [gridData, setGridData] = useState([]);
+
+
+  const [gridData, setGridData] = useState( [] );
+  const [value, setValue] = useState(1);
+    const onChangeselect = (value) => {
+      console.log(value);
+    };
+    const onChange = (date, dateString) => {
+      console.log(date, dateString);
+    };
+    const onChangeradio = (e) => {
+      console.log("radio checked", e.target.value);
+      setValue(e.target.value);
+    };
+  
 
   const [addingdossier, setAddingdossier] = useState({
     num_affaire: "",
@@ -337,19 +377,25 @@ const RechercheDossier = () => {
               <td>
                 <button
                   className="btnadd"
+
                   onClick={() => {
                     setIsAdd(true);
                   }}
                 >
+                  >
                   Reclasser Dossier
                 </button>
               </td>
               <button
                 className="btnadd"
+
                 onClick={() => {
                   setIsAdd(true);
                 }}
               >
+
+                >
+
                 Archiver Dossier
               </button>
             </tr>
@@ -477,13 +523,14 @@ const RechercheDossier = () => {
           ></Input>
         </Modal>
         <Modal
-          title="ajouter dossier"
+          title="Ajouter une Tâche"
           visible={isAdd}
           okText="Enregistrer"
           cancelText="Annuler"
           onCancel={() => {
             setIsAdd(false);
           }}
+
           onOk={() => {
             adddossier();
             setIsAdd(false);
@@ -560,6 +607,60 @@ const RechercheDossier = () => {
               });
             }}
           ></Input>
+
+          onRequestClose={() => {}}>
+          <div className="formaddtache">
+            <label>Tâche:</label>
+            <Input type="text" placeholder="nom de la tâche"></Input>
+            <label>Date Critique:</label>
+            <DatePicker onChange={onChange} placeholder="date critique" />
+            <label>Date Rappel:</label>
+            <DatePicker onChange={onChange} placeholder="date rappel" />
+            <label>Résolu:</label>
+            <div className="radioet">
+              <Radio.Group onChange={onChangeradio} value={value}>
+                <Radio value={1}>Oui</Radio>
+                <Radio value={2}>Non</Radio>
+              </Radio.Group>
+            </div>
+            <label>Personne Chargée:</label>
+            <div className="radioet">
+              <Radio.Group onChange={onChangeradio} value={value}>
+                <Radio value={1}>Collaborateur</Radio>
+                <Radio value={2}>Greffier</Radio>
+              </Radio.Group>
+            </div>
+            <label>Greffier:</label>
+            <Cascader
+              options={options}
+              onChange={onChangeselect}
+              placeholder="selectionner greffier"
+            />
+            <label>Course:</label>
+            <div className="radioet">
+              <Radio.Group onChange={onChangeradio} value={value}>
+                <Radio value={1}>Oui</Radio>
+                <Radio value={2}>Non</Radio>
+              </Radio.Group>
+            </div>
+            <label>Lieux:</label>
+            <Cascader
+              options={options}
+              onChange={onChangeselect}
+              placeholder="selectionner lieu"
+            />
+            <label>Service:</label>
+            <Cascader
+              options={options}
+              onChange={onChangeselect}
+              placeholder="selectionner service"
+            />
+            <label>Date d'audience:</label>
+            <DatePicker onChange={onChange} placeholder="date d'audience" />
+            <label>Date de Déchéance:</label>
+            <DatePicker onChange={onChange} placeholder="date de déchéance" />
+          </div>
+
         </Modal>
       </header>
     </div>
