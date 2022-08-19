@@ -1,8 +1,8 @@
 import React from "react";
 import axios from "axios";
 
-import { useState, useEffect } from "react";
-import { Table, Modal, Input, Button, Space } from "antd";
+
+
 import "../../App.css";
 
 import {useState, useEffect} from "react";
@@ -41,7 +41,7 @@ const RechercheDossier = () => {
   const [edditingdossier, setEdditingdossier] = useState(null);
   const [isAdd, setIsAdd] = useState(false);
 
-  const [gridData, setGridData] = useState([]);
+ 
 
 
   const [gridData, setGridData] = useState( [] );
@@ -394,7 +394,7 @@ const RechercheDossier = () => {
                 }}
               >
 
-                >
+                
 
                 Archiver Dossier
               </button>
