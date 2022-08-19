@@ -13,7 +13,7 @@ import {MdPersonSearch} from "react-icons/md";
 
 axios.defaults.withCredentials = true;
 
-export const AjoutCollabo = () => {
+const AjoutCollabo = () => {
   const [liste, setliste] = useState([]);
   const [isAdd, setIsAdd] = useState(false);
   const [addingCollab, setAddingCollab] = useState({
@@ -71,7 +71,8 @@ export const AjoutCollabo = () => {
   //notre page et son contenu
   return (
     <div className="back">
-      <header className="App-header">
+          <header className="App-header">
+             
         <button
           className="btnadd"
           onClick={() => {
