@@ -11,8 +11,9 @@ import { useNavigate } from "react-router-dom";
 import { Card, Row, Col ,Button } from "antd";
 
 import { FcFinePrint, FcBusinessman, FcSalesPerformance } from "react-icons/fc";
-
+let firstRender = true;
 axios.defaults.withCredentials = true;
+
 
 function Home() {
   const gridStyle = {

@@ -9,7 +9,7 @@ var keyaccesstoken = process.env.ACCESS_TOKEN_SECRET;
 
 //validateToken
 const validateToken = (req, res, next) => {
-  const cookies = req.headers.cookie;
+  const cookies = String(req.headers.cookie);
   const accessToken = cookies.split("=")[1]; //traja3 el token
   console.log(cookies);
   console.log(accessToken);
@@ -31,7 +31,7 @@ const validateToken = (req, res, next) => {
 
 //refreshToken
 const refreshToken = (req, res, next) => {
-  const cookies = req.headers.cookie;
+  const cookies = String(req.headers.cookie);
   const prevToken = cookies.split("=")[1];
   if (!prevToken) {
     return res.status(400).json({ message: "couldn't find token" });

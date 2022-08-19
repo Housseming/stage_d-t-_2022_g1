@@ -113,6 +113,7 @@ body {
   width: 1200px;
   margin: auto !important;
   margin-top: 10px !important;
+  background-color: rgba(255, 255, 255, 0.537)!important;
 }
 
 @media only screen and (max-width: 1500px) {
@@ -201,6 +202,7 @@ body {
   border: 0.5px solid #0000003a !important;
   color: white !important;
 }
+
 
 .btnsearch {
   color: white;
