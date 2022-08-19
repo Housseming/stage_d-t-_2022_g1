@@ -4,6 +4,7 @@ import "./dossier.css";
 import { Marginer } from "../marginer/marginfile";
 import TabClient from "./tabclientdemandeur";
 import axios from "axios";
+import { dossierdata } from "./dossierdata";
 
 /*const options = [
   {
@@ -58,7 +59,7 @@ const ClientDemandeur = () => {
     activité: "",
     categorie: "",
     situation_fiscale:"",
-  } );
+  });
 
   const filter = (inputValue, path) =>
     path.some(
@@ -101,7 +102,12 @@ const ClientDemandeur = () => {
       activité:newclient[0].activité,
       situation_fiscale: newclient[0].situation_fiscale,
     });
-    console.log("donnee",donnee)
+    console.log( "donnee", donnee);
+ 
+    console.log("dataaaaaaaaaaaaaa",dossierdata)
+   
+
+    
     /*if(donnee.situation_fiscale == "Assujetti" ){
       setIschecked(true,false,false);
     }
@@ -152,6 +158,9 @@ const ClientDemandeur = () => {
             className="input"
             placeholder="CIN"
             value={donnee.matricule}
+            onChange={(e) => {
+              dossierdata.cin = e.target.value;
+            }}
           />
         </div>
       </div>
@@ -163,6 +172,9 @@ const ClientDemandeur = () => {
             type="text"
             placeholder="Raison Sociale"
             value={donnee.raison}
+            onChange={(e) => {
+              dossierdata.raison = e.target.value;
+            }}
           />
         </div>
 
@@ -239,6 +251,9 @@ const ClientDemandeur = () => {
             className="inputraison"
             placeholder="Numéro de tel"
             value={donnee.num}
+            onChange={(e) => {
+              dossierdata.tel = e.target.value;
+            }}
           />
         </div>
       </div>

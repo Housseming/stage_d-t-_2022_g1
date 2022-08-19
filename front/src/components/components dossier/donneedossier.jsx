@@ -10,6 +10,7 @@ import {
   InputNumber,
   Cascader,
 } from "antd";
+import { dossierdata } from "./dossierdata";
 
 import { toast } from "react-toastify";
 import Selectdossier from "./selectemplacement";
@@ -49,7 +50,7 @@ const DonneeDossier = () => {
 
   const onNameChange = (event) => {
     setName(event.target.value);
-    setAdd_dossier({...add_dossier,typedossier:event.target.value})
+    setAdd_dossier({ ...add_dossier, typedossier: name });
   };
 
   const addItem = (e) => {
@@ -72,11 +73,12 @@ const DonneeDossier = () => {
     annee: "",
     mission: "",
     emplacement: "",
-    numaffaire: "",
+    numaffaire: 0,
     lieu: "",
     service: "",
     observation: "",
     date_creation: "",
+
   });
   const onChangeemp = (value, selectedOptions) => {
     console.log(value, selectedOptions);
@@ -90,7 +92,7 @@ const DonneeDossier = () => {
         selectedOptions[0].value
     );
     setListeserviceinput(newlisteser);
-    setAdd_dossier({...add_dossier,lieu:selectedOptions[0].label})
+    setAdd_dossier({ ...add_dossier, lieu: selectedOptions[0].label });
     console.log(listeserviceinput, "ena liste service jdida");
   };
   const onChangeservice = (value, selectedOptions) => {
@@ -98,8 +100,18 @@ const DonneeDossier = () => {
     setAdd_dossier({ ...add_dossier, service: selectedOptions[0].label });
   };
   const onChangedate = (date, dateString) => {
-    console.log(date, dateString,"ena date heeey");
-    
+    console.log(date, dateString, "ena date heeey");
+    setAdd_dossier({
+      ...add_dossier,
+      annee: dateString,
+    });
+  };
+  const onChangedate2 = (date, dateString) => {
+    console.log(date, dateString, "ena date heeey");
+    setAdd_dossier({
+      ...add_dossier,
+      date_creation: dateString,
+    });
   };
 
   const filterlieu = (inputValue, path) =>
@@ -181,11 +193,9 @@ const DonneeDossier = () => {
   const adddossier = async () => {
     try {
       const resp = await axios.post("/recherchedossieradd", add_dossier);
-      if (resp.data.error) {
-        toast.error(resp.data.error);
-      } else {
-        console.log(resp.data);
-      }
+      console.log("helloooooooooooooooooooooooooooooooooooooooo")
+      console.log(add_dossier,dossierdata,"ena dossier dataaaaaaaaaaaaaaaa")
+      toast.success("les données de dossier sont ajoutés avec succès")
     } catch (error) {
       console.log(error);
     }
@@ -220,7 +230,7 @@ const DonneeDossier = () => {
                   <Input
                     placeholder="Ajouter un type"
                     ref={inputRef}
-                    value={add_dossier.typedossier}
+                    value={name}
                     onChange={onNameChange}
                   />
                   <Button type="text" icon={<PlusOutlined />} onClick={addItem}>
@@ -238,21 +248,24 @@ const DonneeDossier = () => {
         <div className="div">
           <label htmlFor="code">Code Dossier :</label>
 
-          <InputNumber className="input" placeholder="Code Dossier" />
+          <Input
+            className="input"
+            placeholder="Code Dossier"
+            value={add_dossier.codedossier}
+            onChange={(e) => {
+              setAdd_dossier({
+                ...add_dossier,
+                codedossier: e.target.value,
+              });
+            }}
+          />
           <div className="client1">
             <div className="dateinput">
               <label>Année</label>
               <DatePicker
-                
                 picker="year"
                 placeholder="Année"
-                value={add_dossier.annee}
-                onChange={(e) => {
-                  setAdd_dossier({
-                    ...add_dossier,
-                    annee: e.target.value,
-                  });
-                }}
+                onChange={onChangedate}
               />
             </div>
           </div>
@@ -294,7 +307,7 @@ const DonneeDossier = () => {
           <label> Num Affaire :</label>
 
           <Input
-            type="text"
+            type="number"
             className="inputraison"
             placeholder="Numéro Affaire"
             value={add_dossier.numaffaire}
@@ -356,13 +369,7 @@ const DonneeDossier = () => {
             className="dateinput"
             bordered={true}
             placeholder="date creation"
-            value={add_dossier.date_creation}
-            onChange={(e) => {
-              setAdd_dossier({
-                ...add_dossier,
-                date_creation: e.target.value,
-              });
-            }}
+            onChange={onChangedate2}
           />
         </div>
       </div>
@@ -377,7 +384,14 @@ const DonneeDossier = () => {
           {" "}
           Retirer Adversaire{" "}
         </Button>
+        <div className="boutonvalid">
+          <Button className="bouton" type="primary" block onClick={adddossier}>
+            Valider Dossier
+          </Button>
+          <Marginer direction="vertical" margin={10} />
+        </div>
       </div>
+
       <TabDossier />
     </div>
   );
