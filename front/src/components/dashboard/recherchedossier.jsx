@@ -384,6 +384,7 @@ const RechercheDossier = () => {
                     setIsAdd(true);
                   }}
                 >
+
                   Reclasser Dossier
                 </button>
               </td>
@@ -603,7 +604,7 @@ const RechercheDossier = () => {
               });
             }}
           ></Input>
-          
+
           <div className="formaddtache">
             <label>Tâche:</label>
             <Input type="text" placeholder="nom de la tâche"></Input>
