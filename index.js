@@ -12,6 +12,7 @@ const root9 = require("./routes/utilisateur");
 const root10 = require("./routes/b_Gestion");
 const root11 = require("./routes/recherchedossier");
 const root12 = require("./routes/adversaire");
+const root13 = require("./routes/tache");
 const express = require("express");
 const app = express();
 const cors = require("cors");
@@ -59,6 +60,7 @@ app.use(root9); //utilisateur
 app.use(root10); //gestionclient
 app.use(root11); //recherchedossier
 app.use(root12); //adversaire
+app.use(root13); //tache
 app.use(verifyroute);
 app.use(loginroute);
 app.use(registerroute);

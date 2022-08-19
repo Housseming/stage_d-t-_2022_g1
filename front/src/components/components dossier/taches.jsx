@@ -38,7 +38,7 @@ function Taches() {
   const [value, setValue] = useState(1);
 
   const column = [
-    {key: "0", title: "id", dataIndex: "id"},
+    {key: "0", title: "id_tache", dataIndex: "id_tache"},
     {key: "1", title: "Tâche", dataIndex: "tache"},
 
     {key: "2", title: "Date Critique", dataIndex: "date_critique"},

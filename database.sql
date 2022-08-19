@@ -9,6 +9,7 @@ CREATE TABLE primehuissier(
 );
 CREATE TABLE tachetable(
     id_tache SERIAL PRIMARY KEY,
+    tache TEXT NOT NULL ,
     date_critique TEXT,
     date_rappel TEXT,
     resolu TEXT,
