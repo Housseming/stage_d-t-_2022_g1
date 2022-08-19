@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+/*import React, { useState } from "react";
 import { Button, Table, Modal, Input, DatePicker, Radio, Cascader } from "antd";
 import { Marginer } from "../marginer/marginfile";
 import axios from "axios";
@@ -256,4 +256,4 @@ function Taches() {
   );
 }
 
-export default Taches;
+export default Taches;*/
