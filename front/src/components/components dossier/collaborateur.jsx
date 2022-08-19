@@ -1,18 +1,26 @@
-import React, {useState, useMemo} from "react";
+import React, {useState, useMemo,useEffect} from "react";
 import "./dossier.css";
 import {Marginer} from "../marginer/marginfile";
 import {Input, Button, Table, Radio, Cascader, Select} from "antd";
 import axios from "axios";
+import  AjoutCollabo  from "./ajoutcollabo";
+//import {Table, Button, Modal, Input, Pagination} from "antd";
+import "antd/dist/antd.min.css";
+
 function Collaborateur() {
   const [listeCollab, setListeCollab] = useState([]);
   //const [matricule, setMatricule] = useState("");
   const [newcollab, setNewcollab] = useState([]);
   const [donnee, setDonnee] = useState({
     username: "",
-    raison: "",
+    montant: "",
+    cin: "",
+    ville: "",
+    rue: "",
     num: "",
-    activité: "",
-    categorie: "",
+    codepostal: "",
+    activite: "",
+    tel:"",
   });
 
   const filter = (inputValue, path) =>
@@ -49,11 +57,14 @@ function Collaborateur() {
 
     setDonnee({
       username: newcollab[0].username,
-      raison: newcollab[0].raison,
-      categorie: newcollab[0].categorie,
+      montant: newcollab[0].montant,
+      cin: newcollab[0].cin,
+      ville: newcollab[0].ville,
+      rue: newcollab[0].rue,
       num: newcollab[0].num,
-      activité: newcollab[0].activité,
-      situation_fiscale: newcollab[0].situation_fiscale,
+      codepostal: newcollab[0].codepostal,
+      activite: newcollab[0].activite,
+      tel: newcollab[0].tel,
     });
   };
   const onChangeradio = (e) => {
@@ -66,12 +77,12 @@ function Collaborateur() {
       <div className="divcollab1">
         <div className="inputcoll">
           <label>Code Collaborateur :</label>
+          <AjoutCollabo/>
           <Cascader
             type="text"
             placeholder="code collaborateur"
             options={liste}
-            onChange={onChange}
-          ></Cascader>
+            onChange={onChange}></Cascader>
         </div>
         <div className="inputcoll">
           <label>Mode Réglement :</label>
@@ -84,22 +95,28 @@ function Collaborateur() {
         </div>
         <div className="inputcoll">
           <label>Nom et Prénom :</label>
-          <Input type="text" placeholder="Nom et Prénom" value={donnee.username}></Input>
+          <Input
+            type="text"
+            placeholder="Nom et Prénom"
+            value={donnee.username}></Input>
         </div>
         <div className="inputcoll">
-          <label>Par Collaborateur :</label>
-          <Input type="text" placeholder="part collaborateur"></Input>
+          <label>Part Collaborateur :</label>
+          <Input
+            type="text"
+            placeholder="part collaborateur"
+            value={donnee.montant}></Input>
         </div>
         <div className="inputcoll">
           <label>CIN :</label>
-          <Input type="text" placeholder="cin"></Input>
+          <Input type="text" placeholder="cin" value={donnee.cin}></Input>
         </div>
         <div className="inputcoll">
           <label>Type Réglement :</label>
           <div className="radioet">
             <Radio.Group onChange={onChangeradio} value={value}>
-              <Radio value={1}>Pourcentage</Radio>
-              <Radio value={2}>Forfait</Radio>
+              <Radio value={3}>Pourcentage</Radio>
+              <Radio value={4}>Forfait</Radio>
             </Radio.Group>
           </div>
         </div>
@@ -109,29 +126,35 @@ function Collaborateur() {
           <label>Adresse :</label>
           <div className="inputcoll">
             <label>Ville :</label>
-            <Input type="text" placeholder="ville"></Input>
+            <Input type="text" placeholder="ville" value={donnee.ville}></Input>
           </div>
           <div className="inputcoll">
             <label>Rue :</label>
-            <Input type="text" placeholder="rue"></Input>
+            <Input type="text" placeholder="rue" value={donnee.rue}></Input>
           </div>
           <div className="inputcoll">
             <label>Numéro :</label>
-            <Input type="text" placeholder="numéro"></Input>
+            <Input type="text" placeholder="numéro" value={donnee.num}></Input>
           </div>
           <div className="inputcoll">
             <label>Code Postal :</label>
-            <Input type="text" placeholder="code postal"></Input>
+            <Input
+              type="text"
+              placeholder="code postal"
+              value={donnee.codepostal}></Input>
           </div>
         </div>
         <div className="divcollab23">
           <div className="inputcoll">
             <label>Activité Contribuale :</label>
-            <Input type="text" placeholder="Activité Contribuale"></Input>
+            <Input
+              type="text"
+              placeholder="Activité Contribuale"
+              value={donnee.activite}></Input>
           </div>
           <div className="inputcoll">
             <label>Tel :</label>
-            <Input type="text" placeholder="Tel"></Input>
+            <Input type="text" placeholder="Tel" value={donnee.tel}></Input>
           </div>
         </div>
       </div>
