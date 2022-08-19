@@ -22,10 +22,20 @@ root11.post("/recherchedossieradd", async(req, res) => {
 
 root11.post("/recherchedossieradd", async(req, res) => {
     try {
-        const { num_affaire, emplacement, tel, mission, adversaire, reste, client } =
+        const { typedossier,
+    codedossier,
+    annee,
+    mission,
+    emplacement,
+    numaffaire,
+    lieu,
+    service,
+    observation,
+    date_creation, } =
         req.body;
+    
         const newdossiers = await pool.query(
-            "INSERT INTO recherchedossier (num_affaire, emplacement, tel, mission,adversaire,reste) VALUES($1,$2,$3,$4,$5,$6) WHERE client=$7", [num_affaire, emplacement, tel, mission, adversaire, reste, client]
+            "INSERT INTO recherchedossier (num_affaire, emplacement,mission,reste) VALUES($1,$2,$3,$4,$5,$6) WHERE client=$7", [num_affaire, emplacement, tel, mission, adversaire, reste, client]
             //res.json("succes"),
         );
         res.json(newdossiers.rows[0]);

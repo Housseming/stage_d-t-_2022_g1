@@ -1,8 +1,9 @@
     body{
-        background-image: url("./bodybackground.jpg.png");
+        background-image: url("./lawback2.jpg");
         background-attachment: fixed;
         background-size: cover;
         background-repeat: no-repeat;
+
         width: 100%;
         
     }

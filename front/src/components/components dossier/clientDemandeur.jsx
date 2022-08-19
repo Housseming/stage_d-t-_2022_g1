@@ -50,13 +50,14 @@ const ClientDemandeur = () => {
   const [listeClient, setListeClient] = useState( [] );
   const [matricule, setMatricule] = useState( "" );
   const [newclient, setNewclient] = useState( [] );
-  const [ischecked, setIschecked] = useState( false );
+ // const [ischecked, setIschecked] = useState( [false,false,false] );
   const [donnee, setDonnee] = useState({
     matricule: "",
     raison: "",
     num: "",
     activité: "",
     categorie: "",
+    situation_fiscale:"",
   } );
 
   const filter = (inputValue, path) =>
@@ -90,7 +91,7 @@ const ClientDemandeur = () => {
     );
     console.log( newlistclient, "KING" )
     setNewclient( newlistclient )
-    setMatricule( newclient[0].matricule );
+   
 
     setDonnee({
       matricule: newclient[0].matricule,
@@ -100,8 +101,20 @@ const ClientDemandeur = () => {
       activité:newclient[0].activité,
       situation_fiscale: newclient[0].situation_fiscale,
     });
+    console.log("donnee",donnee)
+    /*if(donnee.situation_fiscale == "Assujetti" ){
+      setIschecked(true,false,false);
+    }
+     if (donnee.situation_fiscale == "non Assujetti") {
+         setIschecked(false, true, false);
+         console.log("checkedassuj")
+       }
+    if (donnee.situation_fiscale == "Exonoré") {
+      setIschecked(false, false, true);
+    }
+          console.log(ischecked,"checkbox")*/
   }
-    const onChangeradio = (e) => {
+    /*const onChangeradio = (e) => {
       console.log("radio checked", e.target.value);
       if (donnee.situation_fiscale === "Assujetti") {
         setValue(1);
@@ -110,7 +123,7 @@ const ClientDemandeur = () => {
       } else {
         setValue(3);
       }
-    };
+    };*/
   return (
     <div className="container">
       <div className="reglementdiv1">
@@ -156,14 +169,41 @@ const ClientDemandeur = () => {
         <div className="div">
           <label>Situation Fiscale :</label>
           <div className="radioet">
-            <Radio.Group onChange={onChangeradio}>
-              <Radio  value={1}>
+            <Radio.Group>
+              <Radio
+                checked={() => {
+                  if (donnee.situation_fiscale == "Assujetti") {
+                    return true;
+                  } else {
+                    return false;
+                  }
+                }}
+                value={1}
+              >
                 Non Assujetie
               </Radio>
-              <Radio  value={2}>
+              <Radio
+                checked={() => {
+                  if (donnee.situation_fiscale == "non Assujetti") {
+                    return true;
+                  } else {
+                    return false;
+                  }
+                }}
+                value={2}
+              >
                 Assujetie
               </Radio>
-              <Radio  value={3}>
+              <Radio
+                checked={() => {
+                  if (donnee.situation_fiscale == "Exonoré") {
+                    return true;
+                  } else {
+                    return false;
+                  }
+                }}
+                value={3}
+              >
                 exonoré
               </Radio>
             </Radio.Group>
@@ -223,6 +263,6 @@ const ClientDemandeur = () => {
             </Button>*/}
     </div>
   );
-};
+}
 
   export default ClientDemandeur;

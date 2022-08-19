@@ -50,6 +50,7 @@ function Taches() {
     { key: "9", title: "Lieux", dataIndex: "fax" },
     { key: "10", title: "Service", dataIndex: "service" },
     { key: "11", title: "Résolu", dataIndex: "resolu" },
+    { key: "12", title: "Tâche", dataIndex: "tache" },
   ];
   return (
     <div className="container">
