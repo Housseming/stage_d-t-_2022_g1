@@ -124,6 +124,7 @@ const TabDossier = () => {
   };
   return (
     <div className="container2">
+
       <div className="boutonvalid">
         <Button
           className="btnadd"
@@ -136,6 +137,7 @@ const TabDossier = () => {
         </Button>
         <Marginer direction="vertical" margin={10} />
       </div>
+
       <div className="tab">
         <Table
           columns={column}

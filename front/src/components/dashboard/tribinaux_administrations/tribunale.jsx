@@ -343,7 +343,7 @@ const Tribunale = () => {
                     Ajouter un service
                   </button>
                   <div className="tab">
-                    <Table
+                    <Table 
                       columns={column}
                       dataSource={newListeService}
                       bottomHeight={0}
@@ -410,7 +410,7 @@ const Tribunale = () => {
                         <h1>Jours de l'audience</h1>
                         <Checkbox.Group
                           onChange={onChange}
-                          Value={[
+                          defaultValue={[
                             edditingservice.lundi == "audience" ? "lundi" : "",
                             edditingservice.mardi == "audience" ? "mardi" : "",
                             edditingservice.mercredi == "audience"
