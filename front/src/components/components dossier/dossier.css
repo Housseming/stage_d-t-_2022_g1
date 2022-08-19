@@ -327,3 +327,12 @@ legend {
         flex-direction: column;
     }
 }
+.btnaddcollabo{
+    width: 30px!important;
+    height: 30px!important;
+    background-color: #0583f2;
+    padding-right: 10px!important;
+    padding-bottom: 20px!important;
+   margin-bottom: 30px!important;
+
+}
