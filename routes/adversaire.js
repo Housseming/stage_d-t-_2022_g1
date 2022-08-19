@@ -34,8 +34,8 @@ root12.get("/adversaire", async(req, res) => {
 //get a adversaire
 root12.get("/adversaire/:id", async(req, res) => {
     try {
-        const { id } = req.params;
-        const adversaire = await pool.query("SELECT * FROM adversaire WHERE id=$1", [
+        const { id_adversaire } = req.params;
+        const adversaire = await pool.query("SELECT * FROM adversaire WHERE id_adversaire=$1", [
             id,
         ]);
         res.json(adversaire.rows[0]);
@@ -46,10 +46,10 @@ root12.get("/adversaire/:id", async(req, res) => {
 //update a adversaire
 root12.post("/adversaire/update", async(req, res) => {
     try {
-        const { id } = req.body;
+        const { id_adversaire } = req.body;
         const { nom, registre, adresse, adressedesigne, avocat, adresseavocat } = req.body;
         const updatePrime = await pool.query(
-            "UPDATE adversaire SET nom=$1,registre=$2,adresse=$3,adressedesigne=$4,avocat=$5,adresseavocat=$6 WHERE id=$7", [nom, registre, adresse, adressedesigne, avocat, adresseavocat, id]
+            "UPDATE adversaire SET nom=$1,registre=$2,adresse=$3,adressedesigne=$4,avocat=$5,adresseavocat=$6 WHERE id_adversaire=$7", [nom, registre, adresse, adressedesigne, avocat, adresseavocat, id_adversaire]
         );
         res.json("adversaire updated");
     } catch (err) {
@@ -59,9 +59,9 @@ root12.post("/adversaire/update", async(req, res) => {
 //delete  adversaire
 root12.post("/adversaireeff", async(req, res) => {
     try {
-        const { id } = req.body;
+        const { id_adversaire } = req.body;
         const deletePrime = await pool.query(
-            "DELETE FROM adversaire WHERE id=$1", [id]
+            "DELETE FROM adversaire WHERE id_adversaire=$1", [id_adversaire]
         );
         res.json("deleted");
     } catch (err) {

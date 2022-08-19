@@ -231,7 +231,7 @@ const Gestionclient = () => {
     setSortedInfo({});
     setSearchText("");
     getGestionclientrequest();
-
+   
   }
   const getCollabrequest = async () => {
     try {
