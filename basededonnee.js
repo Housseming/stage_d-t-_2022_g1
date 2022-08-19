@@ -2,10 +2,10 @@ const Client = require("pg").Client;
 
 const client = new Client({
     user: "postgres",
-    password: "*itsme*",
+    password: "maurice96386045",
     host: "localhost",
     port: 5432,
-    database: "primehuissier",
+    database: "clientbase",
 });
 
 client.connect(function(err) {
