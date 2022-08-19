@@ -1,16 +1,16 @@
 import React from "react";
 import axios from "axios";
-import {useState, useEffect} from "react";
-import {Table, Button, Modal, Input, Pagination} from "antd";
+import { useState, useEffect } from "react";
+import { Table, Button, Modal, Input, Pagination } from "antd";
 import "antd/dist/antd.min.css";
-import {AiFillEdit} from "react-icons/ai";
-import {MdDeleteForever} from "react-icons/md";
-import {toast} from "react-toastify";
-import {Link} from "react-router-dom";
-import {FcAcceptDatabase} from "react-icons/fc";
+import { AiFillEdit } from "react-icons/ai";
+import { MdDeleteForever } from "react-icons/md";
+import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
+import { FcAcceptDatabase } from "react-icons/fc";
 import styled from "styled-components";
-import {MdPersonSearch} from "react-icons/md";
-
+import { MdPersonSearch } from "react-icons/md";
+import { GoDiffAdded } from "react-icons/go";
 axios.defaults.withCredentials = true;
 
 const AjoutCollabo = () => {
@@ -71,15 +71,19 @@ const AjoutCollabo = () => {
   //notre page et son contenu
   return (
     <div className="back">
-          <header className="App-header">
-             
+      <header className="App-header">
         <button
-          className="btnadd"
+          className="ajouter"
           onClick={() => {
             setIsAdd(true);
-          }}>
-          +
+          }}
+        >
+          {" "}
+          <div className="ajoutertrib">
+            <GoDiffAdded className="addingtrib"></GoDiffAdded>
+          </div>
         </button>
+
         <Modal
           title="Ajouter un collaborateur"
           visible={isAdd}
@@ -92,7 +96,8 @@ const AjoutCollabo = () => {
             addCollab();
             setIsAdd(false);
             toast.success("collaborateur ajouté avec succès");
-          }}>
+          }}
+        >
           <Input
             placeholder="nom"
             value={addingCollab.username}
@@ -101,7 +106,8 @@ const AjoutCollabo = () => {
                 ...addingCollab,
                 username: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
           {/*edditingCollab? s'il n'est pas null*/}
           <Input
             placeholder="cin"
@@ -111,7 +117,8 @@ const AjoutCollabo = () => {
                 ...addingCollab,
                 cin: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
           <Input
             placeholder="ville"
             value={addingCollab.ville}
@@ -120,7 +127,8 @@ const AjoutCollabo = () => {
                 ...addingCollab,
                 ville: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
           <Input
             placeholder="rue"
             value={addingCollab.rue}
@@ -129,7 +137,8 @@ const AjoutCollabo = () => {
                 ...addingCollab,
                 rue: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
           <Input
             placeholder="codepostal"
             value={addingCollab.codepostal}
@@ -138,7 +147,8 @@ const AjoutCollabo = () => {
                 ...addingCollab,
                 codepostal: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
           <Input
             placeholder="activite"
             value={addingCollab.activite}
@@ -147,7 +157,8 @@ const AjoutCollabo = () => {
                 ...addingCollab,
                 activite: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
           <Input
             placeholder="tel"
             value={addingCollab.tel}
@@ -156,7 +167,8 @@ const AjoutCollabo = () => {
                 ...addingCollab,
                 tel: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
           <Input
             placeholder="fax"
             value={addingCollab.fax}
@@ -165,7 +177,8 @@ const AjoutCollabo = () => {
                 ...addingCollab,
                 fax: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
           <Input
             placeholder="email"
             value={addingCollab.email}
@@ -174,7 +187,8 @@ const AjoutCollabo = () => {
                 ...addingCollab,
                 email: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
           <Input
             placeholder="matricule"
             value={addingCollab.matricule}
@@ -183,7 +197,8 @@ const AjoutCollabo = () => {
                 ...addingCollab,
                 matricule: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
           <Input
             placeholder="methode_paiment"
             value={addingCollab.methodepaiment}
@@ -192,7 +207,8 @@ const AjoutCollabo = () => {
                 ...addingCollab,
                 methodepaiment: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
           <Input
             placeholder="montant"
             value={addingCollab.montant}
@@ -201,7 +217,8 @@ const AjoutCollabo = () => {
                 ...addingCollab,
                 montant: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
           <Input
             placeholder="nombre_dossier"
             value={addingCollab.nbredossier}
@@ -210,7 +227,8 @@ const AjoutCollabo = () => {
                 ...addingCollab,
                 nbredossier: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
         </Modal>
       </header>
     </div>

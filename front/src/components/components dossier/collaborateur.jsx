@@ -76,13 +76,15 @@ function Collaborateur() {
     <div className="container">
       <div className="divcollab1">
         <div className="inputcoll">
+          <AjoutCollabo />
           <label>Code Collaborateur :</label>
-          <AjoutCollabo/>
+
           <Cascader
             type="text"
             placeholder="code collaborateur"
             options={liste}
-            onChange={onChange}></Cascader>
+            onChange={onChange}
+          ></Cascader>
         </div>
         <div className="inputcoll">
           <label>Mode Réglement :</label>
@@ -98,14 +100,16 @@ function Collaborateur() {
           <Input
             type="text"
             placeholder="Nom et Prénom"
-            value={donnee.username}></Input>
+            value={donnee.username}
+          ></Input>
         </div>
         <div className="inputcoll">
           <label>Part Collaborateur :</label>
           <Input
             type="text"
             placeholder="part collaborateur"
-            value={donnee.montant}></Input>
+            value={donnee.montant}
+          ></Input>
         </div>
         <div className="inputcoll">
           <label>CIN :</label>
@@ -141,7 +145,8 @@ function Collaborateur() {
             <Input
               type="text"
               placeholder="code postal"
-              value={donnee.codepostal}></Input>
+              value={donnee.codepostal}
+            ></Input>
           </div>
         </div>
         <div className="divcollab23">
@@ -150,7 +155,8 @@ function Collaborateur() {
             <Input
               type="text"
               placeholder="Activité Contribuale"
-              value={donnee.activite}></Input>
+              value={donnee.activite}
+            ></Input>
           </div>
           <div className="inputcoll">
             <label>Tel :</label>

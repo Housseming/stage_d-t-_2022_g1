@@ -1,13 +1,20 @@
 import React from "react";
 import axios from "axios";
 
-
-
 import "../../App.css";
 
-import {useState, useEffect} from "react";
-import { Table, Modal, Input, Button, Space,DatePicker, Radio,Cascader } from "antd";
-import "../../App.css"
+import { useState, useEffect } from "react";
+import {
+  Table,
+  Modal,
+  Input,
+  Button,
+  Space,
+  DatePicker,
+  Radio,
+  Cascader,
+} from "antd";
+import "../../App.css";
 
 import "antd/dist/antd.min.css";
 import { AiFillEdit } from "react-icons/ai";
@@ -15,24 +22,24 @@ import { MdDeleteForever } from "react-icons/md";
 import { toast } from "react-toastify";
 import { SearchOutlined } from "@ant-design/icons";
 import { Marginer } from "../marginer/marginfile";
- const options = [
-   {
-     value: "zhejiang",
-     label: "Zhejiang",
-     children: [
-       {
-         value: "hangzhou",
-         label: "Hangzhou",
-         children: [
-           {
-             value: "xihu",
-             label: "West Lake",
-           },
-         ],
-       },
-     ],
-   },
- ];
+const options = [
+  {
+    value: "zhejiang",
+    label: "Zhejiang",
+    children: [
+      {
+        value: "hangzhou",
+        label: "Hangzhou",
+        children: [
+          {
+            value: "xihu",
+            label: "West Lake",
+          },
+        ],
+      },
+    ],
+  },
+];
 
 const RechercheDossier = () => {
   //declaration necessaires
@@ -41,22 +48,18 @@ const RechercheDossier = () => {
   const [edditingdossier, setEdditingdossier] = useState(null);
   const [isAdd, setIsAdd] = useState(false);
 
- 
-
-
-  const [gridData, setGridData] = useState( [] );
+  const [gridData, setGridData] = useState([]);
   const [value, setValue] = useState(1);
-    const onChangeselect = (value) => {
-      console.log(value);
-    };
-    const onChange = (date, dateString) => {
-      console.log(date, dateString);
-    };
-    const onChangeradio = (e) => {
-      console.log("radio checked", e.target.value);
-      setValue(e.target.value);
-    };
-  
+  const onChangeselect = (value) => {
+    console.log(value);
+  };
+  const onChange = (date, dateString) => {
+    console.log(date, dateString);
+  };
+  const onChangeradio = (e) => {
+    console.log("radio checked", e.target.value);
+    setValue(e.target.value);
+  };
 
   const [addingdossier, setAddingdossier] = useState({
     num_affaire: "",
@@ -294,9 +297,9 @@ const RechercheDossier = () => {
         /*value.tel.toLowerCase().includes(searchText.toLowerCase()) ||*/
         value.mission.toLowerCase().includes(searchText.toLowerCase())
         /*value.adversaire.toLowerCase().includes(searchText.toLowerCase()) ||*/
-       /* value.reste.toLowerCase().includes(searchText.toLowerCase())*/
-        
-    )});
+        /* value.reste.toLowerCase().includes(searchText.toLowerCase())*/
+      );
+    });
     setGridData(filteredData);
     console.log("filtered", filteredData);
     console.log("length", filteredData.length);
@@ -377,25 +380,20 @@ const RechercheDossier = () => {
               <td>
                 <button
                   className="btnadd"
-
                   onClick={() => {
                     setIsAdd(true);
                   }}
                 >
-                  
+
                   Reclasser Dossier
                 </button>
               </td>
               <button
                 className="btnadd"
-
                 onClick={() => {
                   setIsAdd(true);
                 }}
               >
-
-                
-
                 Archiver Dossier
               </button>
             </tr>
@@ -530,7 +528,6 @@ const RechercheDossier = () => {
           onCancel={() => {
             setIsAdd(false);
           }}
-
           onOk={() => {
             adddossier();
             setIsAdd(false);
@@ -607,6 +604,7 @@ const RechercheDossier = () => {
               });
             }}
           ></Input>
+
           <div className="formaddtache">
             <label>Tâche:</label>
             <Input type="text" placeholder="nom de la tâche"></Input>
@@ -658,7 +656,6 @@ const RechercheDossier = () => {
             <label>Date de Déchéance:</label>
             <DatePicker onChange={onChange} placeholder="date de déchéance" />
           </div>
-
         </Modal>
       </header>
     </div>

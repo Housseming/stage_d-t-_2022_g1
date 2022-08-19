@@ -11,14 +11,13 @@ import { MdDeleteForever } from "react-icons/md";
 import { toast } from "react-toastify";
 
 const Emplacementdossier = () => {
-    const [page, setPage] = useState(1);
-    const [pageSize, setPageSize] = useState(6);
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(6);
   const [listeservice, setlisteservice] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
   const [edditingEmplacementdossier, setEdditingEmplacementdossier] =
     useState(null);
   const [addingEmplacementdossier, setAddingEmplacementdossier] = useState({
-    
     libelle: "",
   });
 
@@ -205,7 +204,6 @@ const Emplacementdossier = () => {
             toast.success("Emplacementdossier modifié avec succée");
           }}
         >
-          
           <Input
             placeholder="libelle"
             value={edditingEmplacementdossier?.libelle}
@@ -233,7 +231,6 @@ const Emplacementdossier = () => {
             toast.success("Emplacement_dossier_ajouté avec succès");
           }}
         >
-          
           <Input
             placeholder="libelle"
             value={addingEmplacementdossier.libelle}
