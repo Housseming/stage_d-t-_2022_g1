@@ -1,7 +1,6 @@
 const express = require("express");
 const route = express.Router();
 const bcrypt = require("bcryptjs");
-const client = require("../basededonnee");
 const bodyParser = require("body-parser");
 const jwt = require("jsonwebtoken");
 const cookie = require("cookie-parser");
@@ -14,7 +13,7 @@ var keyaccesstoken = process.env.ACCESS_TOKEN_SECRET;
 var keyrefreshtoken = process.env.REFRESH_TOKEN_SECRET;
 route.post("/login", (req, res) => {
             const { username, password } = req.body;
-            client.query(
+            pool.query(
                     "SELECT * FROM clienttable WHERE username=$1", [username],
                     (err, result) => {
                         if (err) {
@@ -37,7 +36,7 @@ route.post("/login", (req, res) => {
               keyaccesstoken,
               { expiresIn: "35s" }
             );
-            console.log("token generated",accessToken);
+            console.log("token generated after logging in",accessToken);
             //payload heya data nheb ena nkhazenha eli heya parametre lowel mtaa el sign
             if (req.cookies[`${result.rows[0].id}`]) {//check if the cookie amready exists then generate a new one
               req.cookies[`${result.rows[0].id}`] = "";
@@ -49,6 +48,7 @@ route.post("/login", (req, res) => {
               expires: new Date(Date.now() + 1000 * 30),
               httpOnly: true,
               sameSite: "lax",
+              secure:"true",
             });
             res.json({ message: "Successufully logged in", accessToken });
           } else {
