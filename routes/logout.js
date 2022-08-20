@@ -1,6 +1,6 @@
 const express = require("express");
 const route = express.Router();
-const client = require("../basededonnee");
+const pool = require("../db");
 const bodyParser = require("body-parser");
 const {
   validateToken,

@@ -27,15 +27,20 @@ const tribunaleroute = require("./routes/tribunale");
 const cookie = require("cookie-parser");
 const verifyroute = require("./routes/verifytokenroute");
 const user = require("./routes/user");
-const logout = require("./routes/logout")
-    //const verifyroute = require("./routes/verifytokenroute")
+const logout = require("./routes/logout");
+//const verifyroute = require("./routes/verifytokenroute")
 require("dotenv").config();
 
 app.use(cookie());
 //middleware
 app.use(bodyParser.json());
 app.use(express.json());
-app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
+app.use(
+  cors({
+    credentials: true,
+    origin: "http://localhost:3000",
+  })
+);
 /*app.use(express.static(path.join(__dirname, "front/build")));
 if (process.env.NODE_ENV === "production") {
     //server static content
@@ -74,5 +79,5 @@ app.use(logout);
     res.sendFile(path.join(__dirname, "front/build/index.html"));
 })*/
 app.listen(PORT, () => {
-    console.log(`running server on ${PORT}`);
+  console.log(`running server on ${PORT}`);
 });
