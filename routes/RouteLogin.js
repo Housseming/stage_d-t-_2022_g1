@@ -4,6 +4,7 @@ const bcrypt = require("bcryptjs");
 const bodyParser = require("body-parser");
 const jwt = require("jsonwebtoken");
 const cookie = require("cookie-parser");
+const pool = require("../db");
 require("dotenv").config();
 //bch nasnaa token
 

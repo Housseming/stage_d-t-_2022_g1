@@ -27,6 +27,10 @@ import {
   DocumentSearchIcon,
   ArchiveIcon,
   DocumentIcon,
+  PhotographIcon,
+  TruckIcon,
+  PrinterIcon,
+  CurrencyDollarIcon
 } from "@heroicons/react/outline";
 import {
   AppstoreOutlined,
@@ -57,6 +61,33 @@ const solutions = [
     icon: CreditCardIcon,
   },
 ];
+const resourcesdebours = [
+  {
+    name: "timbre",
+    description: "",
+    href: "/home/timbre",
+    icon: PhotographIcon,
+  },
+  {
+    name: "photocopie",
+    description: "",
+    href: "/home/photocopie",
+    icon: PrinterIcon,
+  },
+  {
+    name: "transport",
+    description: "",
+    href: "/home/transport",
+    icon: TruckIcon,
+  },
+  {
+    name: "recette finance",
+    description: "",
+    href: "/home/recettedufinance",
+    icon: CurrencyDollarIcon,
+  },
+];
+
 
 const solutions1 = [
   {
@@ -203,13 +234,13 @@ function classNames(...classes) {
 
 export default function Example() {
   return (
-    <Popover className="relative bg-white">
+    <Popover className="relative bg-white lg:w-max md:w-max xl:w-full 2xl:w-full">
       <div className="flex justify-between items-center px-4 py-6 sm:px-6 md:justify-start md:space-x-10">
         <div>
           <a href="#" className="flex">
             <span className="sr-only">Workflow</span>
             <ScaleIcon
-              className="h-8 w-auto sm:h-10"
+              className="h-8 w-auto sm:h-14"
               src="https://tailwindui.com/img/logos/workflow-mark-blue-500.svg"
               alt=""
             />
@@ -279,8 +310,6 @@ export default function Example() {
                             </a>
                           ))}
 
-                          <Navigation
-                          />
                           {solutions1.map((item) => (
                             <a
                               key={item.name}
@@ -288,6 +317,69 @@ export default function Example() {
                               className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50"
                             >
                               <div className="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-blue-500 text-white sm:h-12 sm:w-12">
+                                <item.icon
+                                  className="h-6 w-6"
+                                  aria-hidden="true"
+                                />
+                              </div>
+                              <div className="ml-4">
+                                <p className="text-base font-medium text-gray-900">
+                                  {item.name}
+                                </p>
+                                <p className="mt-1 text-sm text-gray-500">
+                                  {item.description}
+                                </p>
+                              </div>
+                            </a>
+                          ))}
+                        </div>
+                      </div>
+                    </Popover.Panel>
+                  </Transition>
+                </>
+              )}
+            </Popover>
+            <Popover className="relative">
+              {({ open }) => (
+                <>
+                  <Popover.Button
+                    className={classNames(
+                      open ? "text-gray-900" : "text-gray-500",
+                      "group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                    )}
+                  >
+                    <span>Debours</span>
+                    <ChevronDownIcon
+                      className={classNames(
+                        open ? "text-gray-600" : "text-gray-400",
+                        "ml-2 h-5 w-5 group-hover:text-gray-500"
+                      )}
+                      aria-hidden="true"
+                    />
+                  </Popover.Button>
+
+                  <Transition
+                    as={Fragment}
+                    enter="transition ease-out duration-200"
+                    enterFrom="opacity-0 translate-y-1"
+                    enterTo="opacity-100 translate-y-0"
+                    leave="transition ease-in duration-150"
+                    leaveFrom="opacity-100 translate-y-0"
+                    leaveTo="opacity-0 translate-y-1"
+                  >
+                    <Popover.Panel className="absolute z-10 left-1/2 transform -translate-x-1/2 mt-3 px-2 w-screen max-w-xs sm:px-0">
+                      <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
+                        <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
+                          {resourcesdebours.map((item) => (
+                            <a
+                              key={item.name}
+                              href={item.href}
+                              className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50"
+                            >
+                              <div
+                                className="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-blue-500 
+                              text-white sm:h-12 sm:w-12"
+                              >
                                 <item.icon
                                   className="h-6 w-6"
                                   aria-hidden="true"
@@ -606,7 +698,7 @@ export default function Example() {
 
           {/* mtaa sign in hedhom*/}
 
-          <div className="flex items-center md:ml-12">
+          <div className="flex items-center md:ml-12 ">
             <a
               href="/"
               className="ml-8 inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-500 hover:bg-blue-500 "
@@ -633,13 +725,7 @@ export default function Example() {
           <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white divide-y-2 divide-gray-50">
             <div className="pt-5 pb-6 px-5">
               <div className="flex items-center justify-between">
-                <div>
-                  <img
-                    className="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/workflow-mark-blue-600.svg"
-                    alt="Workflow"
-                  />
-                </div>
+                <div></div>
                 <div className="-mr-2">
                   <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
                     <span className="sr-only">Close menu</span>
