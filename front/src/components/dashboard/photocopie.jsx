@@ -10,6 +10,7 @@ import { MdDeleteForever } from "react-icons/md";
 import { toast } from "react-toastify";
 
 const Parametreenextra = () => {
+  const [check, setCheck] = useState(false);
   const [listeservice, setlisteservice] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
   const [edditingParametre, setEdditingParametre] = useState(null);
@@ -17,8 +18,9 @@ const Parametreenextra = () => {
     prixphotocopie: 0,
   });
 
+
   const columns = [
-    { key: "1", title: "prixphotocopie", dataIndex: "prixphotocopie" },
+    { key: "1", title: "Prix photocopie", dataIndex: "prixphotocopie" },
 
     {
       key: "2",
@@ -55,7 +57,10 @@ const Parametreenextra = () => {
   const getParametrerequest = async () => {
     try {
       const response = await axios.get("/photocopie");
-      setlisteservice(response.data); // aleh listeservice dhaherli khtr tji listeservice [{:}]
+      setlisteservice(response.data);
+      if (response.data.length==0)
+      setCheck(true); else setCheck(false);
+      // aleh listeservice dhaherli khtr tji listeservice [{:}]
     } catch (error) {
       console.log(error.message);
     }
@@ -65,8 +70,7 @@ const Parametreenextra = () => {
   }, [listeservice]);
   console.log(listeservice);
 
-  ////////////
-  //modifier une Parametre
+  //////////////modifier une Parametre
   const editParametre = (record) => {
     setIsEdit(true);
     setEdditingParametre({ ...record }); //copie mel record
@@ -89,13 +93,22 @@ const Parametreenextra = () => {
   //lien aveclback pour l'ajout
   const [isAdd, setIsAdd] = useState(false);
 
+  const addPhotocopie = async () => {
+    try {
+      const resp = await axios.post("/photocopie", addingParametre);
+      console.log(resp.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="App">
       <header className="App-header">
       <h1>Prix de la photocopie</h1>
-        {/*<Button className="btnadd"  onClick={() => {
+          {check && <Button className="btnadd"  onClick={() => {
             setIsAdd(true);
-          } }> Ajouter</Button>*/}
+          } }> Ajouter</Button>}
         <div classname="tab">
           <Table
             columns={columns}
@@ -106,7 +119,7 @@ const Parametreenextra = () => {
         </div>
         {/*MODIFICATION*/}
         <Modal
-          title="modifier prixphotocpie"
+          title="modifier prix photocopie"
           visible={isEdit}
           okText="Enregistrer"
           cancelText="Annuler"
@@ -127,7 +140,7 @@ const Parametreenextra = () => {
             setlisteservice(newlisteservice);
             editParametrerequest(edditingParametre.prixphotocopie);
             resetEditing();
-            toast.success("Parametre modifie avec succée");
+            toast.success("Parametre modifié avec succée");
           }}
         >
           <Input
@@ -143,6 +156,32 @@ const Parametreenextra = () => {
 
           {/*AJOUT*/}
         </Modal>
+        <Modal
+          title="ajouter "
+          visible={isAdd}
+          okText="Enregistrer"
+          cancelText="Annuler"
+          onCancel={() => {
+            setIsAdd(false);
+          }}
+          onOk={() => {
+            addPhotocopie();
+            setIsAdd(false);
+            toast.success("Timbre ajouté avec succès");
+          }}
+        >
+          <Input
+            placeholder="libelle"
+            value={addingParametre.prixphotocopie}
+            onChange={(e) => {
+              setAddingParametre({
+                ...addingParametre,
+                prixphotocopie: e.target.value,
+              });
+            }}
+          ></Input>
+           
+           </Modal>
       </header>
     </div>
   );

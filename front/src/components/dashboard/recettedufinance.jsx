@@ -22,9 +22,9 @@ const Recettedufinance = () => {
   });
 
   const columns = [
-    { key: "1", title: "libelle", dataIndex: "libelle" },
-    { key: "2", title: "montant", dataIndex: "montant" },
-    { key: "3", title: "id", dataIndex: "id" },
+    { key: "1", title: "Libelle", dataIndex: "libelle" },
+    { key: "2", title: "Montant", dataIndex: "montant" },
+    { key: "3", title: "Id", dataIndex: "id" },
     {
       key: "4",
       title: "Actions",

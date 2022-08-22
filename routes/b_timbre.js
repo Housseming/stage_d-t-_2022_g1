@@ -11,7 +11,7 @@ const pool = require("../db")
 
 
 //RouTES
-//create a todo 
+//ajout
 root3.post("/timbre", async (req, res) => {
     try {
         const {libelle,montant} = req.body;
