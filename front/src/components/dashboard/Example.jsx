@@ -1,6 +1,6 @@
 /* This example requires Tailwind CSS v2.0+ */
 
-import { Fragment } from "react";
+import { Fragment,useContext } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import {
   PlusIcon,
@@ -46,6 +46,8 @@ import {
   UserAddIcon,
   UserGroupIcon,
 } from "@heroicons/react/solid";
+import axios from "axios";
+import AuthContext from "../../context/AuthContext";
 
 const solutions = [
   {
@@ -228,6 +230,13 @@ function classNames(...classes) {
 }
 
 export default function Example() {
+  const {getLoggedIn} = useContext(AuthContext)
+  const logOut = async ()=>{
+    await axios.get("/logout");
+    getLoggedIn();
+
+
+  }
   return (
     <Popover className="relative bg-white lg:w-max md:w-max xl:w-full 2xl:w-full">
       <div className="flex justify-between items-center px-4 py-6 sm:px-6 md:justify-start md:space-x-10">
@@ -694,7 +703,7 @@ export default function Example() {
           {/* mtaa sign in hedhom*/}
 
           <div className="flex items-center md:ml-12 ">
-            <a
+            <a onClick={logOut}
               href="/"
               className="ml-8 inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-500 hover:bg-blue-500 "
             >

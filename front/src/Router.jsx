@@ -38,7 +38,7 @@ function Router() {
     <BrowserRouter>
       <Routes>
         <Route path="/">
-          {<Route index element={<Home></Home>}></Route>}
+          {loggedIn===true &&<Route index element={<Home></Home>}></Route>}
           {loggedIn === false && (
             <Route path="login" element={<AccountBox />}></Route>
           )}
