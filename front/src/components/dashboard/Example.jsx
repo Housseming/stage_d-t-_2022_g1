@@ -105,7 +105,7 @@ const solutions1 = [
   {
     name: "Type dossier",
     description: " ",
-    href: "#",
+    href: "/home/underconstruction",
     icon: FolderIcon,
   },
   {
@@ -129,49 +129,44 @@ const solutions1 = [
   {
     name: "primeorateur",
     description: "",
-    href: "#",
+    href: "/home/underconstruction",
     icon: CurrencyYenIcon,
   },
   {
     name: "Greffier",
     description: " ",
-    href: "#",
+    href: "/home/underconstruction",
     icon: PencilAltIcon,
   },
   {
     name: "Prime Greffier",
     description: " ",
-    href: "#",
+    href: "/home/underconstruction",
     icon: CreditCardIcon,
   },
 ];
 
 const client0 = [
   { name: "Gestion Client", href: "/home/gestionclient", icon: UserIcon },
-  { name: "Fiche Signalitique", href: "#", icon: DocumentIcon },
+  {
+    name: "Fiche Signalitique",
+    href: "/home/underconstruction",
+    icon: DocumentIcon,
+  },
 ];
 const resources = [
   {
-    name: "Help Center",
+    name: "Etat huissier",
     description: "",
-    href: "#",
+    href: "/home/underconstruction",
   },
+  
+];
+const resources4 = [
   {
-    name: "Guides",
-    description:
-      "Learn how to maximize our platform to get the most out of it.",
-    href: "#",
-  },
-  {
-    name: "Events",
-    description:
-      "See what meet-ups and other events we might be planning near you.",
-    href: "#",
-  },
-  {
-    name: "Security",
-    description: "Understand how we take your privacy seriously.",
-    href: "#",
+    name: "Etat huissier",
+    description: "",
+    href: "/home/underconstruction",
   },
 ];
 const resources2 = [
@@ -204,27 +199,27 @@ const resources3 = [
   {
     name: "Tâche",
     description: "",
-    href: "#",
+    href: "/home/underconstruction",
   },
   {
     name: "Huissier",
     description: "",
-    href: "#",
+    href: "/home/underconstruction",
   },
   {
     name: "Echéance",
     description: "",
-    href: "#",
+    href: "/home/underconstruction",
   },
   {
     name: "Recouvrement",
     description: "",
-    href: "#",
+    href: "/home/underconstruction",
   },
   {
     name: "Expert",
     description: "",
-    href: "#",
+    href: "/home/underconstruction",
   },
 ];
 
@@ -610,7 +605,7 @@ export default function Example() {
                     <Popover.Panel className="absolute z-10 left-1/2 transform -translate-x-1/2 mt-3 px-2 w-screen max-w-xs sm:px-0">
                       <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
                         <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
-                          {resources.map((item) => (
+                          {resources4.map((item) => (
                             <a
                               key={item.name}
                               href={item.href}
@@ -758,7 +753,7 @@ export default function Example() {
                   href="#"
                   className="text-base font-medium text-gray-900 hover:text-gray-700"
                 >
-                  Client
+                  Paramètre globale
                 </a>
 
                 <a
@@ -789,17 +784,9 @@ export default function Example() {
                   href="/login"
                   className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-500 hover:bg-blue-500"
                 >
-                  S'enregistrer
+                  Se déconnecter
                 </a>
-                <p className="mt-6 text-center text-base font-medium text-gray-500">
-                  Existing customer?{" "}
-                  <a
-                    href="/login"
-                    className="text-blue-600 hover:text-blue-500"
-                  >
-                    Se connecter
-                  </a>
-                </p>
+                
               </div>
             </div>
           </div>

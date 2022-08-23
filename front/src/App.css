@@ -3,9 +3,8 @@ body {
   background-attachment: fixed;
   background-size: cover;
   background-repeat: no-repeat;
-  
+  background-position: center center;
 
-  width: 100%;
 }
 
 .edit {
@@ -113,7 +112,7 @@ body {
   width: 1200px;
   margin: auto !important;
   margin-top: 10px !important;
-  background-color: rgba(255, 255, 255, 0.537)!important;
+  background-color: rgba(255, 255, 255, 0.537) !important;
 }
 
 @media only screen and (max-width: 1500px) {
@@ -203,7 +202,6 @@ body {
   color: white !important;
 }
 
-
 .btnsearch {
   color: white;
   background-color: #0583f2;
@@ -249,12 +247,25 @@ body {
   align-items: center;
   background-color: white !important;
   width: 100%;
-  height:100vh;
+  height: 100vh;
   margin: 0 auto;
-
 }
-.Errorpagediv img{
+.Errorpagediv img {
   width: 50%;
-  
+}
+.constpagediv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
+  width: 100%;
+}
+
+.constpagediv img {
+  width: 60rem;
+}
+@media only screen and (max-width: 700px) {
+  .constpagediv img {
+    padding-top: 20px;
+  }
 }

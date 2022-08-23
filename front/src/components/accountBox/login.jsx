@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
+
 import {
   BoldLink,
   BoxContainer,
@@ -13,6 +14,7 @@ import {
 import { Marginer } from "../marginer/marginfile";
 import { AccountBox } from ".";
 import { AccountContext } from "./accountContext";
+axios.defaults.withCredentials = true;
 export function Login(props) {
   const { Switchtosignup } = useContext(AccountContext);
   const [username, setUsername] = useState("");
@@ -24,6 +26,8 @@ export function Login(props) {
         username: username,
 
         password: password,
+      },{
+        withCredentials:true,
       });
       if (resp.data.error) {
         toast.error(resp.data.error);

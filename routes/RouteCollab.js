@@ -4,6 +4,7 @@ const pool = require("../db");
 const bodyParser = require("body-parser");
 const { validateToken } = require("../middlewares/AuthMiddleWare");
 const { refreshToken } = require("../middlewares/AuthMiddleWare");
+const auth = require("../middlewares/AuthMiddleWare")
 route.post("/collab", (req, res) => {
     const {
         username,
@@ -108,7 +109,7 @@ route.post("/modif", (req, res) => {
     );
 });
 
-route.get("/collab", (req, res) => {
+route.get("/collab",auth, (req, res) => {
     pool.query("SELECT * FROM collaboratortable", (error, result) => {
         if (error) {
             console.log(error);

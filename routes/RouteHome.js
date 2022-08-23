@@ -1,4 +1,4 @@
-const express = require("express");
+/*const express = require("express");
 const route = express.Router();
 const pool = require("../db");
 const bodyParser = require("body-parser");
@@ -8,4 +8,4 @@ route.post("/Home", validateToken, (req, res) => {
     res.json({ error: "user logged in !" });
 });
 
-module.exports = route;
+module.exports = route;*/

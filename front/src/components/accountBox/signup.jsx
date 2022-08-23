@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+
 import {
   BoldLink,
   BoxContainer,
@@ -11,7 +12,7 @@ import {
 } from "./common";
 import { Marginer } from "../marginer/marginfile";
 import { AccountContext } from "./accountContext";
-
+axios.defaults.withCredentials = true;
 export function Signup(props) {
   const { Switchtologin } = useContext(AccountContext);
   const [username, setUsername] = useState("");

@@ -22,12 +22,12 @@ const PORT = process.env.PORT || 5000;
 const loginroute = require("./routes/RouteLogin");
 const registerroute = require("./routes/RouteRegister");
 const collabroute = require("./routes/RouteCollab");
-const homeroute = require("./routes/RouteHome");
+//const homeroute = require("./routes/RouteHome");
 const tribunaleroute = require("./routes/tribunale");
 const cookie = require("cookie-parser");
-const verifyroute = require("./routes/verifytokenroute");
-const user = require("./routes/user");
-const logout = require("./routes/logout");
+//const verifyroute = require("./routes/verifytokenroute");
+//const user = require("./routes/user");
+//const logout = require("./routes/logout");
 //const verifyroute = require("./routes/verifytokenroute")
 require("dotenv").config();
 
@@ -39,6 +39,7 @@ app.use(
   cors({
     credentials: true,
     origin: "http://localhost:3000",
+    methods: "GET, HEAD, PUT, PATCH, POST, DELETE",
   })
 );
 /*app.use(express.static(path.join(__dirname, "front/build")));
@@ -66,14 +67,14 @@ app.use(root10); //gestionclient
 app.use(root11); //recherchedossier
 app.use(root12); //adversaire
 app.use(root13); //tache
-app.use(verifyroute);
+//app.use(verifyroute);
 app.use(loginroute);
 app.use(registerroute);
 app.use(collabroute);
-app.use(homeroute);
-app.use(user);
+//app.use(homeroute);
+//app.use(user);
 app.use(tribunaleroute);
-app.use(logout);
+//app.use(logout);
 
 /*app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "front/build/index.html"));
