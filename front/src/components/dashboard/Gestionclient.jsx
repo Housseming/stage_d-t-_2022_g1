@@ -616,13 +616,13 @@ const Gestionclient = () => {
               <Input disabled
                 placeholder="code client"
                 value={persons + '/' + addingGestionclient.raison[0]}
-                /* onChange={(e) => {
-                 /* setVal(e.target.value)
+                onChange={(e) => {
+  
                   setAddingGestionclient({
                     ...addingGestionclient,
-                    codeclient:val ,
+                    codeclient:e.target.value ,
                   });
-                }}*/
+                }}
               //amltha win lmatricule lval ghadi win yiwali yaml feha
 
               ></Input>
@@ -645,11 +645,8 @@ const Gestionclient = () => {
               setAddingGestionclient({
                 ...addingGestionclient,
                 matricule: e.target.value,
-              });setVal(persons + '/' + addingGestionclient.raison[0])
-              setAddingGestionclient({
-                ...addingGestionclient,
-                codeclient:val ,
               });
+              
             }}
           ></Input>
           <Input
@@ -695,7 +692,11 @@ const Gestionclient = () => {
           <Input
             placeholder="activité"
             value={addingGestionclient.activite}
-            onChange={(e) => {
+            onChange={(e) => {setVal(persons + '/' + addingGestionclient.raison[0]);
+            setAddingGestionclient({
+              ...addingGestionclient,
+              codeclient:val ,
+            });
               setAddingGestionclient({
                 ...addingGestionclient,
                 activite: e.target.value,
