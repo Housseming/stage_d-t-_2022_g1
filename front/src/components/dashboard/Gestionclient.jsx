@@ -59,7 +59,8 @@ const Gestionclient = () => {
     var cb = document.getElementById('abc')
     var input1 = document.getElementById('1')
     var input2 = document.getElementById('2')
-    if (cb.checked == true) {
+    
+    if (cb.checked == true) {console.log("winek aa",addingGestionclient.codecollaborateur)
       setCheck(true); setCheck1(false);
       input1.style.display = "block"//yidhaher
       input2.style.display = "none"
@@ -261,7 +262,7 @@ const Gestionclient = () => {
   const liste = useMemo(() => {
     getCollabrequest();
     return Listecollab.map((trib) => ({
-      value: trib.id,
+      value: trib.id+ ":" + trib.username,
       label: trib.id + ":" + trib.username,
     }));
   }, [Listecollab]);
@@ -576,10 +577,10 @@ const Gestionclient = () => {
           <Cascader
             className="cascader2"
             options={liste}
-            onChange={(e) => {
+            onChange={(value) => {console.log("aawinekbelehy",value[0])
               setAddingGestionclient({
                 ...addingGestionclient,
-                codecollaborateur: e.target.value,
+                codecollaborateur: value[0],
               });
             }}
             placeholder="Selectionner code collaborateur "
@@ -597,7 +598,7 @@ const Gestionclient = () => {
               <Input
                 placeholder="code client"
                 value={val}
-                onChange={(e) => {
+                onChange={(e) => {console.log('traahwari',e.target.value)
                   setVal(e.target.value)
                   setAddingGestionclient({
                     ...addingGestionclient,
@@ -616,8 +617,8 @@ const Gestionclient = () => {
               <Input disabled
                 placeholder="code client"
                 value={persons + '/' + addingGestionclient.raison[0]}
-                onChange={(e) => {
-  
+                onChange={(e) => {console.log('traahwari',e.target.value)
+  //matekhdmsh
                   setAddingGestionclient({
                     ...addingGestionclient,
                     codeclient:e.target.value ,
