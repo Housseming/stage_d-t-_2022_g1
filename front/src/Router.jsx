@@ -33,19 +33,19 @@ import { useContext } from "react";
 axios.defaults.withCredentials = true;
 
 function Router() {
-  const loggedIn = useContext(AuthContext);
+  let loggedIn = useContext(AuthContext);
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/">
-          {loggedIn===true &&<Route index element={<Home></Home>}></Route>}
-          {loggedIn === false && (
+          { <Route index element={<Home></Home>}></Route>}
+          { (
             <Route path="login" element={<AccountBox />}></Route>
           )}
-          {loggedIn === false && (
+          {(
             <Route path="register" element={<RegisterBox />} />
           )}
-          {loggedIn === true && (
+          {((
             <>
               <Route path="home" element={<Sharedlayout />}>
                 <Route path="primehuissier" element={<PrimeHuissier />} />
@@ -84,7 +84,7 @@ function Router() {
                   element={<Underconstruction></Underconstruction>}
                 ></Route>
               </Route>
-            </>
+            </>)
           )}
 
 

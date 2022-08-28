@@ -704,7 +704,7 @@ export default function Example() {
 
           <div className="flex items-center md:ml-12 ">
             <a onClick={logOut}
-              href="/"
+              href="/login"
               className="ml-8 inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-500 hover:bg-blue-500 "
             >
               Se déconnecter
@@ -789,7 +789,7 @@ export default function Example() {
                 ))}
               </div>
               <div className="mt-6">
-                <a
+                <a onClick={logOut}
                   href="/login"
                   className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-500 hover:bg-blue-500"
                 >
