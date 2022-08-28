@@ -11,7 +11,7 @@ require("dotenv").config();
 const { validateToken } = require("../middlewares/AuthMiddleWare");
 
 var keyaccesstoken = process.env.ACCESS_TOKEN_SECRET;
-var keyrefreshtoken = process.env.REFRESH_TOKEN_SECRET;
+
 route.post("/login", (req, res) => {
   const { username, password } = req.body;
   pool.query(

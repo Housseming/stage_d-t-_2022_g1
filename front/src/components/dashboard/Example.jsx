@@ -48,6 +48,7 @@ import {
 } from "@heroicons/react/solid";
 import axios from "axios";
 import AuthContext from "../../context/AuthContext";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const solutions = [
   {
@@ -230,10 +231,12 @@ function classNames(...classes) {
 }
 
 export default function Example() {
+  const navigate = useNavigate()
   const {getLoggedIn} = useContext(AuthContext)
   const logOut = async ()=>{
     await axios.get("/logout");
     getLoggedIn();
+    navigate("/login");
 
 
   }
@@ -624,10 +627,10 @@ export default function Example() {
                                 className="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-blue-500 
                               text-white sm:h-12 sm:w-12"
                               >
-                                <item.icon
+                                {/*<item.icon
                                   className="h-6 w-6"
                                   aria-hidden="true"
-                                />
+                          />*/}
                               </div>
                               <div className="ml-4">
                                 <p className="text-base font-medium text-gray-900">
@@ -703,12 +706,12 @@ export default function Example() {
           {/* mtaa sign in hedhom*/}
 
           <div className="flex items-center md:ml-12 ">
-            <a onClick={logOut}
-              href="/login"
+            <button onClick={logOut}
+            
               className="ml-8 inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-500 hover:bg-blue-500 "
             >
               Se déconnecter
-            </a>
+            </button>
           </div>
         </div>
       </div>
@@ -789,12 +792,12 @@ export default function Example() {
                 ))}
               </div>
               <div className="mt-6">
-                <a onClick={logOut}
-                  href="/login"
+                <button onClick={logOut}
+                  
                   className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-500 hover:bg-blue-500"
                 >
                   Se déconnecter
-                </a>
+                </button>
                 
               </div>
             </div>
