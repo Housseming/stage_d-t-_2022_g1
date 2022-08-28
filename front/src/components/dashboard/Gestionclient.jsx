@@ -91,9 +91,12 @@ const Gestionclient = () => {
     { key: "8", title: "activité", dataIndex: "activite" },
     { key: "9", title: "situation_fiscale", dataIndex: "situation_fiscale" },
     { key: "10", title: "categorie", dataIndex: "categorie" },
-    { key: "11", title: "fax", dataIndex: "fax" },
-    { key: "12", title: "email", dataIndex: "email" },
-    {key: "13",
+    { key: "11", title: "Fax", dataIndex: "fax" },
+    { key: "12", title: "Email", dataIndex: "email" },
+    { key: "13", title: "Code client", dataIndex: "codeclient" },
+    { key: "14", title: "code collaborateur", dataIndex: "codecollaborateur" },
+    
+    {key: "15",
       title: "Actions",
       render: (record) => {
         return (
@@ -128,7 +131,9 @@ const Gestionclient = () => {
   const getGestionclientrequest = async () => {
     try {
       const response = await axios.get("/gestionclient");
+      console.log('aaaaaaaa1',response.data)
       setlisteservice(response.data);
+      console.log('aaaaaaaa2',listeservice)
       for (let i = 0; i<response.data.length; i++) {if (response.data[i].id>persons){setPersons( response.data[i].id+1)}}
       console.log('ahayaliste',(persons)) // aleh listeservice dhaherli khtr tji listeservice [{:}]
     } catch (error) {
@@ -171,7 +176,9 @@ const Gestionclient = () => {
   ////////////
   //modifier une Gestionclient
   const editGestionclient = (record) => {
+    
     setIsEdit(true);
+
     setEdditingGestionclient({ ...record }); //copie mel record
   };
   const resetEditing = () => {
@@ -181,7 +188,9 @@ const Gestionclient = () => {
   //lien aveclback pour la modif
   const editGestionclientrequest = async (
     id,
-    raison,
+   codecollaborateur,
+   codeclient,
+   raison,
     matricule,
     ville,
     rue,
@@ -191,11 +200,14 @@ const Gestionclient = () => {
     situation_fiscale,
     categorie,
     fax,
-    email
+    email,
+    
   ) => {
     try {
       const modified = await axios.post("/gestionclient/modif", {
-        id: id,
+        id:id,
+        codecollaborateur:codecollaborateur,
+        codeclient:codeclient,
         raison: raison,
         matricule: matricule,
         ville: ville,
@@ -205,8 +217,9 @@ const Gestionclient = () => {
         activite: activite,
         situation_fiscale: situation_fiscale,
         categorie: categorie,
-        fax: fax,
-        email: email
+        fax:fax,
+        email:email,
+        
 
       });
       console.log("emplacement_dossier_modifié");
@@ -282,7 +295,8 @@ const Gestionclient = () => {
         value.situation_fiscale.toLowerCase().includes(searchText.toLowerCase()) ||
         value.categorie.toLowerCase().includes(searchText.toLowerCase()) ||
         value.fax.toLowerCase().includes(searchText.toLowerCase()) ||
-        value.email.toLowerCase().includes(searchText.toLowerCase())
+          value.codeclient.toLowerCase().includes(searchText.toLowerCase())||
+        value.codecollaborateur.toLowerCase().includes(searchText.toLowerCase())
 
       );
 
@@ -344,15 +358,16 @@ const Gestionclient = () => {
           onOk={() => {
             setIsEdit(false);
             const newlisteservice = listeservice.map((Gestionclient) => {
-              if (Gestionclient.id === edditingGestionclient.id) {
+              if (Gestionclient.id ===edditingGestionclient.id) {
                 return edditingGestionclient;
               } else {
                 return Gestionclient;
               }
             });
             setlisteservice(newlisteservice);
-            editGestionclientrequest(
-              edditingGestionclient.id,
+            editGestionclientrequest( edditingGestionclient.id,
+              edditingGestionclient.codecollaborateur,
+              edditingGestionclient.codeclient,
               edditingGestionclient.raison,
               edditingGestionclient.matricule,
               edditingGestionclient.ville,
@@ -363,7 +378,8 @@ const Gestionclient = () => {
               edditingGestionclient.situation_fiscale,
               edditingGestionclient.categorie,
               edditingGestionclient.fax,
-              edditingGestionclient.email
+              edditingGestionclient.email,
+             
             ); // a ne pas toucher l'id
             resetEditing();
             toast.success("Gestionclient modifié avec succée");
@@ -373,7 +389,11 @@ const Gestionclient = () => {
 
             className="cascader2"
             options={liste}
-            onChange={onChange}
+            onChange={(value) => {console.log("aawinekbelehy",typeof(value[0]))
+            setEdditingGestionclient({
+              ...edditingGestionclient,
+              codecollaborateur: value[0],
+            });}}
             placeholder="selectionner code collaborateur "
             showSearch={{
               filter,
@@ -393,16 +413,7 @@ const Gestionclient = () => {
               });
             }}
           ></Input>
-          <Input
-            placeholder="id"
-            value={edditingGestionclient?.id}
-            onChange={(e) => {
-              setEdditingGestionclient({
-                ...edditingGestionclient,
-                id: e.target.value,
-              });
-            }}
-          ></Input>
+        
 
           <Input
             placeholder=""
@@ -583,7 +594,7 @@ const Gestionclient = () => {
                 codecollaborateur: value[0],
               });
             }}
-            placeholder="Selectionner code collaborateur "
+            placeholder="Selectionner ClassName collaborateur "
             showSearch={{
               filter,
             }}
@@ -616,12 +627,12 @@ const Gestionclient = () => {
             <div id='2'>
               <Input disabled
                 placeholder="code client"
-                value={persons + '/' + addingGestionclient.raison[0]}
+                value={addingGestionclient.codeclient}
                 onChange={(e) => {console.log('traahwari',e.target.value)
   //matekhdmsh
                   setAddingGestionclient({
                     ...addingGestionclient,
-                    codeclient:e.target.value ,
+                    codeclient:persons + '/' + addingGestionclient.raison[0] ,
                   });
                 }}
               //amltha win lmatricule lval ghadi win yiwali yaml feha
@@ -636,7 +647,11 @@ const Gestionclient = () => {
               setAddingGestionclient({
                 ...addingGestionclient,
                 raison: e.target.value,
+  
+                
+                codeclient:persons + '/' + addingGestionclient.raison[0] ,
               });
+              
             }}
           ></Input>
           <Input
@@ -704,7 +719,7 @@ const Gestionclient = () => {
               });
             }}
           ></Input>
-          <div ClassName="situation">
+          <div className="situation">
             <fieldset>
               <legend>Situation Fiscale</legend>
 

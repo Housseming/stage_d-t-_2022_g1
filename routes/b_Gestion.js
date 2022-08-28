@@ -25,7 +25,8 @@ root10.post("/gestionclient/modif", async(req, res) => {
     try {
         const { id,codecollaborateur,codeclient, raison, matricule, ville, rue, num, code_postale, activite, situation_fiscale, categorie, fax, email } = req.body;
 
-        const newTodo2 = await pool.query("UPDATE gestionclient SET codecollaborateur=$2,codeclient=$3,raison=$4,matricule=$5,ville=$6,rue=$7,num=$8,code_postale=$9,activite=$10,situation_fiscale=$11,categorie=$12,fax=$13,email=$14   WHERE id=$1  ", [id,codecollaborateur,codeclient ,raison, matricule, ville, rue, num, code_postale, activite, situation_fiscale, categorie, fax, email]);
+        const newTodo2 = await pool.query("UPDATE gestionclient SET codecollaborateur=$2,codeclient=$3,raison=$4,matricule=$5,ville=$6,rue=$7,num=$8,code_postale=$9,activite=$10,situation_fiscale=$11,categorie=$12,fax=$13,email=$14   WHERE id=$1  ", 
+        [id,codecollaborateur,codeclient ,raison, matricule, ville, rue, num, code_postale, activite, situation_fiscale, categorie, fax, email]);
         res.json(newTodo2);
 
 
@@ -36,7 +37,7 @@ root10.post("/gestionclient/modif", async(req, res) => {
 //selection 
 root10.get("/gestionclient", async(req, res) => {
     try {
-        const newTodo = await pool.query(" SELECT id,raison, matricule, ville, rue, num, code_postale, activite, situation_fiscale, categorie, fax, email FROM gestionclient ORDER by id asc")
+        const newTodo = await pool.query(" SELECT * FROM gestionclient ORDER by id asc")
         res.json(newTodo.rows);
 
 
