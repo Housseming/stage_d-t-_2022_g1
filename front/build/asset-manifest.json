@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/static/css/main.2d5930be.css",
+    "main.js": "/static/js/main.d176f2fd.js",
+    "static/js/787.71df535f.chunk.js": "/static/js/787.71df535f.chunk.js",
+    "static/media/backgroundavocat.jpg": "/static/media/backgroundavocat.da8ce56e92a3714aab3b.jpg",
+    "static/media/errorimage.png": "/static/media/errorimage.57085d8961e4e7ed3e9b.png",
+    "static/media/lawback2.jpg": "/static/media/lawback2.ea6ca6b026df24fc2fb1.jpg",
+    "static/media/avocatimage2.png": "/static/media/avocatimage2.70c0142d885ebaaf30d3.png",
+    "static/media/avocatimage3.png": "/static/media/avocatimage3.dbe4fd0a14f79a52d8e6.png",
+    "static/media/avocatimage1.png": "/static/media/avocatimage1.c85b3a0984f9c20e4c11.png",
+    "index.html": "/index.html",
+    "main.2d5930be.css.map": "/static/css/main.2d5930be.css.map",
+    "main.d176f2fd.js.map": "/static/js/main.d176f2fd.js.map",
+    "787.71df535f.chunk.js.map": "/static/js/787.71df535f.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2d5930be.css",
+    "static/js/main.d176f2fd.js"
+  ]
+}
