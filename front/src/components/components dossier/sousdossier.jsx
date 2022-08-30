@@ -73,7 +73,7 @@ const SousDossier = () => {
         <div className="div">
           <label htmlFor="code">Code Dossier :</label>
 
-          <Searchi placeholder="Code Dossier" />
+          <Searchi placeholder="Code Dossier"  />
         </div>
         <div className="div ">
           <label>Date Création :</label>

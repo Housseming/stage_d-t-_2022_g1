@@ -19,8 +19,7 @@ import { Marginer } from "../marginer/marginfile";
 
 
 const Gestionclient = () => {
-  const [listecodecollab, setListecodecollab] = useState([
-  ]);
+  const [listecodecollab, setListecodecollab] = useState([]);
 
   const onChange = (value, selectedOptions) => {
     console.log(value, selectedOptions);

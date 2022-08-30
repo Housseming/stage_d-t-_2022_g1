@@ -1,10 +1,12 @@
-import { Cascader, Input, Radio, Button } from "antd";
-import React, { useState,useMemo } from "react";
+import { Cascader, Input, Radio, Button, Space, Select, Divider } from "antd";
+import React, { useState, useMemo, useRef } from "react";
 import "./dossier.css";
 import { Marginer } from "../marginer/marginfile";
 import TabClient from "./tabclientdemandeur";
 import axios from "axios";
 import { dossierdata } from "./dossierdata";
+import { useEffect } from "react";
+import { PlusOutlined } from "@ant-design/icons";
 
 /*const options = [
   {
@@ -47,80 +49,59 @@ import { dossierdata } from "./dossierdata";
 ];*/
 
 const ClientDemandeur = () => {
-  const [value, setValue] = useState( 1 );
-  const [listeClient, setListeClient] = useState( [] );
-  const [matricule, setMatricule] = useState( "" );
-  const [newclient, setNewclient] = useState( [] );
- // const [ischecked, setIschecked] = useState( [false,false,false] );
+  const [value, setValue] = useState(1);
+  const [listeClient, setListeClient] = useState([]);
+  const [matricule, setMatricule] = useState("");
+  const [newclient, setNewclient] = useState([]);
+  const [codeclient, setCodeclient] = useState([]);
+  const { Option } = Select;
+  const index = 0;
+
+  //select
+  const [items, setItems] = useState([]);
+  const [name, setName] = useState("");
+  const inputRef = useRef(null);
+
+
+  
+
+
+  // const [ischecked, setIschecked] = useState( [false,false,false] );
   const [donnee, setDonnee] = useState({
     matricule: "",
     raison: "",
     num: "",
     activité: "",
     categorie: "",
-    situation_fiscale:"",
+    situation_fiscale: "",
   });
 
-  const filter = (inputValue, path) =>
+  /*const filter = (inputValue, path) =>
     path.some(
       (option) =>
         option.label.toLowerCase().indexOf(inputValue.toLowerCase()) > -1
-    );
+    );*/
   const getclientrequest = async () => {
     try {
       const response = await axios.get("/gestionclient");
       console.log(response.data);
 
       setListeClient(response.data);
+      const liste = listeClient.map((client) => {
+        return client.codeclient;
+      });
+      setCodeclient(liste);
     } catch (error) {
       console.log(error.message);
     }
   };
-  const liste = useMemo(() => {
+
+
+  useEffect(() => {
     getclientrequest();
-    return listeClient.map((client) => ({
-      value: client.id,
-      label: client.raison +":"+client.id+":"+client.raison[0],
-    }));
-  }, [listeClient] );
+  }, [listeClient]);
 
- 
-  const onChange = ( value, selectedOptions ) => {
-    console.log( value, "lefriki", selectedOptions );
-    const newlistclient = listeClient.filter(
-      ( ser ) => ser.id == selectedOptions[0].value
-    );
-    console.log( newlistclient, "KING" )
-    setNewclient( newlistclient )
-   
-
-    setDonnee({
-      matricule: newclient[0].matricule,
-      raison: newclient[0].raison,
-      categorie: newclient[0].categorie,
-      num: newclient[0].num,
-      activité:newclient[0].activité,
-      situation_fiscale: newclient[0].situation_fiscale,
-    });
-    console.log( "donnee", donnee);
- 
-    console.log("dataaaaaaaaaaaaaa",dossierdata)
-   
-
-    
-    /*if(donnee.situation_fiscale == "Assujetti" ){
-      setIschecked(true,false,false);
-    }
-     if (donnee.situation_fiscale == "non Assujetti") {
-         setIschecked(false, true, false);
-         console.log("checkedassuj")
-       }
-    if (donnee.situation_fiscale == "Exonoré") {
-      setIschecked(false, false, true);
-    }
-          console.log(ischecked,"checkbox")*/
-  }
-    /*const onChangeradio = (e) => {
+  /*const onChangeradio = (e) => {
       console.log("radio checked", e.target.value);
       if (donnee.situation_fiscale === "Assujetti") {
         setValue(1);
@@ -130,24 +111,72 @@ const ClientDemandeur = () => {
         setValue(3);
       }
     };*/
+  //****************************recherche****************
+  const handleChange = (e) => {
+    setSearchText(e.target.value);
+    if (e.target.value === "") {getclientrequest()};
+  };
+  const [searchText, setSearchText] = useState("");
+  const [sortedInfo, setSortedInfo] = useState({});
+  const [gridData, setGridData] = useState([]);
+  let [filteredData] = useState();
+  const globalSearch = () => {
+    filteredData = codeclient.filter((value) => {
+      return value.toLowerCase().includes(searchText.toLowerCase());
+    });
+    setGridData(filteredData);
+  };
+  const reset = () => {
+    setSortedInfo({});
+    setSearchText("");
+    getclientrequest();
+  };
+
   return (
     <div className="container">
       <div className="reglementdiv1">
         <div className="div">
           <label>Code client :</label>
 
-          <Cascader
-            className="cascader1"
-            options={liste}
-            onChange={onChange}
-            placeholder="selectionner code client"
-            showSearch={{
-              filter,
-            }}
-            onSearch={(value) => {
-              console.log(value);
-            }}
+          <Input
+            placeholder="Chercher code client"
+            onChange={handleChange}
+            type="text"
+            allowClear
+            value={searchText}
           />
+
+          <Button onClick={globalSearch} type="primary">
+            {" "}
+            Chercher Client{" "}
+          </Button>
+          <Button onClick={reset}> Réinitialiser </Button>
+
+          <Select
+            style={{
+              width: 250,
+            }}
+            placeholder="Code Client"
+            dropdownRender={(menu) => (
+              <>
+                {menu}
+                <Divider
+                  style={{
+                    margin: "8px 0",
+                  }}
+                />
+                <Space
+                  style={{
+                    padding: "0 8px 4px",
+                  }}
+                ></Space>
+              </>
+            )}
+          >
+            {gridData && gridData.length
+              ? gridData.map((item) => <Option key={item}>{item}</Option>)
+              : codeclient.map((item) => <Option key={item}>{item}</Option>)}
+          </Select>
         </div>
 
         <div className="div">
@@ -278,6 +307,6 @@ const ClientDemandeur = () => {
             </Button>*/}
     </div>
   );
-}
+};
 
-  export default ClientDemandeur;
+export default ClientDemandeur;

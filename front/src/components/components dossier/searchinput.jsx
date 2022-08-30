@@ -32,9 +32,48 @@ const searchResult = (query) =>
         ),
       };
     });
-
+const options = [
+  {
+    value: "emplacement",
+    label: "emplacement",
+    children: [
+      {
+        value: "child",
+        label: "child",
+        children: [
+          {
+            value: "childd1",
+            label: "childd1",
+          },
+          {
+            value: "child2",
+            label: "child2",
+            disabled: true,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    value: "emplacement1",
+    label: "emplacement 1",
+    children: [
+      {
+        value: "emplacement 2",
+        label: "emplacement2",
+        children: [
+          {
+            value: "child1",
+            label: "child1",
+          },
+        ],
+      },
+    ],
+  },
+];
 const Searchi = () => {
   const [options, setOptions] = useState([]);
+  
 
   const handleSearch = (value) => {
     setOptions(value ? searchResult(value) : []);
