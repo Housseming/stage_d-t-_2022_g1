@@ -10,7 +10,7 @@ function AuthContextProvider(props) {
   const getLoggedIn = async () => {
     const loggedInresponse = await axios.get("/loggedIn");
     setLoggedIn(loggedInresponse.data);
-    console.log(loggedInresponse.data);
+    console.log("connected ?",loggedInresponse.data);
   };
   useEffect(() => {
     getLoggedIn();
