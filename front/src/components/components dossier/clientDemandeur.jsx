@@ -1,71 +1,18 @@
-import { Cascader, Input, Radio, Button, Space, Select, Divider } from "antd";
-import React, { useState, useMemo, useRef } from "react";
+import { Cascader, Input, Radio, Button } from "antd";
+import React, { useState, useMemo } from "react";
 import "./dossier.css";
 import { Marginer } from "../marginer/marginfile";
 import TabClient from "./tabclientdemandeur";
 import axios from "axios";
 import { dossierdata } from "./dossierdata";
 import { useEffect } from "react";
-import { PlusOutlined } from "@ant-design/icons";
-
-/*const options = [
-  {
-    value: "zhejiang",
-    label: "Zhejiang",
-    children: [
-      {
-        value: "hangzhou",
-        label: "Hangzhou",
-        children: [
-          {
-            value: "xihu",
-            label: "West Lake",
-          },
-          {
-            value: "xiasha",
-            label: "Xia Sha",
-            disabled: true,
-          },
-        ],
-      },
-    ],
-  },
-  {
-    value: "jiangsu",
-    label: "Jiangsu",
-    children: [
-      {
-        value: "nanjing",
-        label: "Nanjing",
-        children: [
-          {
-            value: "zhonghuamen",
-            label: "Zhong Hua men",
-          },
-        ],
-      },
-    ],
-  },
-];*/
 
 const ClientDemandeur = () => {
   const [value, setValue] = useState(1);
   const [listeClient, setListeClient] = useState([]);
   const [matricule, setMatricule] = useState("");
   const [newclient, setNewclient] = useState([]);
-  const [codeclient, setCodeclient] = useState([]);
-  const { Option } = Select;
-  const index = 0;
-
-  //select
-  const [items, setItems] = useState([]);
-  const [name, setName] = useState("");
-  const inputRef = useRef(null);
-
-
-  
-
-
+  const [liste,setListe] = useState([]);
   // const [ischecked, setIschecked] = useState( [false,false,false] );
   const [donnee, setDonnee] = useState({
     matricule: "",
@@ -76,31 +23,68 @@ const ClientDemandeur = () => {
     situation_fiscale: "",
   });
 
-  /*const filter = (inputValue, path) =>
+  const filter = (inputValue, path) =>
     path.some(
       (option) =>
         option.label.toLowerCase().indexOf(inputValue.toLowerCase()) > -1
-    );*/
+    );
   const getclientrequest = async () => {
     try {
       const response = await axios.get("/gestionclient");
       console.log(response.data);
 
       setListeClient(response.data);
-      const liste = listeClient.map((client) => {
-        return client.codeclient;
-      });
-      setCodeclient(liste);
+      const newliste = listeClient.map((client) => ({
+        value: client.id,
+        label: client.codeclient,
+      }));
+      setListe(newliste); 
+     
     } catch (error) {
       console.log(error.message);
     }
   };
-
-
-  useEffect(() => {
+  /*const liste = useMemo(() => {
     getclientrequest();
-  }, [listeClient]);
+    return listeClient.map((client) => ({
+      value: client.id,
+      label: client.codeclient,
+    }));
+  }, [listeClient]);*/
+useEffect(()=>{
+  getclientrequest();
+},[listeClient])
+  const onChange = (value, selectedOptions) => {
+    console.log(value, "lefriki", selectedOptions);
+    listeClient.map((ser) => {
+      if (ser.id == selectedOptions[0].value) {
+        setDonnee({
+          matricule: ser.matricule,
+          raison: ser.raison,
+          categorie: ser.categorie,
+          num: ser.num,
+          activité: ser.activite,
+          situation_fiscale: ser.situation_fiscale,
+        });
+      }
+    });
 
+    console.log("donnee", donnee);
+
+    console.log("dataaaaaaaaaaaaaa", dossierdata);
+
+    /*if(donnee.situation_fiscale == "Assujetti" ){
+      setIschecked(true,false,false);
+    }
+     if (donnee.situation_fiscale == "non Assujetti") {
+         setIschecked(false, true, false);
+         console.log("checkedassuj")
+       }
+    if (donnee.situation_fiscale == "Exonoré") {
+      setIschecked(false, false, true);
+    }
+          console.log(ischecked,"checkbox")*/
+  };
   /*const onChangeradio = (e) => {
       console.log("radio checked", e.target.value);
       if (donnee.situation_fiscale === "Assujetti") {
@@ -111,72 +95,24 @@ const ClientDemandeur = () => {
         setValue(3);
       }
     };*/
-  //****************************recherche****************
-  const handleChange = (e) => {
-    setSearchText(e.target.value);
-    if (e.target.value === "") {getclientrequest()};
-  };
-  const [searchText, setSearchText] = useState("");
-  const [sortedInfo, setSortedInfo] = useState({});
-  const [gridData, setGridData] = useState([]);
-  let [filteredData] = useState();
-  const globalSearch = () => {
-    filteredData = codeclient.filter((value) => {
-      return value.toLowerCase().includes(searchText.toLowerCase());
-    });
-    setGridData(filteredData);
-  };
-  const reset = () => {
-    setSortedInfo({});
-    setSearchText("");
-    getclientrequest();
-  };
-
   return (
     <div className="container">
       <div className="reglementdiv1">
         <div className="div">
           <label>Code client :</label>
 
-          <Input
-            placeholder="Chercher code client"
-            onChange={handleChange}
-            type="text"
-            allowClear
-            value={searchText}
-          />
-
-          <Button onClick={globalSearch} type="primary">
-            {" "}
-            Chercher Client{" "}
-          </Button>
-          <Button onClick={reset}> Réinitialiser </Button>
-
-          <Select
-            style={{
-              width: 250,
+          <Cascader
+            className="cascader1"
+            options={liste}
+            onChange={onChange}
+            placeholder="selectionner code client"
+            showSearch={{
+              filter,
             }}
-            placeholder="Code Client"
-            dropdownRender={(menu) => (
-              <>
-                {menu}
-                <Divider
-                  style={{
-                    margin: "8px 0",
-                  }}
-                />
-                <Space
-                  style={{
-                    padding: "0 8px 4px",
-                  }}
-                ></Space>
-              </>
-            )}
-          >
-            {gridData && gridData.length
-              ? gridData.map((item) => <Option key={item}>{item}</Option>)
-              : codeclient.map((item) => <Option key={item}>{item}</Option>)}
-          </Select>
+            onSearch={(value) => {
+              console.log(value);
+            }}
+          />
         </div>
 
         <div className="div">

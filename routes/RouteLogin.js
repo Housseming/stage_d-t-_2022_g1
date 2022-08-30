@@ -8,7 +8,7 @@ const pool = require("../db");
 require("dotenv").config();
 //bch nasnaa token
 
-const { validateToken } = require("../middlewares/AuthMiddleWare");
+
 
 var keyaccesstoken = process.env.ACCESS_TOKEN_SECRET;
 
@@ -40,7 +40,7 @@ route.post("/login", (req, res) => {
             //payload heya data nheb ena nkhazenha eli heya parametre lowel mtaa el sign
 
             res
-              .cookie("token", accessToken, {
+              .cookie("token", accessToken,{
                 httpOnly: true,
                 //secure: true,
                 sameSite: "lax",
@@ -60,7 +60,7 @@ route.post("/login", (req, res) => {
 });
 route.get("/logout", (req, res) => {
   res
-    .cookie("token", "", {
+    .cookie("token","",{
       httpOnly: true,
       expires: new Date(0),
       //secure: true,

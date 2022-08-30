@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const { validateToken } = require("../middlewares/AuthMiddleWare");
 const { refreshToken } = require("../middlewares/AuthMiddleWare");
 const auth = require("../middlewares/AuthMiddleWare")
-route.post("/collab", (req, res) => {
+route.post("/collab",auth,(req, res) => {
     const {
         username,
         cin,
