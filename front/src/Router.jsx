@@ -34,18 +34,245 @@ import { useContext } from "react";
 axios.defaults.withCredentials = true;
 
 function Router() {
-  const { loggedIn } = useContext(AuthContext);
+   const {loggedIn} = useContext(AuthContext);
 
   return (
-   
+    /*<BrowserRouter>
+      <Routes>
+        <Route path="/">
+          <Route
+            index
+            element={
+              <Home></Home>
+            }
+          ></Route>
+          <Route
+            path="login"
+            element={
+              loggedIn == false ? (
+                <AccountBox />
+              ) : (
+                <Navigate replace to={"/home"} />
+              )
+            }
+          ></Route>
+
+          <Route
+            path="register"
+            element={
+              loggedIn == false ? (
+                <RegisterBox />
+              ) : (
+                <Navigate replace to={"/home"} />
+              )
+            }
+          />
+
+          <>
+            <Route
+              exact path="home"
+              element={
+                loggedIn === true ? (
+                  <Sharedlayout />
+                ) : (
+                  <Navigate replace to={"/login"} />
+                )
+              }
+            >
+              <Route
+                exact path="primehuissier"
+                element={
+                  
+                    <PrimeHuissier />
+                 
+                }
+              />
+              <Route
+                 path="utilisateur"
+                element={
+                  loggedIn == true ? (
+                    <Utilisateur />
+                  ) : (
+                    <Navigate replace to={"/login"} />
+                  )
+                }
+              />
+              <Route
+                path="Parametreglobale"
+                element={
+                  loggedIn == true ? (
+                    <Parametreglobale />
+                  ) : (
+                    <Navigate replace to={"/login"} />
+                  )
+                }
+              />
+              <Route
+                path="honoraireenextra"
+                element={
+                  loggedIn == true ? (
+                    <Honoraireenextra />
+                  ) : (
+                    <Navigate replace to={"/login"} />
+                  )
+                }
+              />
+              <Route
+                path="timbre"
+                element={
+                  loggedIn == true ? (
+                    <Timbre />
+                  ) : (
+                    <Navigate replace to={"/login"} />
+                  )
+                }
+              />
+              <Route
+                path="photocopie"
+                element={
+                  loggedIn == true ? (
+                    <Photocopie />
+                  ) : (
+                    <Navigate replace to={"/login"} />
+                  )
+                }
+              />
+              <Route
+                path="transport"
+                element={
+                  loggedIn == true ? (
+                    <Transport />
+                  ) : (
+                    <Navigate replace to={"/login"} />
+                  )
+                }
+              />
+              <Route
+                path="recettedufinance"
+                element={
+                  loggedIn == true ? (
+                    <Recettedufinance />
+                  ) : (
+                    <Navigate replace to={"/login"} />
+                  )
+                }
+              />
+              <Route
+                path="emplacementdossier"
+                element={
+                  loggedIn == true ? (
+                    <Emplacementdossier />
+                  ) : (
+                    <Navigate replace to={"/login"} />
+                  )
+                }
+              />
+              <Route
+                path="gestionclient"
+                element={
+                  loggedIn == true ? (
+                    <Gestionclient />
+                  ) : (
+                    <Navigate replace to={"/login"} />
+                  )
+                }
+              />
+              <Route
+                path="collaborateurs"
+                element={
+                  loggedIn == true ? (
+                    <Collabo></Collabo>
+                  ) : (
+                    <Navigate replace to={"/login"} />
+                  )
+                }
+              ></Route>
+              <Route
+                path="Tribunaux_et_administrations"
+                element={
+                  loggedIn == true ? (
+                    <Tribunale />
+                  ) : (
+                    <Navigate replace to={"/login"} />
+                  )
+                }
+              />
+
+              <Route
+                path="recherchedossier"
+                element={
+                  loggedIn == true ? (
+                    <RechercheDossier />
+                  ) : (
+                    <Navigate replace to={"/login"} />
+                  )
+                }
+              ></Route>
+              <Route
+                path="creationdossier"
+                element={
+                  loggedIn == true ? (
+                    <CreationDossier />
+                  ) : (
+                    <Navigate replace to={"/login"} />
+                  )
+                }
+              ></Route>
+              <Route
+                path="dossiers"
+                element={
+                  loggedIn == true ? (
+                    <Dossiers />
+                  ) : (
+                    <Navigate replace to={"/login"} />
+                  )
+                }
+              ></Route>
+              <Route
+                path="underconstruction"
+                element={
+                  loggedIn == true ? (
+                    <Underconstruction></Underconstruction>
+                  ) : (
+                    <Navigate replace to={"/login"} />
+                  )
+                }
+              ></Route>
+            </Route>
+          </>
+
+          <Route
+            path="*"
+            element={
+              loggedIn == true ? (
+                <Error></Error>
+              ) : (
+                <Navigate replace to={"/login"} />
+              )
+            }
+          ></Route>
+        </Route>
+      </Routes>
+    
+      <ToastContainer position="top-center"></ToastContainer>
+    </BrowserRouter>*/
     <BrowserRouter>
       <Routes>
         <Route path="/">
-          {loggedIn === false && (
+          {loggedIn == false && (
             <>
               <Route index element={<Home></Home>}></Route>
 
-              <Route path="login" element={<AccountBox />}></Route>
+              <Route
+                path="login"
+                element={
+                  loggedIn === false ? (
+                    <AccountBox />
+                  ) : (
+                    <Navigate replace to={"/home"} />
+                  )
+                }
+              ></Route>
 
               <Route
                 path="register"
