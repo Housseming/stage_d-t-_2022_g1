@@ -66,25 +66,25 @@ const solutions = [
 ];
 const resourcesdebours = [
   {
-    name: "timbre",
+    name: "Timbre",
     description: "",
     href: "/home/timbre",
     icon: PhotographIcon,
   },
   {
-    name: "photocopie",
+    name: "Photocopie",
     description: "",
     href: "/home/photocopie",
     icon: PrinterIcon,
   },
   {
-    name: "transport",
+    name: "Transport",
     description: "",
     href: "/home/transport",
     icon: TruckIcon,
   },
   {
-    name: "recette finance",
+    name: "Recette du finance",
     description: "",
     href: "/home/recettedufinance",
     icon: CurrencyDollarIcon,
