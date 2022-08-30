@@ -63,10 +63,18 @@ const DonneeDossier = () => {
   };
 
   const [value, setValue] = useState(1);
+  const [disabledtrib, setDisabledtrib] = useState(false);
+  const [disabledservice, setDisabledservice] = useState(false);
   const [listeTrib, setListeTrib] = useState([]);
   const [listeservice, setListeservice] = useState([]);
   const [listeserviceinput, setListeserviceinput] = useState([]);
   const [listeemplacement, setListeemplacement] = useState([]);
+  const [liste, setListe] = useState([]);
+  const [vider, setVider] = useState(false);
+  const [listeser, setListeser] = useState([]);
+  const [valuetrib, setValuetrib] = useState("");
+    const [valueservice, setValueservice] = useState("");
+
   const [add_dossier, setAdd_dossier] = useState({
     typedossier: "",
     codedossier: "",
@@ -78,14 +86,15 @@ const DonneeDossier = () => {
     service: "",
     observation: "",
     date_creation: "",
-
   });
+  const [clear, setClear] = useState(false);
   const onChangeemp = (value, selectedOptions) => {
     console.log(value, selectedOptions);
     setAdd_dossier({ ...add_dossier, emplacement: selectedOptions[0].label });
   };
   const onChange = (value, selectedOptions) => {
     console.log(value, selectedOptions);
+    setValuetrib(selectedOptions[0].label);
     const newlisteser = listeser.filter(
       (ser) =>
         ser.value.substring(value.indexOf(":"), value.length) ==
@@ -93,11 +102,15 @@ const DonneeDossier = () => {
     );
     setListeserviceinput(newlisteser);
     setAdd_dossier({ ...add_dossier, lieu: selectedOptions[0].label });
+    setDisabledtrib(true);
     console.log(listeserviceinput, "ena liste service jdida");
   };
   const onChangeservice = (value, selectedOptions) => {
     console.log(value, selectedOptions);
+    setValueservice(selectedOptions[0].label)
     setAdd_dossier({ ...add_dossier, service: selectedOptions[0].label });
+    setDisabledservice(true);
+    
   };
   const onChangedate = (date, dateString) => {
     console.log(date, dateString, "ena date heeey");
@@ -137,6 +150,11 @@ const DonneeDossier = () => {
       //console.log(response.data);
 
       setListeTrib(response.data);
+      const newliste1 = listeTrib.map((trib) => ({
+        value: trib.id,
+        label: trib.lieu,
+      }));
+      setListe(newliste1);
       // console.log("hellolistetrib", listeTrib);
     } catch (error) {
       console.log(error.message);
@@ -158,18 +176,23 @@ const DonneeDossier = () => {
     try {
       const response = await axios.get("/service");
       setListeservice(response.data);
+      const newliste = listeservice.map((ser) => ({
+        value: ser.tribunale_id + ":" + ser.service_id,
+        label: ser.nom,
+      }));
+      setListeser(newliste);
     } catch (error) {
       console.log(error.message);
     }
   };
-  const liste = useMemo(() => {
+  /*const liste = useMemo(() => {
     gettribunalerequest();
 
     return listeTrib.map((trib) => ({
       value: trib.id,
       label: trib.lieu,
     }));
-  }, [listeTrib]);
+  }, [listeTrib]);*/
 
   const listeemp = useMemo(() => {
     getemplacementdossierrequest();
@@ -180,22 +203,28 @@ const DonneeDossier = () => {
     }));
   }, [listeemplacement]);
 
-  const listeser = useMemo(() => {
+  /*const listeser = useMemo(() => {
     getservicerequest();
 
     return listeservice.map((ser) => ({
       value: ser.tribunale_id + ":" + ser.service_id,
       label: ser.nom,
     }));
-  }, [listeservice]);
+  }, [listeservice]);*/
 
   //************ajouter dossier **************/
+  useEffect(() => {
+    gettribunalerequest();
+  }, [liste]);
+  useEffect(() => {
+    getservicerequest();
+  }, [listeser]);
   const adddossier = async () => {
     try {
       const resp = await axios.post("/recherchedossieradd", add_dossier);
-      console.log("helloooooooooooooooooooooooooooooooooooooooo")
-      console.log(add_dossier,dossierdata,"ena dossier dataaaaaaaaaaaaaaaa")
-      toast.success("les données de dossier sont ajoutés avec succès")
+      console.log("helloooooooooooooooooooooooooooooooooooooooo");
+      console.log(add_dossier, dossierdata, "ena dossier dataaaaaaaaaaaaaaaa");
+      toast.success("les données de dossier sont ajoutés avec succès");
     } catch (error) {
       console.log(error);
     }
@@ -325,6 +354,8 @@ const DonneeDossier = () => {
           <label>lieu :</label>
 
           <Cascader
+            disabled={disabledtrib}
+            id="cascadertrib"
             className="cascader1"
             options={liste}
             placeholder="Chercher lieu"
@@ -333,12 +364,16 @@ const DonneeDossier = () => {
               filter,
             }}
             onSearch={(value) => console.log(value)}
+            allowClear={clear}
+            value={valuetrib}
           />
         </div>
         <div className="div">
           <label>Service :</label>
 
           <Cascader
+            id="cascaderservice"
+            disabled={disabledservice}
             className="cascader1"
             options={listeserviceinput}
             onChange={onChangeservice}
@@ -346,8 +381,24 @@ const DonneeDossier = () => {
               filter,
             }}
             onSearch={(value) => console.log(value)}
+            value={valueservice}
           />
         </div>
+        <Button
+        type="primary"
+        
+          
+         
+          
+          onClick={() => {
+            setDisabledtrib(false);
+            setDisabledservice(false);
+            setValuetrib("");
+            setValueservice("");
+          }}
+        >
+          resélectionner les données du tribunale 
+        </Button>
       </div>
       <div className="client5">
         <div className="div">
