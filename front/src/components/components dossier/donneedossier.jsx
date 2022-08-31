@@ -386,6 +386,7 @@ const DonneeDossier = () => {
         </div>
         <Button
         type="primary"
+      style={{width:300}}
         
           
          

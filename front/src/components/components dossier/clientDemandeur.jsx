@@ -4,7 +4,6 @@ import "./dossier.css";
 import { Marginer } from "../marginer/marginfile";
 import TabClient from "./tabclientdemandeur";
 import axios from "axios";
-import { dossierdata } from "./dossierdata";
 import { useEffect } from "react";
 
 const ClientDemandeur = () => {
@@ -12,7 +11,7 @@ const ClientDemandeur = () => {
   const [listeClient, setListeClient] = useState([]);
   const [matricule, setMatricule] = useState("");
   const [newclient, setNewclient] = useState([]);
-  const [liste,setListe] = useState([]);
+  const [liste, setListe] = useState([]);
   // const [ischecked, setIschecked] = useState( [false,false,false] );
   const [donnee, setDonnee] = useState({
     matricule: "",
@@ -21,6 +20,9 @@ const ClientDemandeur = () => {
     activité: "",
     categorie: "",
     situation_fiscale: "",
+    checkassuj: false,
+    checknonassuj: false,
+    checkexono: false,
   });
 
   const filter = (inputValue, path) =>
@@ -38,8 +40,7 @@ const ClientDemandeur = () => {
         value: client.id,
         label: client.codeclient,
       }));
-      setListe(newliste); 
-     
+      setListe(newliste);
     } catch (error) {
       console.log(error.message);
     }
@@ -51,13 +52,20 @@ const ClientDemandeur = () => {
       label: client.codeclient,
     }));
   }, [listeClient]);*/
-useEffect(()=>{
-  getclientrequest();
-},[listeClient])
+  useEffect(() => {
+    getclientrequest();
+    
+  }, [listeClient]);
+    const onChangeradio = (e) => {
+      console.log("radio checked", e.target.value);
+      setValue(e.target.value);
+    };
   const onChange = (value, selectedOptions) => {
     console.log(value, "lefriki", selectedOptions);
     listeClient.map((ser) => {
-      if (ser.id == selectedOptions[0].value) {
+      console.log(ser, "seeeeeeeeeer");
+      if (ser.codeclient === selectedOptions[0].label) {
+        console.log("ser", ser.codeclient);
         setDonnee({
           matricule: ser.matricule,
           raison: ser.raison,
@@ -65,36 +73,25 @@ useEffect(()=>{
           num: ser.num,
           activité: ser.activite,
           situation_fiscale: ser.situation_fiscale,
+          checkassuj:
+            ser.situation_fiscale === "asujetti" || "Asujetti" ? true : false,
+          checknonassuj:
+            ser.situation_fiscale === "non Assujetti" ? true : false,
+          checkexono: ser.situation_fiscale === "Exonoré" ? true : false,
         });
       }
     });
-
-    console.log("donnee", donnee);
-
-    console.log("dataaaaaaaaaaaaaa", dossierdata);
-
-    /*if(donnee.situation_fiscale == "Assujetti" ){
-      setIschecked(true,false,false);
-    }
-     if (donnee.situation_fiscale == "non Assujetti") {
-         setIschecked(false, true, false);
-         console.log("checkedassuj")
-       }
-    if (donnee.situation_fiscale == "Exonoré") {
-      setIschecked(false, false, true);
-    }
-          console.log(ischecked,"checkbox")*/
+  
   };
-  /*const onChangeradio = (e) => {
-      console.log("radio checked", e.target.value);
-      if (donnee.situation_fiscale === "Assujetti") {
-        setValue(1);
-      } else if (donnee.situation_fiscale === "Non Assujetti") {
-        setValue(2);
-      } else {
-        setValue(3);
+    const addclientdossier = async () => {
+      try {
+        const resp = await axios.post("/recherchedossieradd", donnee);
+        console.log(resp.data);
+      } catch (error) {
+        console.log(error);
       }
-    };*/
+    };
+
   return (
     <div className="container">
       <div className="reglementdiv1">
@@ -112,6 +109,7 @@ useEffect(()=>{
             onSearch={(value) => {
               console.log(value);
             }}
+            changeOnSelect={true}
           />
         </div>
 
@@ -123,9 +121,6 @@ useEffect(()=>{
             className="input"
             placeholder="CIN"
             value={donnee.matricule}
-            onChange={(e) => {
-              dossierdata.cin = e.target.value;
-            }}
           />
         </div>
       </div>
@@ -137,50 +132,20 @@ useEffect(()=>{
             type="text"
             placeholder="Raison Sociale"
             value={donnee.raison}
-            onChange={(e) => {
-              dossierdata.raison = e.target.value;
-            }}
           />
         </div>
 
         <div className="div">
           <label>Situation Fiscale :</label>
           <div className="radioet">
-            <Radio.Group>
-              <Radio
-                checked={() => {
-                  if (donnee.situation_fiscale == "Assujetti") {
-                    return true;
-                  } else {
-                    return false;
-                  }
-                }}
-                value={1}
-              >
+            <Radio.Group onChange={onChangeradio} value={value}>
+              <Radio checked={donnee.checkassuj} value={1}>
                 Non Assujetie
               </Radio>
-              <Radio
-                checked={() => {
-                  if (donnee.situation_fiscale == "non Assujetti") {
-                    return true;
-                  } else {
-                    return false;
-                  }
-                }}
-                value={2}
-              >
+              <Radio checked={donnee.checknonassuj} value={2}>
                 Assujetie
               </Radio>
-              <Radio
-                checked={() => {
-                  if (donnee.situation_fiscale == "Exonoré") {
-                    return true;
-                  } else {
-                    return false;
-                  }
-                }}
-                value={3}
-              >
+              <Radio checked={donnee.checkexono} value={3}>
                 exonoré
               </Radio>
             </Radio.Group>
@@ -216,9 +181,6 @@ useEffect(()=>{
             className="inputraison"
             placeholder="Numéro de tel"
             value={donnee.num}
-            onChange={(e) => {
-              dossierdata.tel = e.target.value;
-            }}
           />
         </div>
       </div>
@@ -237,10 +199,14 @@ useEffect(()=>{
       </div>
       <Marginer direction="vertical" margin={20} />
       <TabClient />
-      {/*<Button className="boutonvalid" type="primary" block>
-          {" "}
-          Valider Dossier
-            </Button>*/}
+      <Button
+        className="boutonvalid"
+        type="primary"
+        block
+        onClick={addclientdossier}
+      >
+        Valider Dossier
+      </Button>
     </div>
   );
 };

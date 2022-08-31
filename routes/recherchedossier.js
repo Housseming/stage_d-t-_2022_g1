@@ -22,33 +22,12 @@ const pool = require("../db");
 
 root11.post("/recherchedossieradd", async (req, res) => {
   try {
-    const {
-      typedossier,
-      codedossier,
-      annee,
-      mission,
-      emplacement,
-      numaffaire,
-      lieu,
-      service,
-      observation,
-      date_creation,
-    } = req.body;
+    const { matricule, raison, num, activité, categorie, situation_fiscale } =
+      req.body;
 
     const newdossiers = await pool.query(
-      "INSERT INTO recherchedossier (num_affaire,emplacement,mission,code_dossier,annee,lieu,service,observation,date_creation,type_dossier) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)",
-      [
-        numaffaire,
-        emplacement,
-        mission,
-        codedossier,
-        annee,
-        lieu,
-        service,
-        observation,
-        date_creation,
-        typedossier,
-      ]
+      "INSERT INTO recherchedossier (client,tel) VALUES($1,$2)",
+      [raison, num]
       //res.json("succes"),
     );
     res.json(newdossiers.rows[0]);
@@ -112,7 +91,7 @@ root11.post("/recherchedossier/update", async (req, res) => {
 //delete a dossier
 root11.post("/recherchedossiereff", async (req, res) => {
   try {
-    const {id_dossier} = req.body;
+    const { id_dossier } = req.body;
     const deletedossier = await pool.query(
       "DELETE FROM recherchedossier WHERE id_dossier=$1",
       [id_dossier]
