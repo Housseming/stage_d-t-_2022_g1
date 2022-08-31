@@ -1,12 +1,28 @@
-/*import React, { useState,useEffect } from "react";
+import React, { useState,useEffect } from "react";
 import { Button, Table, Modal, Input, DatePicker, Radio, Cascader } from "antd";
 import { Marginer } from "../marginer/marginfile";
+import {toast} from "react-toastify";
 import axios from "axios";
 function Taches() {
+    const [listeservice, setlisteservice] = useState([]);
+    const [isEdit, setIsEdit] = useState(false);
+    const [edditingtache, setEdditingtache] = useState(null);
   const [liste, setliste] = useState([]);
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(6);
-  const [isAdd, setIsAdd] = useState(false);
+  const [isAdd, setIsAdd] = useState( false );
+   const [addingtache, setAddingtache] = useState({
+     tache: "",
+     date_critique: "",
+     date_rappel: "",
+     date_audience: "",
+     date_decheance: "",
+     greffier: "",
+     course: "",
+     lieux: "",
+     service: "",
+     resolu: "",
+   });
   const options = [
     {
       value: "zhejiang",
@@ -25,38 +41,38 @@ function Taches() {
       ],
     },
   ];
-  //select primehuissier
-  const getprimerequest = async () => {
+  //select tache
+  const gettacherequest = async () => {
     try {
-      const response = await axios.get("/primehuissier");
+      const response = await axios.get("/tache");
       setlisteservice(response.data);
     } catch (error) {
       console.log(error.message);
     }
   };
   useEffect(() => {
-    getprimerequest();
+    gettacherequest();
   });
   console.log(listeservice);
 
-  //supprimer primehuissier
-  const deleteprime = (record) => {
+  //suptacher tache
+  const deletetache = (record) => {
     Modal.confirm({
-      title: "Vous etes sur de supprimer ce primehuissier?",
+      title: "Vous etes sur de supprimer cette tache?",
       okText: "oui",
       okType: "danger",
       cancelText: "annuler",
       onOk: () => {
         const newlisteservice = listeservice.filter(
-          (prime) => prime.id !== record.id
+          (tache) => tache.id !== record.id
         );
         setlisteservice(newlisteservice);
-        deleteprimerequest(record.id);
-        toast.success("primehuissier supprimée avec succés");
+        deletetacherequest(record.id);
+        toast.success("tache supprimée avec succés");
       },
     });
   };
-  const deleteprimerequest = async (id) => {
+  const deletetacherequest = async (id) => {
     try {
       const deleted = await axios.post("/tacheeff", {
         id: id,
@@ -68,18 +84,18 @@ function Taches() {
   };
 
   //modifier tache
-  const editprime = (record) => {
+  const edittache = (record) => {
     setIsEdit(true);
-    setEdditingprime({...record}); //copie mel record
+    setEdditingtache({...record}); //copie mel record
   };
   const resetEditing = () => {
     setIsEdit(false);
-    setEdditingprime(null);
+    setEdditingtache(null);
   };
   //ajouter tache
-  const addprime = async () => {
+  const addtache = async () => {
     try {
-      const resp = await axios.post("/tacheadd", addingprime);
+      const resp = await axios.post("/tacheadd", addingtache);
       console.log(resp.data);
     } catch (error) {
       console.log(error);
@@ -89,7 +105,7 @@ function Taches() {
     console.log(value);
   };
   const onChange = (date, dateString) => {
-    console.log(date, dateString);
+    console.log(date,'azziz', dateString);
   };
   const onChangeradio = (e) => {
     console.log("radio checked", e.target.value);
@@ -105,11 +121,11 @@ function Taches() {
     {key: "3", title: "Date Rappel", dataIndex: "date_rappel"},
     {key: "4", title: "Date_audience", dataIndex: "date_audience"},
     {key: "5", title: "Date_Déchéance", dataIndex: "date_decheance"},
-    {key: "6", title: "Personne_Chargé", dataIndex: "collaborateur"},
+    {key: "6", title: "Personne_Chargé", dataIndex: "personne_chargee"},
     {key: "7", title: "Greffier", dataIndex: "greffier"},
     {key: "8", title: "Course", dataIndex: "course"},
-    {key: "9", title: "Lieux", dataIndex: "fax"},
-    {key: "10", title: "Service", dataIndex: "service"},
+    {key: "9", title: "Lieux", dataIndex: "lieux"},
+    {key: "10", title: "Services", dataIndex: "services"},
     {key: "11", title: "Résolu", dataIndex: "resolu"},
   ];
   return (
@@ -123,10 +139,6 @@ function Taches() {
             setIsAdd(true);
           }}>
           Ajouter Tâche
-        </Button>
-        <Marginer direction="vertical" margin={10} />
-        <Button className="bouton" type="primary" block>
-          Retirer Tâche
         </Button>
       </div>
       <div className="tablediv">
@@ -161,19 +173,19 @@ function Taches() {
           <Input
             type="text"
             placeholder="nom de la tâche"
-            value={addingprime.tache}
+            value={addingtache.tache}
             onChange={(e) => {
-              setAddingprime({
-                ...addingprime,
+              setAddingtache({
+                ...addingtache,
                 tache: e.target.value,
               });
             }}></Input>
           <label>Date Critique:</label>
           <DatePicker
-            value={addingprime.date_critique}
+            value={addingtache.date_critique}
             onChange={(e) => {
-              setAddingprime({
-                ...addingprime,
+              setAddingtache({
+                ...addingtache,
                 date_critique: e.target.value,
               });
             }}
@@ -181,10 +193,10 @@ function Taches() {
           />
           <label>Date Rappel:</label>
           <DatePicker
-            value={addingprime.date_rappel}
+            value={addingtache.date_rappel}
             onChange={(e) => {
-              setAddingprime({
-                ...addingprime,
+              setAddingtache({
+                ...addingtache,
                 date_rappel: e.target.value,
               });
             }}
@@ -192,10 +204,10 @@ function Taches() {
           />
           <label>Date d'audience:</label>
           <DatePicker
-            value={addingprime.date_audience}
+            value={addingtache.date_audience}
             onChange={(e) => {
-              setAddingprime({
-                ...addingprime,
+              setAddingtache({
+                ...addingtache,
                 date_audience: e.target.value,
               });
             }}
@@ -205,8 +217,8 @@ function Taches() {
           <div className="radioet">
             <Radio.Group
               onChange={(e) => {
-                setAddingprime({
-                  ...addingprime,
+                setAddingtache({
+                  ...addingtache,
                   resolu: e.target.value,
                 });
               }}
@@ -256,4 +268,4 @@ function Taches() {
   );
 }
 
-export default Taches;*/
+export default Taches;
