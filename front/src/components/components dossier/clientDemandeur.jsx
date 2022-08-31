@@ -71,7 +71,8 @@ useEffect(()=>{
 
     console.log("donnee", donnee);
 
-    console.log("dataaaaaaaaaaaaaa", dossierdata);
+    console.log( "dataaaaaaaaaaaaaa", dossierdata );
+     console.log("hellooo", donnee.situation_fiscale);
 
     /*if(donnee.situation_fiscale == "Assujetti" ){
       setIschecked(true,false,false);
@@ -148,40 +149,25 @@ useEffect(()=>{
           <div className="radioet">
             <Radio.Group>
               <Radio
-                checked={() => {
-                  if (donnee.situation_fiscale == "Assujetti") {
-                    return true;
-                  } else {
-                    return false;
-                  }
-                }}
-                value={1}
-              >
-                Non Assujetie
+                name={`situation_fiscale${liste.value}`}
+                id={`situation_fiscale${liste.value}`}
+                checked={donnee.situation_fiscale === "non Assujetti"}
+                value="non Assujetti">
+                non Assujetti
               </Radio>
               <Radio
-                checked={() => {
-                  if (donnee.situation_fiscale == "non Assujetti") {
-                    return true;
-                  } else {
-                    return false;
-                  }
-                }}
-                value={2}
-              >
-                Assujetie
+                name={`situation_fiscale${liste.value}`}
+                id={`situation_fiscale${liste.value}`}
+                checked={donnee.situation_fiscale ==="Asujetti"}
+                value="Assujetti">
+                Assujetti
               </Radio>
               <Radio
-                checked={() => {
-                  if (donnee.situation_fiscale == "Exonoré") {
-                    return true;
-                  } else {
-                    return false;
-                  }
-                }}
-                value={3}
-              >
-                exonoré
+                name={`situation_fiscale${liste.value}`}
+                id={`situation_fiscale${liste.value}`}
+                checked={donnee.situation_fiscale ==="Exonoré"}
+                value="Exonoré">
+                Exonoré
               </Radio>
             </Radio.Group>
           </div>

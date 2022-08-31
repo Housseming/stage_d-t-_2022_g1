@@ -1,16 +1,16 @@
-import React, {useState, useMemo,useEffect} from "react";
+import React, {useState, useMemo, useEffect} from "react";
 import "./dossier.css";
 import {Marginer} from "../marginer/marginfile";
 import {Input, Button, Table, Radio, Cascader, Select} from "antd";
 import axios from "axios";
-import  AjoutCollabo  from "./ajoutcollabo";
+import AjoutCollabo from "./ajoutcollabo";
 //import {Table, Button, Modal, Input, Pagination} from "antd";
 import "antd/dist/antd.min.css";
 
 function Collaborateur() {
   const [listeCollab, setListeCollab] = useState([]);
   //const [matricule, setMatricule] = useState("");
-  const [newcollab, setNewcollab] = useState([]);
+  const [newlistcollab, setNewlistcollab] = useState( [] );
   const [donnee, setDonnee] = useState({
     username: "",
     montant: "",
@@ -20,7 +20,7 @@ function Collaborateur() {
     num: "",
     codepostal: "",
     activite: "",
-    tel:"",
+    tel: "",
   });
 
   const filter = (inputValue, path) =>
@@ -44,28 +44,32 @@ function Collaborateur() {
       value: collab.id,
       label: collab.id + ":" + collab.username,
     }));
-  }, [listeCollab]);
+  }, [listeCollab] );
+  console.log("heyyyee",listeCollab)
 
   const onChange = (value, selectedOptions) => {
     console.log(value, "lefriki", selectedOptions);
-    const newlistcollab = listeCollab.filter(
-      (ser) => ser.id == selectedOptions[0].value
-    );
+     listeCollab.map((ser) => {
+       if (ser.id == selectedOptions[0].value) {
+        setDonnee({
+          username: ser.username,
+          montant: ser.montant,
+          cin: ser.cin,
+          ville: ser.ville,
+          rue: ser.rue,
+          num: ser.num,
+          codepostal: ser.codepostal,
+          activite: ser.activite,
+          tel: ser.tel,
+        });
+       }
+     });
+
     console.log(newlistcollab, "KING");
-    setNewcollab(newlistcollab);
+   // setNewcollab(newlistcollab);
     //setMatricule(newcollab[0].matricule);
 
-    setDonnee({
-      username: newcollab[0].username,
-      montant: newcollab[0].montant,
-      cin: newcollab[0].cin,
-      ville: newcollab[0].ville,
-      rue: newcollab[0].rue,
-      num: newcollab[0].num,
-      codepostal: newcollab[0].codepostal,
-      activite: newcollab[0].activite,
-      tel: newcollab[0].tel,
-    });
+   
   };
   const onChangeradio = (e) => {
     console.log("radio checked", e.target.value);
@@ -80,11 +84,14 @@ function Collaborateur() {
           <label>Code Collaborateur :</label>
 
           <Cascader
-            type="text"
             placeholder="code collaborateur"
             options={liste}
             onChange={onChange}
-          ></Cascader>
+            showSearch=
+            {{
+              filter,
+            }}>
+          </Cascader>
         </div>
         <div className="inputcoll">
           <label>Mode Réglement :</label>
@@ -100,16 +107,14 @@ function Collaborateur() {
           <Input
             type="text"
             placeholder="Nom et Prénom"
-            value={donnee.username}
-          ></Input>
+            value={donnee.username}></Input>
         </div>
         <div className="inputcoll">
           <label>Part Collaborateur :</label>
           <Input
             type="text"
             placeholder="part collaborateur"
-            value={donnee.montant}
-          ></Input>
+            value={donnee.montant}></Input>
         </div>
         <div className="inputcoll">
           <label>CIN :</label>
@@ -145,8 +150,7 @@ function Collaborateur() {
             <Input
               type="text"
               placeholder="code postal"
-              value={donnee.codepostal}
-            ></Input>
+              value={donnee.codepostal}></Input>
           </div>
         </div>
         <div className="divcollab23">
@@ -155,8 +159,7 @@ function Collaborateur() {
             <Input
               type="text"
               placeholder="Activité Contribuale"
-              value={donnee.activite}
-            ></Input>
+              value={donnee.activite}></Input>
           </div>
           <div className="inputcoll">
             <label>Tel :</label>

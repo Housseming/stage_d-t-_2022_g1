@@ -7,7 +7,7 @@ const pool = require("../db");
 //middleware
 
 //routes//
-//create adversaire
+//create tache
 //req heya requete client res heya res li bch ymchi lclient
 //async taati wa9t lel data bch tekhdem les fctions teeha
 root13.post("/tacheadd", async(req, res) => {
@@ -43,33 +43,33 @@ root13.post("/tacheadd", async(req, res) => {
             ]
             //res.json("succes"),
         );
-        res.json(newadversaires.rows[0]);
+        res.json(newtaches.rows[0]);
     } catch (err) {
         console.error(err.message);
     }
 });
-//get all adversaires
+//get all taches
 root13.get("/tache", async(req, res) => {
     try {
-        const alladversaires = await pool.query("SELECT * FROM tachetable");
-        res.json(alladversaires.rows);
+        const alltaches = await pool.query("SELECT * FROM tachetable");
+        res.json(alltaches.rows);
     } catch (err) {
         console.error(err.message);
     }
 });
-//get a adversaire
+//get a tache
 root13.get("/tache/:id", async(req, res) => {
     try {
         const { id_tache } = req.params;
-        const adversaire = await pool.query(
+        const tache = await pool.query(
             "SELECT * FROM tachetable WHERE id_tache=$1", [id_tache]
         );
-        res.json(adversaire.rows[0]);
+        res.json(tache.rows[0]);
     } catch (err) {
         console.error(err.message);
     }
 });
-//update a adversaire
+//update a tache
 root13.post("/tache/update", async(req, res) => {
     try {
         const { id_tache } = req.body;
@@ -104,12 +104,12 @@ root13.post("/tache/update", async(req, res) => {
                 id_tache
             ]
         );
-        res.json("adversaire updated");
+        res.json("tache updated");
     } catch (err) {
         console.error(err.message);
     }
 });
-//delete  adversaire
+//delete  tache
 root13.post("/tacheeff", async(req, res) => {
     try {
         const { id_tache } = req.body;
