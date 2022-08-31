@@ -15,8 +15,7 @@ const Emplacementdossier = () => {
   const [pageSize, setPageSize] = useState(6);
   const [listeservice, setlisteservice] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
-  const [edditingEmplacementdossier, setEdditingEmplacementdossier] =
-    useState(null);
+  const [edditingEmplacementdossier, setEdditingEmplacementdossier] =useState(null);
   const [addingEmplacementdossier, setAddingEmplacementdossier] = useState({
     libelle: "",
   });
