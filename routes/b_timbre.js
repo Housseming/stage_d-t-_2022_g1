@@ -11,7 +11,7 @@ const pool = require("../db")
 
 
 //RouTES
-//create a todo 
+//ajout
 root3.post("/timbre", async (req, res) => {
     try {
         const {libelle,montant} = req.body;
@@ -26,23 +26,24 @@ root3.post("/timbre", async (req, res) => {
     catch (err) {
         console.error(err.message);
     }
+});
 //pour la modification 
-root3.put("/timbre/modif1", async (req, res) => {
+root3.post("/timbre/modif", async (req, res) => {
     try {
-        const { libelle,montant } = req.body;
+        const { id,libelle,montant } = req.body;
        
 
-        const newTodo1 = await pool.query("UPDATE public.timbre SET montant=$2 WHERE libelle=$1",
-            [libelle,montant]);
+        const newTodo1 = await pool.query("UPDATE public.timbre SET libelle=$2,montant=$3 WHERE id=$1",
+            [id,libelle,montant]);
         res.json(newTodo1);
         
 
     }
     catch (err) {
-        console.error(err.message);
+        console.error('aaaaaabb',err.message);
     }
 });
-});
+
 root3.get("/timbre", async (req, res) => {
     try {
 
@@ -58,9 +59,9 @@ root3.get("/timbre", async (req, res) => {
 //suppression
 root3.post("/timbre/delete", async (req, res) => {
     try {
-        const { libelle } = req.body;
-       const newTodo1 = await pool.query("DELETE FROM public.timbre WHERE libelle=$1",
-            [libelle]);
+        const { id } = req.body;
+       const newTodo1 = await pool.query("DELETE FROM public.timbre WHERE id=$1",
+            [id]);
         res.json(newTodo1);
         res.json("timbre was deleted");
         

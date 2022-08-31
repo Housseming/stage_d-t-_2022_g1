@@ -1,6 +1,6 @@
 const express = require("express");
 const route = express.Router();
-const client = require("../basededonnee");
+const pool = require("../db");
 const bcrypt = require("bcryptjs");
 const saltRounds = 10;
 const bodyParser = require("body-parser");
@@ -8,7 +8,7 @@ route.post("/register", (req, res) => {
     //recevoir les données du front end
     const { username, password, email } = req.body;
     //verifier si l'utilisateur existe deja ou non si non ajouter ses données dans la base
-    client.query(
+    pool.query(
         "SELECT * FROM clienttable WHERE (username=$1 AND email=$2) ", [username, email],
         (error, result) => {
             if (error) {
@@ -21,7 +21,7 @@ route.post("/register", (req, res) => {
                         if (err) {
                             throw err;
                         }
-                        client.query(
+                        pool.query(
                             "INSERT INTO clienttable (username,password,email) VALUES($1,$2,$3)", [username, hash, email],
                             (err, result) => {
                                 if (err) {
