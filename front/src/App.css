@@ -18,7 +18,11 @@ body {
   width: 25px;
   height: 30px;
 }
-
+.addtachediv{
+  color: #ffc107;
+  width: 25px;
+  height: 30px;
+}
 .edit:hover {
   color: #0583f26b;
 }
@@ -26,7 +30,9 @@ body {
 .delete:hover {
   color: rgba(255, 0, 0, 0.296);
 }
-
+.addtachediv:hover {
+  color: #ffc10788;
+}
 .tableau {
   margin-top: 100px;
 }
@@ -105,7 +111,23 @@ body {
 .btnadd:hover {
   background-color: white;
   color: rgb(0, 0, 0);
+}.btndossier {
+  /*margin-top: 100px;*/
+  /*margin-bottom: 40px;*/
+  color: rgb(255, 255, 255);
+  background-color: #0583f2;
+  width: 200px;
+  height: 38px;
+  border: 3px solid #0583f2;
+  font-size: 15px;
+  margin-top: 20px;
 }
+
+.btndossier:hover {
+  background-color: white;
+  color: rgb(0, 0, 0);
+}
+
 
 .ant-table {
   overflow-x: auto !important;
