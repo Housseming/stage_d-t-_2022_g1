@@ -24,15 +24,16 @@ const TabDossier = () => {
     id_dossier:0,
   });
   const column = [
-  {key:"0",title:"id",dataIndex:"id"},
-    { key: "1", title: "Nom", dataIndex: "nom" },
-    { key: "2", title: "Registre", dataIndex: "registre" },
-    { key: "3", title: "adresse", dataIndex: "adresse" },
-    { key: "4", title: "Adresse Désignée", dataIndex: "adressedesigne" },
-    { key: "5", title: "Avocat", dataIndex: "avocat" },
-    { key: "6", title: "Adresse Avocat", dataIndex: "adresseavocat" },
+    { key: "0", title: "id_adversaire", dataIndex: "id" },
+    { key: "1", title: "id_dossier", dataIndex: "id_doss" },
+    { key: "2", title: "Nom", dataIndex: "nom" },
+    { key: "3", title: "Registre", dataIndex: "registre" },
+    { key: "4", title: "adresse", dataIndex: "adresse" },
+    { key: "5", title: "Adresse Désignée", dataIndex: "adressedesigne" },
+    { key: "6", title: "Avocat", dataIndex: "avocat" },
+    { key: "7", title: "Adresse Avocat", dataIndex: "adresseavocat" },
     {
-      key: "16",
+      key: "8",
       title: "Actions",
       render: (record) => {
         return (
@@ -92,7 +93,7 @@ const TabDossier = () => {
       cancelText: "annuler",
       onOk: () => {
         const newlisteservice = listeservice.filter(
-          (adversaire) => adversaire.id !== record.id
+          (adversaire) => adversaire.adversaire_id !== record.id
         );
         setListeservice(newlisteservice);
         deleteadversairerequest(record.id);
@@ -166,7 +167,7 @@ const TabDossier = () => {
         onOk={async () => {
           setIsEdit(false);
           const newlisteservice = listeservice.map((adversaire) => {
-            if (adversaire.id == edditingadversaire.id) {
+            if (adversaire.id_adversaire == edditingadversaire.id_adversaire) {
               return edditingadversaire;
             } else {
               return adversaire;

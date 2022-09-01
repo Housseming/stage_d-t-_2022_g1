@@ -49,7 +49,7 @@ const ClientDemandeur = () => {
     if (id_dossier !== 0) {
       localStorage.setItem("id_dossier", id_dossier);
     }
-    console.log("ena check",donnee)
+    console.log("ena check", donnee);
   }, [listeClient, id_dossier]);
 
   const onChangeradio = (e) => {
@@ -69,14 +69,31 @@ const ClientDemandeur = () => {
           activité: ser.activite,
           situation_fiscale: ser.situation_fiscale,
           checkassuj:
-           (ser.situation_fiscale === "Asujetti" || ser.situation_fiscale ==="assujeti" )? true : false,
+            ser.situation_fiscale === "Asujetti" ||
+            ser.situation_fiscale === "assujeti"
+              ? true
+              : false,
           checknonassuj:
             ser.situation_fiscale === "non Assujetti" ? true : false,
-          checkexono:
-            ser.situation_fiscale === "Exonoré" ? true: false,
+          checkexono: ser.situation_fiscale === "Exonoré" ? true : false,
         });
       }
     });
+
+    console.log("donnee", donnee);
+    console.log("hellooo", donnee.situation_fiscale);
+
+    /*if(donnee.situation_fiscale == "Assujetti" ){
+      setIschecked(true,false,false);
+    }
+     if (donnee.situation_fiscale == "non Assujetti") {
+         setIschecked(false, true, false);
+         console.log("checkedassuj")
+       }
+    if (donnee.situation_fiscale == "Exonoré") {
+      setIschecked(false, false, true);
+    }
+          console.log(ischecked,"checkbox")*/
   };
 
   const addclientdossier = async () => {
@@ -113,7 +130,6 @@ const ClientDemandeur = () => {
 
         <div className="div">
           <label htmlFor="cin">Matricule Fiscale/CIN :</label>
-          
 
           <Input
             type="text"
@@ -137,17 +153,15 @@ const ClientDemandeur = () => {
         <div className="div">
           <label>Situation Fiscale :</label>
           <div className="radioet">
-            
-              <Radio checked={donnee.checkassuj} value="1">
-                Assujetie
-              </Radio>
-              <Radio checked={donnee.checknonassuj} value="2">
-                Non Assujetie
-              </Radio>
-              <Radio checked={donnee.checkexono} value="3">
-                exonoré
-              </Radio>
-           
+            <Radio checked={donnee.checkassuj} value="1">
+              Assujetie
+            </Radio>
+            <Radio checked={donnee.checknonassuj} value="2">
+              Non Assujetie
+            </Radio>
+            <Radio checked={donnee.checkexono} value="3">
+              exonoré
+            </Radio>
           </div>
         </div>
       </div>
