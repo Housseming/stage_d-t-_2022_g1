@@ -79,7 +79,7 @@ const ClientDemandeur = () => {
 
     console.log("donnee", donnee);
 
-    console.log( "dataaaaaaaaaaaaaa", dossierdata );
+    //console.log( "dataaaaaaaaaaaaaa", dossierdata );
      console.log("hellooo", donnee.situation_fiscale);
 
     /*if(donnee.situation_fiscale == "Assujetti" ){
