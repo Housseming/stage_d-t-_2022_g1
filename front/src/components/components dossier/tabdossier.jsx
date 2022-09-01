@@ -13,6 +13,7 @@ const TabDossier = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [edditingadversaire, setEdditingadversaire] = useState(null);
   const [isAdd, setIsAdd] = useState(false);
+
   const [addingadversaire, setAddingadversaire] = useState( {
     nom: "",
     registre: "",
@@ -20,6 +21,7 @@ const TabDossier = () => {
     adressedesigne: "",
     avocat: "",
     adresseavocat: "",
+    id_dossier:0,
   });
   const column = [
   {key:"0",title:"id",dataIndex:"id"},
@@ -72,8 +74,13 @@ const TabDossier = () => {
     }
   };
   useEffect(() => {
+    const id = localStorage.getItem("id_dossier");
+    console.log(id, "ena el id eli bch netbaath");
+    setAddingadversaire({ ...addingadversaire, id_dossier: id });
+
     getadversairerequest();
-  });
+
+  },[listeservice,addingadversaire.id_dossier]);
   console.log(listeservice);
 
   //supprimer adversaire
@@ -240,6 +247,7 @@ const TabDossier = () => {
             adressedesigne: "",
             avocat: "",
             adresseavocat: "",
+            id_dossier:0,
           });
         }}>
         <Input

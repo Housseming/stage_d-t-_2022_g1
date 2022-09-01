@@ -46,8 +46,10 @@ const ClientDemandeur = () => {
 
   useEffect(() => {
     getclientrequest();
-    if(id_dossier!==0){
-    localStorage.setItem("id_dossier", id_dossier);}
+    if (id_dossier !== 0) {
+      localStorage.setItem("id_dossier", id_dossier);
+    }
+    console.log("ena check",donnee)
   }, [listeClient, id_dossier]);
 
   const onChangeradio = (e) => {
@@ -67,10 +69,11 @@ const ClientDemandeur = () => {
           activité: ser.activite,
           situation_fiscale: ser.situation_fiscale,
           checkassuj:
-            ser.situation_fiscale === "asujetti" || "Asujetti" ? true : false,
+           (ser.situation_fiscale === "Asujetti" || ser.situation_fiscale ==="assujeti" )? true : false,
           checknonassuj:
             ser.situation_fiscale === "non Assujetti" ? true : false,
-          checkexono: ser.situation_fiscale === "Exonoré" ? true : false,
+          checkexono:
+            ser.situation_fiscale === "Exonoré" ? true: false,
         });
       }
     });
@@ -130,6 +133,7 @@ const ClientDemandeur = () => {
 
         <div className="div">
           <label htmlFor="cin">Matricule Fiscale/CIN :</label>
+          
 
           <Input
             type="text"
@@ -153,44 +157,18 @@ const ClientDemandeur = () => {
         <div className="div">
           <label>Situation Fiscale :</label>
           <div className="radioet">
-c
-
-            <Radio.Group>
-              <Radio
-                name={`situation_fiscale${liste.value}`}
-                id={`situation_fiscale${liste.value}`}
-                checked={donnee.situation_fiscale === "non Assujetti"}
-                value="non Assujetti">
-                non Assujetti
-              </Radio>
-              <Radio
-                name={`situation_fiscale${liste.value}`}
-                id={`situation_fiscale${liste.value}`}
-                checked={donnee.situation_fiscale ==="Asujetti"}
-                value="Assujetti">
-                Assujetti
-              </Radio>
-              <Radio
-                name={`situation_fiscale${liste.value}`}
-                id={`situation_fiscale${liste.value}`}
-                checked={donnee.situation_fiscale ==="Exonoré"}
-                value="Exonoré">
-                Exonoré
-              </Radio>
-              </Radio.Group>
-
-            <Radio.Group onChange={onChangeradio} value={value}>
-              <Radio checked={donnee.checkassuj} value={1}>
-                Non Assujetie
-              </Radio>
-              <Radio checked={donnee.checknonassuj} value={2}>
+            
+              <Radio checked={donnee.checkassuj} value="1">
                 Assujetie
               </Radio>
-              <Radio checked={donnee.checkexono} value={3}>
+              <Radio checked={donnee.checknonassuj} value="2">
+                Non Assujetie
+              </Radio>
+              <Radio checked={donnee.checkexono} value="3">
                 exonoré
 
               </Radio>
-            </Radio.Group>
+           
           </div>
         </div>
       </div>
