@@ -9,10 +9,8 @@ import { useEffect } from "react";
 const ClientDemandeur = () => {
   const [value, setValue] = useState(1);
   const [listeClient, setListeClient] = useState([]);
-  const [matricule, setMatricule] = useState("");
-  const [newclient, setNewclient] = useState([]);
+  const [id_dossier, setId_dossier] = useState(0);
   const [liste, setListe] = useState([]);
-  // const [ischecked, setIschecked] = useState( [false,false,false] );
   const [donnee, setDonnee] = useState({
     matricule: "",
     raison: "",
@@ -45,27 +43,22 @@ const ClientDemandeur = () => {
       console.log(error.message);
     }
   };
-  /*const liste = useMemo(() => {
-    getclientrequest();
-    return listeClient.map((client) => ({
-      value: client.id,
-      label: client.codeclient,
-    }));
-  }, [listeClient]);*/
+
   useEffect(() => {
     getclientrequest();
-    
-  }, [listeClient]);
-    const onChangeradio = (e) => {
-      console.log("radio checked", e.target.value);
-      setValue(e.target.value);
-    };
+    if(id_dossier!==0){
+    localStorage.setItem("id_dossier", id_dossier);}
+  }, [listeClient, id_dossier]);
+
+  const onChangeradio = (e) => {
+    console.log("radio checked", e.target.value);
+    setValue(e.target.value);
+  };
+
   const onChange = (value, selectedOptions) => {
-    console.log(value, "lefriki", selectedOptions);
+    console.log(value, selectedOptions);
     listeClient.map((ser) => {
-      console.log(ser, "seeeeeeeeeer");
       if (ser.codeclient === selectedOptions[0].label) {
-        console.log("ser", ser.codeclient);
         setDonnee({
           matricule: ser.matricule,
           raison: ser.raison,
@@ -81,6 +74,7 @@ const ClientDemandeur = () => {
         });
       }
     });
+
 
 
     console.log("donnee", donnee);
@@ -101,14 +95,17 @@ const ClientDemandeur = () => {
           console.log(ischecked,"checkbox")*/
 
   };
-    const addclientdossier = async () => {
-      try {
-        const resp = await axios.post("/recherchedossieradd", donnee);
-        console.log(resp.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+
+  const addclientdossier = async () => {
+    try {
+      const resp = await axios.post("/clientdossieradd", donnee);
+      console.log(resp, "dataaaaaaaa");
+      setId_dossier(resp.data.id_dossier);
+      console.log("ena id", typeof id_dossier, id_dossier);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="container">
@@ -156,6 +153,7 @@ const ClientDemandeur = () => {
         <div className="div">
           <label>Situation Fiscale :</label>
           <div className="radioet">
+c
 
             <Radio.Group>
               <Radio
@@ -178,6 +176,8 @@ const ClientDemandeur = () => {
                 checked={donnee.situation_fiscale ==="Exonoré"}
                 value="Exonoré">
                 Exonoré
+              </Radio>
+              </Radio.Group>
 
             <Radio.Group onChange={onChangeradio} value={value}>
               <Radio checked={donnee.checkassuj} value={1}>

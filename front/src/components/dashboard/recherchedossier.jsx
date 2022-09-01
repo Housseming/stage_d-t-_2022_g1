@@ -13,6 +13,7 @@ import {
   DatePicker,
   Radio,
   Cascader,
+  Drawer
 } from "antd";
 import "../../App.css";
 
@@ -22,6 +23,12 @@ import { MdDeleteForever } from "react-icons/md";
 import { toast } from "react-toastify";
 import { SearchOutlined } from "@ant-design/icons";
 import { Marginer } from "../marginer/marginfile";
+import {
+  HiClipboardDocumentCheck,
+  HiClipboardCheck,
+  
+} from "react-icons/hi";
+import {FaCalendarCheck} from "react-icons/fa"
 const options = [
   {
     value: "zhejiang",
@@ -41,7 +48,22 @@ const options = [
   },
 ];
 
+
 const RechercheDossier = () => {
+  const [visible, setVisible] = useState(false);
+const [placement, setPlacement] = useState("right");
+
+const showDrawer = () => {
+  setVisible(true);
+};
+
+const onChangepl = (e) => {
+  setPlacement(e.target.value);
+};
+
+const onClose = () => {
+  setVisible(false);
+};
   //declaration necessaires
   const [liste, setListe] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
@@ -265,8 +287,19 @@ const RechercheDossier = () => {
                   deletedossier(record);
                 }}
               ></MdDeleteForever>
+              <pre>
+                <p>supprimer </p>
+              </pre>
+            </div>
 
-              <p>supprimer</p>
+            <div className="divdelete">
+              <HiClipboardCheck
+                className="addtachediv"
+                onClick={showDrawer}
+              ></HiClipboardCheck>
+              <pre>
+                <p>+Tâche</p>
+              </pre>
             </div>
           </div>
         );
@@ -285,16 +318,42 @@ const RechercheDossier = () => {
   useEffect(() => {
     getdossierrequest();
   });
-  console.log(liste);
-  //la barre de la recherche
+  const deletedossier = (record) => {
+    Modal.confirm({
+      title: "Vous etes sur de supprimer ce dossier?",
+      okText: "oui",
+      okType: "danger",
+      cancelText: "annuler",
+      onOk: () => {
+        const newListe = liste.filter((dossier) => dossier.id_dossier !== record.id_dossier);
+        setListe(newListe);
+        deletedossierrequest(record.id_dossier);
+      },
+    });
+  };
+  const deletedossierrequest = async (id_dossier) => {
+    try {
+      const deleted = await axios.post("/recherchedossiereff", {
+        id_dossier: id_dossier,
+      });
+      if (deleted.data.error) {
+        toast.error(deleted.data.error);
+      } else {
+        console.log("dossier supprimé");
+        toast.success("dossier supprimé avec succee");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const globalSearch = () => {
     filteredData = liste.filter((value) => {
       return (
         value.num_affaire.toLowerCase().includes(searchText.toLowerCase()) ||
         value.emplacement.toLowerCase().includes(searchText.toLowerCase()) ||
-        /*value.client.toLowerCase().includes(searchText.toLowerCase()) ||*/
-        /*value.tel.toLowerCase().includes(searchText.toLowerCase()) ||*/
+        value.client.toLowerCase().includes(searchText.toLowerCase()) ||
+        value.tel.toLowerCase().includes(searchText.toLowerCase()) ||
         value.mission.toLowerCase().includes(searchText.toLowerCase())
         /*value.adversaire.toLowerCase().includes(searchText.toLowerCase()) ||*/
         /* value.reste.toLowerCase().includes(searchText.toLowerCase())*/
@@ -315,32 +374,7 @@ const RechercheDossier = () => {
   };
 
   //supprimer dossier
-  const deletedossier = (record) => {
-    Modal.confirm({
-      title: "Vous etes sur de supprimer ce dossier?",
-      okText: "oui",
-      okType: "danger",
-      cancelText: "annuler",
-      onOk: () => {
-        const newListe = liste.filter(
-          (dossier) => dossier.id_dossier !== record.id_dossier
-        );
-        setListe(newListe);
-        deletedossierrequest(record.id_dossier);
-        toast.success("dossier supprimée avec succès");
-      },
-    });
-  };
-  const deletedossierrequest = async (id_dossier) => {
-    try {
-      const deleted = await axios.post("recherchedossiereff", {
-        id_dossier: id_dossier,
-      });
-      console.log("dossier supprimé");
-    } catch (error) {
-      console.log(error);
-    }
-  };
+
 
   //modifier un dossier
   const editdossier = (record) => {
@@ -367,7 +401,7 @@ const RechercheDossier = () => {
         <div className="boutonet">
           <table>
             <tr>
-              <td>
+              {/*<td>
                 <button
                   className="btnadd"
                   onClick={() => {
@@ -376,20 +410,19 @@ const RechercheDossier = () => {
                 >
                   Ajouter Tache
                 </button>
-              </td>
+                </td>*/}
               <td>
                 <button
-                  className="btnadd"
+                  className="btndossier"
                   onClick={() => {
                     setIsAdd(true);
                   }}
                 >
-
                   Reclasser Dossier
                 </button>
               </td>
               <button
-                className="btnadd"
+                className="btndossier"
                 onClick={() => {
                   setIsAdd(true);
                 }}
@@ -520,7 +553,147 @@ const RechercheDossier = () => {
             }}
           ></Input>
         </Modal>
-        <Modal
+
+        <Drawer
+          title="Ajouter une Tâche"
+          placement={placement}
+          width={500}
+          onClose={onClose}
+          visible={visible}
+          extra={
+            <Space>
+              <Button onClick={onClose}>Annuler</Button>
+              <Button type="primary" onClick={onClose}>
+                Enregistrer
+              </Button>
+            </Space>
+          }
+        >
+          <Input
+            placeholder="numéro d'affaire"
+            value={addingdossier.num_affaire}
+            onChange={(e) => {
+              setAddingdossier({
+                ...addingdossier,
+                num_affaire: e.target.value,
+              });
+            }}
+          ></Input>
+          <Input
+            placeholder="emplacement dossier"
+            value={addingdossier.emplacement}
+            onChange={(e) => {
+              setAddingdossier({
+                ...addingdossier,
+                emplacement: e.target.value,
+              });
+            }}
+          ></Input>
+          <Input
+            placeholder="Nom du client "
+            value={addingdossier.client}
+            onChange={(e) => {
+              setAddingdossier({
+                ...addingdossier,
+                client: e.target.value,
+              });
+            }}
+          ></Input>
+          <Input
+            placeholder="Numéro du tel du client"
+            value={addingdossier.tel}
+            onChange={(e) => {
+              setAddingdossier({
+                ...addingdossier,
+                tel: e.target.value,
+              });
+            }}
+          ></Input>
+          <Input
+            placeholder="Mission"
+            value={addingdossier.mission}
+            onChange={(e) => {
+              setAddingdossier({
+                ...addingdossier,
+                mission: e.target.value,
+              });
+            }}
+          ></Input>
+          <Input
+            placeholder="Adversaire"
+            value={addingdossier.adversaire}
+            onChange={(e) => {
+              setAddingdossier({
+                ...addingdossier,
+                adversaire: e.target.value,
+              });
+            }}
+          ></Input>
+          <Input
+            placeholder="Reste"
+            value={addingdossier.reste}
+            onChange={(e) => {
+              setAddingdossier({
+                ...addingdossier,
+                reste: e.target.value,
+              });
+            }}
+          ></Input>
+
+          <div className="formaddtache">
+            <label>Tâche:</label>
+            <Input type="text" placeholder="nom de la tâche"></Input>
+            <label>Date Critique:</label>
+            <DatePicker onChange={onChange} placeholder="date critique" />
+            <label>Date Rappel:</label>
+            <DatePicker onChange={onChange} placeholder="date rappel" />
+            <label>Résolu:</label>
+            <div className="radioet">
+              <Radio.Group onChange={onChangeradio} value={value}>
+                <Radio value={1}>Oui</Radio>
+                <Radio value={2}>Non</Radio>
+              </Radio.Group>
+            </div>
+            <label>Personne Chargée:</label>
+            <div className="radioet">
+              <Radio.Group onChange={onChangeradio} value={value}>
+                <Radio value={1}>Collaborateur</Radio>
+                <Radio value={2}>Greffier</Radio>
+              </Radio.Group>
+            </div>
+            <label>Greffier:</label>
+            <Cascader
+              options={options}
+              onChange={onChangeselect}
+              placeholder="selectionner greffier"
+            />
+            <label>Course:</label>
+            <div className="radioet">
+              <Radio.Group onChange={onChangeradio} value={value}>
+                <Radio value={1}>Oui</Radio>
+                <Radio value={2}>Non</Radio>
+              </Radio.Group>
+            </div>
+            <label>Lieux:</label>
+            <Cascader
+              options={options}
+              onChange={onChangeselect}
+              placeholder="selectionner lieu"
+            />
+            <label>Service:</label>
+            <Cascader
+              options={options}
+              onChange={onChangeselect}
+              placeholder="selectionner service"
+            />
+            <label>Date d'audience:</label>
+            <DatePicker onChange={onChange} placeholder="date d'audience" />
+            <label>Date de Déchéance:</label>
+            <DatePicker onChange={onChange} placeholder="date de déchéance" />
+          </div>
+        </Drawer>
+
+        {/*<Modal
           title="Ajouter une Tâche"
           visible={isAdd}
           okText="Enregistrer"
@@ -656,7 +829,7 @@ const RechercheDossier = () => {
             <label>Date de Déchéance:</label>
             <DatePicker onChange={onChange} placeholder="date de déchéance" />
           </div>
-        </Modal>
+          </Modal>*/}
       </header>
     </div>
   );

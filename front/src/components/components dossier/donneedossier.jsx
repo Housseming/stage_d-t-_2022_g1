@@ -17,6 +17,7 @@ import Selectdossier from "./selectemplacement";
 import TabDossier from "./tabdossier";
 import axios from "axios";
 import { PlusOutlined } from "@ant-design/icons";
+import { domMax } from "framer-motion";
 
 const { Option } = Select;
 let index = 0;
@@ -73,7 +74,7 @@ const DonneeDossier = () => {
   const [vider, setVider] = useState(false);
   const [listeser, setListeser] = useState([]);
   const [valuetrib, setValuetrib] = useState("");
-    const [valueservice, setValueservice] = useState("");
+  const [valueservice, setValueservice] = useState("");
 
   const [add_dossier, setAdd_dossier] = useState({
     typedossier: "",
@@ -86,6 +87,7 @@ const DonneeDossier = () => {
     service: "",
     observation: "",
     date_creation: "",
+    id_dossier: 0,
   });
   const [clear, setClear] = useState(false);
   const onChangeemp = (value, selectedOptions) => {
@@ -107,10 +109,9 @@ const DonneeDossier = () => {
   };
   const onChangeservice = (value, selectedOptions) => {
     console.log(value, selectedOptions);
-    setValueservice(selectedOptions[0].label)
+    setValueservice(selectedOptions[0].label);
     setAdd_dossier({ ...add_dossier, service: selectedOptions[0].label });
     setDisabledservice(true);
-    
   };
   const onChangedate = (date, dateString) => {
     console.log(date, dateString, "ena date heeey");
@@ -185,14 +186,6 @@ const DonneeDossier = () => {
       console.log(error.message);
     }
   };
-  /*const liste = useMemo(() => {
-    gettribunalerequest();
-
-    return listeTrib.map((trib) => ({
-      value: trib.id,
-      label: trib.lieu,
-    }));
-  }, [listeTrib]);*/
 
   const listeemp = useMemo(() => {
     getemplacementdossierrequest();
@@ -203,34 +196,28 @@ const DonneeDossier = () => {
     }));
   }, [listeemplacement]);
 
-  /*const listeser = useMemo(() => {
-    getservicerequest();
-
-    return listeservice.map((ser) => ({
-      value: ser.tribunale_id + ":" + ser.service_id,
-      label: ser.nom,
-    }));
-  }, [listeservice]);*/
-
   //************ajouter dossier **************/
   useEffect(() => {
     gettribunalerequest();
-  }, [liste]);
+    const id = localStorage.getItem("id_dossier");
+    console.log(id, "ena el id eli bch netbaath");
+    setAdd_dossier({ ...add_dossier, id_dossier: id });
+  }, [liste,add_dossier.id_dossier]);
+
   useEffect(() => {
     getservicerequest();
   }, [listeser]);
   const adddossier = async () => {
     try {
-      const resp = await axios.post("/recherchedossieradd", add_dossier);
-      console.log("helloooooooooooooooooooooooooooooooooooooooo");
-      console.log(add_dossier, dossierdata, "ena dossier dataaaaaaaaaaaaaaaa");
+      console.log(add_dossier);
+      const resp = await axios.post("/donneedossieradd", add_dossier);
+
+      //console.log(add_dossier, dossierdata, "ena dossier dataaaaaaaaaaaaaaaa");
       toast.success("les données de dossier sont ajoutés avec succès");
     } catch (error) {
       console.log(error);
     }
   };
-
-  //const listesaved = useMemo(()=>gettribunalerequest(),[listeTrib,listelieutrib])
 
   return (
     <div className="container">
@@ -385,20 +372,18 @@ const DonneeDossier = () => {
           />
         </div>
         <Button
-        type="primary"
-      style={{width:300}}
-        
-          
-         
-          
+          type="primary"
+          style={{ width: 300 }}
           onClick={() => {
             setDisabledtrib(false);
             setDisabledservice(false);
             setValuetrib("");
             setValueservice("");
+            const id = localStorage.getItem("id_dossier");
+            console.log(id, "ena mel local storage");
           }}
         >
-          resélectionner les données du tribunale 
+          resélectionner les données du tribunale
         </Button>
       </div>
       <div className="client5">
@@ -426,28 +411,13 @@ const DonneeDossier = () => {
         </div>
       </div>
 
-      {/*<div className="boutonet">
-        <Button className="bouton" type="primary" block>
-          {" "}
-          Ajouter Adversaire
-        </Button>
-        <Marginer direction="vertical" margin={10} />
-        <Button className="bouton" type="primary" block>
-          {" "}
-          Retirer Adversaire{" "}
-        </Button>
-
+      <div className="boutonet">
         <div className="boutonvalid">
           <Button className="bouton" type="primary" block onClick={adddossier}>
             Valider Dossier
           </Button>
-          <Marginer direction="vertical" margin={10} />
         </div>
       </div>
-
-
-          </div>*/}
-
       <TabDossier />
     </div>
   );
