@@ -251,6 +251,7 @@ const DonneeDossier = () => {
                   />
                   <Button type="text" icon={<PlusOutlined />} onClick={addItem}>
                     Ajouter Type
+                    
                   </Button>
                 </Space>
               </>

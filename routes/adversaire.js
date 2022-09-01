@@ -12,9 +12,9 @@ const pool = require("../db");
 //async taati wa9t lel data bch tekhdem les fctions teeha
 root12.post("/adversaireadd", async(req, res) => {
     try {
-        const { nom, registre, adresse, adressedesigne, avocat, adresseavocat } = req.body;
+        const { nom, registre, adresse, adressedesigne, avocat, adresseavocat,id_dossier } = req.body;
         const newadversaires = await pool.query(
-            "INSERT INTO adversaire (nom, registre, adresse, adressedesigne, avocat,adresseavocat) VALUES($1,$2,$3,$4,$5,$6)", [nom, registre, adresse, adressedesigne, avocat, adresseavocat]
+            "INSERT INTO adversaire (nom, registre, adresse, adressedesigne, avocat,adresseavocat,id_doss) VALUES($1,$2,$3,$4,$5,$6,$7)", [nom, registre, adresse, adressedesigne, avocat, adresseavocat,id_dossier]
             //res.json("succes"),
         );
         res.json(newadversaires.rows[0]);
