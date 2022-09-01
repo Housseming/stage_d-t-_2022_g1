@@ -4,6 +4,7 @@ import {Marginer} from "../marginer/marginfile";
 import {Input, Button, Table, Radio, Cascader, Select} from "antd";
 import axios from "axios";
 import AjoutCollabo from "./ajoutcollabo";
+import {FcCollaboration} from "react-icons/fc"
 //import {Table, Button, Modal, Input, Pagination} from "antd";
 import "antd/dist/antd.min.css";
 
@@ -78,6 +79,15 @@ function Collaborateur() {
   const [value, setValue] = useState(1);
   return (
     <div className="container">
+      <h1
+        style={{
+          fontSize: "1.3rem",
+          color: "#0583f2",
+        }}
+      >
+        Collaborateur
+      </h1>
+      <FcCollaboration className="addclientdem"></FcCollaboration>
       <div className="divcollab1">
         <div className="inputcoll">
           <AjoutCollabo />
@@ -87,11 +97,10 @@ function Collaborateur() {
             placeholder="code collaborateur"
             options={liste}
             onChange={onChange}
-            showSearch=
-            {{
+            showSearch={{
               filter,
-            }}>
-          </Cascader>
+            }}
+          ></Cascader>
         </div>
         <div className="inputcoll">
           <label>Mode Réglement :</label>
@@ -107,14 +116,16 @@ function Collaborateur() {
           <Input
             type="text"
             placeholder="Nom et Prénom"
-            value={donnee.username}></Input>
+            value={donnee.username}
+          ></Input>
         </div>
         <div className="inputcoll">
           <label>Part Collaborateur :</label>
           <Input
             type="text"
             placeholder="part collaborateur"
-            value={donnee.montant}></Input>
+            value={donnee.montant}
+          ></Input>
         </div>
         <div className="inputcoll">
           <label>CIN :</label>
@@ -150,7 +161,8 @@ function Collaborateur() {
             <Input
               type="text"
               placeholder="code postal"
-              value={donnee.codepostal}></Input>
+              value={donnee.codepostal}
+            ></Input>
           </div>
         </div>
         <div className="divcollab23">
@@ -159,7 +171,8 @@ function Collaborateur() {
             <Input
               type="text"
               placeholder="Activité Contribuale"
-              value={donnee.activite}></Input>
+              value={donnee.activite}
+            ></Input>
           </div>
           <div className="inputcoll">
             <label>Tel :</label>

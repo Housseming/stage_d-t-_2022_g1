@@ -7,6 +7,7 @@ import Selection from "./selectioninput";
 import Selectdossier from "./selectemplacement";
 import TabDossier from "./tabdossier";
 import Searchi from "./searchinput";
+import {RiFoldersFill} from "react-icons/ri"
 const options = [
   {
     value: "emplacement",
@@ -69,11 +70,20 @@ const SousDossier = () => {
 
   return (
     <div className="container">
+      <h1
+        style={{
+          fontSize: "1.3rem",
+          color: "#0583f2",
+        }}
+      >
+        Sous Dossier
+      </h1>
+      <RiFoldersFill className="addclientdem"></RiFoldersFill>
       <div className="sousdoss1">
         <div className="div">
           <label htmlFor="code">Code Dossier :</label>
 
-          <Searchi placeholder="Code Dossier"  />
+          <Searchi placeholder="Code Dossier" />
         </div>
         <div className="div ">
           <label>Date Création :</label>

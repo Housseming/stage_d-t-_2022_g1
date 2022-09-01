@@ -9,7 +9,7 @@ import "antd/dist/antd.min.css";
 import { AiFillEdit } from "react-icons/ai";
 import { MdDeleteForever } from "react-icons/md";
 import { toast } from "react-toastify";
-
+import {BiFolderOpen} from "react-icons/bi"
 const Emplacementdossier = () => {
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(6);
@@ -21,15 +21,17 @@ const Emplacementdossier = () => {
   });
 
   const columns = [
-    { key: "1", title: "libelle", dataIndex: "libelle" },
+  
 
     {
-      key: "2",
+      key: "1",
       title: "id",
       dataIndex: "id",
       //sorter:(record1,record2)=>
       //{ return record1.id<record2.id}
     },
+    { key: "2", title: "libelle", dataIndex: "libelle" },
+
     {
       key: "3",
       title: "Actions",
@@ -140,6 +142,7 @@ const Emplacementdossier = () => {
         addingEmplacementdossier
       );
       console.log(resp.data);
+      setAddingEmplacementdossier({ libelle: "" });
     } catch (error) {
       console.log(error);
     }
@@ -149,6 +152,7 @@ const Emplacementdossier = () => {
     <div className="App">
       <header className="App-header">
         <h1>Emplacement dossier</h1>
+        <BiFolderOpen className="dashbicons"></BiFolderOpen>
         {
           <button
             className="btnadd"
@@ -200,8 +204,9 @@ const Emplacementdossier = () => {
               edditingEmplacementdossier.libelle
             );
             resetEditing();
-            toast.success("Emplacementdossier modifié avec succée");
+            toast.success("Emplacement dossier modifié avec succès");
           }}
+          destroyOnClose={true}
         >
           <Input
             placeholder="libelle"
@@ -223,12 +228,14 @@ const Emplacementdossier = () => {
           cancelText="Annuler"
           onCancel={() => {
             setIsAdd(false);
+            setAddingEmplacementdossier({ libelle: "" });
           }}
           onOk={() => {
             addEmplacementdossier();
             setIsAdd(false);
-            toast.success("Emplacement_dossier_ajouté avec succès");
+            toast.success("Emplacement dossier ajouté avec succès");
           }}
+          destroyOnClose={true}
         >
           <Input
             placeholder="libelle"
