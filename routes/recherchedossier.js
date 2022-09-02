@@ -31,8 +31,8 @@ root11.post("/clientdossieradd", async (req, res) => {
     );
     console.log(newdossiers.rows[0])
     res.json(newdossiers.rows[0]);
-  } catch (err) {
-    console.error(err.message);
+  } catch (error) {
+    console.error(error.message);
   }
 });
 //"UPDATE  recherchedossier SET (num_affaire,emplacement,mission,code_dossier,annee,lieu,service,observation,date_creation,type_dossier) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) WHERE id_dossier=$11",

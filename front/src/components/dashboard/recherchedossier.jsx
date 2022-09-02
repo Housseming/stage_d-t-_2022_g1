@@ -51,19 +51,19 @@ const options = [
 
 const RechercheDossier = () => {
   const [visible, setVisible] = useState(false);
-const [placement, setPlacement] = useState("right");
+  const [placement, setPlacement] = useState("right");
 
-const showDrawer = () => {
-  setVisible(true);
-};
+  const showDrawer = () => {
+    setVisible(true);
+  };
 
-const onChangepl = (e) => {
-  setPlacement(e.target.value);
-};
+  const onChangepl = (e) => {
+    setPlacement(e.target.value);
+  };
 
-const onClose = () => {
-  setVisible(false);
-};
+  const onClose = () => {
+    setVisible(false);
+  };
   //declaration necessaires
   const [liste, setListe] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
@@ -82,6 +82,7 @@ const onClose = () => {
     console.log("radio checked", e.target.value);
     setValue(e.target.value);
   };
+  const [listeadversaire, setListeadversaire] = useState([]);
 
   const [addingdossier, setAddingdossier] = useState({
     num_affaire: "",
@@ -315,9 +316,20 @@ const onClose = () => {
       console.log(error.message);
     }
   };
+  //*****************les adverssaire**************
+  const getadversairerequest = async () => {
+    try {
+      const response = await axios.get("/adversaire");
+      setListeadversaire(response.data);
+      console.log(listeadversaire);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   useEffect(() => {
     getdossierrequest();
-  });
+    getadversairerequest();
+  },[listeadversaire,liste]);
   const deletedossier = (record) => {
     Modal.confirm({
       title: "Vous etes sur de supprimer ce dossier?",
@@ -325,7 +337,9 @@ const onClose = () => {
       okType: "danger",
       cancelText: "annuler",
       onOk: () => {
-        const newListe = liste.filter((dossier) => dossier.id_dossier !== record.id_dossier);
+        const newListe = liste.filter(
+          (dossier) => dossier.id_dossier !== record.id_dossier
+        );
         setListe(newListe);
         deletedossierrequest(record.id_dossier);
       },
@@ -374,7 +388,6 @@ const onClose = () => {
   };
 
   //supprimer dossier
-
 
   //modifier un dossier
   const editdossier = (record) => {
