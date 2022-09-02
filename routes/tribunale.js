@@ -32,6 +32,7 @@ route.post("/deleteTribunale", (req, res) => {
       }
     }
   );
+  
 });
 
 route.post("/modifierTribunale", (req, res) => {
@@ -136,3 +137,5 @@ route.get("/tribunale", (req, res) => {
 });
 
 module.exports = route;
+
+

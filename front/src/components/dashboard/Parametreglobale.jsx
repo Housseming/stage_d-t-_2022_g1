@@ -4,7 +4,7 @@ import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Table, Button, Modal, Input } from "antd";
-import {MdOutlineSettingsSuggest} from "react-icons/md"
+import { MdOutlineSettingsSuggest } from "react-icons/md";
 import "antd/dist/antd.min.css";
 import { AiFillEdit } from "react-icons/ai";
 import { MdDeleteForever } from "react-icons/md";
@@ -70,30 +70,31 @@ const Parametreglobale = () => {
 
   //supprimer une Parametre
   const deleteParametre = (record) => {
-  Modal.confirm({
-    title: "Vous etes sur de supprimer ce Paramètre?",
-    okText: "oui",
-    okType: "danger",
-    cancelText: "annuler",
-    onOk: () => {
-      const newlisteservice = listeservice.filter((Parametre) => Parametre.timbrefiscale !== record.timbrefiscale);
-      setlisteservice(newlisteservice);
-      deleteParametrerequest(record.timbrefiscale);
-      toast.success("Paramètre supprimé avec succès");
-    },
-  });
-};
-const deleteParametrerequest = async (timbrefiscale) => {
-  try {
-    const deleted = await axios.post("/Parametreenextra/delete", {
-      timbrefiscale:timbrefiscale ,
+    Modal.confirm({
+      title: "Vous etes sur de supprimer ce Paramètre?",
+      okText: "oui",
+      okType: "danger",
+      cancelText: "annuler",
+      onOk: () => {
+        const newlisteservice = listeservice.filter(
+          (Parametre) => Parametre.timbrefiscale !== record.timbrefiscale
+        );
+        setlisteservice(newlisteservice);
+        deleteParametrerequest(record.timbrefiscale);
+        toast.success("Paramètre supprimé avec succès");
+      },
     });
-    console.log("Parametre supprimé");
-  } catch (error) {
-    console.log(error);
-  }
- };
-
+  };
+  const deleteParametrerequest = async (timbrefiscale) => {
+    try {
+      const deleted = await axios.post("/Parametreenextra/delete", {
+        timbrefiscale: timbrefiscale,
+      });
+      console.log("Parametre supprimé");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   ////////////
   //modifier une Parametre
@@ -200,18 +201,21 @@ const deleteParametrerequest = async (timbrefiscale) => {
 
           {/*AJOUT*/}
         </Modal>
-         <Modal
+        <Modal
           title="ajouter "
           visible={isAdd}
           okText="Enregistrer"
           cancelText="Annuler"
           onCancel={() => {
             setIsAdd(false);
+            setAddingParametre({ timbrefiscale: 0, tauxtva: 0 });
           }}
+          destroyOnClose={true}
           onOk={() => {
             addParametre();
             setIsAdd(false);
             toast.success("Paramètre ajouté avec succès");
+            setAddingParametre({ timbrefiscale: 0, tauxtva: 0 });
           }}
         >
           <Input
@@ -224,7 +228,7 @@ const deleteParametrerequest = async (timbrefiscale) => {
               });
             }}
           ></Input>
-           <Input
+          <Input
             placeholder="tauxtva"
             value={addingParametre.tauxtva}
             onChange={(e) => {
@@ -234,8 +238,7 @@ const deleteParametrerequest = async (timbrefiscale) => {
               });
             }}
           ></Input>
-           
-          </Modal>
+        </Modal>
       </header>
     </div>
   );

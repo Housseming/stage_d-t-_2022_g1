@@ -9,20 +9,19 @@ import "antd/dist/antd.min.css";
 import { AiFillEdit } from "react-icons/ai";
 import { MdDeleteForever } from "react-icons/md";
 import { toast } from "react-toastify";
-import {BiFolderOpen} from "react-icons/bi"
+import { BiFolderOpen } from "react-icons/bi";
 const Emplacementdossier = () => {
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(6);
   const [listeservice, setlisteservice] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
-  const [edditingEmplacementdossier, setEdditingEmplacementdossier] =useState(null);
+  const [edditingEmplacementdossier, setEdditingEmplacementdossier] =
+    useState(null);
   const [addingEmplacementdossier, setAddingEmplacementdossier] = useState({
     libelle: "",
   });
 
   const columns = [
-  
-
     {
       key: "1",
       title: "id",
@@ -142,7 +141,6 @@ const Emplacementdossier = () => {
         addingEmplacementdossier
       );
       console.log(resp.data);
-      setAddingEmplacementdossier({ libelle: "" });
     } catch (error) {
       console.log(error);
     }
@@ -234,6 +232,7 @@ const Emplacementdossier = () => {
             addEmplacementdossier();
             setIsAdd(false);
             toast.success("Emplacement dossier ajouté avec succès");
+            setAddingEmplacementdossier({ libelle: "" });
           }}
           destroyOnClose={true}
         >

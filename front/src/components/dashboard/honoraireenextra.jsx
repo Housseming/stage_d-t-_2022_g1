@@ -128,7 +128,6 @@ const Honoraireenextra = () => {
     try {
       const resp = await axios.post("/honoraireenextra", addingHonoraire);
       console.log(resp.data);
-      setAddingHonoraire({ libelle: "", libelle_francais: "", montant: 0 });
     } catch (error) {
       console.log(error);
     }
@@ -136,9 +135,11 @@ const Honoraireenextra = () => {
   return (
     <div className="App">
       <header className="App-header">
-      <h1>Honoraire en extra</h1>
-      <MdOutlineCreditScore className="dashbicons"></MdOutlineCreditScore>
-        <button className="btnadd"  onClick={() => {
+        <h1>Honoraire en extra</h1>
+        <MdOutlineCreditScore className="dashbicons"></MdOutlineCreditScore>
+        <button
+          className="btnadd"
+          onClick={() => {
             setIsAdd(true);
           }}
         >
@@ -230,6 +231,11 @@ const Honoraireenextra = () => {
             addHonoraire();
             setIsAdd(false);
             toast.success("Honoraire ajouté avec succès");
+            setAddingHonoraire({
+              libelle: "",
+              libelle_francais: "",
+              montant: 0,
+            });
           }}
           destroyOnClose={true}
         >

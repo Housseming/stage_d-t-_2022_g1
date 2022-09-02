@@ -221,13 +221,28 @@ const PrimeHuissier = () => {
           visible={isAdd}
           okText="Enregistrer"
           cancelText="Annuler"
+          destroyOnClose={true}
           onCancel={() => {
             setIsAdd(false);
+            setAddingprime({
+              libelle: "",
+              montant: "",
+              dessociable: "",
+              impot: "",
+              mensuel: "",
+            });
           }}
           onOk={() => {
             addprime();
             setIsAdd(false);
             toast.success("Primehuissier ajoutée avec succès");
+            setAddingprime({
+              libelle: "",
+              montant: "",
+              dessociable: "",
+              impot: "",
+              mensuel: "",
+            });
           }}
         >
           <Input
