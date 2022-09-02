@@ -1,5 +1,6 @@
 import React,{useState} from "react";
-import { Input,Button,Table,} from "antd";
+import { Input,Button,Table} from "antd";
+import {AiFillCreditCard} from "react-icons/ai"
 function Reglement() {
     const [page, setPage] = useState(1);
     const [pageSize, setPageSize] = useState(6);
@@ -20,6 +21,15 @@ function Reglement() {
     ];
   return (
     <div className="container">
+      <h1
+        style={{
+          fontSize: "1.3rem",
+          color: "#0583f2",
+        }}
+      >
+        Réglement
+      </h1>
+      <AiFillCreditCard className="addclientdem"></AiFillCreditCard>
       <div className="reglementdiv1">
         <div className="inputreg">
           <label>Honoraire Avocat :</label>

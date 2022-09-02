@@ -16,8 +16,9 @@ import {toast} from "react-toastify";
 import Selectdossier from "./selectemplacement";
 import TabDossier from "./tabdossier";
 import axios from "axios";
-import {PlusOutlined} from "@ant-design/icons";
-import {domMax} from "framer-motion";
+import { PlusOutlined } from "@ant-design/icons";
+import { domMax } from "framer-motion";
+import {RiFolderAddFill} from "react-icons/ri";
 
 const {Option} = Select;
 let index = 0;
@@ -219,7 +220,17 @@ const DonneeDossier = () => {
 
   return (
     <div className="container">
-      <div className="client2">
+      <h1
+        style={{
+          fontSize: "1.3rem",
+          color: "#0583f2",
+        }}
+      >
+        Données Dossier
+      </h1>
+      <RiFolderAddFill className="addclientdem"></RiFolderAddFill>
+      <Marginer direction="vertical" margin={50} />
+      <div className="client1">
         <div className="div">
           <label>Type Dossier:</label>
 
@@ -271,25 +282,24 @@ const DonneeDossier = () => {
               });
             }}
           />
-          <div className="client1">
-            <div className="dateinput">
-              <label>Année</label>
-              <DatePicker
-                picker="year"
-                placeholder="Année"
-                onChange={onChangedate}
-              />
-            </div>
-          </div>
         </div>
       </div>
       <div className="client2">
+        <div className="div">
+          <label>Année</label>
+          <DatePicker
+            className="dateinput"
+            picker="year"
+            placeholder="Année"
+            onChange={onChangedate}
+          />
+        </div>
         <div className="div">
           <label>Mission :</label>
 
           <Input
             type="text"
-            classame="mission"
+            className="mission"
             value={add_dossier.mission}
             onChange={(e) => {
               setAdd_dossier({
@@ -300,6 +310,7 @@ const DonneeDossier = () => {
           />
         </div>
       </div>
+
       <div className="client3">
         <div className="div">
           <label htmlFor="emplacement"> Emplacement :</label>
@@ -385,6 +396,7 @@ const DonneeDossier = () => {
         <div className="div">
           <label>Observation(s) : </label>
           <Input
+            className="mission"
             type="text"
             value={add_dossier.observation}
             onChange={(e) => {
@@ -406,14 +418,13 @@ const DonneeDossier = () => {
         </div>
       </div>
 
-      <div className="boutonet">
-        <div className="boutonvalid">
-          <Button className="bouton" type="primary" block onClick={adddossier}>
-            Valider Dossier
-          </Button>
-        </div>
-      </div>
+      <div className="boutonet"></div>
       <TabDossier />
+      <div className="boutonvalid">
+        <button className="buttonvalidate" onClick={adddossier}>
+          Valider Dossier
+        </button>
+      </div>
     </div>
   );
 };

@@ -12,7 +12,7 @@ root10.post("/gestionclient", async(req, res) => {
 
 
         const newTodo2 = await pool.query(
-            "INSERT INTO gestionclient (raison,matricule,ville,rue,num,code_postale,activite,situation_fiscale,categorie,fax,emailcodecollaborateur,codeclient) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13) ", //nahit on conflict khater ken yajouti meme id maykblsh haka wala haka
+            "INSERT INTO gestionclient (raison,matricule,ville,rue,num,code_postale,activite,situation_fiscale,categorie,fax,email,codecollaborateur,codeclient) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13) ", //nahit on conflict khater ken yajouti meme id maykblsh haka wala haka
             [
                 raison,
                 matricule,

@@ -12,7 +12,7 @@ import {
 } from "antd";
 import React, { useState, useEffect, useMemo } from "react";
 import axios from "axios";
-
+import {AiFillBank} from "react-icons/ai"
 import Tableau from "./service";
 import "./trib.css";
 import { GoDiffAdded } from "react-icons/go";
@@ -290,6 +290,12 @@ const Tribunale = () => {
   /**********************return comp****************************/
   return (
     <>
+      <div className="back">
+        <header className="App-header">
+        <h1>Tribunaux et Administrations</h1>
+        <AiFillBank className="dashbicons"></AiFillBank>
+        </header>
+      </div>
       <button
         className="ajouter"
         onClick={() => {
@@ -356,23 +362,21 @@ const Tribunale = () => {
                   >
                     Ajouter un service
                   </button>
-                  <div className="tab">
-                    <Table
-                      columns={column}
-                      dataSource={newListeService}
-                      bottomHeight={0}
-                      bordered={true}
-                      pagination={{
-                        current: page,
-                        pageSize: pageSize,
-                        onChange: (page, pageSize) => {
-                          setPage(page);
-                          setPageSize(pageSize);
-                        },
-                      }}
-                      scroll={{ x: "max-content" }}
-                    ></Table>
-                  </div>
+
+                  <Table
+                    columns={column}
+                    dataSource={newListeService}
+                    bordered={true}
+                    pagination={{
+                      current: page,
+                      pageSize: pageSize,
+                      onChange: (page, pageSize) => {
+                        setPage(page);
+                        setPageSize(pageSize);
+                      },
+                    }}
+                    scroll={{ x: "max-content" }}
+                  ></Table>
 
                   <Modal
                     title="modifier service"
@@ -1006,37 +1010,39 @@ const Tribunale = () => {
                       }}
                     ></Input>
                   </Modal>
-                  <Modal
-                    title="ajouter une tribunale"
-                    visible={isAddtrib}
-                    okText="Enregistrer"
-                    cancelText="Annuler"
-                    destroyOnClose={true}
-                    onCancel={() => {
-                      setIsAddtrib(false);
-                    }}
-                    onOk={() => {
-                      addtrib();
-                      setIsAddtrib(false);
-                      toast.success("tribunale ajoutée avec succès");
-                    }}
-                  >
-                    <Input
-                      placeholder="tapez le lieu du tribunale"
-                      value={addingtrib.lieu}
-                      onChange={(e) => {
-                        setAddingtrib({
-                          lieu: e.target.value,
-                        });
-                      }}
-                    ></Input>
-                  </Modal>
                 </header>
               </div>
             </TabPane>
           );
         })}
       </Tabs>
+      <Modal
+        title="ajouter une tribunale"
+        visible={isAddtrib}
+        okText="Enregistrer"
+        cancelText="Annuler"
+        destroyOnClose={true}
+        onCancel={() => {
+          setIsAddtrib(false);
+          setAddingtrib({ lieu: "" });
+        }}
+        onOk={() => {
+          addtrib();
+          setIsAddtrib(false);
+          toast.success("tribunale ajoutée avec succès");
+          setAddingtrib({ lieu: "" });
+        }}
+      >
+        <Input
+          placeholder="tapez le lieu du tribunale"
+          value={addingtrib.lieu}
+          onChange={(e) => {
+            setAddingtrib({
+              lieu: e.target.value,
+            });
+          }}
+        ></Input>
+      </Modal>
     </>
   );
 };

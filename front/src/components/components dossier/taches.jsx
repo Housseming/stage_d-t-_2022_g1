@@ -3,6 +3,7 @@ import { Button, Table, Modal, Input, DatePicker, Radio, Cascader } from "antd";
 import { Marginer } from "../marginer/marginfile";
 import {toast} from "react-toastify";
 import axios from "axios";
+import {  HiClipboardCheck } from "react-icons/hi";
 function Taches() {
     const [listeservice, setlisteservice] = useState([]);
     const [isEdit, setIsEdit] = useState(false);
@@ -130,6 +131,15 @@ function Taches() {
   ];
   return (
     <div className="container">
+      <h1
+        style={{
+          fontSize: "1.3rem",
+          color: "#0583f2",
+        }}
+      >
+        Tâche(s)
+      </h1>
+      <HiClipboardCheck className="addclientdem"></HiClipboardCheck>
       <div className="boutonet">
         <Button
           className="bouton"
@@ -137,7 +147,8 @@ function Taches() {
           block
           onClick={() => {
             setIsAdd(true);
-          }}>
+          }}
+        >
           Ajouter Tâche
         </Button>
       </div>
@@ -154,10 +165,11 @@ function Taches() {
               setPageSize(pageSize);
             },
           }}
-          style={{display: "flex", flex: 1}}
-          scroll={{x: "max-content"}}
+          style={{ display: "flex", flex: 1 }}
+          scroll={{ x: "max-content" }}
           size="middle"
-          bordered={true}></Table>
+          bordered={true}
+        ></Table>
       </div>
       <Modal
         title="Ajouter une Tâche"
@@ -167,7 +179,8 @@ function Taches() {
         onCancel={() => {
           setIsAdd(false);
         }}
-        onRequestClose={() => {}}>
+        onRequestClose={() => {}}
+      >
         <div className="formaddtache">
           <label>Tâche:</label>
           <Input
@@ -179,7 +192,8 @@ function Taches() {
                 ...addingtache,
                 tache: e.target.value,
               });
-            }}></Input>
+            }}
+          ></Input>
           <label>Date Critique:</label>
           <DatePicker
             value={addingtache.date_critique}
@@ -222,7 +236,8 @@ function Taches() {
                   resolu: e.target.value,
                 });
               }}
-              value={value}>
+              value={value}
+            >
               <Radio value={1}>Oui</Radio>
               <Radio value={2}>Non</Radio>
             </Radio.Group>
