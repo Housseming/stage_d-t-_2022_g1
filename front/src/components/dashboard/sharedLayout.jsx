@@ -1,10 +1,10 @@
 import React from "react";
-import {Outlet} from "react-router-dom";
-import Example from "./Example";
+import { Outlet } from "react-router-dom";
+import { DropMenu } from "../navbar/Menu";
 export const Sharedlayout = () => {
   return (
     <>
-      <Example></Example>
+      <DropMenu />
       <Outlet></Outlet>
     </>
   );

@@ -166,7 +166,7 @@ const TabDossier = () => {
         onOk={async () => {
           setIsEdit(false);
           const newlisteservice = listeservice.map((adversaire) => {
-            if (adversaire.id == edditingadversaire.id) {
+            if (adversaire.id_adversaire == edditingadversaire.id) {
               return edditingadversaire;
             } else {
               return adversaire;

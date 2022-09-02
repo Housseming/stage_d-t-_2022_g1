@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useMemo, useRef } from "react";
-import { Marginer } from "../marginer/marginfile";
+import React, {useState, useEffect, useMemo, useRef} from "react";
+import {Marginer} from "../marginer/marginfile";
 import {
   DatePicker,
   Space,
@@ -10,16 +10,16 @@ import {
   InputNumber,
   Cascader,
 } from "antd";
-import { dossierdata } from "./dossierdata";
+import {dossierdata} from "./dossierdata";
 
-import { toast } from "react-toastify";
+import {toast} from "react-toastify";
 import Selectdossier from "./selectemplacement";
 import TabDossier from "./tabdossier";
 import axios from "axios";
-import { PlusOutlined } from "@ant-design/icons";
-import { domMax } from "framer-motion";
+import {PlusOutlined} from "@ant-design/icons";
+import {domMax} from "framer-motion";
 
-const { Option } = Select;
+const {Option} = Select;
 let index = 0;
 
 const DonneeDossier = () => {
@@ -51,7 +51,7 @@ const DonneeDossier = () => {
 
   const onNameChange = (event) => {
     setName(event.target.value);
-    setAdd_dossier({ ...add_dossier, typedossier: name });
+    setAdd_dossier({...add_dossier, typedossier: name});
   };
 
   const addItem = (e) => {
@@ -92,7 +92,7 @@ const DonneeDossier = () => {
   const [clear, setClear] = useState(false);
   const onChangeemp = (value, selectedOptions) => {
     console.log(value, selectedOptions);
-    setAdd_dossier({ ...add_dossier, emplacement: selectedOptions[0].label });
+    setAdd_dossier({...add_dossier, emplacement: selectedOptions[0].label});
   };
   const onChange = (value, selectedOptions) => {
     console.log(value, selectedOptions);
@@ -103,14 +103,14 @@ const DonneeDossier = () => {
         selectedOptions[0].value
     );
     setListeserviceinput(newlisteser);
-    setAdd_dossier({ ...add_dossier, lieu: selectedOptions[0].label });
+    setAdd_dossier({...add_dossier, lieu: selectedOptions[0].label});
     setDisabledtrib(true);
     console.log(listeserviceinput, "ena liste service jdida");
   };
   const onChangeservice = (value, selectedOptions) => {
     console.log(value, selectedOptions);
     setValueservice(selectedOptions[0].label);
-    setAdd_dossier({ ...add_dossier, service: selectedOptions[0].label });
+    setAdd_dossier({...add_dossier, service: selectedOptions[0].label});
     setDisabledservice(true);
   };
   const onChangedate = (date, dateString) => {
@@ -201,8 +201,8 @@ const DonneeDossier = () => {
     gettribunalerequest();
     const id = localStorage.getItem("id_dossier");
     console.log(id, "ena el id eli bch netbaath");
-    setAdd_dossier({ ...add_dossier, id_dossier: id });
-  }, [liste,add_dossier.id_dossier]);
+    setAdd_dossier({...add_dossier, id_dossier: id});
+  }, [liste, add_dossier.id_dossier]);
 
   useEffect(() => {
     getservicerequest();
@@ -211,8 +211,6 @@ const DonneeDossier = () => {
     try {
       console.log(add_dossier);
       const resp = await axios.post("/donneedossieradd", add_dossier);
-
-      //console.log(add_dossier, dossierdata, "ena dossier dataaaaaaaaaaaaaaaa");
       toast.success("les données de dossier sont ajoutés avec succès");
     } catch (error) {
       console.log(error);
@@ -241,8 +239,7 @@ const DonneeDossier = () => {
                 <Space
                   style={{
                     padding: "0 8px 4px",
-                  }}
-                >
+                  }}>
                   <Input
                     placeholder="Ajouter un type"
                     ref={inputRef}
@@ -254,8 +251,7 @@ const DonneeDossier = () => {
                   </Button>
                 </Space>
               </>
-            )}
-          >
+            )}>
             {items.map((item) => (
               <Option key={item}>{item}</Option>
             ))}
@@ -373,7 +369,7 @@ const DonneeDossier = () => {
         </div>
         <Button
           type="primary"
-          style={{ width: 300 }}
+          style={{width: 300}}
           onClick={() => {
             setDisabledtrib(false);
             setDisabledservice(false);
@@ -381,8 +377,7 @@ const DonneeDossier = () => {
             setValueservice("");
             const id = localStorage.getItem("id_dossier");
             console.log(id, "ena mel local storage");
-          }}
-        >
+          }}>
           resélectionner les données du tribunale
         </Button>
       </div>
