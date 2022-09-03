@@ -24,7 +24,7 @@ const { Option } = Select;
 let index = 0;
 
 const DonneeDossier = () => {
-  const [items, setItems] = useState([
+  /*const [items, setItems] = useState([
     "إداري",
     "أذون",
     "أمر بالدفع",
@@ -46,23 +46,14 @@ const DonneeDossier = () => {
     "مرور",
     "ملك تجاري",
     "نفقة",
-  ]);
-  const [name, setName] = useState("");
-  const inputRef = useRef(null);
+  ]);*/
+  const [typedossierliste,setTypedossierliste] = useState([]);
+    const [typedossier1, setTypedossier1] = useState([]);
+  
 
-  const onNameChange = (event) => {
-    setName(event.target.value);
-    setAdd_dossier({ ...add_dossier, typedossier: name });
-  };
+ 
 
-  const addItem = (e) => {
-    e.preventDefault();
-    setItems([...items, name || `New item ${index++}`]);
-    setName("");
-    setTimeout(() => {
-      inputRef.current?.focus();
-    }, 0);
-  };
+
 
   const [value, setValue] = useState(1);
   const [disabledtrib, setDisabledtrib] = useState(false);
@@ -95,19 +86,23 @@ const DonneeDossier = () => {
     console.log(value, selectedOptions);
     setAdd_dossier({ ...add_dossier, emplacement: selectedOptions[0].label });
   };
-  const onChange = (value, selectedOptions) => {
-    console.log(value, selectedOptions);
-    setValuetrib(selectedOptions[0].label);
-    const newlisteser = listeser.filter(
-      (ser) =>
-        ser.value.substring(value.indexOf(":"), value.length) ==
-        selectedOptions[0].value
-    );
-    setListeserviceinput(newlisteser);
-    setAdd_dossier({ ...add_dossier, lieu: selectedOptions[0].label });
-    setDisabledtrib(true);
-    console.log(listeserviceinput, "ena liste service jdida");
-  };
+    const onChange = (value, selectedOptions) => {
+      console.log(value, selectedOptions);
+      setValuetrib(selectedOptions[0].label);
+      const newlisteser = listeser.filter(
+        (ser) =>
+          ser.value.substring(0,((ser.value).indexOf(":"))) ==
+          selectedOptions[0].value
+      );
+      console.log(newlisteser, "hello");
+      setListeserviceinput(newlisteser);
+      
+      setAdd_dossier({ ...add_dossier, lieu: selectedOptions[0].label });
+      setDisabledtrib(true);
+      console.log(listeserviceinput, "ena liste service jdida");
+    };
+
+
   const onChangeservice = (value, selectedOptions) => {
     console.log(value, selectedOptions);
     setValueservice(selectedOptions[0].label);
@@ -144,6 +139,13 @@ const DonneeDossier = () => {
     console.log("radio checked", e.target.value);
     setValue(e.target.value);
   };
+      const onChangetype = (value, selectedOptions) => {
+        console.log(value, selectedOptions);
+        setAdd_dossier({
+          ...add_dossier,
+          typedossier: selectedOptions[0].label,
+        });
+      };
   //**********select tribunale********************
 
   const gettribunalerequest = async () => {
@@ -157,6 +159,7 @@ const DonneeDossier = () => {
         label: trib.lieu,
       }));
       setListe(newliste1);
+      
       // console.log("hellolistetrib", listeTrib);
     } catch (error) {
       console.log(error.message);
@@ -188,6 +191,7 @@ const DonneeDossier = () => {
     }
   };
 
+
   const listeemp = useMemo(() => {
     getemplacementdossierrequest();
 
@@ -196,18 +200,37 @@ const DonneeDossier = () => {
       label: emp.libelle,
     }));
   }, [listeemplacement]);
+  
 
   //************ajouter dossier **************/
+    const getTypedossierrequest = async () => {
+    try {
+      const response = await axios.get("/typedossier");
+      setTypedossierliste(response.data); 
+      const newliste = typedossierliste.map((ser) => ({
+        value: ser.id ,
+        label: ser.type_dossier,
+      }));
+      setTypedossier1(newliste);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   useEffect(() => {
     gettribunalerequest();
+    getTypedossierrequest();
+    console.log(typedossierliste,"type")
     const id = localStorage.getItem("id_dossier");
     console.log(id, "ena el id eli bch netbaath");
     setAdd_dossier({ ...add_dossier, id_dossier: id });
-  }, [liste,add_dossier.id_dossier]);
+  }, [liste,typedossierliste,add_dossier.id_dossier]);
 
   useEffect(() => {
     getservicerequest();
-  }, [listeser]);
+    console.log(listeservice)
+     console.log(listeser,"listeserena");
+  },[listeservice,listeser]);
+
   const adddossier = async () => {
     try {
       console.log(add_dossier);
@@ -236,41 +259,16 @@ const DonneeDossier = () => {
         <div className="div">
           <label>Type Dossier:</label>
 
-          <Select
-            style={{
-              width: 250,
+          <Cascader
+            className="cascader1"
+            options={typedossier1}
+            placeholder="Type dossier"
+            onChange={onChangetype}
+            showSearch={{
+              filter,
             }}
-            placeholder="Type de Dossier"
-            dropdownRender={(menu) => (
-              <>
-                {menu}
-                <Divider
-                  style={{
-                    margin: "8px 0",
-                  }}
-                />
-                <Space
-                  style={{
-                    padding: "0 8px 4px",
-                  }}
-                >
-                  <Input
-                    placeholder="Ajouter un type"
-                    ref={inputRef}
-                    value={name}
-                    onChange={onNameChange}
-                  />
-                  <Button type="text" icon={<PlusOutlined />} onClick={addItem}>
-                    Ajouter Type
-                  </Button>
-                </Space>
-              </>
-            )}
-          >
-            {items.map((item) => (
-              <Option key={item}>{item}</Option>
-            ))}
-          </Select>
+            onSearch={(value) => console.log(value)}
+          ></Cascader>
         </div>
         <div className="div">
           <label htmlFor="code">Code Dossier :</label>

@@ -8,6 +8,7 @@ import "antd/dist/antd.min.css";
 import { AiFillEdit } from "react-icons/ai";
 import { MdDeleteForever } from "react-icons/md";
 import { toast } from "react-toastify";
+import { TruckIcon } from "@heroicons/react/outline";
 
 const Transport = () => {
   const [listeservice, setlisteservice] = useState([]);
@@ -107,6 +108,8 @@ const Transport = () => {
     <div className="App">
       <header className="App-header">
       <h1>Transport</h1>
+      <TruckIcon className="dashbicons"></TruckIcon>
+
         {check && <Button className="btnadd"  onClick={() => {
             setIsAdd(true);
           } }> Ajouter</Button>}

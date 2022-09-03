@@ -219,7 +219,7 @@ const Tribunale = () => {
   ];
   const column1 = [
     { key: "1", title: "ID", dataIndex: "id" },
-    { key: "2", title: "nom", dataIndex: "lieu" },
+    { key: "2", title: "lieu", dataIndex: "lieu" },
 
     {
       key: "3",
@@ -231,7 +231,7 @@ const Tribunale = () => {
               <AiFillEdit
                 className="edit"
                 onClick={() => {
-                  edittrib(record.id, record.lieu);
+                  edittrib(record.id,record.lieu);
                 }}
               ></AiFillEdit>
               <pre>
