@@ -8,6 +8,7 @@ import "antd/dist/antd.min.css";
 import { AiFillEdit } from "react-icons/ai";
 import { MdDeleteForever } from "react-icons/md";
 import { toast } from "react-toastify";
+import { PrinterIcon } from "@heroicons/react/outline";
 
 const Parametreenextra = () => {
   const [check, setCheck] = useState(false);
@@ -106,6 +107,7 @@ const Parametreenextra = () => {
     <div className="App">
       <header className="App-header">
       <h1>Prix de la photocopie</h1>
+      <PrinterIcon className="dashbicons"></PrinterIcon>
           {check && <Button className="btnadd"  onClick={() => {
             setIsAdd(true);
           } }> Ajouter</Button>}

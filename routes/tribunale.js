@@ -51,7 +51,7 @@ route.post("/modifierTribunale", (req, res) => {
 });
 
 route.get("/tribunale", (req, res) => {
-  pool.query("SELECT * FROM tribunaletable", (error, result) => {
+  pool.query("SELECT * FROM tribunaletable ORDER BY id", (error, result) => {
     if (error) {
       console.log(error);
     } else {

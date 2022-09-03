@@ -219,7 +219,7 @@ const Tribunale = () => {
   ];
   const column1 = [
     { key: "1", title: "ID", dataIndex: "id" },
-    { key: "2", title: "nom", dataIndex: "lieu" },
+    { key: "2", title: "lieu", dataIndex: "lieu" },
 
     {
       key: "3",
@@ -231,7 +231,7 @@ const Tribunale = () => {
               <AiFillEdit
                 className="edit"
                 onClick={() => {
-                  edittrib(record.id, record.lieu);
+                  edittrib(record.id,record.lieu);
                 }}
               ></AiFillEdit>
               <pre>
@@ -324,7 +324,7 @@ const Tribunale = () => {
   const
    editservice = (record) => {
     setEdditingservice({ ...record });
-    setEdditingservice({...edditingservice,tribunale_id:idtrib})
+    setEdditingservice({...edditingservice,tribunale_id:idtrib,service_id:record.service_id,nom:record.nom})
     setChecked3({
       check1: record.lundi == "audience" ? true : false,
       check2: record.mardi == "audience" ? true : false,

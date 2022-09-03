@@ -28,6 +28,7 @@ import Error from "./components/dashboard/error";
 import Underconstruction from "./components/dashboard/underconstruction";
 import axios from "axios";
 import { AuthContextProvider } from "./context/AuthContext";
+import Typedossier from "./components/dashboard/typedossier";
 import AuthContext from "./context/AuthContext";
 import { useContext } from "react";
 
@@ -319,6 +320,10 @@ function Router() {
                 <Route
                   path="creationdossier"
                   element={<CreationDossier />}
+                ></Route>
+                <Route
+                  path="typedossier"
+                  element={<Typedossier />}
                 ></Route>
                 <Route path="dossiers" element={<Dossiers />}></Route>
                 <Route
