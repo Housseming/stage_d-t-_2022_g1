@@ -324,7 +324,7 @@ const Tribunale = () => {
   const
    editservice = (record) => {
     setEdditingservice({ ...record });
-    setEdditingservice({...edditingservice,tribunale_id:idtrib,service_id:record.service_id})
+    setEdditingservice({...edditingservice,tribunale_id:idtrib,service_id:record.service_id,nom:record.nom})
     setChecked3({
       check1: record.lundi == "audience" ? true : false,
       check2: record.mardi == "audience" ? true : false,
