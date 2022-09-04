@@ -35,7 +35,7 @@ import { useContext } from "react";
 axios.defaults.withCredentials = true;
 
 function Router() {
-   const {loggedIn} = useContext(AuthContext);
+ // const { loggedIn } = useContext(AuthContext);
 
   return (
     /*<BrowserRouter>
@@ -53,7 +53,7 @@ function Router() {
               loggedIn == false ? (
                 <AccountBox />
               ) : (
-                <Navigate replace to={"/home"} />
+                <Navigate  to={"/home"} />
               )
             }
           ></Route>
@@ -64,24 +64,24 @@ function Router() {
               loggedIn == false ? (
                 <RegisterBox />
               ) : (
-                <Navigate replace to={"/home"} />
+                <Navigate to={"/home"} />
               )
             }
           />
 
           <>
             <Route
-              exact path="home"
+               path="home"
               element={
                 loggedIn === true ? (
                   <Sharedlayout />
                 ) : (
-                  <Navigate replace to={"/login"} />
+                  <Navigate to={"/login"} />
                 )
               }
             >
               <Route
-                exact path="primehuissier"
+                 path="primehuissier"
                 element={
                   
                     <PrimeHuissier />
@@ -94,7 +94,7 @@ function Router() {
                   loggedIn == true ? (
                     <Utilisateur />
                   ) : (
-                    <Navigate replace to={"/login"} />
+                    <Navigate to={"/login"} />
                   )
                 }
               />
@@ -104,7 +104,7 @@ function Router() {
                   loggedIn == true ? (
                     <Parametreglobale />
                   ) : (
-                    <Navigate replace to={"/login"} />
+                    <Navigate  to={"/login"} />
                   )
                 }
               />
@@ -114,7 +114,7 @@ function Router() {
                   loggedIn == true ? (
                     <Honoraireenextra />
                   ) : (
-                    <Navigate replace to={"/login"} />
+                    <Navigate  to={"/login"} />
                   )
                 }
               />
@@ -124,7 +124,7 @@ function Router() {
                   loggedIn == true ? (
                     <Timbre />
                   ) : (
-                    <Navigate replace to={"/login"} />
+                    <Navigate to={"/login"} />
                   )
                 }
               />
@@ -134,7 +134,7 @@ function Router() {
                   loggedIn == true ? (
                     <Photocopie />
                   ) : (
-                    <Navigate replace to={"/login"} />
+                    <Navigate to={"/login"} />
                   )
                 }
               />
@@ -144,7 +144,7 @@ function Router() {
                   loggedIn == true ? (
                     <Transport />
                   ) : (
-                    <Navigate replace to={"/login"} />
+                    <Navigate to={"/login"} />
                   )
                 }
               />
@@ -154,7 +154,7 @@ function Router() {
                   loggedIn == true ? (
                     <Recettedufinance />
                   ) : (
-                    <Navigate replace to={"/login"} />
+                    <Navigate to={"/login"} />
                   )
                 }
               />
@@ -164,7 +164,7 @@ function Router() {
                   loggedIn == true ? (
                     <Emplacementdossier />
                   ) : (
-                    <Navigate replace to={"/login"} />
+                    <Navigate to={"/login"} />
                   )
                 }
               />
@@ -174,7 +174,7 @@ function Router() {
                   loggedIn == true ? (
                     <Gestionclient />
                   ) : (
-                    <Navigate replace to={"/login"} />
+                    <Navigate to={"/login"} />
                   )
                 }
               />
@@ -184,7 +184,7 @@ function Router() {
                   loggedIn == true ? (
                     <Collabo></Collabo>
                   ) : (
-                    <Navigate replace to={"/login"} />
+                    <Navigate to={"/login"} />
                   )
                 }
               ></Route>
@@ -194,7 +194,7 @@ function Router() {
                   loggedIn == true ? (
                     <Tribunale />
                   ) : (
-                    <Navigate replace to={"/login"} />
+                    <Navigate to={"/login"} />
                   )
                 }
               />
@@ -205,7 +205,7 @@ function Router() {
                   loggedIn == true ? (
                     <RechercheDossier />
                   ) : (
-                    <Navigate replace to={"/login"} />
+                    <Navigate to={"/login"} />
                   )
                 }
               ></Route>
@@ -215,7 +215,7 @@ function Router() {
                   loggedIn == true ? (
                     <CreationDossier />
                   ) : (
-                    <Navigate replace to={"/login"} />
+                    <Navigate to={"/login"} />
                   )
                 }
               ></Route>
@@ -225,7 +225,7 @@ function Router() {
                   loggedIn == true ? (
                     <Dossiers />
                   ) : (
-                    <Navigate replace to={"/login"} />
+                    <Navigate to={"/login"} />
                   )
                 }
               ></Route>
@@ -235,7 +235,7 @@ function Router() {
                   loggedIn == true ? (
                     <Underconstruction></Underconstruction>
                   ) : (
-                    <Navigate replace to={"/login"} />
+                    <Navigate to={"/login"} />
                   )
                 }
               ></Route>
@@ -248,7 +248,7 @@ function Router() {
               loggedIn == true ? (
                 <Error></Error>
               ) : (
-                <Navigate replace to={"/login"} />
+                <Navigate to={"/login"} />
               )
             }
           ></Route>
@@ -260,83 +260,43 @@ function Router() {
     <BrowserRouter>
       <Routes>
         <Route path="/">
-          {loggedIn == false && (
-            <>
-              <Route index element={<Home></Home>}></Route>
+          <Route index element={<Home></Home>}></Route>
 
-              <Route
-                path="login"
-                element={
-                  loggedIn === false ? (
-                    <AccountBox />
-                  ) : (
-                    <Navigate replace to={"/home"} />
-                  )
-                }
-              ></Route>
+          <Route path="login" element={<AccountBox />}></Route>
 
-              <Route
-                path="register"
-                element={
-                  loggedIn === false ? (
-                    <RegisterBox />
-                  ) : (
-                    <Navigate replace to={"/home"} />
-                  )
-                }
-              />
-            </>
-          )}
+          <Route path="register" element={<RegisterBox />} />
 
           <Route path="home" element={<Sharedlayout />}>
-            {loggedIn === true && (
-              <>
-                <Route path="primehuissier" element={<PrimeHuissier />} />
-                <Route path="utilisateur" element={<Utilisateur />} />
-                <Route path="Parametreglobale" element={<Parametreglobale />} />
-                <Route path="honoraireenextra" element={<Honoraireenextra />} />
-                <Route path="timbre" element={<Timbre />} />
-                <Route path="photocopie" element={<Photocopie />} />
-                <Route path="transport" element={<Transport />} />
-                <Route path="recettedufinance" element={<Recettedufinance />} />
-                <Route
-                  path="emplacementdossier"
-                  element={<Emplacementdossier />}
-                />
-                <Route path="gestionclient" element={<Gestionclient />} />
-                <Route
-                  path="collaborateurs"
-                  element={<Collabo></Collabo>}
-                ></Route>
-                <Route
-                  path="Tribunaux_et_administrations"
-                  element={<Tribunale />}
-                />
-                <Route path="welcome" element={<Welcome></Welcome>}></Route>
-                <Route
-                  path="recherchedossier"
-                  element={<RechercheDossier />}
-                ></Route>
-                <Route
-                  path="creationdossier"
-                  element={<CreationDossier />}
-                ></Route>
-                <Route
-                  path="typedossier"
-                  element={<Typedossier />}
-                ></Route>
-                <Route path="dossiers" element={<Dossiers />}></Route>
-                <Route
-                  path="underconstruction"
-                  element={<Underconstruction></Underconstruction>}
-                ></Route>
-              </>
-            )}
+            <Route path="primehuissier" element={<PrimeHuissier />} />
+            <Route path="utilisateur" element={<Utilisateur />} />
+            <Route path="Parametreglobale" element={<Parametreglobale />} />
+            <Route path="honoraireenextra" element={<Honoraireenextra />} />
+            <Route path="timbre" element={<Timbre />} />
+            <Route path="photocopie" element={<Photocopie />} />
+            <Route path="transport" element={<Transport />} />
+            <Route path="recettedufinance" element={<Recettedufinance />} />
+            <Route path="emplacementdossier" element={<Emplacementdossier />} />
+            <Route path="gestionclient" element={<Gestionclient />} />
+            <Route path="collaborateurs" element={<Collabo></Collabo>}></Route>
+            <Route
+              path="Tribunaux_et_administrations"
+              element={<Tribunale />}
+            />
+            <Route path="welcome" element={<Welcome></Welcome>}></Route>
+            <Route
+              path="recherchedossier"
+              element={<RechercheDossier />}
+            ></Route>
+            <Route path="creationdossier" element={<CreationDossier />}></Route>
+            <Route path="typedossier" element={<Typedossier />}></Route>
+            <Route path="dossiers" element={<Dossiers />}></Route>
+            <Route
+              path="underconstruction"
+              element={<Underconstruction></Underconstruction>}
+            ></Route>
           </Route>
 
-          {loggedIn == true && (
-            <Route path="*" element={<Error></Error>}></Route>
-          )}
+          <Route path="*" element={<Error></Error>}></Route>
         </Route>
       </Routes>
 
