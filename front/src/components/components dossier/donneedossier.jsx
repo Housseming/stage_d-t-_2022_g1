@@ -206,7 +206,10 @@ const DonneeDossier = () => {
 
   useEffect(() => {
     getservicerequest();
-  }, [listeser]);
+    console.log(listeservice)
+     console.log(listeser,"listeserena");
+  },[listeservice]);
+
   const adddossier = async () => {
     try {
       console.log(add_dossier);
