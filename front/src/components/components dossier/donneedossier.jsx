@@ -229,7 +229,7 @@ const DonneeDossier = () => {
     getservicerequest();
     console.log(listeservice)
      console.log(listeser,"listeserena");
-  },[listeservice,listeser]);
+  },[listeservice]);
 
   const adddossier = async () => {
     try {
