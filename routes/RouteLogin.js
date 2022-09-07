@@ -30,7 +30,7 @@ route.post("/login", (req, res) => {
           if (match) {
             console.log("matching");
 
-            /*const accessToken = jwt.sign(
+            const accessToken = jwt.sign(
               {
                 id: result.rows[0].id,
               },
@@ -39,13 +39,13 @@ route.post("/login", (req, res) => {
             console.log("token generated after logging in", accessToken);
             //payload heya data nheb ena nkhazenha eli heya parametre lowel mtaa el sign
 
-            /*res
+            res
               .cookie("token", accessToken,{
                 httpOnly: true,
                 //secure: true,
                 sameSite: "lax",
               })
-              .send();*/
+              .send();
 
             //res.json({ message: "Successufully logged in", accessToken });
           } else {
@@ -58,7 +58,7 @@ route.post("/login", (req, res) => {
     }
   );
 });
-/*route.get("/logout", (req, res) => {
+route.get("/logout", (req, res) => {
   res
     .cookie("token","",{
       httpOnly: true,
@@ -83,7 +83,7 @@ route.get("/loggedIn", (req, res) => {
   } catch (err) {
     res.json(false);
   }
-});*/
+});
 
 
 

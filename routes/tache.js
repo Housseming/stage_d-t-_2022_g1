@@ -43,7 +43,7 @@ root13.post("/tacheadd", async(req, res) => {
             ]
             //res.json("succes"),
         );
-        res.json(newtaches.rows[0]);
+        res.json(newtache.rows[0]);
     } catch (err) {
         console.error(err.message);
     }
