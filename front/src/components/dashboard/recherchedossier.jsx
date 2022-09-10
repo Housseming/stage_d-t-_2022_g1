@@ -23,6 +23,7 @@ import { MdDeleteForever } from "react-icons/md";
 import { toast } from "react-toastify";
 import { SearchOutlined } from "@ant-design/icons";
 import { Marginer } from "../marginer/marginfile";
+import { DocumentSearchIcon } from "@heroicons/react/outline";
 import {
   HiClipboardDocumentCheck,
   HiClipboardCheck,
@@ -51,19 +52,19 @@ const options = [
 
 const RechercheDossier = () => {
   const [visible, setVisible] = useState(false);
-const [placement, setPlacement] = useState("right");
+  const [placement, setPlacement] = useState("right");
 
-const showDrawer = () => {
-  setVisible(true);
-};
+  const showDrawer = () => {
+    setVisible(true);
+  };
 
-const onChangepl = (e) => {
-  setPlacement(e.target.value);
-};
+  const onChangepl = (e) => {
+    setPlacement(e.target.value);
+  };
 
-const onClose = () => {
-  setVisible(false);
-};
+  const onClose = () => {
+    setVisible(false);
+  };
   //declaration necessaires
   const [liste, setListe] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
@@ -82,6 +83,7 @@ const onClose = () => {
     console.log("radio checked", e.target.value);
     setValue(e.target.value);
   };
+  const [listeadversaire, setListeadversaire] = useState([]);
 
   const [addingdossier, setAddingdossier] = useState({
     num_affaire: "",
@@ -97,10 +99,11 @@ const onClose = () => {
   let [filteredData] = useState();
   const column = [
     { key: "1", title: "id_dossier", dataIndex: "id_dossier" },
-    { key: "2", title: "num_affaire", dataIndex: "num_affaire" },
-    { key: "3", title: "emplacement", dataIndex: "emplacement" },
+    { key: "2", title: "code_dossier", dataIndex: "code_dossier" },
+    { key: "3", title: "num_affaire", dataIndex: "num_affaire" },
+    { key: "4", title: "emplacement", dataIndex: "emplacement" },
     {
-      key: "4",
+      key: "5",
       title: "client",
       dataIndex: "client",
       filterDropdown: ({
@@ -153,63 +156,14 @@ const onClose = () => {
         return record.client.toLowerCase().includes(value.toLowerCase());
       },
     },
-    { key: "5", title: "tel", dataIndex: "tel" },
-    {
-      key: "6",
-      title: "mission",
-      dataIndex: "mission",
-      filterDropdown: ({
-        setSelectedKeys,
-        selectedKeys,
-        clearFilters,
-        confirm,
-      }) => {
-        return (
-          <React.Fragment>
-            <Input
-              autoFocus
-              placeholder="type text"
-              value={selectedKeys[0]}
-              onChange={(e) => {
-                setSelectedKeys(e.target.value ? [e.target.value] : []);
-                confirm({ closeDropdown: false });
-              }}
-              onPressEnter={() => {
-                confirm();
-              }}
-              onBlur={() => {
-                confirm();
-              }}
-            ></Input>
-            <Button
-              onClick={() => {
-                confirm();
-              }}
-              type="primary"
-            >
-              {" "}
-              Rechercher{" "}
-            </Button>
-            <Button
-              onClick={() => {
-                clearFilters();
-              }}
-              type="danger"
-            >
-              Réinitialiser{" "}
-            </Button>
-          </React.Fragment>
-        );
-      },
-      filterIcon: () => {
-        return <SearchOutlined />;
-      },
-      onFilter: (value, record) => {
-        return record.mission.toLowerCase().includes(value.toLowerCase());
-      },
-    },
+    { key: "6", title: "tel", dataIndex: "tel" },
     {
       key: "7",
+      title: "mission",
+      dataIndex: "mission",
+    },
+    {
+      key: "8",
       title: "adversaire",
       dataIndex: "adversaire",
       filterDropdown: ({
@@ -262,7 +216,10 @@ const onClose = () => {
         return record.adversaire.toLowerCase().includes(value.toLowerCase());
       },
     },
-    { key: "8", title: "reste", dataIndex: "reste" },
+    { key: "9", title: "reste", dataIndex: "reste" },
+    { key: "10", title: "lieu", dataIndex: "lieu" },
+    { key: "11", title: "service", dataIndex: "service" },
+    { key: "12", title: "Type_dossier", dataIndex: "type_dossier" },
     {
       key: "16",
       title: "Actions",
@@ -315,9 +272,20 @@ const onClose = () => {
       console.log(error.message);
     }
   };
+  //*****************les adverssaire**************
+  const getadversairerequest = async () => {
+    try {
+      const response = await axios.get("/adversaire");
+      setListeadversaire(response.data);
+      console.log(listeadversaire);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   useEffect(() => {
     getdossierrequest();
-  });
+    getadversairerequest();
+  },[listeadversaire,liste]);
   const deletedossier = (record) => {
     Modal.confirm({
       title: "Vous etes sur de supprimer ce dossier?",
@@ -325,7 +293,9 @@ const onClose = () => {
       okType: "danger",
       cancelText: "annuler",
       onOk: () => {
-        const newListe = liste.filter((dossier) => dossier.id_dossier !== record.id_dossier);
+        const newListe = liste.filter(
+          (dossier) => dossier.id_dossier !== record.id_dossier
+        );
         setListe(newListe);
         deletedossierrequest(record.id_dossier);
       },
@@ -375,7 +345,6 @@ const onClose = () => {
 
   //supprimer dossier
 
-
   //modifier un dossier
   const editdossier = (record) => {
     setIsEdit(true);
@@ -398,6 +367,8 @@ const onClose = () => {
   return (
     <div className="App">
       <header className="App-header">
+        <h1>Liste des dossiers</h1>
+        <DocumentSearchIcon className="dashbicons"></DocumentSearchIcon>
         <div className="boutonet">
           <table>
             <tr>
@@ -411,16 +382,7 @@ const onClose = () => {
                   Ajouter Tache
                 </button>
                 </td>*/}
-              <td>
-                <button
-                  className="btndossier"
-                  onClick={() => {
-                    setIsAdd(true);
-                  }}
-                >
-                  Reclasser Dossier
-                </button>
-              </td>
+              
               <button
                 className="btndossier"
                 onClick={() => {

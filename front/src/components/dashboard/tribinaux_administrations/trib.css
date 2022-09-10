@@ -31,3 +31,11 @@
   background-color: white;
   color: rgb(0, 0, 0);
 }
+.servicetrib {
+  color: rgb(0, 0, 0);
+  width: 25px;
+  height: 30px;
+}
+.servicetrib:hover {
+  color: rgba(0, 0, 0, 0.296);
+}

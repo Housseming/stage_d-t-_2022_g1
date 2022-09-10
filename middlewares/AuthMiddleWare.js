@@ -1,4 +1,4 @@
-const jwt = require("jsonwebtoken");
+/*const jwt = require("jsonwebtoken");
 require("dotenv").config();
 var keyaccesstoken = process.env.ACCESS_TOKEN_SECRET;
 function auth(req, res, next) {
@@ -20,4 +20,4 @@ function auth(req, res, next) {
   }
 }
 
-module.exports = auth;
+module.exports = auth;*/

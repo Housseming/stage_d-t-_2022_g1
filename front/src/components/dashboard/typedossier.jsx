@@ -1,6 +1,3 @@
-/* This example requires Tailwind CSS v2.0+ */
-//il vaut mieux l'id a ne pas toucher
-// houwa fama par defaut mahomsh mnadhmin besh nemshy nhawel nadhmhom f data base
 import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
@@ -11,15 +8,15 @@ import { MdDeleteForever } from "react-icons/md";
 import { toast } from "react-toastify";
 import { BiFolderOpen } from "react-icons/bi";
 
-const Emplacementdossier = () => {
+const Typedossier = () => {
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(6);
   const [listeservice, setlisteservice] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
-  const [edditingEmplacementdossier, setEdditingEmplacementdossier] =
+  const [edditingTypedossier, setEdditingTypedossier] =
     useState(null);
-  const [addingEmplacementdossier, setAddingEmplacementdossier] = useState({
-    libelle: "",
+  const [addingTypedossier, setAddingTypedossier] = useState({
+    type_dossier: "",
   });
 
   const columns = [
@@ -30,7 +27,7 @@ const Emplacementdossier = () => {
       //sorter:(record1,record2)=>
       //{ return record1.id<record2.id}
     },
-    { key: "2", title: "libelle", dataIndex: "libelle" },
+    { key: "2", title: "type_dossier", dataIndex:"type_dossier" },
 
     {
       key: "3",
@@ -42,7 +39,7 @@ const Emplacementdossier = () => {
               <AiFillEdit
                 className="edit"
                 onClick={() => {
-                  editEmplacementdossier(record);
+                  editTypedossier(record);
                 }}
               ></AiFillEdit>
               <pre>
@@ -53,7 +50,7 @@ const Emplacementdossier = () => {
               <MdDeleteForever
                 className="delete"
                 onClick={() => {
-                  deleteEmplacementdossier(record);
+                  deleteTypedossier(record);
                 }}
               ></MdDeleteForever>
 
@@ -67,66 +64,66 @@ const Emplacementdossier = () => {
     },
   ];
 
-  //select Emplacementdossier
-  const getEmplacementdossierrequest = async () => {
+  //select Typedossier
+  const getTypedossierrequest = async () => {
     try {
-      const response = await axios.get("/emplacementdossier");
+      const response = await axios.get("/typedossier");
       setlisteservice(response.data); // aleh listeservice dhaherli khtr tji listeservice [{:}]
     } catch (error) {
       console.log(error.message);
     }
   };
   useEffect(() => {
-    getEmplacementdossierrequest();
+    getTypedossierrequest();
   }, [listeservice]);
   console.log(listeservice);
 
-  //supprimer une Emplacementdossier
-  const deleteEmplacementdossier = (record) => {
+  //supprimer une Typedossier
+  const deleteTypedossier = (record) => {
     Modal.confirm({
-      title: "Vous etes sur de supprimer l'Emplacementdossier?",
+      title: "Vous etes sur de supprimer ce type dossier?",
       okText: "oui",
       okType: "danger",
       cancelText: "annuler",
       onOk: () => {
         const newlisteservice = listeservice.filter(
-          (Emplacementdossier) => Emplacementdossier.id !== record.id
+          (Typedossier) => Typedossier.id !== record.id
         );
         setlisteservice(newlisteservice);
-        deleteEmplacementdossierrequest(record.id);
-        toast.success("Emplacement dossier supprimé avec succès");
+        deleteTypedossierrequest(record.id);
+        toast.success("Type dossier supprimé avec succès");
       },
     });
   };
-  const deleteEmplacementdossierrequest = async (id) => {
+  const deleteTypedossierrequest = async (id) => {
     try {
-      const deleted = await axios.post("/emplacementdossier/delete", {
+      const deleted = await axios.post("/typedossier/delete", {
         id: id,
       });
-      console.log("Emplacement_dossier supprimé");
+      console.log("Type_dossier supprimé");
     } catch (error) {
       console.log(error);
     }
   };
 
   ////////////
-  //modifier une Emplacementdossier
-  const editEmplacementdossier = (record) => {
+  //modifier une Typedossier
+  const editTypedossier = (record) => {
     setIsEdit(true);
-    setEdditingEmplacementdossier({ ...record }); //copie mel record
+    setEdditingTypedossier({ ...record }); //copie mel record
   };
   const resetEditing = () => {
     setIsEdit(false);
-    setEdditingEmplacementdossier(null);
+    setEdditingTypedossier(null);
   };
   //lien aveclback pour la modif
-  const editEmplacementdossierrequest = async (id, libelle) => {
+  const editTypedossierrequest = async (id, type_dossier) => {
     try {
-      const modified = await axios.post("/emplacementdossier/modif", {
+      const modified = await axios.post("/Typedossier/modif", {
         id: id,
-        libelle: libelle,
+        type_dossier: type_dossier,
       });
-      console.log("emplacement_dossier_modifié", id, libelle);
+      console.log("Type_dossier_modifié", id, type_dossier);
     } catch (error) {
       console.log(error);
     }
@@ -135,11 +132,11 @@ const Emplacementdossier = () => {
 
   const [isAdd, setIsAdd] = useState(false);
 
-  const addEmplacementdossier = async () => {
+  const addTypedossier = async () => {
     try {
       const resp = await axios.post(
-        "/emplacementdossier",
-        addingEmplacementdossier
+        "/Typedossier",
+        addingTypedossier
       );
       console.log(resp.data);
     } catch (error) {
@@ -150,7 +147,7 @@ const Emplacementdossier = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Emplacement dossier</h1>
+        <h1>Type dossier</h1>
         <BiFolderOpen className="dashbicons"></BiFolderOpen>
         {
           <button
@@ -181,7 +178,7 @@ const Emplacementdossier = () => {
         </div>
         {/*MODIFICATION*/}
         <Modal
-          title="modifier libelle"
+          title="modifier type_dossier"
           visible={isEdit}
           okText="Enregistrer"
           cancelText="Annuler"
@@ -190,30 +187,30 @@ const Emplacementdossier = () => {
           }}
           onOk={() => {
             setIsEdit(false);
-            const newlisteservice = listeservice.map((Emplacementdossier) => {
-              if (Emplacementdossier.id === edditingEmplacementdossier.id) {
-                return edditingEmplacementdossier;
+            const newlisteservice = listeservice.map((Typedossier) => {
+              if (Typedossier.id === edditingTypedossier.id) {
+                return edditingTypedossier;
               } else {
-                return Emplacementdossier;
+                return Typedossier;
               }
             });
             setlisteservice(newlisteservice);
-            editEmplacementdossierrequest(
-              edditingEmplacementdossier.id,
-              edditingEmplacementdossier.libelle
+            editTypedossierrequest(
+              edditingTypedossier.id,
+              edditingTypedossier.type_dossier
             );
             resetEditing();
-            toast.success("Emplacement dossier modifié avec succès");
+            toast.success("Type dossier modifié avec succès");
           }}
           destroyOnClose={true}
         >
           <Input
-            placeholder="libelle"
-            value={edditingEmplacementdossier?.libelle}
+            placeholder="type_dossier"
+            value={edditingTypedossier?.type_dossier}
             onChange={(e) => {
-              setEdditingEmplacementdossier({
-                ...edditingEmplacementdossier,
-                libelle: e.target.value,
+              setEdditingTypedossier({
+                ...edditingTypedossier,
+                type_dossier: e.target.value,
               });
             }}
           ></Input>
@@ -227,23 +224,23 @@ const Emplacementdossier = () => {
           cancelText="Annuler"
           onCancel={() => {
             setIsAdd(false);
-            setAddingEmplacementdossier({ libelle: "" });
+            setAddingTypedossier({ type_dossier: "" });
           }}
           onOk={() => {
-            addEmplacementdossier();
+            addTypedossier();
             setIsAdd(false);
-            toast.success("Emplacement dossier ajouté avec succès");
-            setAddingEmplacementdossier({ libelle: "" });
+            toast.success("Type dossier ajouté avec succès");
+            setAddingTypedossier({ type_dossier: "" });
           }}
           destroyOnClose={true}
         >
           <Input
-            placeholder="libelle"
-            value={addingEmplacementdossier.libelle}
+            placeholder="type_dossier"
+            value={addingTypedossier.type_dossier}
             onChange={(e) => {
-              setAddingEmplacementdossier({
-                ...addingEmplacementdossier,
-                libelle: e.target.value,
+              setAddingTypedossier({
+                ...addingTypedossier,
+                type_dossier: e.target.value,
               });
             }}
           ></Input>
@@ -252,4 +249,4 @@ const Emplacementdossier = () => {
     </div>
   );
 };
-export default Emplacementdossier;
+export default Typedossier;

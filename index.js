@@ -22,6 +22,7 @@ const PORT = process.env.PORT || 5000;
 const loginroute = require("./routes/RouteLogin");
 const registerroute = require("./routes/RouteRegister");
 const collabroute = require("./routes/RouteCollab");
+const typedossierroute = require("./routes/typedossier")
 //const homeroute = require("./routes/RouteHome");
 const tribunaleroute = require("./routes/tribunale");
 const cookie = require("cookie-parser");
@@ -38,7 +39,8 @@ app.use(express.json());
 app.use(
   cors({
     credentials: true,
-    origin: "http://localhost:3000",
+    origin: ["http://localhost:3000",
+    "https://webavocat.herokuapp.com",],
     methods: "GET, HEAD, PUT, PATCH, POST, DELETE",
   })
 );
@@ -74,6 +76,7 @@ app.use(collabroute);
 //app.use(homeroute);
 //app.use(user);
 app.use(tribunaleroute);
+app.use(typedossierroute);
 //app.use(logout);
 
 /*app.get("*", (req, res) => {

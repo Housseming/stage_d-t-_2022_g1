@@ -8,7 +8,7 @@ import "antd/dist/antd.min.css";
 import { AiFillEdit } from "react-icons/ai";
 import { MdDeleteForever } from "react-icons/md";
 import { toast } from "react-toastify";
-
+import { PhotographIcon } from "@heroicons/react/outline";
 const Timbre = () => {
   const [listeservice, setlisteservice] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
@@ -20,7 +20,7 @@ const Timbre = () => {
   });
 
   const columns = [
-    { key: "1", title: "Id", dataIndex: "id" },
+    
     { key: "2", title: "Libelle", dataIndex: "libelle" },
 
     { key: "3", title: "Montant", dataIndex: "montant" },
@@ -37,7 +37,9 @@ const Timbre = () => {
                   editTimbre(record);
                 }}
               ></AiFillEdit>
-              <p>modifier</p>
+              <pre>
+                <p>modifier </p>
+              </pre>
             </div>
             <div className="divdelete">
               <MdDeleteForever
@@ -46,8 +48,9 @@ const Timbre = () => {
                   deleteTimbre(record);
                 }}
               ></MdDeleteForever>
-
-              <p>supprimer</p>
+              <pre>
+                <p>supprimer</p>
+              </pre>
             </div>
           </div>
         );
@@ -133,13 +136,14 @@ const Timbre = () => {
     <div className="App">
       <header className="App-header">
       <h1>Timbres</h1> 
-        <Button className="btnadd"  onClick={() => {
+      <PhotographIcon className="dashbicons"></PhotographIcon>
+        <button className="btnadd"  onClick={() => {
             setIsAdd(true);
           }}
         >
           {" "}
           Ajouter
-        </Button>
+        </button>
         <div classname="tab">
           <Table
             columns={columns}
