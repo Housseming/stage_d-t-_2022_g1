@@ -9,6 +9,8 @@ import image2 from "./avocatimage2.png";
 import image3 from "./avocatimage3.png";
 import { useNavigate } from "react-router-dom";
 import { Card, Row, Col ,Button } from "antd";
+import AuthContext from "../../context/AuthContext";
+import { useContext } from "react";
 
 import { FcFinePrint, FcBusinessman, FcSalesPerformance } from "react-icons/fc";
 let firstRender = true;
@@ -16,6 +18,7 @@ axios.defaults.withCredentials = true;
 
 
 function Home() {
+  const { loggedIn } = useContext(AuthContext);
   const gridStyle = {
     width: "200",
     height: "1000",
@@ -118,7 +121,7 @@ function Home() {
                 veuillez vous inscrire ou vous connectez si vous avez déjà un
                 compte
               </p>
-              <button className="loginfromhome" onClick={()=>{navigate("/login");}}>Se Connecter</button>
+              <button className="loginfromhome" onClick={()=>{if(loggedIn===true){navigate("/home")}else{navigate("/login")}}}>Se Connecter</button>
             </div>
           </div>
         </div>

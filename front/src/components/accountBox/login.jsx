@@ -14,26 +14,38 @@ import {
 import { Marginer } from "../marginer/marginfile";
 import { AccountBox } from ".";
 import { AccountContext } from "./accountContext";
+import AuthContext from "../../context/AuthContext";
 axios.defaults.withCredentials = true;
 export function Login(props) {
   const { Switchtosignup } = useContext(AccountContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   let navigate = useNavigate();
+  const { loggedIn, getLoggedIn } = useContext(AuthContext);
+  
+  async function log() {
+    await axios.get("/loggedIn");
+    await getLoggedIn();
+    navigate("/home");
+  }
   const Send = async () => {
     try {
-      const resp = await axios.post("/login", {
-        username: username,
+      const resp = await axios.post(
+        "/login",
+        {
+          username: username,
 
-        password: password,
-      },{
-        withCredentials:true,
-      });
+          password: password,
+        },
+        {
+          withCredentials: true,
+        }
+      );
       if (resp.data.error) {
         toast.error(resp.data.error);
       } //khater ki naamlou login saye maach ykoun mawjoud asslan el response.data.error
       else {
-        navigate("/home");
+        log();
       }
     } catch (error) {
       console.log(error);

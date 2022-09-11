@@ -22,6 +22,7 @@ import { AiFillEdit } from "react-icons/ai";
 import { MdDeleteForever } from "react-icons/md";
 import { toast } from "react-toastify";
 import { MdHomeRepairService } from "react-icons/md";
+import Example from "../Example";
 const { TabPane } = Tabs;
 
 const Tribunale = () => {
@@ -1150,6 +1151,7 @@ const Tribunale = () => {
   );*/
   return (
     <>
+    <Example></Example>
       <div className="back">
         <header className="App-header">
           {service === false && (
