@@ -34,7 +34,9 @@ const Gestionclient = () => {
   const [value, setValue] = useState(0);
   const [val, setVal] = useState();
   const [check, setCheck] = useState(false);
+
   const [check1, setCheck1] = useState(true);
+  const [checkk, setCheckk] = useState(false);
   const [listeservice, setlisteservice] = useState([]);
   const [persons, setPersons] = useState(0);
   const [gridData, setGridData] = useState([]);
@@ -64,11 +66,13 @@ const Gestionclient = () => {
     
     if (cb.checked == true) {console.log("winek aa",addingGestionclient.codecollaborateur)
       setCheck(true); setCheck1(false);
+       setCheckk(true);console.log(checkk,'zer')
       input1.style.display = "block"//yidhaher
       input2.style.display = "none"
     }
     else {
-      setCheck1(true); setCheck(false);
+      setCheck1(true); setCheck(false); 
+      setCheckk(false);console.log(checkk,'zer')
       input1.style.display = "none";
       input2.style.display = "block"
     }
@@ -138,11 +142,11 @@ const Gestionclient = () => {
   const getGestionclientrequest = async () => {
     try {
       const response = await axios.get("/gestionclient");
-      console.log('aaaaaaaa1',response.data)
+      //console.log('aaaaaaaa1',response.data)
       setlisteservice(response.data);
-      console.log('aaaaaaaa2',listeservice)
+     // console.log('aaaaaaaa2',listeservice)
       for (let i = 0; i<response.data.length; i++) {if (response.data[i].id>persons){setPersons( response.data[i].id+1)}}
-      console.log('ahayaliste',(persons)) // aleh listeservice dhaherli khtr tji listeservice [{:}]
+      //console.log('ahayaliste',(persons)) // aleh listeservice dhaherli khtr tji listeservice [{:}]
     } catch (error) {
       console.log(error.message);
     }
@@ -639,22 +643,21 @@ const Gestionclient = () => {
                 disabled
                 placeholder="code client"
                 value={addingGestionclient.codeclient}
-                onChange={(e) => {
+                onChange={(e) => {val='a';
                   console.log("traahwari", e.target.value);
                   //matekhdmsh
-                  setAddingGestionclient({
-                    ...addingGestionclient,
-                    codeclient: persons + "/" + addingGestionclient.raison[0],
-                  });
+                 
+              
                 }}
                 //amltha win lmatricule lval ghadi win yiwali yaml feha
               ></Input>
             </div>
           )}
-          <Input
+         {checkk==false && <Input
             placeholder="raison"
             value={addingGestionclient.raison}
-            onChange={(e) => {
+            onChange={(e) => {console.log('aacava')
+
               setAddingGestionclient({
                 ...addingGestionclient,
                 raison: e.target.value,
@@ -662,7 +665,20 @@ const Gestionclient = () => {
                 codeclient: persons + "/" + addingGestionclient.raison[0],
               });
             }}
-          ></Input>
+          ></Input>}
+          {checkk==true &&  <Input
+          placeholder="raison"
+          value={addingGestionclient.raison}
+          onChange={(e) => {
+  console.log('hani felinput thenya');
+            setAddingGestionclient({
+              ...addingGestionclient,
+              raison: e.target.value,
+
+             
+            });
+          }}
+        ></Input>}
           <Input
             placeholder="matricule"
             value={addingGestionclient.matricule}
@@ -717,11 +733,11 @@ const Gestionclient = () => {
             placeholder="activité"
             value={addingGestionclient.activite}
             onChange={(e) => {
-              setVal(persons + "/" + addingGestionclient.raison[0]);
+              /*setVal(persons + "/" + addingGestionclient.raison[0]);
               setAddingGestionclient({
                 ...addingGestionclient,
                 codeclient: val,
-              });
+              });*/
               setAddingGestionclient({
                 ...addingGestionclient,
                 activite: e.target.value,
