@@ -8,14 +8,13 @@ import image1 from "./avocatimage1.png";
 import image2 from "./avocatimage2.png";
 import image3 from "./avocatimage3.png";
 import { useNavigate } from "react-router-dom";
-import { Card, Row, Col ,Button } from "antd";
+import { Card, Row, Col, Button } from "antd";
 import AuthContext from "../../context/AuthContext";
 import { useContext } from "react";
 
 import { FcFinePrint, FcBusinessman, FcSalesPerformance } from "react-icons/fc";
 let firstRender = true;
 axios.defaults.withCredentials = true;
-
 
 function Home() {
   const { loggedIn } = useContext(AuthContext);
@@ -25,7 +24,7 @@ function Home() {
 
     textAlign: "center",
   };
-   let navigate = useNavigate();
+  let navigate = useNavigate();
   /* const sendLogout = async() =>{
     const res = await axios.post("/logout", null, {
       withCredentials: true,
@@ -43,7 +42,7 @@ function Home() {
   }*/
 
   return (
-    <div style={{backgroundColor:"white"}}>
+    <div style={{ backgroundColor: "white" }}>
       <Navbar></Navbar>
       <div className="divcontainerhome">
         <div className="divhome">
@@ -121,7 +120,18 @@ function Home() {
                 veuillez vous inscrire ou vous connectez si vous avez déjà un
                 compte
               </p>
-              <button className="loginfromhome" onClick={()=>{if(loggedIn===true){navigate("/home")}else{navigate("/login")}}}>Se Connecter</button>
+              <button
+                className="loginfromhome"
+                onClick={() => {
+                  if (loggedIn === true) {
+                    navigate("/home");
+                  } else {
+                    navigate("/login");
+                  }
+                }}
+              >
+                Se Connecter
+              </button>
             </div>
           </div>
         </div>
