@@ -9,11 +9,13 @@ const pool = require("../db")
 
 root6.post("/recettedufinance", async (req, res) => {
     try {
-        const { id,libelle,montant } = req.body;
+        const { //id
+            libelle,montant } = req.body;
        
 
-        const newTodo1 = await pool.query("INSERT INTO public.recettedufinance ( id,libelle,montant ) VALUES($1,$2,$3 )",
-            [ id,libelle,montant ]);
+        const newTodo1 = await pool.query("INSERT INTO public.recettedufinance ( libelle,montant ) VALUES($1,$2)",
+            [ //id,
+            libelle,montant ]);
         res.json(newTodo1);
 
 
@@ -58,7 +60,7 @@ root6.post("/recettedufinance/modif", async (req, res) => {
  root6.post("/recettedufinance/delete", async (req, res) => {
     try {
         const { id } = req.body;
-       const newTodo1 = await pool.query("DELETE FROM public.recettedufinance WHERE id=$1",
+       const newTodo1 = await pool.query("DELETE FROM recettedufinance WHERE id=$1",
             [id]);
         res.json(newTodo1);
         res.json("honoraire was deleted");

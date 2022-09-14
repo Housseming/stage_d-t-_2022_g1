@@ -14,18 +14,16 @@ import { CurrencyDollarIcon } from "@heroicons/react/outline";
 const Recettedufinance = () => {
   const [listeservice, setlisteservice] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
-  const [edditingRecettedufinance, setEdditingRecettedufinance] =
-    useState(null);
+  const [edditingRecettedufinance, setEdditingRecettedufinance] =useState(null);
   const [addingRecettedufinance, setAddingRecettedufinance] = useState({
-    id: "",
+    
     libelle: "",
-    montant: "",
+    montant: 0,
   });
 
   const columns = [
-    { key: "1", title: "Libelle", dataIndex: "libelle" },
-    { key: "2", title: "Montant", dataIndex: "montant" },
-    { key: "3", title: "Id", dataIndex: "id" },
+    { key: "2", title: "Libelle", dataIndex: "libelle" },
+    { key: "3", title: "Montant", dataIndex: "montant" },
     {
       key: "4",
       title: "Actions",
@@ -39,7 +37,8 @@ const Recettedufinance = () => {
                   editRecettedufinance(record);
                 }}
               ></AiFillEdit>
-              <p>modifier</p>
+              <pre>
+              <p>modifier</p></pre>
             </div>
             {
               <div className="divdelete">
@@ -71,7 +70,7 @@ const Recettedufinance = () => {
   useEffect(() => {
     getRecettedufinancerequest();
   }, [listeservice]);
-  console.log(listeservice);
+ // console.log(listeservice);
 
   //supprimer une Recettedufinance
   const deleteRecettedufinance = (record) => {
@@ -112,14 +111,12 @@ const Recettedufinance = () => {
     setEdditingRecettedufinance(null);
   };
   //lien aveclback pour la modif
-  const editRecettedufinancerequest = async (id, libelle, montant) => {
+  const editRecettedufinancerequest = async ( edditingRecettedufiance) => {
     try {
       const modified = await axios.post("/recettedufinance/modif", {
-        id: id,
-        libelle: libelle,
-        montant: montant,
+        edditingRecettedufiance
       });
-      console.log("Recettedufinance modifié", libelle);
+      console.log("Recettedufinance modifié", edditingRecettedufiance);
     } catch (error) {
       console.log(error);
     }
@@ -174,24 +171,13 @@ const Recettedufinance = () => {
             });
             setlisteservice(newlisteservice);
             editRecettedufinancerequest(
-              edditingRecettedufinance.id,
-              edditingRecettedufinance.libelle,
-              edditingRecettedufinance.montant
+              edditingRecettedufinance
             );
             resetEditing();
             toast.success("Recettedufinance modifie avec succée");
           }}
         >
-          <Input
-            placeholder="id"
-            value={edditingRecettedufinance?.id}
-            onChange={(e) => {
-              setEdditingRecettedufinance({
-                ...edditingRecettedufinance,
-                id: e.target.value,
-              });
-            }}
-          ></Input>
+       
           <Input
             placeholder="libelle"
             value={edditingRecettedufinance?.libelle}
@@ -224,7 +210,7 @@ const Recettedufinance = () => {
           onCancel={() => {
             setIsAdd(false);
               setAddingRecettedufinance({
-                id: "",
+                
                 libelle: "",
                 montant: "",
               });
@@ -234,13 +220,13 @@ const Recettedufinance = () => {
             setIsAdd(false);
             toast.success("Recette finance ajoutée avec succès");
             setAddingRecettedufinance({
-              id: "",
+            
               libelle: "",
               montant: "",
             });
           }}
         >
-          <Input
+         {false && <Input
             placeholder="id"
             value={addingRecettedufinance.id}
             onChange={(e) => {
@@ -249,7 +235,7 @@ const Recettedufinance = () => {
                 id: e.target.value,
               });
             }}
-          ></Input>
+          ></Input> }
           <Input
             placeholder="libelle"
             value={addingRecettedufinance.libelle}
