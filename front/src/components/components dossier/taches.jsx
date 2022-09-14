@@ -70,21 +70,18 @@ function Taches() {
   const onChangeradio1 = (e) => {
     console.log("radio checked", e.target.value);
     setValue1(e.target.value);
-    
   };
-    const onChangeradio2 = (e) => {
-      console.log("radio checked", e.target.value);
-      setValue2(e.target.value);
-      
-    };
-        const onChangeradio = (e) => {
-          console.log("radio checked", e.target.value);
-          setValue(e.target.value);
-          
-        };
+  const onChangeradio2 = (e) => {
+    console.log("radio checked", e.target.value);
+    setValue2(e.target.value);
+  };
+  const onChangeradio = (e) => {
+    console.log("radio checked", e.target.value);
+    setValue(e.target.value);
+  };
   const [value, setValue] = useState(0);
-    const [value1, setValue1] = useState(0);
-      const [value2, setValue2] = useState(0);
+  const [value1, setValue1] = useState(0);
+  const [value2, setValue2] = useState(0);
   const [isAdd, setIsAdd] = useState(false);
   /*const StyledTable = styled((props) => <Table {...props} />)`
     && tbody > tr:hover > td {
@@ -172,14 +169,6 @@ function Taches() {
     }
   };
 
-  useEffect(() => {
-    getTacherequest();
-    gettribunalerequest();
-    getservicerequest();
-    const id = localStorage.getItem("id_dossier");
-    setAddinngTache({ ...addingTache, id_doss: id });
-  }, [liste, addingTache.id_doss]);
-
   //supprimer collaborateur
   const deleteTache = (record) => {
     Modal.confirm({
@@ -236,11 +225,15 @@ function Taches() {
       console.log(error);
     }
   };
+  useEffect(() => {
+    getTacherequest();
+  }, [liste]);
+
   //**********************lieu et service**********************
   const [disabledtrib, setDisabledtrib] = useState(false);
   const [disabledservice, setDisabledservice] = useState(false);
   const [listeTrib, setListeTrib] = useState([]);
-    const [listeTrib1, setListeTrib1] = useState([]);
+  const [listeTrib1, setListeTrib1] = useState([]);
   const [listeservice, setListeservice] = useState([]);
   const [listeserviceinput, setListeserviceinput] = useState([]);
   const [listeser, setListeser] = useState([]);
@@ -268,7 +261,6 @@ function Taches() {
     setAddinngTache({ ...addingTache, services: selectedOptions[0].label });
     setDisabledservice(true);
   };
-
 
   const gettribunalerequest = async () => {
     try {
@@ -305,7 +297,22 @@ function Taches() {
       (option) =>
         option.label.toLowerCase().indexOf(inputValue.toLowerCase()) > -1
     );
+  useEffect(() => {
+    gettribunalerequest();
 
+    
+  }, [listeTrib]);
+    useEffect(() => {
+      
+
+      getservicerequest();
+    }, [listeservice]);
+
+  useEffect(() => {
+    
+    const id = localStorage.getItem("id_dossier");
+    setAddinngTache({ ...addingTache, id_doss: id });
+  }, [addingTache.id_doss]);
 
   //notre page et son contenu
   return (
@@ -332,14 +339,13 @@ function Taches() {
         <Table
           columns={column}
           dataSource={liste}
-          //scroll={{ x:10}}
           pagination={{
             current: page,
             pageSize: pageSize,
             onChange: (page, pageSize) => {
               setPage(page);
               setPageSize(pageSize);
-            }
+            },
           }}
           size="middle"
           bordered={true}
@@ -501,11 +507,10 @@ function Taches() {
               service: "",
               resolu: "",
             });
-             setDisabledtrib(false);
-             setDisabledservice(false);
-             setValuetrib("");
-             setValueservice("");
-                
+            setDisabledtrib(false);
+            setDisabledservice(false);
+            setValuetrib("");
+            setValueservice("");
           }}
           onOk={() => {
             addTache();
@@ -523,11 +528,10 @@ function Taches() {
               service: "",
               resolu: "",
             });
-             setDisabledtrib(false);
-             setDisabledservice(false);
-             setValuetrib("");
-             setValueservice("");
-                
+            setDisabledtrib(false);
+            setDisabledservice(false);
+            setValuetrib("");
+            setValueservice("");
           }}
         >
           <div className="formaddtache">
@@ -675,10 +679,8 @@ function Taches() {
                 setDisabledservice(false);
                 setValuetrib("");
                 setValueservice("");
-                
               }}
             >
-
               resélectionner les données du lieu
             </Button>
 

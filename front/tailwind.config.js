@@ -1,8 +1,11 @@
-/** @type {import('tailwindcss').Config} */
 module.exports = {
-    content: ["./src/components/Dashboard/Example.jsx"],
-    theme: {
-        extend: {},
-    },
-    plugins: [],
-}
+  purge: ["./src/components/Dashboard/Example.jsx"],
+  darkMode: false, // or 'media' or 'class'
+  theme: {
+    extend: {},
+  },
+  variants: {
+    extend: {},
+  },
+  plugins: [],
+};
