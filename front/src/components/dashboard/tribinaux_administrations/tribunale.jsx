@@ -1151,7 +1151,7 @@ const Tribunale = () => {
   );*/
   return (
     <>
-    <Example></Example>
+   
       <div className="back">
         <header className="App-header">
           {service === false && (
