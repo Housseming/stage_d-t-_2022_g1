@@ -5,13 +5,13 @@ import axios from "axios";
 const AuthContext = createContext();
 // this component is going to stock the state logged in
 function AuthContextProvider(props) {
-  const [loggedIn, setLoggedIn] = useState(undefined);
+  const [loggedIn, setLoggedIn] = useState(null);
    
 
   const getLoggedIn = async () => {
     const loggedInresponse = await axios.get("/loggedIn");
     setLoggedIn(loggedInresponse.data);
-    console.log(loggedInresponse.data);
+    console.log(loggedInresponse.data,"dataa");
   };
   useEffect(() => {
     getLoggedIn();

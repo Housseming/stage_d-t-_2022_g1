@@ -16,6 +16,7 @@ import {
   Drawer
 } from "antd";
 import "../../App.css";
+import {Navigate, useNavigate} from "react-router-dom"
 
 import "antd/dist/antd.min.css";
 import { AiFillEdit } from "react-icons/ai";
@@ -79,6 +80,7 @@ const RechercheDossier = () => {
   const onChange = (date, dateString) => {
     console.log(date, dateString);
   };
+  const navigate = useNavigate();
   const onChangeradio = (e) => {
     console.log("radio checked", e.target.value);
     setValue(e.target.value);
@@ -252,7 +254,7 @@ const RechercheDossier = () => {
             <div className="divdelete">
               <HiClipboardCheck
                 className="addtachediv"
-                onClick={showDrawer}
+                onClick={()=>{navigate("/home/creationdossier")}}
               ></HiClipboardCheck>
               <pre>
                 <p>+Tâche</p>

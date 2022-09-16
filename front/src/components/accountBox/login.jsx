@@ -20,6 +20,7 @@ export function Login(props) {
   const { Switchtosignup } = useContext(AccountContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [user,setUser] = useState({});
   let navigate = useNavigate();
   const { loggedIn, getLoggedIn } = useContext(AuthContext);
   
@@ -45,6 +46,7 @@ export function Login(props) {
         toast.error(resp.data.error);
       } //khater ki naamlou login saye maach ykoun mawjoud asslan el response.data.error
       else {
+        
         log();
       }
     } catch (error) {

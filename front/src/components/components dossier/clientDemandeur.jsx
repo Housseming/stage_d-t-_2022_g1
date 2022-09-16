@@ -126,7 +126,7 @@ const ClientDemandeur = () => {
         content={
           <div>
             <Link to="/home/collaborateurs">
-              <h1 style={{ color: "#f25e5e" }}>
+              <h1 style={{ fontSize:"15px",color: "#f25e5e" }}>
                 Voulez vous ajouter un client qui n'existe pas ?
               </h1>
             </Link>

@@ -122,7 +122,6 @@ const Tribunale = () => {
   const [listeservice, setListeservice] = useState([]);
   const [isEditservice, setIsEditservice] = useState(false);
   const [edditingservice, setEdditingservice] = useState({
-    
     nom: "",
     lundi: "",
     mardi: "",
@@ -173,6 +172,7 @@ const Tribunale = () => {
     jeudi: "",
     vendredi: "",
     samedi: "",
+    tribunale_id: idtrib,
   });
   const column = [
     { key: "1", title: "ID", dataIndex: "service_id" },
@@ -195,7 +195,6 @@ const Tribunale = () => {
                 className="edit"
                 onClick={() => {
                   editservice(record);
-
                 }}
               ></AiFillEdit>
               <pre>
@@ -232,7 +231,7 @@ const Tribunale = () => {
               <AiFillEdit
                 className="edit"
                 onClick={() => {
-                  edittrib(record.id,record.lieu);
+                  edittrib(record.id, record.lieu);
                 }}
               ></AiFillEdit>
               <pre>
@@ -259,10 +258,9 @@ const Tribunale = () => {
                     ...addingservice,
                     tribunale_id: record.id,
                   });
+
                   setIdtrib(record.id);
                   setNomtrib(record.lieu);
-
-                  //console.log(record.id, "idtrib");
 
                   //console.log(filtredservice, "filtred");
                 }}
@@ -291,6 +289,7 @@ const Tribunale = () => {
     gettribunalerequest();
     getservicerequest();
     console.log(edditingservice, "kbal ma netcheki");
+    console.log(addingservice.tribunale_id, "idtrib");
   });
 
   //*****************supprimer service*****************
@@ -322,10 +321,14 @@ const Tribunale = () => {
   };
 
   //*************************modifier un service**************
-  const
-   editservice = (record) => {
+  const editservice = (record) => {
     setEdditingservice({ ...record });
-    setEdditingservice({...edditingservice,tribunale_id:idtrib,service_id:record.service_id,nom:record.nom})
+    setEdditingservice({
+      ...edditingservice,
+      tribunale_id: idtrib,
+      service_id: record.service_id,
+      nom: record.nom,
+    });
     setChecked3({
       check1: record.lundi == "audience" ? true : false,
       check2: record.mardi == "audience" ? true : false,
@@ -334,30 +337,30 @@ const Tribunale = () => {
       check5: record.vendredi == "audience" ? true : false,
       check6: record.samedi == "audience" ? true : false,
     });
-        setChecked4({
-          check1: record.lundi == "course" ? true : false,
-          check2: record.mardi == "course" ? true : false,
-          check3: record.mercredi == "course" ? true : false,
-          check4: record.jeudi == "course" ? true : false,
-          check5: record.vendredi == "course" ? true : false,
-          check6: record.samedi == "course" ? true : false,
-        });
-        setDisabled3({
-          check1: record.lundi == "course" ? true : false,
-          check2: record.mardi == "course" ? true : false,
-          check3: record.mercredi == "course" ? true : false,
-          check4: record.jeudi == "course" ? true : false,
-          check5: record.vendredi == "course" ? true : false,
-          check6: record.samedi == "course" ? true : false,
-        });
-        setDisabled4({
-          check1: record.lundi == "audience" ? true : false,
-          check2: record.mardi == "audience" ? true : false,
-          check3: record.mercredi == "audience" ? true : false,
-          check4: record.jeudi == "audience" ? true : false,
-          check5: record.vendredi == "audience" ? true : false,
-          check6: record.samedi == "audience" ? true : false,
-        });
+    setChecked4({
+      check1: record.lundi == "course" ? true : false,
+      check2: record.mardi == "course" ? true : false,
+      check3: record.mercredi == "course" ? true : false,
+      check4: record.jeudi == "course" ? true : false,
+      check5: record.vendredi == "course" ? true : false,
+      check6: record.samedi == "course" ? true : false,
+    });
+    setDisabled3({
+      check1: record.lundi == "course" ? true : false,
+      check2: record.mardi == "course" ? true : false,
+      check3: record.mercredi == "course" ? true : false,
+      check4: record.jeudi == "course" ? true : false,
+      check5: record.vendredi == "course" ? true : false,
+      check6: record.samedi == "course" ? true : false,
+    });
+    setDisabled4({
+      check1: record.lundi == "audience" ? true : false,
+      check2: record.mardi == "audience" ? true : false,
+      check3: record.mercredi == "audience" ? true : false,
+      check4: record.jeudi == "audience" ? true : false,
+      check5: record.vendredi == "audience" ? true : false,
+      check6: record.samedi == "audience" ? true : false,
+    });
     console.log(edditingservice, "kbal ma netcheki");
     setIsEditservice(true);
     console.log(checked3, checked4, "hani netcheki");
@@ -391,14 +394,14 @@ const Tribunale = () => {
   const changeTabPosition = (e) => {
     setTabPosition(e.target.value);
   };
-  
+
   return (
     <>
       <div className="back">
         <header className="App-header">
           {service === false && (
             <>
-              <h1 >Liste des Tribunaux</h1>
+              <h1>Liste des Tribunaux</h1>
               <AiFillBank className="dashbicons"></AiFillBank>
               <button
                 className="btnadd"
@@ -429,6 +432,7 @@ const Tribunale = () => {
             <>
               <h1>Liste des services</h1>
               <h3 style={{ color: "#0583f2" }}>{nomtrib}</h3>
+              <h3 style={{ color: "#0583f2" }}>{idtrib}</h3>
               <MdHomeRepairService className="dashbicons"></MdHomeRepairService>
 
               <button
@@ -867,6 +871,7 @@ const Tribunale = () => {
               setIsAddservice(false);
               toast.success("service ajouté avec succès");
               setAddingservice({
+                ...addingservice,
                 nom: "",
                 lundi: "",
                 mardi: "",
@@ -875,6 +880,7 @@ const Tribunale = () => {
                 vendredi: "",
                 samedi: "",
               });
+              console.log(addingservice, "baed el ok");
               setDisabled(false, false, false, false, false, false);
               setDisabled2(false, false, false, false, false, false);
             }}

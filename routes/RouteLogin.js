@@ -28,24 +28,28 @@ route.post("/login", (req, res) => {
           console.log(match);
 
           if (match) {
+            
             console.log("matching");
 
             const accessToken = jwt.sign(
               {
                 id: result.rows[0].id,
+                username : result.rows[0].username,
               },
               keyaccesstoken
             );
+            
             console.log("token generated after logging in", accessToken);
             //payload heya data nheb ena nkhazenha eli heya parametre lowel mtaa el sign
 
             res
-              .cookie("token", accessToken,{
+              .cookie("token",accessToken,{
                 httpOnly: true,
                 //secure: true,
                 sameSite: "lax",
               })
               .send();
+              
 
             //res.json({ message: "Successufully logged in", accessToken });
           } else {
@@ -76,10 +80,13 @@ route.get("/loggedIn", (req, res) => {
     if (!token) {
       return res.json(false);
     }
+    else{
 
-    jwt.verify(token, keyaccesstoken);
+    const payload = jwt.verify(token, keyaccesstoken);
+    const userid = payload.id;
+    const username = payload.username;
 
-    res.send(true);
+    res.json({log:true,user_id:userid,user_name:username});}
   } catch (err) {
     res.json(false);
   }

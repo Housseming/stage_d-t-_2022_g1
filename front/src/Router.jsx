@@ -41,14 +41,13 @@ function Router() {
       <Routes>
         <Route exact path="/">
           <Route index element={<Home></Home>}></Route>
-          {loggedIn === false && (
+          
             <>
               <Route path="login" element={<AccountBox />}></Route>
 
               <Route path="register" element={<RegisterBox />} />
             </>
-          )}
-          {loggedIn === true && (
+          
             <>
               <Route path="home" element={<Sharedlayout></Sharedlayout>}>
                 <Route path="primehuissier" element={<PrimeHuissier />} />
@@ -88,11 +87,11 @@ function Router() {
                 ></Route>
               </Route>
             </>
-          )}
+          
 
-          {loggedIn == true && (
+          
             <Route path="*" element={<Error></Error>}></Route>
-          )}
+          
         </Route>
       </Routes>
 
