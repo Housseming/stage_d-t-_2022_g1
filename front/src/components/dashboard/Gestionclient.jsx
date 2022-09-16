@@ -260,7 +260,7 @@ const Gestionclient = () => {
     setSortedInfo({});
     setSearchText("");
     getGestionclientrequest();
-   
+    window.location.reload();
   }
   const getCollabrequest = async () => {
     try {

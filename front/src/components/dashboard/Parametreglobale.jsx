@@ -18,10 +18,11 @@ const Parametreglobale = () => {
     timbrefiscale: 0,
     tauxtva: 0,
   });
+  const [check,setCheck]=useState()
 
   const columns = [
-    { key: "1", title: "timbrefiscale", dataIndex: "timbrefiscale" },
-    { key: "2", title: "tauxtva", dataIndex: "tauxtva" },
+    { key: "1", title: "Timbre fiscale", dataIndex: "timbrefiscale" },
+    { key: "2", title: "Taux TVA", dataIndex: "tauxtva" },
 
     {
       key: "3",
@@ -38,7 +39,7 @@ const Parametreglobale = () => {
               ></AiFillEdit>
               <p>modifier</p>
             </div>
-            {/* <div className="divdelete">
+            <div className="divdelete">
           <MdDeleteForever
             className="delete"
             onClick={() => {
@@ -47,7 +48,7 @@ const Parametreglobale = () => {
           ></MdDeleteForever>
 
           <p>supprimer</p>
-          </div>*/}
+          </div>
           </div>
         );
       },
@@ -58,7 +59,9 @@ const Parametreglobale = () => {
   const getParametrerequest = async () => {
     try {
       const response = await axios.get("/Parametreglobale");
-      setlisteservice(response.data); // aleh listeservice dhaherli khtr tji listeservice [{:}]
+      setlisteservice(response.data); 
+      if (response.data.length==0)
+      setCheck(true); else setCheck(false);// aleh listeservice dhaherli khtr tji listeservice [{:}]
     } catch (error) {
       console.log(error.message);
     }
@@ -77,18 +80,18 @@ const Parametreglobale = () => {
       cancelText: "annuler",
       onOk: () => {
         const newlisteservice = listeservice.filter(
-          (Parametre) => Parametre.timbrefiscale !== record.timbrefiscale
+          (Parametre) => Parametre.id !== record.id
         );
         setlisteservice(newlisteservice);
-        deleteParametrerequest(record.timbrefiscale);
+        deleteParametrerequest(record.id);
         toast.success("Paramètre supprimé avec succès");
       },
     });
   };
-  const deleteParametrerequest = async (timbrefiscale) => {
+  const deleteParametrerequest = async (id) => {
     try {
       const deleted = await axios.post("/Parametreenextra/delete", {
-        timbrefiscale: timbrefiscale,
+        id:id,
       });
       console.log("Parametre supprimé");
     } catch (error) {
@@ -107,12 +110,10 @@ const Parametreglobale = () => {
     setEdditingParametre(null);
   };
   //lien aveclback pour la modif
-  const editParametrerequest = async (timbrefiscale, tauxtva) => {
+  const editParametrerequest = async (edditingParametre) => {
     try {
-      const modified = await axios.post("/Parametreglobale/modif", {
-        timbrefiscale: timbrefiscale,
-        tauxtva: tauxtva,
-      });
+      const modified = await axios.post("/Parametreglobale/modif" ,edditingParametre);
+      
       console.log("Parametre modifié");
     } catch (error) {
       console.log(error);
@@ -134,7 +135,7 @@ const Parametreglobale = () => {
       <header className="App-header">
         <h1>Paramètres Globales</h1>
         <MdOutlineSettingsSuggest className="dashbicons"></MdOutlineSettingsSuggest>
-        <button
+        { <button
           className="btnadd"
           onClick={() => {
             setIsAdd(true);
@@ -142,7 +143,7 @@ const Parametreglobale = () => {
         >
           {" "}
           Ajouter
-        </button>
+        </button>}
         <div classname="tab">
           <Table
             columns={columns}
@@ -163,17 +164,14 @@ const Parametreglobale = () => {
           onOk={() => {
             setIsEdit(false);
             const newlisteservice = listeservice.map((Parametre) => {
-              if (Parametre.timbrefiscale === edditingParametre.timbrefiscale) {
+              if (Parametre.id === edditingParametre.id) {
                 return edditingParametre;
               } else {
                 return Parametre;
               }
             });
             setlisteservice(newlisteservice);
-            editParametrerequest(
-              edditingParametre.timbrefiscale,
-              edditingParametre.tauxtva
-            );
+            editParametrerequest(edditingParametre);
             resetEditing();
             toast.success("Paramètre modifié avec succès");
           }}

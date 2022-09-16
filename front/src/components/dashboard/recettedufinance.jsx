@@ -14,16 +14,18 @@ import { CurrencyDollarIcon } from "@heroicons/react/outline";
 const Recettedufinance = () => {
   const [listeservice, setlisteservice] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
-  const [edditingRecettedufinance, setEdditingRecettedufinance] =useState(null);
+  const [edditingRecettedufinance, setEdditingRecettedufinance] =
+    useState(null);
   const [addingRecettedufinance, setAddingRecettedufinance] = useState({
-    
+    id: "",
     libelle: "",
-    montant: 0,
+    montant: "",
   });
 
   const columns = [
-    { key: "2", title: "Libelle", dataIndex: "libelle" },
-    { key: "3", title: "Montant", dataIndex: "montant" },
+    { key: "1", title: "Libelle", dataIndex: "libelle" },
+    { key: "2", title: "Montant", dataIndex: "montant" },
+    
     {
       key: "4",
       title: "Actions",
@@ -37,8 +39,7 @@ const Recettedufinance = () => {
                   editRecettedufinance(record);
                 }}
               ></AiFillEdit>
-              <pre>
-              <p>modifier</p></pre>
+              <pre><p>Modifier </p></pre>
             </div>
             {
               <div className="divdelete">
@@ -49,7 +50,7 @@ const Recettedufinance = () => {
                   }}
                 ></MdDeleteForever>
 
-                <p>supprimer</p>
+               <pre><p>Supprimer</p></pre>
               </div>
             }
           </div>
@@ -70,7 +71,7 @@ const Recettedufinance = () => {
   useEffect(() => {
     getRecettedufinancerequest();
   }, [listeservice]);
- // console.log(listeservice);
+  console.log(listeservice);
 
   //supprimer une Recettedufinance
   const deleteRecettedufinance = (record) => {
@@ -111,12 +112,14 @@ const Recettedufinance = () => {
     setEdditingRecettedufinance(null);
   };
   //lien aveclback pour la modif
-  const editRecettedufinancerequest = async ( edditingRecettedufiance) => {
+  const editRecettedufinancerequest = async (id, libelle, montant) => {
     try {
       const modified = await axios.post("/recettedufinance/modif", {
-        edditingRecettedufiance
+        id: id,
+        libelle: libelle,
+        montant: montant,
       });
-      console.log("Recettedufinance modifié", edditingRecettedufiance);
+      console.log("Recettedufinance modifié", libelle);
     } catch (error) {
       console.log(error);
     }
@@ -171,13 +174,15 @@ const Recettedufinance = () => {
             });
             setlisteservice(newlisteservice);
             editRecettedufinancerequest(
-              edditingRecettedufinance
+              edditingRecettedufinance.id,
+              edditingRecettedufinance.libelle,
+              edditingRecettedufinance.montant
             );
             resetEditing();
             toast.success("Recettedufinance modifie avec succée");
           }}
         >
-       
+         
           <Input
             placeholder="libelle"
             value={edditingRecettedufinance?.libelle}
@@ -210,7 +215,7 @@ const Recettedufinance = () => {
           onCancel={() => {
             setIsAdd(false);
               setAddingRecettedufinance({
-                
+                id: "",
                 libelle: "",
                 montant: "",
               });
@@ -220,22 +225,13 @@ const Recettedufinance = () => {
             setIsAdd(false);
             toast.success("Recette finance ajoutée avec succès");
             setAddingRecettedufinance({
-            
+              id: "",
               libelle: "",
               montant: "",
             });
           }}
         >
-         {false && <Input
-            placeholder="id"
-            value={addingRecettedufinance.id}
-            onChange={(e) => {
-              setAddingRecettedufinance({
-                ...addingRecettedufinance,
-                id: e.target.value,
-              });
-            }}
-          ></Input> }
+         
           <Input
             placeholder="libelle"
             value={addingRecettedufinance.libelle}
